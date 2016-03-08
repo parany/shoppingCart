@@ -6,6 +6,7 @@ using Microsoft.Practices.Unity;
 using ShoppingCart.Controllers;
 using ShoppingCart.Models;
 using ShoppingCart.Models.Entities.Shopping;
+using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models.Repositories.Concrete;
 using ShoppingCart.Models.Repositories.Interface;
@@ -20,6 +21,11 @@ namespace ShoppingCart
             var container = new UnityContainer();
 
             container.RegisterType<IGenericRepository<Product>, GenericRepository<Product>>();
+            container.RegisterType<IGenericRepository<Cart>, GenericRepository<Cart>>();
+            container.RegisterType<IGenericRepository<CartLine>, GenericRepository<CartLine>>();
+            container.RegisterType<IGenericRepository<Category>, GenericRepository<Category>>();
+            container.RegisterType<IGenericRepository<ShippingDetail>, GenericRepository<ShippingDetail>>();
+
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
             container.RegisterType<DbContext, ApplicationDbContext>(new HierarchicalLifetimeManager());
             container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());

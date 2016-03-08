@@ -50,15 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Entities\Cart.cs" />
+    <Compile Include="Models\Entities\CartLine.cs" />
     <Compile Include="Migrations\201603081056054_Init.cs" />
     <Compile Include="Migrations\201603081056054_Init.Designer.cs">
       <DependentUpon>201603081056054_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Entities\Shopping\BaseObject.cs" />
-    <Compile Include="Entities\Shopping\Category.cs" />
-    <Compile Include="Entities\Shopping\Product.cs" />
-    <Compile Include="Entities\User\IdentityModels.cs" />
+    <Compile Include="Models\Entities\BaseObject.cs" />
+    <Compile Include="Models\Entities\Category.cs" />
+    <Compile Include="Models\Entities\Product.cs" />
+    <Compile Include="Models\Entities\ShippingDetails.cs" />
+    <Compile Include="Models\User\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Concrete\GenericRepository.cs" />
     <Compile Include="Repositories\Interface\IGenericRepository.cs" />

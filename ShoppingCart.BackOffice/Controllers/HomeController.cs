@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShoppingCart.Models;
-using ShoppingCart.Models.Models.Shopping;
+using ShoppingCart.Models.Entities.Shopping;
 using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.BackOffice.Controllers

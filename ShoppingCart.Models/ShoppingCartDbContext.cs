@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShoppingCart.Models.Models.Shopping;
+using ShoppingCart.Models.Entities.Shopping;
 
 namespace ShoppingCart.Models
 {

@@ -55,10 +55,10 @@
       <DependentUpon>201603081056054_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Shopping\BaseObject.cs" />
-    <Compile Include="Models\Shopping\Category.cs" />
-    <Compile Include="Models\Shopping\Product.cs" />
-    <Compile Include="Models\User\IdentityModels.cs" />
+    <Compile Include="Entities\Shopping\BaseObject.cs" />
+    <Compile Include="Entities\Shopping\Category.cs" />
+    <Compile Include="Entities\Shopping\Product.cs" />
+    <Compile Include="Entities\User\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Concrete\GenericRepository.cs" />
     <Compile Include="Repositories\Interface\IGenericRepository.cs" />

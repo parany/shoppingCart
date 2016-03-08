@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ShoppingCart.Models.Models.Shopping
+namespace ShoppingCart.Models.Entities.Shopping
 {
     public class Category : BaseObject
     {

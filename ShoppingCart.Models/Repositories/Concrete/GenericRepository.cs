@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Security;
-using ShoppingCart.Models.Models.Shopping;
+using ShoppingCart.Models.Entities.Shopping;
 using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.Models.Repositories.Concrete

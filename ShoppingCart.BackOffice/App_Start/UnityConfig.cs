@@ -4,7 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using ShoppingCart.Models;
-using ShoppingCart.Models.Models.Shopping;
+using ShoppingCart.Models.Entities.Shopping;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models.Repositories.Concrete;
 using ShoppingCart.Models.Repositories.Interface;

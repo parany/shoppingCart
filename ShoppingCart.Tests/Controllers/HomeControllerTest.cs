@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShoppingCart;
 using ShoppingCart.Controllers;
-using ShoppingCart.Models.Models.Shopping;
+using ShoppingCart.Models.Entities.Shopping;
 using ShoppingCart.Models.Repositories.Concrete;
 
 namespace ShoppingCart.Tests.Controllers

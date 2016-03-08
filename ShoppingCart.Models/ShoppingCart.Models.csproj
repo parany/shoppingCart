@@ -47,16 +47,12 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201603081938503_AddCartModels.cs" />
-    <Compile Include="Migrations\201603081938503_AddCartModels.Designer.cs">
-      <DependentUpon>201603081938503_AddCartModels.cs</DependentUpon>
+    <Compile Include="Migrations\201603081950026_MigrationInit.cs" />
+    <Compile Include="Migrations\201603081950026_MigrationInit.Designer.cs">
+      <DependentUpon>201603081950026_MigrationInit.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Entities\Cart.cs" />
     <Compile Include="Models\Entities\CartLine.cs" />
-    <Compile Include="Migrations\Init.cs" />
-    <Compile Include="Migrations\Init.Designer.cs">
-      <DependentUpon>Init.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\BaseObject.cs" />
     <Compile Include="Models\Entities\Category.cs" />
@@ -77,11 +73,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603081938503_AddCartModels.resx">
-      <DependentUpon>201603081938503_AddCartModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\Init.resx">
-      <DependentUpon>Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603081950026_MigrationInit.resx">
+      <DependentUpon>201603081950026_MigrationInit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

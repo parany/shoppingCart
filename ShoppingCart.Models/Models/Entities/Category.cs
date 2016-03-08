@@ -2,7 +2,7 @@
 
 namespace ShoppingCart.Models.Models.Entities
 {
-    public class Category : BaseObject
+    public sealed class Category : BaseObject
     {
         public string Name { get; set; }
 

@@ -3,7 +3,7 @@ namespace ShoppingCart.Models.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddCartModels : DbMigration
+    public partial class MigrationInit : DbMigration
     {
         public override void Up()
         {
@@ -41,6 +41,38 @@ namespace ShoppingCart.Models.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Products",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        Name = c.String(),
+                        Description = c.String(),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        CategoryId = c.Int(nullable: false),
+                        DateCreated = c.DateTime(),
+                        DateModified = c.DateTime(),
+                        CreatedBy = c.String(),
+                        ModifiedBy = c.String(),
+                        Category_Id = c.Guid(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.Category_Id)
+                .Index(t => t.Category_Id);
+            
+            CreateTable(
+                "dbo.Categories",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        Name = c.String(),
+                        DateCreated = c.DateTime(),
+                        DateModified = c.DateTime(),
+                        CreatedBy = c.String(),
+                        ModifiedBy = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.ShippingDetails",
                 c => new
                     {
@@ -57,21 +89,21 @@ namespace ShoppingCart.Models.Migrations
                 .ForeignKey("dbo.Carts", t => t.Cart_Id)
                 .Index(t => t.Cart_Id);
             
-            AddColumn("dbo.Products", "Description", c => c.String());
-            AddColumn("dbo.Products", "Price", c => c.Decimal(nullable: false, precision: 18, scale: 2));
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.ShippingDetails", "Cart_Id", "dbo.Carts");
             DropForeignKey("dbo.CartLines", "Product_Id", "dbo.Products");
+            DropForeignKey("dbo.Products", "Category_Id", "dbo.Categories");
             DropForeignKey("dbo.CartLines", "Cart_Id", "dbo.Carts");
             DropIndex("dbo.ShippingDetails", new[] { "Cart_Id" });
+            DropIndex("dbo.Products", new[] { "Category_Id" });
             DropIndex("dbo.CartLines", new[] { "Product_Id" });
             DropIndex("dbo.CartLines", new[] { "Cart_Id" });
-            DropColumn("dbo.Products", "Price");
-            DropColumn("dbo.Products", "Description");
             DropTable("dbo.ShippingDetails");
+            DropTable("dbo.Categories");
+            DropTable("dbo.Products");
             DropTable("dbo.Carts");
             DropTable("dbo.CartLines");
         }

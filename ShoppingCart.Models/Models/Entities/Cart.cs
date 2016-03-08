@@ -2,7 +2,7 @@
 
 namespace ShoppingCart.Models.Models.Entities
 {
-    public class Cart : BaseObject
+    public sealed class Cart : BaseObject
     {
         public HashSet<CartLine> CartLines { get; set; }
 

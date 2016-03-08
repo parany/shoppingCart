@@ -4,9 +4,7 @@ namespace ShoppingCart.Models.Models.Entities
 {
     public class ShippingDetail : BaseObject
     {
-        public ApplicationUser User { get; set; }
-
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public Cart Cart { get; set; }
 

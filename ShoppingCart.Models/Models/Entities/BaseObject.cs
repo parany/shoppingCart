@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShoppingCart.Models.Entities.Shopping
+namespace ShoppingCart.Models.Models.Entities
 {
     public abstract class BaseObject
     {

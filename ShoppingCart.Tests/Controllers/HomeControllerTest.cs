@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ShoppingCart;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShoppingCart.Controllers;
-using ShoppingCart.Models.Entities.Shopping;
+using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Concrete;
+using System.Web.Mvc;
 
 namespace ShoppingCart.Tests.Controllers
 {

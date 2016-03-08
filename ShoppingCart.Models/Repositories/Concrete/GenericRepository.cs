@@ -1,30 +1,20 @@
-﻿using System;
+﻿using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Models.Repositories.Interface;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Security;
-using ShoppingCart.Models.Entities.Shopping;
-using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.Models.Repositories.Concrete
 {
-    public class PagingSettings
-    {
-        public int Page { get; set; }
-        public int PageSize { get; set; }
-        public int NumberOfRecords { get; set; }
-        public int TotalNumberOfRecords { get; set; }
-    }
-
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseObject
     {
        
         public List<Expression<Func<T, object>>> NavigationProperties;
         private List<Expression<Func<T, object>>> _ignoreProperties;
-        public PagingSettings PagingSettings = null;
-        public Func<IQueryable<T>, IOrderedQueryable<T>> OrderBy = null;
+        public PagingSettings PagingSettings;
+        public Func<IQueryable<T>, IOrderedQueryable<T>> OrderBy;
 
         public GenericRepository()
         {
@@ -43,7 +33,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
 
         public void SetNavigationProperties(params Expression<Func<T, object>>[] navigationProperties)
         {
-            if (NavigationProperties != null) { NavigationProperties.Clear(); }
+            NavigationProperties?.Clear();
             AddNavigationProperties(navigationProperties);
         }
 
@@ -88,15 +78,12 @@ namespace ShoppingCart.Models.Repositories.Concrete
                 // Apply eager loading
                 if (NavigationProperties != null && NavigationProperties.Count > 0)
                 {
-                    foreach (Expression<Func<T, object>> navigationProperty in NavigationProperties)
-                    {
-                        dbQuery = dbQuery.Include<T, object>(navigationProperty);
-                    }
+                    dbQuery = NavigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
                 }
 
                 list = dbQuery
                   .AsNoTracking()
-                  .ToList<T>();
+                  .ToList();
             }
 
 
@@ -113,10 +100,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
                 // Apply eager loading
                 if (NavigationProperties != null && NavigationProperties.Count > 0)
                 {
-                    foreach (Expression<Func<T, object>> navigationProperty in NavigationProperties)
-                    {
-                        dbQuery = dbQuery.Include<T, object>(navigationProperty);
-                    }
+                    dbQuery = NavigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
                 }
 
                 dbQuery = dbQuery
@@ -137,7 +121,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
                         .Take(PagingSettings.PageSize);
                 }
 
-                list = dbQuery.ToList<T>();
+                list = dbQuery.ToList();
 
                 // Set number of records
                 if (PagingSettings != null) { PagingSettings.NumberOfRecords = list.Count(); }
@@ -166,7 +150,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
 
         public virtual bool Exists(Guid id)
         {
-            bool exists = false;
+            bool exists;
             using (var context = new ShoppingCartDbContext())
             {
                 IQueryable<T> dbQuery = context.Set<T>();
@@ -181,7 +165,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
 
         public virtual T GetFirst()
         {
-            T item = null;
+            T item;
             using (var context = new ShoppingCartDbContext())
             {
                 IQueryable<T> dbQuery = context.Set<T>();
@@ -196,7 +180,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
 
         public virtual T GetLastCreated()
         {
-            T item = null;
+            T item;
             using (var context = new ShoppingCartDbContext())
             {
                 IQueryable<T> dbQuery = context.Set<T>();
@@ -212,7 +196,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
 
         public virtual T GetSingle(Expression<Func<T, bool>> where)
         {
-            T item = null;
+            T item;
             using (var context = new ShoppingCartDbContext())
             {
                 IQueryable<T> dbQuery = context.Set<T>();
@@ -220,10 +204,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
                 // Apply eager loading
                 if (NavigationProperties != null && NavigationProperties.Count > 0)
                 {
-                    foreach (Expression<Func<T, object>> navigationProperty in NavigationProperties)
-                    {
-                        dbQuery = dbQuery.Include<T, object>(navigationProperty);
-                    }
+                    dbQuery = NavigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include(navigationProperty));
                 }
 
                 item = dbQuery

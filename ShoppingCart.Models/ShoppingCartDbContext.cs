@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ShoppingCart.Models.Models.Entities;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShoppingCart.Models.Entities.Shopping;
-using ShoppingCart.Models.Models.Entities;
 
 namespace ShoppingCart.Models
 {

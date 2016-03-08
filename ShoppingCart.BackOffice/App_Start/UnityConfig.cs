@@ -1,18 +1,18 @@
-using System.Data.Entity;
-using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using ShoppingCart.Models;
-using ShoppingCart.Models.Entities.Shopping;
+using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models.Repositories.Concrete;
 using ShoppingCart.Models.Repositories.Interface;
+using System.Data.Entity;
+using System.Web.Mvc;
 using Unity.Mvc5;
 
 namespace ShoppingCart.BackOffice
 {
-	public static class UnityConfig
+    public static class UnityConfig
 	{
 		public static void RegisterComponents()
 		{

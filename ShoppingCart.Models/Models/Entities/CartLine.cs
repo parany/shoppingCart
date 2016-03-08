@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShoppingCart.Models.Entities.Shopping
+﻿namespace ShoppingCart.Models.Models.Entities
 {
     public class CartLine : BaseObject
     {

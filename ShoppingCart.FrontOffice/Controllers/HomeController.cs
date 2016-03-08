@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using ShoppingCart.Models.Entities.Shopping;
+﻿using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
+using System.Web.Mvc;
 
 namespace ShoppingCart.Controllers
 {
     public class HomeController : Controller
     {
-        private IGenericRepository<Product> ProductRepository { get; set; } 
+        private IGenericRepository<Product> ProductRepository { get; } 
 
         public HomeController(IGenericRepository<Product> productRepository)
         {

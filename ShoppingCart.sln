@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.FrontOffice", "ShoppingCart\ShoppingCart.FrontOffice.csproj", "{8721026B-92D6-4CF5-AEE5-70C7D6381CA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.FrontOffice", "ShoppingCart.FrontOffice\ShoppingCart.FrontOffice.csproj", "{8721026B-92D6-4CF5-AEE5-70C7D6381CA1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.Tests", "ShoppingCart.Tests\ShoppingCart.Tests.csproj", "{463DD488-CEAB-4C79-8296-5A13B99C2D4F}"
 EndProject

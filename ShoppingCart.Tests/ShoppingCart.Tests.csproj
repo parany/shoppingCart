@@ -92,9 +92,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ShoppingCart\ShoppingCart.csproj">
+    <ProjectReference Include="..\ShoppingCart.Models\ShoppingCart.Models.csproj">
+      <Project>{19913b66-6b27-4fd9-a9fc-64133aa21aa4}</Project>
+      <Name>ShoppingCart.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShoppingCart\ShoppingCart.FrontOffice.csproj">
       <Project>{8721026B-92D6-4CF5-AEE5-70C7D6381CA1}</Project>
-      <Name>ShoppingCart</Name>
+      <Name>ShoppingCart.FrontOffice</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart", "ShoppingCart\ShoppingCart.csproj", "{8721026B-92D6-4CF5-AEE5-70C7D6381CA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.FrontOffice", "ShoppingCart\ShoppingCart.FrontOffice.csproj", "{8721026B-92D6-4CF5-AEE5-70C7D6381CA1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.Tests", "ShoppingCart.Tests\ShoppingCart.Tests.csproj", "{463DD488-CEAB-4C79-8296-5A13B99C2D4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.BackOffice", "ShoppingCart.BackOffice\ShoppingCart.BackOffice.csproj", "{A2C4CDC6-10B3-4A66-B728-15ABF462253F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.Models", "ShoppingCart.Models\ShoppingCart.Models.csproj", "{19913B66-6B27-4FD9-A9FC-64133AA21AA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{463DD488-CEAB-4C79-8296-5A13B99C2D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{463DD488-CEAB-4C79-8296-5A13B99C2D4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{463DD488-CEAB-4C79-8296-5A13B99C2D4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2C4CDC6-10B3-4A66-B728-15ABF462253F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C4CDC6-10B3-4A66-B728-15ABF462253F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2C4CDC6-10B3-4A66-B728-15ABF462253F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2C4CDC6-10B3-4A66-B728-15ABF462253F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19913B66-6B27-4FD9-A9FC-64133AA21AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19913B66-6B27-4FD9-A9FC-64133AA21AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19913B66-6B27-4FD9-A9FC-64133AA21AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19913B66-6B27-4FD9-A9FC-64133AA21AA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

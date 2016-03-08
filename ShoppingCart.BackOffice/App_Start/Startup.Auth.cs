@@ -5,7 +5,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using ShoppingCart.BackOffice.Models;
+using ShoppingCart.Models;
+using ShoppingCart.Models.Models.User;
 
 namespace ShoppingCart.BackOffice
 {

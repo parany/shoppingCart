@@ -10,7 +10,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using ShoppingCart.BackOffice.Models;
+using ShoppingCart.Models;
+using ShoppingCart.Models.Models.User;
 
 namespace ShoppingCart.BackOffice
 {

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ShoppingCart.Models;
 using ShoppingCart.Models.Models.User;
+using ShoppingCart.ViewModels;
 
 namespace ShoppingCart.Controllers
 {

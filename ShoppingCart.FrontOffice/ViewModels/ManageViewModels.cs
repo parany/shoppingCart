@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace ShoppingCart.BackOffice.Models
+namespace ShoppingCart.ViewModels
 {
     public class IndexViewModel
     {

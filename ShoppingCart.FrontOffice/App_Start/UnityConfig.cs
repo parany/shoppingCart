@@ -19,9 +19,6 @@ namespace ShoppingCart
         {
             var container = new UnityContainer();
 
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
-
             container.RegisterType<IGenericRepository<Product>, GenericRepository<Product>>();
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
             container.RegisterType<DbContext, ApplicationDbContext>(new HierarchicalLifetimeManager());

@@ -6,7 +6,7 @@ namespace ShoppingCart.Controllers
 {
     public class HomeController : Controller
     {
-        private IGenericRepository<Product> ProductRepository { get; } 
+        private IGenericRepository<Product> ProductRepository { get; set; } 
 
         public HomeController(IGenericRepository<Product> productRepository)
         {

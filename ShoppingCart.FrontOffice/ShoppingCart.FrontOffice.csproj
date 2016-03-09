@@ -129,11 +129,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
-=======
     <Compile Include="ViewModels\CategoriesViewModel.cs" />
->>>>>>> 03ba8cd0179b1444561ad62bd13e6ba00d5923b1
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />

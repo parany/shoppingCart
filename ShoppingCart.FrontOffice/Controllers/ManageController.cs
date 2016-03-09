@@ -347,13 +347,13 @@ namespace ShoppingCart.Controllers
         private bool HasPassword()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            return user?.PasswordHash != null;
+            return user != null && user.PasswordHash != null;
         }
 
         private bool HasPhoneNumber()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            return user?.PhoneNumber != null;
+            return user != null && user.PhoneNumber != null;
         }
 
         public enum ManageMessageId

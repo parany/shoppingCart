@@ -33,7 +33,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
 
         public void SetNavigationProperties(params Expression<Func<T, object>>[] navigationProperties)
         {
-            NavigationProperties?.Clear();
+            if (NavigationProperties != null) NavigationProperties.Clear();
             AddNavigationProperties(navigationProperties);
         }
 

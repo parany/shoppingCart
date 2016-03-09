@@ -1,0 +1,26 @@
+﻿@model ShoppingCart.ViewModels.CategoriesViewModel
+@{
+    ViewBag.Title = "Categories Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @foreach (var c in Model.Categories)
+        {
+            <div>
+                <h3>@c.Name</h3>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        @foreach (var c in Model.Categories[0].Products)
+        {
+            <div>
+                <h3>@c.Name</h3>
+            </div>
+        }
+    </div>
+</div>

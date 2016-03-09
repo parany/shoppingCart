@@ -31,13 +31,13 @@ namespace ShoppingCart.Models.Repositories.Concrete
             OrderBy = sortExpression;
         }
 
-        public void SetNavigationProperties(params Expression<Func<T, object>>[] navigationProperties)
+        public virtual void SetNavigationProperties(params Expression<Func<T, object>>[] navigationProperties)
         {
             if (NavigationProperties != null) NavigationProperties.Clear();
             AddNavigationProperties(navigationProperties);
         }
 
-        public void AddNavigationProperties(params Expression<Func<T, object>>[] navigationProperties)
+        public virtual void AddNavigationProperties(params Expression<Func<T, object>>[] navigationProperties)
         {
             foreach (var prop in navigationProperties)
             {
@@ -45,7 +45,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
             }
         }
 
-        public void AddIgnoreProperties(params Expression<Func<T, object>>[] ignoreProperties)
+        public virtual void AddIgnoreProperties(params Expression<Func<T, object>>[] ignoreProperties)
         {
             if (ignoreProperties != null)
             {
@@ -56,13 +56,13 @@ namespace ShoppingCart.Models.Repositories.Concrete
             }
         }
 
-        public void AddIgnoreProperty(Expression<Func<T, object>> ignoreProperty)
+        public virtual void AddIgnoreProperty(Expression<Func<T, object>> ignoreProperty)
         {
             if (_ignoreProperties == null) { _ignoreProperties = new List<Expression<Func<T, object>>>(); }
             _ignoreProperties.Add(ignoreProperty);
         }
 
-        public void AddNavigationProperty(Expression<Func<T, object>> navigationProperty)
+        public virtual void AddNavigationProperty(Expression<Func<T, object>> navigationProperty)
         {
             if (NavigationProperties == null) { NavigationProperties = new List<Expression<Func<T, object>>>(); }
             NavigationProperties.Add(navigationProperty);

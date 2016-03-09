@@ -1,4 +1,5 @@
-﻿using ShoppingCart.Models.Models.Entities;
+﻿using ShoppingCart.BackOffice.ViewsModels;
+using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,12 @@ namespace ShoppingCart.BackOffice.Controllers
     public class ProductController : Controller
     {
         private IGenericRepository<Product> ProductRepository { get; }
+        private IGenericRepository<Category> CategoryRepository { get; }
 
-        public ProductController(IGenericRepository<Product> productRepository)
+        public ProductController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository)
         {
             ProductRepository = productRepository;
+            CategoryRepository = categoryRepository;
         }
 
         //
@@ -43,7 +46,11 @@ namespace ShoppingCart.BackOffice.Controllers
         // GET: Product/Create
         public ActionResult Create()
         {
-            return View();
+            CreateViewModels CreateVM = new CreateViewModels
+            {
+                CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
+            };
+            return View(CreateVM);
         }
 
         // POST: Product/Create
@@ -51,8 +58,10 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CategoryId,DateCreated,DateModified,CreatedBy,ModifiedBy")] Product product)
+        public ActionResult Create([Bind(Include = "Id,Name,CategoryId,Quantity,Price,Description")] Product product)
         {
+            product.DateCreated = DateTime.Now;
+            product.CreatedBy = User.Identity.Name;
             if (ModelState.IsValid)
             {
                 product.Id = Guid.NewGuid();

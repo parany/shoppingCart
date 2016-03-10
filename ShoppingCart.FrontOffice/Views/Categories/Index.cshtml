@@ -5,22 +5,44 @@
 
 <div class="row">
     <div class="col-md-4">
+        <ul> Categories
         @foreach (var c in Model.Categories)
         {
-            <div>
-                <h3>@c.Name</h3>
-            </div>
+            <li>
+                <div>
+                    <h3>@c.Name</h3>
+                </div>
+            </li>
         }
+        </ul>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        @foreach (var c in Model.Categories[0].Products)
+        @if (Model.SelectedCategories.Any() && Model.Categories.Any())
         {
-            <div>
-                <h3>@c.Name</h3>
-            </div>
+            foreach (var p in Model.SelectedCategories.First().Products)
+             {
+                 <div>
+                     <h3>@p.Name</h3>
+                     <p>@p.Price</p>
+                 </div>
+             }
+        }
+        else if (!Model.Categories.Any())
+        {
+            foreach (var p in Model.Categories.First().Products)
+            {
+                <div>
+                    <h3>@p.Name</h3>
+                    <p>@p.Price</p>
+                </div>
+            }
+        }
+        else
+        {
+            <div>There is no category yet. Pease contact the administrator to ad new categories</div>
         }
     </div>
 </div>

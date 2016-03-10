@@ -8,5 +8,7 @@ namespace ShoppingCart.ViewModels
     public class CategoriesViewModel
     {
         public IList<Category> Categories { get; set; }
+        public IList<Category> SelectedCategories { get; set; }
+
     }
 }

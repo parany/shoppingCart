@@ -10,7 +10,7 @@
         {
             <li>
                 <div>
-                    <h3>@c.Name</h3>
+                    @Html.ActionLink(c.Name, "Details", "Categories", new {name = c.Name})
                 </div>
             </li>
         }

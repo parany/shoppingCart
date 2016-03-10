@@ -1,0 +1,23 @@
+﻿@model ShoppingCart.ViewModels.ProductDetailViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product Category</h4>
+    <p>@Model.Products.First().Category.Name </p>
+
+</div>
+
+<div>
+    <h4>Product</h4>
+    <p>@Model.Products.First().Name </p>
+    <p>@Model.Products.First().Description </p>
+    <p>@Model.Products.First().Price </p>
+    <p>@Model.Products.First().Quantity </p>
+</div>
+

@@ -18,7 +18,7 @@ namespace ShoppingCart.Controllers
 
         private IGenericRepository<Category> CategoryRepository { get; }
 
-        public CategoriesController(IGenericRepository<Category> categoryRepository, IGenericRepository<Product> productsRepository)
+        public CategoriesController(IGenericRepository<Category> categoryRepository)
         {
             CategoryRepository = categoryRepository;
             CategoryRepository.AddNavigationProperties(c => c.Products);
@@ -49,7 +49,7 @@ namespace ShoppingCart.Controllers
             return View(categoriesViewModel);
         }
 
-        public ActionResult Details(string name)
+        public ActionResult Details(string name, string productNAme)
         {
             CategoriesViewModel categoriesViewModel;
             if (name != null)

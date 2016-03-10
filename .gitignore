@@ -245,3 +245,5 @@ _Pvt_Extensions
 
 ShoppingCart.FrontOffice/Web.config
 ShoppingCart.Models/App.config
+
+ShoppingCart.BackOffice/Web.config

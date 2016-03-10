@@ -1,8 +1,10 @@
 ﻿using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.ViewModels;
 using ShoppingCart.Models.Repositories.Interface;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace ShoppingCart.Controllers
 {
@@ -18,15 +20,24 @@ namespace ShoppingCart.Controllers
 
         public ViewResult Index(int page = 1)
         {
-            IList<Product> products = ProductRepository.GetAll();
-            return View(products);
-            /*
-            return View(products
-                .OrderBy(p => p.Id)
-                .Skip((page - 1) * PageSize)
-                .Take(PageSize)
-               );
-               */
+            DateTime lastWeek = DateTime.Now.AddDays(7);
+
+            IList<Product> products = ProductRepository.GetList(p => (p.DateCreated < lastWeek));
+
+            ProductsListViewModel viewModel = new ProductsListViewModel
+            {
+                Products = products
+                             .OrderBy(p => p.DateCreated)
+                             .Skip((page - 1) * PageSize)
+                             .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = products.Count()
+                }
+            };
+            return View(viewModel);
         }
 
         public ActionResult About()

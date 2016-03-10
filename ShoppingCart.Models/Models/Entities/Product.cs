@@ -1,4 +1,6 @@
-﻿namespace ShoppingCart.Models.Models.Entities
+﻿using System;
+
+namespace ShoppingCart.Models.Models.Entities
 {
     public class Product : BaseObject
     {
@@ -10,7 +12,7 @@
 
         public int Quantity { get; set; }
 
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
 

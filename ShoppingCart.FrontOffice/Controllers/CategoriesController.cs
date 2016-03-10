@@ -42,7 +42,7 @@ namespace ShoppingCart.Controllers
                 categoriesViewModel = new CategoriesViewModel()
                 {
                     Categories = CategoryRepository.GetAll(),
-                    SelectedCategories = null
+                    SelectedCategories = new List<Category>()
                 };
             }
             
@@ -57,15 +57,15 @@ namespace ShoppingCart.Controllers
                 categoriesViewModel = new CategoriesViewModel()
                 {
                     SelectedCategories = CategoryRepository.GetList(c => c.Name == name),
-                    Categories = null
+                    Categories = new List<Category>()
                 };
             }
             else
             {
                 categoriesViewModel = new CategoriesViewModel()
                 {
-                    SelectedCategories = null,
-                    Categories = null
+                    SelectedCategories = new List<Category>(),
+                    Categories = new List<Category>()
                 };
             }
             return View(categoriesViewModel);

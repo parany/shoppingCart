@@ -1,5 +1,9 @@
 ﻿using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
+using ShoppingCart.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ShoppingCart.Controllers
@@ -7,16 +11,33 @@ namespace ShoppingCart.Controllers
     public class HomeController : Controller
     {
         private IGenericRepository<Product> ProductRepository { get; set; } 
+        public int PageSize = 3;
 
         public HomeController(IGenericRepository<Product> productRepository)
         {
             ProductRepository = productRepository;
         }
 
-        public ActionResult Index()
+        public ViewResult Index(int page = 1)
         {
-            var products = ProductRepository.GetAll();
-            return View();
+            DateTime lastWeek = DateTime.Now.AddDays(0);
+
+            IList<Product> products = ProductRepository.GetList(p => (p.DateCreated < lastWeek));
+
+            ProductsListViewModel viewModel = new ProductsListViewModel
+            {
+                Products = products
+                             .OrderBy(p => p.DateCreated)
+                             .Skip((page - 1) * PageSize)
+                             .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = products.Count()
+                }
+            };
+            return View(viewModel);
         }
 
         public ActionResult About()

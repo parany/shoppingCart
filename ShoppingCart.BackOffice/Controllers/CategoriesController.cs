@@ -8,17 +8,23 @@ using System.Web;
 using System.Web.Mvc;
 using ShoppingCart.Models;
 using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
     public class CategoriesController : Controller
     {
-        private ShoppingCartDbContext db = new ShoppingCartDbContext();
+        private IGenericRepository<Category> CategoryRepository { get; }
+
+        public CategoriesController(IGenericRepository<Category> categoryRepository)
+        {
+            CategoryRepository = categoryRepository;
+        }
 
         // GET: Categories
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            return View(CategoryRepository.GetAll());
         }
 
         // GET: Categories/Details/5
@@ -28,7 +34,7 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = CategoryRepository.GetSingle(x => x.Id == id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -47,13 +53,11 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,DateCreated,DateModified,CreatedBy,ModifiedBy")] Category category)
+        public ActionResult Create([Bind(Include = "Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                category.Id = Guid.NewGuid();
-                db.Categories.Add(category);
-                db.SaveChanges();
+                CategoryRepository.Add(category);
                 return RedirectToAction("Index");
             }
 
@@ -67,7 +71,7 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = CategoryRepository.GetSingle(x => x.Id == id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -80,12 +84,11 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,DateCreated,DateModified,CreatedBy,ModifiedBy")] Category category)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
+                CategoryRepository.Update(category);
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -98,7 +101,7 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = CategoryRepository.GetSingle(x => x.Id == id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -111,19 +114,10 @@ namespace ShoppingCart.BackOffice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+            Category category = CategoryRepository.GetSingle(x => x.Id == id);
+            CategoryRepository.Delete(category);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

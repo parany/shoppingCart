@@ -5,6 +5,8 @@ namespace ShoppingCart.Models.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Web;
+    using System.Web.Security;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ShoppingCart.Models.ShoppingCartDbContext>
     {
@@ -28,17 +30,22 @@ namespace ShoppingCart.Models.Migrations
             //    );
             //
 
-           /* context.Products.AddOrUpdate(
-                    new Product { Name = "Produit1" },
-                    new Product { Name = "Produit1" },
-                    new Product { Name = "Produit3" }
-                );*/
+            /* context.Products.AddOrUpdate(
+                     new Product { Name = "Produit1" },
+                     new Product { Name = "Produit1" },
+                     new Product { Name = "Produit3" }
+                 );*/
 
-            context.Categories.AddOrUpdate(
-                    new Category { Id = Guid.NewGuid(), Name = "Category1" },
-                    new Category { Id = Guid.NewGuid(), Name = "Category2" },
-                    new Category { Id = Guid.NewGuid(), Name = "Category3" }
-                );
+            if (!Roles.RoleExists("Administrator"))
+            {
+                Roles.CreateRole("Administrator");
+            }
+
+            if (Membership.GetUser("Admin") == null)
+            {
+                Membership.CreateUser("Admin", "AdminPass1");
+                Roles.AddUserToRole("Admin", "Administrator");
+            }
         }
     }
 }

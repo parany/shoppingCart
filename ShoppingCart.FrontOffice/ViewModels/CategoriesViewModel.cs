@@ -9,6 +9,5 @@ namespace ShoppingCart.ViewModels
     {
         public IList<Category> Categories { get; set; }
         public IList<Category> SelectedCategories { get; set; }
-
     }
 }

@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product presentattion</h2>
+@if(Model.Products.Count() != 0){
+    foreach (var p in Model.Products){
+    <div>
+        <h3>@p.Name</h3>
+        <p></p>
+    </div>
+    }
+}
+
+

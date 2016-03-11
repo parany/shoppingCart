@@ -10,7 +10,7 @@
         {
             <li>
                 <div>
-                    <h3>@c.Name</h3>
+                    @Html.ActionLink(c.Name, "Details", "Categories", new {name = c.Name})
                 </div>
             </li>
         }
@@ -20,7 +20,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        @if (Model.SelectedCategories.Any() && Model.Categories.Any())
+        @if (Model.SelectedCategories.Count() != 0 && Model.Categories.Count() != 0)
         {
             foreach (var p in Model.SelectedCategories.First().Products)
              {
@@ -30,7 +30,7 @@
                  </div>
              }
         }
-        else if (!Model.Categories.Any())
+        else if (Model.SelectedCategories.Count() == 0 && Model.Categories.First().Products.Count() != 0)
         {
             foreach (var p in Model.Categories.First().Products)
             {
@@ -42,7 +42,7 @@
         }
         else
         {
-            <div>There is no category yet. Pease contact the administrator to ad new categories</div>
+            <div>There is no category/Product yet. Pease contact the administrator to ad new categories/Products</div>
         }
     </div>
 </div>

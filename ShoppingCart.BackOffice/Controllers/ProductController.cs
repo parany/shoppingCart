@@ -19,6 +19,7 @@ namespace ShoppingCart.BackOffice.Controllers
         {
             ProductRepository = productRepository;
             CategoryRepository = categoryRepository;
+            ProductRepository.AddNavigationProperty(p => p.Category);
         }
 
         //
@@ -46,11 +47,11 @@ namespace ShoppingCart.BackOffice.Controllers
         // GET: Product/Create
         public ActionResult Create()
         {
-            CreateViewModels CreateVM = new CreateViewModels
+            CreateViewModels createVM = new CreateViewModels
             {
                 CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
             };
-            return View(CreateVM);
+            return View(createVM);
         }
 
         // POST: Product/Create
@@ -58,18 +59,18 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CategoryId,Quantity,Price,Description")] Product product)
+        public ActionResult Create(CreateViewModels createViewModels)
         {
-            product.DateCreated = DateTime.Now;
-            product.CreatedBy = User.Identity.Name;
             if (ModelState.IsValid)
             {
-                product.Id = Guid.NewGuid();
-                ProductRepository.Add(product);
+                createViewModels.Product.Id = Guid.NewGuid();
+                ProductRepository.Add(createViewModels.Product);
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            createViewModels.CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name");
+
+            return View(createViewModels);
         }
 
         // GET: Product/Edit/5
@@ -84,7 +85,13 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+
+            CreateViewModels createVM = new CreateViewModels
+            {
+                Product = product,
+                CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
+            };
+            return View(createVM);
         }
 
         // POST: Product/Edit/5
@@ -92,14 +99,15 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,CategoryId,DateCreated,DateModified,CreatedBy,ModifiedBy")] Product product)
+        public ActionResult Edit(CreateViewModels createViewModels)
         {
             if (ModelState.IsValid)
             {
-                ProductRepository.Update(product);
+                ProductRepository.Update(createViewModels.Product);
                 return RedirectToAction("Index");
             }
-            return View(product);
+            createViewModels.CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name");
+            return View(createViewModels);
         }
 
         // GET: Product/Delete/5

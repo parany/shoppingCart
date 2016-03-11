@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -30,9 +31,18 @@ namespace ShoppingCart.Controllers
 
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult List(string name = "", int ID = 0, decimal price= 0, string category = "")
         {
-
+            /*
+            Func<Product, bool> condition = p =>
+            {
+                return (string.IsNullOrEmpty(name) || p.Name.Equals(name))
+                       && (string.IsNullOrEmpty(name) || p.Name.Equals(name));
+            }
+            ProductDetailViewModel productList = new ProductDetailViewModel()
+            {
+                Products = ProductRepository.GetList(Expression)
+            }*/
             return View();
         }
 

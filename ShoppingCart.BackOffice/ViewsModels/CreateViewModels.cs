@@ -14,5 +14,6 @@ namespace ShoppingCart.BackOffice.ViewsModels
 
         [DisplayName("Category")]
         public SelectList CategoryList { get; set; }
+
     }
 }

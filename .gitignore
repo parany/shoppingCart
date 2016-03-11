@@ -243,7 +243,6 @@ _Pvt_Extensions
 .idea/
 *.sln.iml
 
-ShoppingCart.FrontOffice/Web.config
-ShoppingCart.Models/App.config
+Web.config
+App.config
 
-ShoppingCart.BackOffice/Web.config

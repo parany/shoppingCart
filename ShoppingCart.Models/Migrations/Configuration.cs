@@ -19,7 +19,7 @@ namespace ShoppingCart.Models.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data. E.g.
             //
             //    context.People.AddOrUpdate(
@@ -29,12 +29,6 @@ namespace ShoppingCart.Models.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-            /* context.Products.AddOrUpdate(
-                     new Product { Name = "Produit1" },
-                     new Product { Name = "Produit1" },
-                     new Product { Name = "Produit3" }
-                 );*/
 
             if (!Roles.RoleExists("Administrator"))
             {
@@ -46,6 +40,7 @@ namespace ShoppingCart.Models.Migrations
                 Membership.CreateUser("Admin", "AdminPass1");
                 Roles.AddUserToRole("Admin", "Administrator");
             }
+
         }
     }
 }

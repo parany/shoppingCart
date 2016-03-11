@@ -64,6 +64,15 @@
     <Reference Include="System.Web.Providers">
       <HintPath>..\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+>>>>>>> fb7adf5e3521ad87f9693e1070a1ed8703b5e2c1
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
@@ -81,8 +90,13 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
+=======
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+>>>>>>> fb7adf5e3521ad87f9693e1070a1ed8703b5e2c1
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mvc5, Version=1.2.3.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
@@ -132,7 +146,11 @@
     <Compile Include="App_Start\SmsService.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\AccountController.cs" />
+=======
+    <Compile Include="Controllers\CategoriesController.cs" />
+>>>>>>> fb7adf5e3521ad87f9693e1070a1ed8703b5e2c1
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -140,6 +158,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+<<<<<<< HEAD
     <Compile Include="ViewsModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewsModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewsModels\ConfigureTwoFactorViewModel.cs" />
@@ -160,6 +179,10 @@
     <Compile Include="ViewsModels\SetPasswordViewModel.cs" />
     <Compile Include="ViewsModels\VerifyCodeViewModel.cs" />
     <Compile Include="ViewsModels\VerifyPhoneNumberViewModel.cs" />
+=======
+    <Compile Include="ViewsModels\CategoryListViewModel.cs" />
+    <Compile Include="ViewsModels\CreateViewModels.cs" />
+>>>>>>> fb7adf5e3521ad87f9693e1070a1ed8703b5e2c1
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -182,9 +205,13 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+<<<<<<< HEAD
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+=======
+    <Content Include="Web.config" />
+>>>>>>> fb7adf5e3521ad87f9693e1070a1ed8703b5e2c1
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -198,6 +225,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -215,6 +243,18 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Product\_ProductPartial.cshtml" />
+=======
+    <Content Include="Views\Home\Delete.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+>>>>>>> fb7adf5e3521ad87f9693e1070a1ed8703b5e2c1
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -232,9 +272,12 @@
       <Name>ShoppingCart.Models</Name>
     </ProjectReference>
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+=======
+>>>>>>> fb7adf5e3521ad87f9693e1070a1ed8703b5e2c1
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201603100700396_UpdateMigration.Designer.cs">
       <DependentUpon>201603100700396_UpdateMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603110858441_Address.cs" />
+    <Compile Include="Migrations\201603110858441_Address.Designer.cs">
+      <DependentUpon>201603110858441_Address.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\Cart.cs" />
     <Compile Include="Models\Entities\CartLine.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -89,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603100700396_UpdateMigration.resx">
       <DependentUpon>201603100700396_UpdateMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603110858441_Address.resx">
+      <DependentUpon>201603110858441_Address.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

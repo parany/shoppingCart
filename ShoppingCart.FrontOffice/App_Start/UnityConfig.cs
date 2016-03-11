@@ -1,5 +1,6 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 using Microsoft.Practices.Unity;
 using ShoppingCart.Controllers;
 using ShoppingCart.Models;
@@ -8,6 +9,7 @@ using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models.Repositories.Concrete;
 using ShoppingCart.Models.Repositories.Interface;
 using System.Data.Entity;
+using System.Web;
 using System.Web.Mvc;
 using Unity.Mvc5;
 
@@ -30,6 +32,8 @@ namespace ShoppingCart
             container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
             container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<IAuthenticationManager>(
+                    new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

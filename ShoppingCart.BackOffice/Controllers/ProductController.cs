@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private IGenericRepository<Product> ProductRepository { get; }
@@ -58,18 +59,19 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,CategoryId,Quantity,Price,Description")] Product product)
+        public ActionResult Create(CreateViewModels createVM)
         {
-            product.DateCreated = DateTime.Now;
-            product.CreatedBy = User.Identity.Name;
             if (ModelState.IsValid)
             {
-                product.Id = Guid.NewGuid();
-                ProductRepository.Add(product);
+                createVM.Product.Id = Guid.NewGuid();
+                createVM.Product.CategoryId = createVM.CategoryId;
+                ProductRepository.Add(createVM.Product);
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            createVM.CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name");
+
+            return View(createVM);
         }
 
         // GET: Product/Edit/5
@@ -84,7 +86,12 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+            CreateViewModels CreateVM = new CreateViewModels
+            {
+                Product = product,
+                CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
+            };
+            return View(CreateVM);
         }
 
         // POST: Product/Edit/5

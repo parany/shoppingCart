@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize]
     public class ProductController : Controller
     {
         private IGenericRepository<Product> ProductRepository { get; }
@@ -118,19 +117,6 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = ProductRepository.GetSingle(p => p.Id == id.Value);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
-
-        // POST: Product/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
-        {
             Product product = ProductRepository.GetSingle(p => p.Id == id);
             ProductRepository.Delete(product);
             return RedirectToAction("Index");

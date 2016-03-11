@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewsModels\CategoryListViewModel.cs" />
     <Compile Include="ViewsModels\CreateViewModels.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,7 @@ namespace ShoppingCart.BackOffice.Controllers
         public CategoriesController(IGenericRepository<Category> categoryRepository)
         {
             CategoryRepository = categoryRepository;
+            CategoryRepository.AddNavigationProperty(c => c.Products);
         }
 
         // GET: Categories

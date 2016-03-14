@@ -27,7 +27,7 @@ namespace ShoppingCart.Controllers
             ProductsListViewModel viewModel = new ProductsListViewModel
             {
                 Products = products
-                             .OrderBy(p => p.DateCreated)
+                             .OrderByDescending(p => p.DateCreated)
                              .Skip((page - 1) * PageSize)
                              .Take(PageSize),
                 PagingInfo = new PagingInfo

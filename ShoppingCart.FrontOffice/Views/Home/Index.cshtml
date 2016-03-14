@@ -1,27 +1,36 @@
-@using ShoppingCart.Models
 @model ShoppingCart.ViewModels.ProductsListViewModel
 
 @{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h2>The e-commerce shopping web site</h2>
-    <p class="lead">
-        Have a look at your last products ...
+<div class="jumbotron" >
+    <h2 style="color:#0094ff">The e-commerce shopping web site</h2>
+    <p class="lead" style="color:#000000">
+        Have a look at our new products ...
     </p>
 
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
         @foreach (var p in Model.Products)
         {
             <div class="well">
                 <h3>
-                    <strong>@p.Name</strong>
+                    <strong style="color:#0094ff">@p.Name</strong>
                     <span class="pull-right label label-primary">@p.Price.ToString("c")</span>
                 </h3>
+
+                @using (Html.BeginForm("AddToCart", "Carts"))
+                {
+                    <div class="pull-right">
+                        @Html.Hidden("productId", p.Id)
+                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                        <input type="submit" class="btn btn-success" value="Add to cart" />
+                    </div>
+                }
+
                 <span class="lead"> @p.Description</span>
             </div>
         }

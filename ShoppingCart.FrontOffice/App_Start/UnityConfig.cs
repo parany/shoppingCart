@@ -32,6 +32,7 @@ namespace ShoppingCart
             container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
             container.RegisterType<AccountController>(new InjectionConstructor());
+
             container.RegisterType<IAuthenticationManager>(
                     new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
 

@@ -26,6 +26,7 @@ namespace ShoppingCart.Controllers
 
 
         // GET: Categories
+        // style:  /Categories/Index?categoryName=""
         public ActionResult Index(string categoryName)
         {
             CategoriesViewModel categoriesViewModel;

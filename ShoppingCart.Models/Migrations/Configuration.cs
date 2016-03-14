@@ -30,7 +30,7 @@ namespace ShoppingCart.Models.Migrations
             //    );
             //
 
-            if (!Roles.RoleExists("Administrator"))
+            /*if (!Roles.RoleExists("Administrator"))
             {
                 Roles.CreateRole("Administrator");
             }
@@ -39,7 +39,7 @@ namespace ShoppingCart.Models.Migrations
             {
                 Membership.CreateUser("Admin", "AdminPass1");
                 Roles.AddUserToRole("Admin", "Administrator");
-            }
+            }*/
 
         }
     }

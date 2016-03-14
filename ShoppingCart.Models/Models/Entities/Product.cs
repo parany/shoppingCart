@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace ShoppingCart.Models.Models.Entities
 {
@@ -11,6 +12,9 @@ namespace ShoppingCart.Models.Models.Entities
         public decimal Price { get; set; }
 
         public int Quantity { get; set; }
+
+        /*[DisplayName("Image")]
+        public string ImagePath { get; set; }*/
 
         public Guid CategoryId { get; set; }
 

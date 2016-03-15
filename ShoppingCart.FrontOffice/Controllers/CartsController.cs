@@ -25,35 +25,35 @@ namespace ShoppingCart.Controllers
             return View(new CartIndexViewModel
             {
                 Cart = cart,
-                ReturnUrl = returnUrl
+                ReturnUrl = returnUrl ?? "/"
             });
         }
 
+        [HttpPost]
         public ViewResult checkQuantity(Guid productId, string returnUrl)
         {
             Product product = ProductRepository.GetSingle(p => p.Id == productId);
-            List<int> toQuantityInStock = new List<int>();
-            for(int i=0; i < product.Quantity; i++)
-            {
-                toQuantityInStock.Add(i + 1);
-            }
+            int qtyOrdered = 1;
+            
             CartCheckQuantityViewModel chkQtty = new CartCheckQuantityViewModel
             {
                 Product = product,
                 ReturnUrl = returnUrl,
-                ToQuantityInStock = toQuantityInStock
+                QtyOrdered = qtyOrdered
             };
             return View("AddToCart", chkQtty);
         }
 
-        public RedirectToRouteResult AddToCart(CartViewModel cart, Guid productId, string returnUrl)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public RedirectToRouteResult AddToCart(CartCheckQuantityViewModel data, CartViewModel cart)
         {
-            Product product = ProductRepository.GetSingle(p => p.Id == productId);
+            Product product = ProductRepository.GetSingle(p => p.Id == data.Product.Id);
             if (product != null)
             {
-                cart.AddItem(product, 1);
+                cart.AddItem(product, data.QtyOrdered);
             }
-            return RedirectToAction("Index", new { returnUrl });
+            return RedirectToAction("Index", new { data.ReturnUrl });
         }
 
         public RedirectToRouteResult RemoveFromCart(CartViewModel cart, Guid productId, string returnUrl)
@@ -69,12 +69,6 @@ namespace ShoppingCart.Controllers
         public PartialViewResult Summary(CartViewModel cart)
         {
             return PartialView(cart);
-        }
-
-        [Authorize]
-        public ViewResult Checkout()
-        {
-            return View();
         }
 
     }

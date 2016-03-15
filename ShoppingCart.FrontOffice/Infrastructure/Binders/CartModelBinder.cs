@@ -31,5 +31,10 @@ namespace ShoppingCart.Infrastructure.Binders
             
             return cart;
         }
+
+        public static void UnBindModel(ControllerContext controllerContext)
+        {
+            controllerContext.HttpContext.Session.Clear();
+        }
     }
 }

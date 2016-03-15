@@ -20,17 +20,29 @@
 
 <div class="row">
     <div class="col-md-4">
-        @foreach (var c in Model.SelectedCategories)
+        @if (Model.SelectedCategories.Count() != 0 && Model.Categories.Count() != 0)
         {
-            <p>@c.Name</p>
-            foreach (var p in c.Products)
+            foreach (var p in Model.SelectedCategories.First().Products)
+             {
+                 <div>
+                     <h3>@p.Name</h3>
+                     <p>@p.Price</p>
+                 </div>
+             }
+        }
+        else if (Model.SelectedCategories.Count() == 0 && Model.Categories.First().Products.Count() != 0)
+        {
+            foreach (var p in Model.Categories.First().Products)
             {
-                <li>
-                    <div>
-                        @p.Name
-                    </div>
-                </li>
+                <div>
+                    <h3>@p.Name</h3>
+                    <p>@p.Price</p>
+                </div>
             }
+        }
+        else
+        {
+            <div>There is no category/Product yet. Pease contact the administrator to ad new categories/Products</div>
         }
     </div>
 </div>

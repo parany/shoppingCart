@@ -22,7 +22,7 @@
                     <span class="pull-right label label-primary">@p.Price.ToString("c")</span>
                 </h3>
 
-                @using (Html.BeginForm("AddToCart", "Carts"))
+                @using (Html.BeginForm("checkQuantity", "Carts"))
                 {
                     <div class="pull-right">
                         @Html.Hidden("productId", p.Id)

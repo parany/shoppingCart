@@ -1,41 +1,66 @@
 ﻿@model ShoppingCart.ViewModels.CartCheckQuantityViewModel
 @{
-    ViewBag.Title = "AddToCart";
+    ViewBag.Title = "Confirmation in adding to cart";
 }
+<script type="text/javascript">
+    function update_price()
+    {
+        document.getElementById("Price-form").innerHTML = document.getElementById("Quantity-form").value * @Model.Product.Price;
+    }
+</script>
 
-<h2>AddToCart</h2>
-@using (Html.BeginForm())
+<h2>Confirm adding to Cart</h2>
+@using (Html.BeginForm("AddToCart", "Carts"))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Order Details</h4>
+        <h4>Order Details: Please confirm the quantity of products to add to cart below</h4>
         <hr />
-        
+        @Html.HiddenFor(x => x.Product.Id)
+        @Html.HiddenFor(x => x.ReturnUrl)
         <div class="form-group">
-            <div class = "control-label col-md-2">Product</div>
+            <div class="control-label col-md-2">Product</div>
             <div class="col-md-10">
-                <label class="control-label col-md-2">@Model.Product.Name</label>
+                @Html.DisplayFor(x => x.Product.Name)
             </div>
         </div>
 
         <div class="form-group">
             <div class="control-label col-md-2">Quantity</div>
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Product.Quantity, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.EditorFor(x => x.QtyOrdered, new
+                {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control",
+                       @Id = "Quantity-form",
+                       @OnChange = "javascript:update_price()",
+                       @Min = "1",
+                       @Max = @Model.Product.Quantity
+                   }
+                })
             </div>
         </div>
 
         <div class="form-group">
-            <div class = "control-label col-md-2">Price</div>
-            <div class="col-md-10">
-                 @*@Html.LabelFor(model => model.Product.Price, new { htmlAttributes = new { @class = "form-control" } })*@
+            <div class="control-label col-md-2"> Price</div>
+            <div id="Price-form" class="col-md-10">
+                @Html.DisplayFor(x => x.Product.Price, "MyDecimalTemplate")
             </div>
         </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input class="btn btn-sm btn-primary"
+                       type="submit" value="Continue" />
+            </div>
+        </div>
+
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Model.ReturnUrl"> < Back to List</a>
 </div>
 

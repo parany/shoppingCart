@@ -1,0 +1,37 @@
+﻿@model ShoppingCart.Models.Models.Entities.Product
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 style="color:darkcyan;">Details of @Model.Name</h2>
+
+@*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="alert alert-success" role="alert">
+        <strong>Description:</strong>
+        @Model.Description
+    </div>
+    <div class="alert alert-info" role="alert">
+        <strong>Category:</strong>
+        @Model.Category.Name
+    </div>
+    <div class="alert alert-warning" role="alert">
+        <strong>Selling Price:</strong>
+        @Model.Price.ToString("c")
+    </div>
+    <div class="alert alert-danger" role="alert">
+        <strong>Number available in stock:</strong>
+        @Model.Quantity
+    </div>
+</div>*@
+
+<ul class="list-group">
+    <li class="list-group-item list-group-item-info"><strong>Description:</strong><br/>@Model.Description</li>
+    <li class="list-group-item list-group-item-warning"><span class="badge">@Model.Category.Name</span>Category:<br /></li>
+    <li class="list-group-item list-group-item-danger"><span class="badge">@Model.Price.ToString("c")</span>Selling Price:</li>
+    <li class="list-group-item list-group-item-success"><span class="badge">@Model.Quantity</span>Number available in stock:</li>
+</ul>
+
+<div>
+    <a href="@ViewData["ReturnUrl"]"> < Back to List</a>
+</div>
+

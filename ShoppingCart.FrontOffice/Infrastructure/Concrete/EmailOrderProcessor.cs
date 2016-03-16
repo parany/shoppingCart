@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Infrastructure.Abstract;
 using ShoppingCart.ViewModels;
@@ -13,15 +14,15 @@ namespace ShoppingCart.Infrastructure.Concrete
 {
     public class EmailSettings
     {
-        public string MailToAddress = "orders@example.com";
-        public string MailFromAddress = "sportsstore@example.com";
+        public string MailToAddress = "user@example.com";
+        public string MailFromAddress = "shoppingcart@example.com";
         public bool UseSsl = true;
-        public string Username = "MySmtpUsername";
-        public string Password = "MySmtpPassword";
+        public string Username = "SmtpUsernameTest";
+        public string Password = "SmtpPasswordTest";
         public string ServerName = "smtp.example.com";
         public int ServerPort = 587;
         public bool WriteAsFile = false;
-        public string FileLocation = @"c:\sports_store_emails";
+        public string FileLocation = @"c:\shoppingcart\emails";
     }
 
     public class EmailOrderProcessor : IOrderProcessor

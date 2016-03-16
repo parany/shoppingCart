@@ -9,55 +9,71 @@
     }
 </script>
 
-<h2>Confirm adding to Cart</h2>
-@using (Html.BeginForm("AddToCart", "Carts"))
+@if (Model.QtyRemaining > 0)
 {
-    @Html.AntiForgeryToken()
+    <h2>Confirm adding to Cart</h2>
+    using (Html.BeginForm("AddToCart", "Carts"))
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Order Details: Please confirm the quantity of products to add to cart below</h4>
-        <hr />
-        @Html.HiddenFor(x => x.Product.Id)
-        @Html.HiddenFor(x => x.ReturnUrl)
-        <div class="form-group">
-            <div class="control-label col-md-2">Product</div>
-            <div class="col-md-10">
-                @Html.DisplayFor(x => x.Product.Name)
+        <div class="form-horizontal">
+            <h4>Order Details: Please confirm the quantity of products to add to cart below</h4>
+            <hr />
+            @Html.HiddenFor(x => x.Product.Id)
+            @Html.HiddenFor(x => x.ReturnUrl)
+            <div class="form-group">
+                <div class="control-label col-md-2">Product</div>
+                <div class="col-md-10">
+                    @Html.DisplayFor(x => x.Product.Name)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="control-label col-md-2">Quantity</div>
-            <div class="col-md-10">
-                @Html.EditorFor(x => x.QtyOrdered, new
-                {
-                   htmlAttributes = new
-                   {
-                       @class = "form-control",
-                       @Id = "Quantity-form",
-                       @OnChange = "javascript:update_price()",
-                       @Min = "1",
-                       @Max = @Model.Product.Quantity
-                   }
-                })
+            <div class="form-group">
+                <div class="control-label col-md-2">Quantity</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(x => x.QtyOrdered, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "form-control",
+                   @Id = "Quantity-form",
+                   @OnChange = "javascript:update_price()",
+                   @Min = "1",
+                   @Max = @Model.QtyRemaining
+               }
+           })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="control-label col-md-2"> Price</div>
-            <div id="Price-form" class="col-md-10">
-                @Html.DisplayFor(x => x.Product.Price, "MyDecimalTemplate")
+            <div class="form-group">
+                <div class="control-label col-md-2"> Price</div>
+                <div id="Price-form" class="col-md-10">
+                    @Html.DisplayFor(x => x.Product.Price, "MyDecimalTemplate")
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input class="btn btn-sm btn-primary"
-                       type="submit" value="Continue" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input class="btn btn-sm btn-primary"
+                           type="submit" value="Continue" />
+                </div>
             </div>
-        </div>
 
-    </div>
+        </div>
+    }
+
+}
+else if (Model.QtyRemaining <= 0 && Model.Product.Quantity > 0)
+{
+    <h2>Sorry!</h2>
+    <h4>Maximum number of this product's order reached!</h4>
+    <h6>Please see available stock in Product details</h6>
+}
+else
+{
+    <h2>Sorry!</h2>
+    <h4>This product is out of stock for now. Please check later!</h4>
+    <h6>We will make things in place to allow you to purchase this item as soon as possible</h6>
 }
 
 <div>

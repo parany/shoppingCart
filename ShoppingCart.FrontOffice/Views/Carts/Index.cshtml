@@ -11,8 +11,6 @@
 
 <h2>Your cart</h2>
 
-@using (Html.BeginForm("Index", "Checkout"))
-{
 <table id="cartTable" class="table">
     <thead>
         <tr>
@@ -53,9 +51,20 @@
         </tr>
     </tfoot>
 </table>
+
+@if (Model.ErrorMessage != "")
+{
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        @Model.ErrorMessage
+    </div>
+}
 <div class="text-center">
     <a class="btn btn-primary" href="@Model.ReturnUrl">Continue shopping</a>
-    <input type="submit" class="btn btn-primary" value="Checkout Now" />
+        @Html.ActionLink("Checkout Now", "Index", "Checkout",
+                      new { errorMessage = "" },
+                      new { @class = "btn btn-primary" }
+                 )
 </div>
-}
 

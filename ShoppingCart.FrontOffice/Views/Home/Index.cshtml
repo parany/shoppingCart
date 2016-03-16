@@ -18,7 +18,7 @@
 
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail" style="margin-bottom:20px">
-                <img src="..." alt="...">
+                <img src="~/Content/Product.png" alt="Product">
                 <div class="caption">
                     <h3 style="color:#0094ff">@p.Name</h3>
                     <p class="lead"> @p.Description</p>
@@ -47,23 +47,7 @@
         </div>
     }
 </div>
-            @*<div class="well">
-                <h3>
-                    <strong style="color:#0094ff">@p.Name</strong>
-                    <span class="pull-right label label-primary">@p.Price.ToString("c")</span>
-                </h3>
-
-                @using (Html.BeginForm("checkQuantity", "Carts"))
-                {
-                    <div class="pull-right">
-                        @Html.Hidden("productId", p.Id)
-                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                        <input type="submit" class="btn btn-success" value="Add to cart" />
-                    </div>
-                }
-
-                <span class="lead"> @p.Description</span>
-            </div>*@
+            
 <div class="btn-group pull-right">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
 </div>

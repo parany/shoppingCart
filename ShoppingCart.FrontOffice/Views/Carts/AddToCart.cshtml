@@ -66,14 +66,20 @@
 else if (Model.QtyRemaining <= 0 && Model.Product.Quantity > 0)
 {
     <h2>Sorry!</h2>
-    <h4>Maximum number of this product's order reached!</h4>
-    <h6>Please see available stock in Product details</h6>
+    <div class="text-center">
+        <img style="width:300px;" src="~/Content/Oops.jpg" alt="Oops">
+        <h4>Maximum number of this product's order reached!</h4>
+        <h6>Please see available stock in Product details</h6>
+    </div>
 }
 else
 {
     <h2>Sorry!</h2>
-    <h4>This product is out of stock for now. Please check later!</h4>
-    <h6>We will make things in place to allow you to purchase this item as soon as possible</h6>
+    <div class="text-center">
+        <img style="width:300px;" src="~/Content/Oops.jpg" alt="Oops">
+        <h4>This product is out of stock for now. Please check later!</h4>
+        <h6>We will make things in place to allow you to purchase this item as soon as possible</h6>
+    </div>
 }
 
 <div>

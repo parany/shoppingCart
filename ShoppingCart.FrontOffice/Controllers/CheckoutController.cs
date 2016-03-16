@@ -92,9 +92,9 @@ namespace ShoppingCart.Controllers
             foreach(CartLineViewModel c in cartDto.Cart.Lines)
             {
                 Product productToModify = _ProductRepository.GetSingle(x => x.Id == c.Product.Id);
-                if(productToModify.Quantity >= c.Product.Quantity)
+                if(productToModify.Quantity >= c.Quantity)
                 {
-                    productToModify.Quantity -= c.Product.Quantity;
+                    productToModify.Quantity -= c.Quantity;
                     _ProductRepository.Update(productToModify);
                 }else
                 {

@@ -7,10 +7,11 @@ using System.Linq.Expressions;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using SharedFunctions.LambdaGenerator;
 using ShoppingCart.Models;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
-using ShoppingCart.ViewModels;
+using ShoppingCart.ViewModels;
 
 namespace ShoppingCart.Controllers
 {
@@ -31,19 +32,27 @@ namespace ShoppingCart.Controllers
 
 
         // GET: Products
-        public ActionResult List(string name = "", int ID = 0, decimal price= 0, string category = "")
+        public ActionResult List(string name = "", decimal price= 0, string category = "")
         {
-            /*
-            Func<Product, bool> condition = p =>
+            ProductDetailViewModel productsViewModel;
+            ProductExpression prExp = new ProductExpression();
+            Expression exp = prExp.Compare("p", name, category, price);
+
+
+            productsViewModel = new ProductDetailViewModel()
             {
-                return (string.IsNullOrEmpty(name) || p.Name.Equals(name))
-                       && (string.IsNullOrEmpty(name) || p.Name.Equals(name));
-            }
-            ProductDetailViewModel productList = new ProductDetailViewModel()
-            {
-                Products = ProductRepository.GetList(Expression)
-            }*/
-            return View();
+
+                //Products = ProductRepository.GetList(p =>
+                //                                          ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
+                //                                          && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
+                //                                          && ((price > 0) ? p.Price == price : true)
+                //                                          )
+
+
+                Products = ProductRepository.GetList(exp)
+
+            };
+            return View(productsViewModel);
         }
 
         // GET: Products/Details/5

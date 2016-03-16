@@ -13,20 +13,30 @@ namespace SharedFunctions.LambdaGenerator
     {
         
         private ExprParser _Expression;
+        private LambdaExpression _lambda;
         public ProductExpression()
         {
             _Expression = new ExprParser();
         }
 
-        public LambdaExpression Compare(string variable, string name, string category, decimal price)
+        private void genLambda()
         {
-            return _Expression.Parse(
-                variable + "=>(" + 
-                "(" + name + " != null && !" + name + ".Equals('')) ? "+ variable + ".Name.Equals(" + name +") : true)" +
-                "&& ((" + category + " != null && !" + category + ".Equals('')) ? " + variable + ".Category.Name.Equals(" + category + ") : true)" +
-                "&& ((" + price + " > 0) ? " + variable + ".Price == " + price + " : true)" + 
+
+            _lambda =  _Expression.Parse(
+                "(Produit p,  string name, string category, decimal price) => " +
+                "(" + 
+                "(name != null && !name.Equals('')) ? p.Name.Equals(name) : true)" +
+                "&& ((category != null && !category.Equals('')) ? p.Category.Name.Equals(category) : true)" +
+                "&& (( price> 0) ? p.Price == price : true)" + 
                 ")"
                 );
         }
+
+        public Object RunExpression(Product produit, string name, string category, decimal price)
+        {
+            genLambda();
+            return _Expression.Run(_lambda, produit, name, category, price);
+        }
+
     }
 }

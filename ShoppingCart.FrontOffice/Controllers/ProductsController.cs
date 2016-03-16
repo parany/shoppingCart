@@ -35,8 +35,9 @@ namespace ShoppingCart.Controllers
         public ActionResult List(string name = "", decimal price= 0, string category = "")
         {
             ProductDetailViewModel productsViewModel;
+            Product pr;
             ProductExpression prExp = new ProductExpression();
-            Expression exp = prExp.Compare("p", name, category, price);
+            
 
 
             productsViewModel = new ProductDetailViewModel()
@@ -47,9 +48,7 @@ namespace ShoppingCart.Controllers
                 //                                          && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
                 //                                          && ((price > 0) ? p.Price == price : true)
                 //                                          )
-
-
-                Products = ProductRepository.GetList(exp)
+               Products = ProductRepository.GetList(p => (bool)prExp.RunExpression(p, name, category, price))
 
             };
             return View(productsViewModel);

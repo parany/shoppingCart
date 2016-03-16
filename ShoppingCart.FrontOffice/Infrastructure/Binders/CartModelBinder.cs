@@ -32,9 +32,9 @@ namespace ShoppingCart.Infrastructure.Binders
             return cart;
         }
 
-        public static void UnBindModel(ControllerContext controllerContext)
+        public static void ResetBinding(ControllerContext controllerContext)
         {
-            controllerContext.HttpContext.Session.Clear();
+            controllerContext.HttpContext.Session[sessionKey] = null;
         }
     }
 }

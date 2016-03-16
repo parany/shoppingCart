@@ -9,5 +9,6 @@ namespace ShoppingCart.ViewModels
     {
         public CartViewModel Cart { get; set; }
         public string ReturnUrl { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

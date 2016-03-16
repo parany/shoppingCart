@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+
 using ShoppingCart.ViewModels;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Models.Models.Entities;
@@ -15,77 +16,95 @@ namespace ShoppingCart.Controllers
     public class CheckoutController : Controller
     {
         private IGenericRepository<Cart> _CartRepository { get; set; }
+        private IGenericRepository<Product> _ProductRepository { get; set; }
+        private IGenericRepository<CartLine> _CartLineRepository { get; set; }
         private IGenericRepository<ShippingDetail> _ShippingRepository { get; set; }
-        private IGenericRepository<CartLine> _CartLineRepo { get; set; }
 
-        public CheckoutController(IGenericRepository<Cart> cartRepository,IGenericRepository<ShippingDetail> shipRepo, IGenericRepository<CartLine> cRepo)
+        public CheckoutController(IGenericRepository<Cart> cartRepo,
+                                  IGenericRepository<Product> productRepo,
+                                  IGenericRepository<CartLine> cartlineRepo,
+                                  IGenericRepository<ShippingDetail> shipRepo)
         {
-            _CartRepository = cartRepository;
+            _ProductRepository = productRepo;
+            _CartRepository = cartRepo;
             _CartRepository.AddNavigationProperties(ca => ca.CartLines);
+            _CartLineRepository = cartlineRepo;
+            _CartLineRepository.AddNavigationProperty(cl => cl.Product);
+            _CartLineRepository.AddNavigationProperty(clr => clr.Cart);
             _ShippingRepository = shipRepo;
-            _CartLineRepo = cRepo;
-            _CartLineRepo.AddNavigationProperty(cl => cl.Product);
-            _CartLineRepo.AddNavigationProperty(clr => clr.Cart);
         }
 
+
         [Authorize]
-        // GET: Checkout
-        public ActionResult Index(CartViewModel cartView)
+        public ActionResult Index(CartViewModel cartView, String errorMessage = "")
         {
-            Cart cart = new Cart {
-                Id=Guid.NewGuid()
-            };
-            _CartRepository.Add(cart);
-
-            foreach (CartLineViewModel cartl in cartView.Lines)
+            if(cartView.Lines.Count() == 0)
             {
-                CartLine cartline = new CartLine
-                {
-                    Id = Guid.NewGuid(),
-                    Quantity = cartl.Quantity,
-                    CartId = cart.Id,
-                    ProductId = cartl.Product.Id,
-                };
-            _CartLineRepo.Add(cartline);
-            cart.CartLines.Add(cartline);
+                return RedirectToAction("Index", "Carts", new { errorMessage = "Empty Cart! Please fill the cart before checking out." });
             }
-
-            _CartRepository.Update(cart);
-
-            CartDTO cdto = new CartDTO
+            else
             {
-                Cart = _CartRepository.GetSingle(x => x.Id == cart.Id),
-                UserId = User.Identity.GetUserId(),
-                UserName = User.Identity.GetUserName()
-            };
-            return View(cdto);
+                Cart cart = new Cart
+                {
+                    Id = Guid.NewGuid()
+                };
+                _CartRepository.Add(cart);
+
+                foreach (CartLineViewModel cartl in cartView.Lines)
+                {
+                    CartLine cartline = new CartLine
+                    {
+                        Id = Guid.NewGuid(),
+                        CartId = cart.Id,
+                        ProductId = cartl.Product.Id,
+                        Quantity = cartl.Quantity
+                    };
+                    _CartLineRepository.Add(cartline);
+                    cart.CartLines.Add(cartline);
+                }
+                _CartRepository.Update(cart);
+
+                CartDTO cdto = new CartDTO
+                {
+                    Cart = cartView,
+                    CartId = cart.Id,
+                    UserId = User.Identity.GetUserId(),
+                    UserName = User.Identity.GetUserName(),
+                    ErrorMessage = errorMessage
+                };
+                return View(cdto);
+            }
+           
         }
 
         [HttpPost]
-        public RedirectToRouteResult Order(CartDTO cartDto)
+        public ActionResult Order(CartDTO cartDto)
         {
 
             ShippingDetail shipD = new ShippingDetail
             {
+                Id = Guid.NewGuid(),
                 UserId = cartDto.UserId,
-                CartId = cartDto.Cart.Id,
-                Cart = cartDto.Cart,
-                DateCreated = DateTime.Now,
-                CreatedBy = User.Identity.Name,
-                ModifiedBy = User.Identity.Name,
-                DateModified = DateTime.Now,
-                Id = Guid.NewGuid()
-
+                CartId = cartDto.CartId
             };
             _ShippingRepository.Add(shipD);
 
+            foreach(CartLineViewModel c in cartDto.Cart.Lines)
+            {
+                Product productToModify = _ProductRepository.GetSingle(x => x.Id == c.Product.Id);
+                if(productToModify.Quantity >= c.Product.Quantity)
+                {
+                    productToModify.Quantity -= c.Product.Quantity;
+                    _ProductRepository.Update(productToModify);
+                }else
+                {
+                    return RedirectToAction("Index", "Checkout", new { errorMessage = "Stock insufficient for {0}", c.Product.Name  });
+                }
+            }
 
-            CartModelBinder.UnBindModel(ControllerContext);
-
-            _CartRepository.Delete(cartDto.Cart);
-            return RedirectToRoute("/");
+            CartModelBinder.ResetBinding(ControllerContext);
+            
+            return View();
         }
-
-
     }
 }

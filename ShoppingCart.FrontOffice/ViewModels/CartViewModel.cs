@@ -38,10 +38,20 @@ namespace ShoppingCart.ViewModels
         {
             lineCollection.Clear();
         }
+        public int GetQuantity(Product product)
+        {
+            CartLineViewModel clvm = lineCollection.Find(lc => lc.Product.Id == product.Id);
+            if(clvm == null)
+            {
+                return 0;
+            }
+            return clvm.Quantity;
+        }
         public IEnumerable<CartLineViewModel> Lines
         {
             get { return lineCollection; }
         }
+
     }
 
     public class CartLineViewModel

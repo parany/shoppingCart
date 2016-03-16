@@ -12,7 +12,13 @@
 
 <h2>Checkout Summary</h2>
 
-    @Html.AntiForgeryToken()
+@using (Html.BeginForm("Order", "Checkout"))
+{
+
+    @Html.HiddenFor(x => x.CartId)
+    @Html.HiddenFor(x => x.UserId)
+    @Html.HiddenFor(x => x.Cart)
+    @Html.HiddenFor(x => x.UserName)
     <div class="form-horizontal">
         <h4>Checkout Details: Please confirm your order</h4>
         <hr />
@@ -34,8 +40,8 @@
                 </tr>
             </thead>
             <tbody>
-               
-                @foreach (var line in Model.Cart.CartLines)
+
+                @foreach (var line in Model.Cart.Lines)
                 {
                     <tr>
                         <td class="text-center">@line.Quantity</td>
@@ -45,29 +51,36 @@
                             @((line.Quantity * line.Product.Price).ToString("c"))
                         </td>
                     </tr>
-
                 }
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="3" class="text-right">Total:</td>
                     <td class="text-right">
-                        
-                        @*@Model.Cart.ComputeTotalValue().ToString("c")*@
+
+                        @Model.Cart.ComputeTotalValue().ToString("c")
                     </td>
                 </tr>
             </tfoot>
         </table>
 
+        @if(Model.ErrorMessage != ""){
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            @Model.ErrorMessage
+        </div>
+        }
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10 text-center">
                 @Html.ActionLink("Return to Cart", "Index", "Carts",
-                     new { returnUrl = "/" },
-                     new { @class = "btn btn-primary" }
-                )
-                @*<input class="btn btn-primary"
-                       type="submit" value="Confirm order" />*@
-                @Html.ActionLink("Complete Order", "Order", "Checkout", Model, new { @Class = "btn btn-primary" })
+                      new { returnUrl = "/" },
+                      new { @class = "btn btn-primary" }
+                 )
+                <input class="btn btn-primary"
+                       type="submit" value="Complete order" />
+
             </div>
         </div>
     </div>

@@ -47,6 +47,7 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
@@ -72,12 +73,21 @@
     <Compile Include="Migrations\201603110858441_Address.Designer.cs">
       <DependentUpon>201603110858441_Address.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603141022217_User.cs" />
+    <Compile Include="Migrations\201603141022217_User.Designer.cs">
+      <DependentUpon>201603141022217_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150657323_FilePaths.cs" />
+    <Compile Include="Migrations\201603150657323_FilePaths.Designer.cs">
+      <DependentUpon>201603150657323_FilePaths.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DbConfiguration.cs" />
     <Compile Include="Models\Entities\Cart.cs" />
     <Compile Include="Models\Entities\CartLine.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\BaseObject.cs" />
     <Compile Include="Models\Entities\Category.cs" />
+    <Compile Include="Models\Entities\FilePath.cs" />
     <Compile Include="Models\Entities\Product.cs" />
     <Compile Include="Models\Entities\ShippingDetail.cs" />
     <Compile Include="Models\User\ApplicationUser.cs" />
@@ -106,6 +116,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603110858441_Address.resx">
       <DependentUpon>201603110858441_Address.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141022217_User.resx">
+      <DependentUpon>201603141022217_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150657323_FilePaths.resx">
+      <DependentUpon>201603150657323_FilePaths.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

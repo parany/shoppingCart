@@ -14,11 +14,13 @@ namespace ShoppingCart.BackOffice.Controllers
     {
         private IGenericRepository<Product> ProductRepository { get; }
         private IGenericRepository<Category> CategoryRepository { get; }
+        private IGenericRepository<FilePath> FilePathRepository { get; }
 
-        public ProductController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository)
+        public ProductController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository, IGenericRepository<FilePath> filePathRepository)
         {
             ProductRepository = productRepository;
             CategoryRepository = categoryRepository;
+            FilePathRepository = filePathRepository;
             ProductRepository.AddNavigationProperty(p => p.Category);
         }
 
@@ -59,11 +61,22 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateViewModels createViewModels)
+        public ActionResult Create(CreateViewModels createViewModels, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
                 createViewModels.Product.Id = Guid.NewGuid();
+                /*if (upload != null && upload.ContentLength > 0)
+                {
+                    FilePath photo = new FilePath
+                    {
+                        Id = Guid.NewGuid(),
+                        FileName = System.IO.Path.GetFileName(upload.FileName),
+                        ProductId = createViewModels.Product.Id
+                    };
+                    FilePathRepository.Add(photo);
+                }*/
+                
                 ProductRepository.Add(createViewModels.Product);
                 return RedirectToAction("Index");
             }

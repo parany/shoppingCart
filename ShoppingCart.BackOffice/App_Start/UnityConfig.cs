@@ -20,11 +20,11 @@ namespace ShoppingCart.BackOffice
             var container = new UnityContainer();
 
             container.RegisterType<IGenericRepository<Product>, GenericRepository<Product>>();
+            container.RegisterType<IGenericRepository<Image>, GenericRepository<Image>>();
             container.RegisterType<IGenericRepository<Cart>, GenericRepository<Cart>>();
             container.RegisterType<IGenericRepository<CartLine>, GenericRepository<CartLine>>();
             container.RegisterType<IGenericRepository<Category>, GenericRepository<Category>>();
             container.RegisterType<IGenericRepository<ShippingDetail>, GenericRepository<ShippingDetail>>();
-            container.RegisterType<IGenericRepository<FilePath>, GenericRepository<FilePath>>();
 
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
             container.RegisterType<DbContext, ApplicationDbContext>(new HierarchicalLifetimeManager());

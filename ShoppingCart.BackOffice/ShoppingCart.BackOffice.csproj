@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ImageResizer">
+      <HintPath>..\packages\ImageResizer.4.0.5\lib\net45\ImageResizer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -163,6 +166,7 @@
     <Compile Include="ViewsModels\ManageLoginsViewModel.cs" />
     <Compile Include="ViewsModels\PagingInfo.cs" />
     <Compile Include="ViewsModels\ProductsListViewModel.cs" />
+    <Compile Include="ViewsModels\ProductViewModel.cs" />
     <Compile Include="ViewsModels\RegisterViewModel.cs" />
     <Compile Include="ViewsModels\ResetPasswordViewModel.cs" />
     <Compile Include="ViewsModels\SendCodeViewModel.cs" />
@@ -176,7 +180,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -226,7 +230,8 @@
     <Content Include="Views\Product\_ProductPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\images\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="Uploads\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

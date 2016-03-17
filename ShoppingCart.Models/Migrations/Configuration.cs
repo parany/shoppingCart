@@ -5,14 +5,14 @@ namespace ShoppingCart.Models.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ShoppingCart.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ShoppingCart.Models.ShoppingCartDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ShoppingCart.Models.ApplicationDbContext context)
+        protected override void Seed(ShoppingCart.Models.ShoppingCartDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

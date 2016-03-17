@@ -1,8 +1,10 @@
-﻿using ShoppingCart.BackOffice.ViewsModels;
+﻿using ImageResizer;
+using ShoppingCart.BackOffice.ViewsModels;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -14,21 +16,33 @@ namespace ShoppingCart.BackOffice.Controllers
     {
         private IGenericRepository<Product> ProductRepository { get; }
         private IGenericRepository<Category> CategoryRepository { get; }
-        private IGenericRepository<FilePath> FilePathRepository { get; }
+        private IGenericRepository<Image> ImageRepository { get; }
 
-        public ProductController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository, IGenericRepository<FilePath> filePathRepository)
+        public ProductController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository, IGenericRepository<Image> imageRepository)
         {
             ProductRepository = productRepository;
             CategoryRepository = categoryRepository;
-            FilePathRepository = filePathRepository;
+            ImageRepository = imageRepository;
             ProductRepository.AddNavigationProperty(p => p.Category);
+            ProductRepository.AddNavigationProperty(img => img.Image);
         }
 
         //
         // GET: /Product/
         public ActionResult Index()
         {
-            return View(ProductRepository.GetAll());
+            IList<ProductViewModel> products = new List<ProductViewModel>();
+
+            foreach (Product product in ProductRepository.GetAll())
+            {
+                products.Add(new ProductViewModel
+                {
+                    Product = product,
+                    ImagePath = product.Image.getImageVersion("_thumbnail")
+                });
+            }
+
+            return View(products);
         }
 
         // GET: Product/Details/5
@@ -43,7 +57,12 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+            ProductViewModel productVM = new ProductViewModel
+            {
+                Product = product,
+                ImagePath = product.Image.getImageVersion("_medium")
+            };
+            return View(productVM);
         }
 
         // GET: Product/Create
@@ -66,16 +85,47 @@ namespace ShoppingCart.BackOffice.Controllers
             if (ModelState.IsValid)
             {
                 createViewModels.Product.Id = Guid.NewGuid();
-                /*if (upload != null && upload.ContentLength > 0)
+                
+                if (upload != null && upload.ContentLength > 0)
                 {
-                    FilePath photo = new FilePath
+                    var path = Server.MapPath("~/Uploads/images/");
+                    String imageName = "product_" + createViewModels.Product.Id.ToString();
+
+                    Image uploadImage = new Image
                     {
                         Id = Guid.NewGuid(),
-                        FileName = System.IO.Path.GetFileName(upload.FileName),
-                        ProductId = createViewModels.Product.Id
+                        ImageName = imageName,
+                        ImageType = ".jpg"
                     };
-                    FilePathRepository.Add(photo);
-                }*/
+
+                    uploadImage.ImageName = imageName;
+                    uploadImage.ImageType = Path.GetExtension(upload.FileName);
+
+                    //Define the versions to generate
+                    uploadImage.Versions.Add("_thumbnail", "maxwidth=100&maxheight=100&format=jpg");
+                    uploadImage.Versions.Add("_medium", "maxwidth=700&maxheight=700&format=jpg");
+                    uploadImage.Versions.Add("_large", "maxwidth=1200&maxheight=1200&format=jpg");
+
+                    uploadImage.SaveAs(path, upload);
+                    ImageRepository.Add(uploadImage);
+                    createViewModels.Product.ImageId = uploadImage.Id;
+                }
+                else
+                {
+                    Image img_default = ImageRepository.GetSingle(i => i.ImageName == "product_default");
+
+                    if (img_default == null)
+                    {
+                        img_default = new Image
+                        {
+                            Id = Guid.NewGuid(),
+                            ImageName = "product_default",
+                            ImageType = ".jpg"
+                        };
+                        ImageRepository.Add(img_default);
+                    }
+                    createViewModels.Product.ImageId = img_default.Id;
+                }
                 
                 ProductRepository.Add(createViewModels.Product);
                 return RedirectToAction("Index");

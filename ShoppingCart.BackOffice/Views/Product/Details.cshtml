@@ -1,4 +1,4 @@
-﻿@model ShoppingCart.Models.Models.Entities.Product
+﻿@model ShoppingCart.BackOffice.ViewsModels.ProductViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,66 +11,73 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Product.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Product.Name)
         </dd>
 
         <dt>
 
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.DisplayNameFor(model => model.Product.Category.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category.Name)
+            @Html.DisplayFor(model => model.Product.Category.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Product.Price)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Product.Price)
 
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
+            @Html.DisplayNameFor(model => model.Product.DateCreated)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateCreated)
+            @Html.DisplayFor(model => model.Product.DateCreated)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateModified)
+            @Html.DisplayNameFor(model => model.Product.DateModified)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateModified)
+            @Html.DisplayFor(model => model.Product.DateModified)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.DisplayNameFor(model => model.Product.CreatedBy)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
+            @Html.DisplayFor(model => model.Product.CreatedBy)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
+            @Html.DisplayNameFor(model => model.Product.ModifiedBy)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ModifiedBy)
+            @Html.DisplayFor(model => model.Product.ModifiedBy)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Image)
+        </dt>
+
+        <dd>
+            <img src="~/Uploads/images/@Model.ImagePath" alt="@Model.Product.Image.ImageName" />
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Product.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

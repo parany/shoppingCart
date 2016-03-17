@@ -12,7 +12,7 @@ namespace ShoppingCart.Models
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<FilePath> FilePaths { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         public DbSet<Category> Categories { get; set; }
 

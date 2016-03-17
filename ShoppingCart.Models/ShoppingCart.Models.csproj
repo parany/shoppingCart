@@ -40,6 +40,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\packages\ImageResizer.4.0.5\lib\net45\ImageResizer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -57,25 +60,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201603081950026_MigrationInit.cs" />
+    <Compile Include="Migrations\201603081950026_MigrationInit.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Migrations\201603081950026_MigrationInit.Designer.cs">
       <DependentUpon>201603081950026_MigrationInit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603091159128_migration.cs" />
+    <Compile Include="Migrations\201603091159128_migration.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Migrations\201603091159128_migration.Designer.cs">
       <DependentUpon>201603091159128_migration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603100700396_UpdateMigration.cs" />
+    <Compile Include="Migrations\201603100700396_UpdateMigration.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Migrations\201603100700396_UpdateMigration.Designer.cs">
       <DependentUpon>201603100700396_UpdateMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603141022217_User.cs" />
+    <Compile Include="Migrations\201603141022217_User.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Migrations\201603141022217_User.Designer.cs">
       <DependentUpon>201603141022217_User.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603150657323_FilePaths.cs" />
-    <Compile Include="Migrations\201603150657323_FilePaths.Designer.cs">
-      <DependentUpon>201603150657323_FilePaths.cs</DependentUpon>
+    <Compile Include="Migrations\201603170708281_Image.cs" />
+    <Compile Include="Migrations\201603170708281_Image.Designer.cs">
+      <DependentUpon>201603170708281_Image.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DbConfiguration.cs" />
     <Compile Include="Models\Entities\Cart.cs" />
@@ -83,7 +94,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\BaseObject.cs" />
     <Compile Include="Models\Entities\Category.cs" />
-    <Compile Include="Models\Entities\FilePath.cs" />
+    <Compile Include="Models\Entities\Image.cs" />
     <Compile Include="Models\Entities\Product.cs" />
     <Compile Include="Models\Entities\ShippingDetail.cs" />
     <Compile Include="Models\User\ApplicationUser.cs" />
@@ -113,8 +124,8 @@
     <EmbeddedResource Include="Migrations\201603141022217_User.resx">
       <DependentUpon>201603141022217_User.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603150657323_FilePaths.resx">
-      <DependentUpon>201603150657323_FilePaths.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603170708281_Image.resx">
+      <DependentUpon>201603170708281_Image.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,6 +21,7 @@ namespace ShoppingCart.Controllers
 
 
         private IGenericRepository<Product> ProductRepository { get; }
+        public int PageSize = 6;
 
         public ProductsController(IGenericRepository<Product> productRepository)
         {
@@ -33,18 +34,27 @@ namespace ShoppingCart.Controllers
 
 
         // GET: Products
-        public ActionResult List(string name = "", decimal price= 0, string category = "")
+        public ActionResult List(string name = "", decimal price= 0, string category = "", int page = 1)
         {
-            ProductDetailViewModel productsViewModel;
+            ProductsListViewModel productsViewModel;
+            IList<Product> products = ProductRepository.GetList(p =>
+                ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
+                && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
+                && ((price > 0) ? p.Price == price : true)
+                );
 
-            productsViewModel = new ProductDetailViewModel()
+
+
+            productsViewModel = new ProductsListViewModel()
             {
 
-                Products = ProductRepository.GetList(p =>
-                                                          ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
-                                                          && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
-                                                          && ((price > 0) ? p.Price == price : true)
-                                                          )
+                Products = products,
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = products.Count()
+                }
             };
             return View(productsViewModel);
         }
@@ -67,19 +77,28 @@ namespace ShoppingCart.Controllers
             return View();
         }
 
-        public JsonResult GetListUpdate(string name = "", decimal price = 0, string category = "")
+        public JsonResult GetListUpdate(string name = "", decimal price = 0, string category = "", int page = 1)
         {
 
-            ProductDetailViewModel productsViewModel;
+            ProductsListViewModel productsViewModel;
+            IList<Product> products = ProductRepository.GetList(p =>
+                ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
+                && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
+                && ((price > 0) ? p.Price == price : true)
+                );
 
-            productsViewModel = new ProductDetailViewModel()
+
+
+        productsViewModel = new ProductsListViewModel()
             {
 
-                Products = ProductRepository.GetList(p =>
-                                                          ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
-                                                          && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
-                                                          && ((price > 0) ? p.Price == price : true)
-                                                          )
+                Products = products,
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = products.Count()
+                }
             };
             return Json(productsViewModel.Products, JsonRequestBehavior.AllowGet); 
         }

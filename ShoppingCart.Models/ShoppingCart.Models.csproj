@@ -60,9 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201603181205133_Init.cs" />
-    <Compile Include="Migrations\201603181205133_Init.Designer.cs">
-      <DependentUpon>201603181205133_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201603181246195_Init.cs" />
+    <Compile Include="Migrations\201603181246195_Init.Designer.cs">
+      <DependentUpon>201603181246195_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DbConfiguration.cs" />
     <Compile Include="Models\Entities\Cart.cs" />
@@ -87,8 +87,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603181205133_Init.resx">
-      <DependentUpon>201603181205133_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603181246195_Init.resx">
+      <DependentUpon>201603181246195_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

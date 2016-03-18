@@ -101,10 +101,8 @@ namespace ShoppingCart.Controllers
             {
                 Id = Guid.NewGuid(),
                 UserId = User.Identity.GetUserId(),
-                CartId = cart.Id,
                 DateCreated = DateTime.Now,
-                CreatedBy = User.Identity.GetUserId(),
-                State = ShippingState.NotCheckedOut
+                CreatedBy = User.Identity.GetUserId()
             };
             _ShippingRepository.Add(shipD);
 
@@ -123,7 +121,6 @@ namespace ShoppingCart.Controllers
             }
             // Modifying shipping state to pending
             ShippingDetail ship = _ShippingRepository.GetSingle(x => x.Id == shipD.Id );
-            ship.State = ShippingState.Pending;
             ship.DateModified = DateTime.Now;
             ship.ModifiedBy = User.Identity.GetUserId();
             _ShippingRepository.Update(ship);

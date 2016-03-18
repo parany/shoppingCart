@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ShoppingCart.Models.Models.Entities.Cart>
+
+@{
+    ViewBag.Title = "Carts";
+}
+
+<h2>Carts</h2>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            @item.User.UserName
+            <ul>
+                @foreach (var cartLine in item.CartLines)
+                {
+                    <li>@cartLine.Product.Name</li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

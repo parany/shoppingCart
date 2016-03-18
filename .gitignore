@@ -245,3 +245,5 @@ _Pvt_Extensions
 
 Web.config
 App.config
+
+Uploads/images/*.jpg

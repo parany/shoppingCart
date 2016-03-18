@@ -2,6 +2,14 @@
 
 namespace ShoppingCart.Models.Models.Entities
 {
+    public enum ShippingState
+    {
+        NotCheckedOut = 0,
+        Pending = 1,
+        Canceled = 2,
+        Delivered = 3
+    };
+
     public class ShippingDetail : BaseObject
     {
         public string UserId { get; set; }
@@ -10,5 +18,6 @@ namespace ShoppingCart.Models.Models.Entities
 
         public virtual Cart Cart { get; set; }
 
+        public ShippingState State { get; set; }
     }
 }

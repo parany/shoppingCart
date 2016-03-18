@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.BackOffice", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.Models", "ShoppingCart.Models\ShoppingCart.Models.csproj", "{19913B66-6B27-4FD9-A9FC-64133AA21AA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedFunctions", "SharedFunctions\SharedFunctions.csproj", "{1EE86B32-83C3-4D22-AD5D-3994E7BDDF68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.GeneralLib", "SharedFunctions\ShoppingCart.GeneralLib.csproj", "{1EE86B32-83C3-4D22-AD5D-3994E7BDDF68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

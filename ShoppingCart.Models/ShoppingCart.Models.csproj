@@ -60,33 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201603081950026_MigrationInit.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Migrations\201603081950026_MigrationInit.Designer.cs">
-      <DependentUpon>201603081950026_MigrationInit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603091159128_migration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Migrations\201603091159128_migration.Designer.cs">
-      <DependentUpon>201603091159128_migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603100700396_UpdateMigration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Migrations\201603100700396_UpdateMigration.Designer.cs">
-      <DependentUpon>201603100700396_UpdateMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603141022217_User.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Migrations\201603141022217_User.cs" />
     <Compile Include="Migrations\201603141022217_User.Designer.cs">
       <DependentUpon>201603141022217_User.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603170708281_Image.cs" />
-    <Compile Include="Migrations\201603170708281_Image.Designer.cs">
-      <DependentUpon>201603170708281_Image.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DbConfiguration.cs" />
     <Compile Include="Models\Entities\Cart.cs" />
@@ -112,20 +88,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603081950026_MigrationInit.resx">
-      <DependentUpon>201603081950026_MigrationInit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603091159128_migration.resx">
-      <DependentUpon>201603091159128_migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603100700396_UpdateMigration.resx">
-      <DependentUpon>201603100700396_UpdateMigration.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603141022217_User.resx">
       <DependentUpon>201603141022217_User.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603170708281_Image.resx">
-      <DependentUpon>201603170708281_Image.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

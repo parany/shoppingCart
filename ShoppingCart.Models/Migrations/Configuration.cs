@@ -1,6 +1,5 @@
 namespace ShoppingCart.Models.Migrations
 {
-    using ShoppingCart.Models.Models.Entities;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -27,18 +26,6 @@ namespace ShoppingCart.Models.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-           /* context.Products.AddOrUpdate(
-                    new Product { Name = "Produit1" },
-                    new Product { Name = "Produit1" },
-                    new Product { Name = "Produit3" }
-                );*/
-
-            context.Categories.AddOrUpdate(
-                    new Category { Id = Guid.NewGuid(), Name = "Category1" },
-                    new Category { Id = Guid.NewGuid(), Name = "Category2" },
-                    new Category { Id = Guid.NewGuid(), Name = "Category3" }
-                );
         }
     }
 }

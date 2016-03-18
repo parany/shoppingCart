@@ -5,11 +5,23 @@
 
 <div class="row">
     <div class="col-md-4">
-        @foreach (var c in Model.Categories[0].Products)
+        
+        @if (Model.SelectedCategories.Count() != 0)
         {
-            <div>
-                <h3>@c.Name</h3>
-            </div>
+            <h2>@Model.SelectedCategories.First().Name</h2>
+
+            foreach (var c in Model.SelectedCategories.First().Products)
+            {
+                <div>
+                    <h3>@c.Name</h3>
+                    <p>@c.Description</p>
+                    <p>@c.Price</p>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No product found</p>
         }
     </div>
 </div>

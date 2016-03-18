@@ -30,11 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EFCache, Version=1.0.0.0, Culture=neutral, PublicKeyToken=46c4868af4307d2c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Cache.1.0.0\lib\net45\EFCache.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\packages\ImageResizer.4.0.5\lib\net45\ImageResizer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -43,27 +50,27 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201603081950026_MigrationInit.cs" />
-    <Compile Include="Migrations\201603081950026_MigrationInit.Designer.cs">
-      <DependentUpon>201603081950026_MigrationInit.cs</DependentUpon>
+    <Compile Include="Migrations\201603141022217_User.cs" />
+    <Compile Include="Migrations\201603141022217_User.Designer.cs">
+      <DependentUpon>201603141022217_User.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603091159128_migration.cs" />
-    <Compile Include="Migrations\201603091159128_migration.Designer.cs">
-      <DependentUpon>201603091159128_migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603100700396_UpdateMigration.cs" />
-    <Compile Include="Migrations\201603100700396_UpdateMigration.Designer.cs">
-      <DependentUpon>201603100700396_UpdateMigration.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\DbConfiguration.cs" />
     <Compile Include="Models\Entities\Cart.cs" />
     <Compile Include="Models\Entities\CartLine.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\BaseObject.cs" />
     <Compile Include="Models\Entities\Category.cs" />
+    <Compile Include="Models\Entities\Image.cs" />
     <Compile Include="Models\Entities\Product.cs" />
     <Compile Include="Models\Entities\ShippingDetail.cs" />
     <Compile Include="Models\User\ApplicationUser.cs" />
@@ -81,18 +88,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603081950026_MigrationInit.resx">
-      <DependentUpon>201603081950026_MigrationInit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603091159128_migration.resx">
-      <DependentUpon>201603091159128_migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603100700396_UpdateMigration.resx">
-      <DependentUpon>201603100700396_UpdateMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603141022217_User.resx">
+      <DependentUpon>201603141022217_User.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

@@ -1,0 +1,19 @@
+﻿@model ShoppingCart.BackOffice.ViewsModels.CreateViewModels
+
+@{
+    ViewBag.Title = "Edit";
+
+    ViewBag.btn = "Save";
+}
+
+<h2>Edit</h2>
+
+@Html.Partial("_ProductPartial")
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

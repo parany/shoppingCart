@@ -1,0 +1,87 @@
+﻿
+@model ShoppingCart.ViewModels.CartDTO
+@{
+    ViewBag.Title = "Checkout summary";
+}
+
+<style>
+    #checkTable td {
+        vertical-align: middle;
+    }
+</style>
+
+<h2>Checkout Summary</h2>
+
+@using (Html.BeginForm("Order", "Checkout"))
+{
+
+    @Html.HiddenFor(x => x.CartId)
+    @Html.HiddenFor(x => x.UserId)
+    @Html.HiddenFor(x => x.Cart)
+    @Html.HiddenFor(x => x.UserName)
+    <div class="form-horizontal">
+        <h4>Checkout Details: Please confirm your order</h4>
+        <hr />
+        <div class="form-group">
+            <div class="control-label col-md-2">Ship to:</div>
+            <div class="col-md-10">
+                @Html.DisplayFor(x => x.UserName)
+            </div>
+        </div>
+
+
+        <table id="checkTable" class="table">
+            <thead>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Item</th>
+                    <th class="text-right">Price</th>
+                    <th class="text-right">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var line in Model.Cart.Lines)
+                {
+                    <tr>
+                        <td class="text-center">@line.Quantity</td>
+                        <td class="text-left">@line.Product.Name</td>
+                        <td class="text-right">@line.Product.Price.ToString("c")</td>
+                        <td class="text-right">
+                            @((line.Quantity * line.Product.Price).ToString("c"))
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total:</td>
+                    <td class="text-right">
+
+                        @Model.Cart.ComputeTotalValue().ToString("c")
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        @if(Model.ErrorMessage != ""){
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            @Model.ErrorMessage
+        </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10 text-center">
+                @Html.ActionLink("Return to Cart", "Index", "Carts",
+                      new { returnUrl = "/" },
+                      new { @class = "btn btn-primary" }
+                 )
+                <input class="btn btn-primary"
+                       type="submit" value="Complete order" />
+            </div>
+        </div>
+    </div>
+}
+

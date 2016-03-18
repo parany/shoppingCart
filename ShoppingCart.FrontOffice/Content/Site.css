@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+h2{
+    color: darkcyan;
+}
+
+h4{
+    color:dimgrey;
+}

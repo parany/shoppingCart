@@ -8,7 +8,7 @@ namespace ShoppingCart.Models.Models.Entities
         NotCheckedOut = 0,
         Pending = 1,
         Canceled = 2,
-        Delivered = 3s
+        Delivered = 3
     };
 
     public class ShippingDetail : BaseObject

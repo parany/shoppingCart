@@ -15,12 +15,12 @@ namespace ShoppingCart.Infrastructure.Concrete
 {
     public class EmailSettings
     {
-        public string MailToAddress = "user@example.com";
-        public string MailFromAddress = "shoppingcart@example.com";
+        public string MailToAddress = "shoppingcart@yopmail.com";
+        public string MailFromAddress = "";
         public bool UseSsl = true;
-        public string Username = "MySmtpUsername";
-        public string Password = "MySmtpPassword";
-        public string ServerName = "smtp.example.com";
+        public string Username = "";
+        public string Password = "";
+        public string ServerName = "smtp.gmail.com";
         public int ServerPort = 587;
         public bool WriteAsFile = false;
         public string FileLocation = @"C:\shoppingcart\emails";
@@ -44,6 +44,7 @@ namespace ShoppingCart.Infrastructure.Concrete
                 smtpClient.Host = emailSettings.ServerName;
                 smtpClient.Port = emailSettings.ServerPort;
                 smtpClient.UseDefaultCredentials = false;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.Credentials = new NetworkCredential(
                     emailSettings.Username,
                     emailSettings.Password);
@@ -62,8 +63,9 @@ namespace ShoppingCart.Infrastructure.Concrete
 
                 foreach (var line in cart.CartLines)
                 {
-                    var subtotal = line.Product.Price * line.Quantity;
-                    body.AppendFormat("{0} x {1} (subtotal: {2:c}", line.Quantity, line.Product.Name, subtotal);
+                    //var subtotal = line.Product.Price * line.Quantity;
+                    //body.AppendFormat("{0} x {1} (subtotal: {2:c}", line.Quantity, line.Product.Name, subtotal);
+                    body.AppendLine("Product Test 1: 1 x 2 = 2");
                 }
 
                 body//.AppendFormat("Total order value: {0:c}", cart.ComputeTotalValue())

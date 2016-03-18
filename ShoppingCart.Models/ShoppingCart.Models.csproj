@@ -60,9 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201603141022217_User.cs" />
-    <Compile Include="Migrations\201603141022217_User.Designer.cs">
-      <DependentUpon>201603141022217_User.cs</DependentUpon>
+    <Compile Include="Migrations\201603181205133_Init.cs" />
+    <Compile Include="Migrations\201603181205133_Init.Designer.cs">
+      <DependentUpon>201603181205133_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DbConfiguration.cs" />
     <Compile Include="Models\Entities\Cart.cs" />
@@ -79,7 +79,6 @@
     <Compile Include="Repositories\Concrete\PagingSettings.cs" />
     <Compile Include="Repositories\Interface\IGenericRepository.cs" />
     <Compile Include="ShoppingCartDbContext.cs" />
-    <Compile Include="ApplicationDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -88,8 +87,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603141022217_User.resx">
-      <DependentUpon>201603141022217_User.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603181205133_Init.resx">
+      <DependentUpon>201603181205133_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

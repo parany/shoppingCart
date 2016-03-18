@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ShoppingCart.Infrastructure.Binders;
 using ShoppingCart.Models.Models.User;
+using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Security.Claims;
+using ShoppingCart.Models;
 
 namespace ShoppingCart.Controllers
 {
@@ -24,6 +29,7 @@ namespace ShoppingCart.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            
         }
 
         public ApplicationSignInManager SignInManager
@@ -55,6 +61,7 @@ namespace ShoppingCart.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -389,6 +396,7 @@ namespace ShoppingCart.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            CartModelBinder.ResetBinding(ControllerContext);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

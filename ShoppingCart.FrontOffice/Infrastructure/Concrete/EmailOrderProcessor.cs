@@ -9,6 +9,7 @@ using System.Web;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Infrastructure.Abstract;
 using ShoppingCart.ViewModels;
+using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.Infrastructure.Concrete
 {
@@ -17,12 +18,12 @@ namespace ShoppingCart.Infrastructure.Concrete
         public string MailToAddress = "user@example.com";
         public string MailFromAddress = "shoppingcart@example.com";
         public bool UseSsl = true;
-        public string Username = "SmtpUsernameTest";
-        public string Password = "SmtpPasswordTest";
+        public string Username = "MySmtpUsername";
+        public string Password = "MySmtpPassword";
         public string ServerName = "smtp.example.com";
         public int ServerPort = 587;
         public bool WriteAsFile = false;
-        public string FileLocation = @"c:\shoppingcart\emails";
+        public string FileLocation = @"C:\shoppingcart\emails";
     }
 
     public class EmailOrderProcessor : IOrderProcessor
@@ -32,6 +33,7 @@ namespace ShoppingCart.Infrastructure.Concrete
         public EmailOrderProcessor(EmailSettings settings)
         {
             emailSettings = settings;
+            
         }
 
         public void ProcessOrder(Cart cart, ShippingDetail shippingInfo)
@@ -52,16 +54,16 @@ namespace ShoppingCart.Infrastructure.Concrete
                     smtpClient.PickupDirectoryLocation = emailSettings.FileLocation;
                     smtpClient.EnableSsl = false;
                 }
+
                 StringBuilder body = new StringBuilder()
-                .AppendLine("A new order has been submitted")
-                .AppendLine("---")
-                .AppendLine("Items:");
+                    .AppendLine("A new order has been submitted")
+                    .AppendLine("---")
+                    .AppendLine("Items:");
+
                 foreach (var line in cart.CartLines)
                 {
                     var subtotal = line.Product.Price * line.Quantity;
-                    body.AppendFormat("{0} x {1} (subtotal: {2:c}", line.Quantity,
-                    line.Product.Name,
-                    subtotal);
+                    body.AppendFormat("{0} x {1} (subtotal: {2:c}", line.Quantity, line.Product.Name, subtotal);
                 }
 
                 body//.AppendFormat("Total order value: {0:c}", cart.ComputeTotalValue())

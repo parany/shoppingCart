@@ -1,5 +1,4 @@
-﻿
-@model ShoppingCart.ViewModels.CartDTO
+﻿@model ShoppingCart.ViewModels.CartDTO
 @{
     ViewBag.Title = "Checkout summary";
 }
@@ -14,11 +13,7 @@
 
 @using (Html.BeginForm("Order", "Checkout"))
 {
-
-    @Html.HiddenFor(x => x.CartId)
-    @Html.HiddenFor(x => x.UserId)
     @Html.HiddenFor(x => x.Cart)
-    @Html.HiddenFor(x => x.UserName)
     <div class="form-horizontal">
         <h4>Checkout Details: Please confirm your order</h4>
         <hr />
@@ -80,6 +75,9 @@
                  )
                 <input class="btn btn-primary"
                        type="submit" value="Complete order" />
+                @*@Html.ActionLink("Complete Order", "Order", "Checkout", Model,
+                      new { @class = "btn btn-primary" }
+                 )*@
             </div>
         </div>
     </div>

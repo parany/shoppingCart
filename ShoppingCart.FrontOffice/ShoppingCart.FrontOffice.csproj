@@ -254,6 +254,7 @@
     <Content Include="Views\Products\List.cshtml" />
     <Content Include="Views\Checkout\Order.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Shared\_SearchBarPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

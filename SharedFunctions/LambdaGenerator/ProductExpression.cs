@@ -32,10 +32,10 @@ namespace SharedFunctions.LambdaGenerator
                 );
         }
 
-        public Object RunExpression(Product produit, string name, string category, decimal price)
+        public bool RunExpression(Product produit, string name, string category, decimal price)
         {
             genLambda();
-            return _Expression.Run(_lambda, produit, name, category, price);
+            return (bool)_Expression.Run(_lambda, produit, name, category, price);
         }
 
     }

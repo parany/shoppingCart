@@ -11,7 +11,8 @@ using SharedFunctions.LambdaGenerator;
 using ShoppingCart.Models;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
-using ShoppingCart.ViewModels;
+using ShoppingCart.ViewModels;
+
 
 namespace ShoppingCart.Controllers
 {
@@ -35,21 +36,15 @@ namespace ShoppingCart.Controllers
         public ActionResult List(string name = "", decimal price= 0, string category = "")
         {
             ProductDetailViewModel productsViewModel;
-            Product pr;
-            ProductExpression prExp = new ProductExpression();
-            
-
 
             productsViewModel = new ProductDetailViewModel()
             {
 
-                //Products = ProductRepository.GetList(p =>
-                //                                          ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
-                //                                          && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
-                //                                          && ((price > 0) ? p.Price == price : true)
-                //                                          )
-               Products = ProductRepository.GetList(p => (bool)prExp.RunExpression(p, name, category, price))
-
+                Products = ProductRepository.GetList(p =>
+                                                          ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
+                                                          && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
+                                                          && ((price > 0) ? p.Price == price : true)
+                                                          )
             };
             return View(productsViewModel);
         }
@@ -70,6 +65,23 @@ namespace ShoppingCart.Controllers
         {
 
             return View();
+        }
+
+        public JsonResult GetListUpdate(string name = "", decimal price = 0, string category = "")
+        {
+
+            ProductDetailViewModel productsViewModel;
+
+            productsViewModel = new ProductDetailViewModel()
+            {
+
+                Products = ProductRepository.GetList(p =>
+                                                          ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
+                                                          && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
+                                                          && ((price > 0) ? p.Price == price : true)
+                                                          )
+            };
+            return Json(productsViewModel.Products, JsonRequestBehavior.AllowGet); 
         }
 
     }

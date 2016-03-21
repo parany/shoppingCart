@@ -157,6 +157,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewsModels\AddPhoneNumberViewModel.cs" />
+    <Compile Include="ViewsModels\CartLineViewModel.cs" />
+    <Compile Include="ViewsModels\CartsViewModel.cs" />
     <Compile Include="ViewsModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewsModels\ConfigureTwoFactorViewModel.cs" />
     <Compile Include="ViewsModels\CreateViewModels.cs" />
@@ -175,6 +177,7 @@
     <Compile Include="ViewsModels\ResetPasswordViewModel.cs" />
     <Compile Include="ViewsModels\SendCodeViewModel.cs" />
     <Compile Include="ViewsModels\SetPasswordViewModel.cs" />
+    <Compile Include="ViewsModels\ShippingDetailViewModel.cs" />
     <Compile Include="ViewsModels\VerifyCodeViewModel.cs" />
     <Compile Include="ViewsModels\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>

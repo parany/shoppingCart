@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShoppingCart.Models.Models.Entities.Cart>
+﻿@model IEnumerable<ShoppingCart.BackOffice.ViewsModels.CartsViewModel>
 
 @{
     ViewBag.Title = "Carts";
@@ -6,17 +6,26 @@
 
 <h2>Carts</h2>
 
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>
-            @item.User.UserName
+@foreach (var item in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">@item.UserName</div>
+        <div class="panel-body">
+            <h2>Products</h2>
             <ul>
                 @foreach (var cartLine in item.CartLines)
                 {
-                    <li>@cartLine.Product.Name</li>
+                    <li>
+                        <span class="badge">@cartLine.Quantity</span>
+                        @cartLine.Product.Name
+                    </li>
+
                 }
             </ul>
-        </li>
-    }
-</ul>
+            <h2>Ship to :</h2>
+                @item.ShippingDetail.Name<br />
+                At : @item.ShippingDetail.Address<br />
+                Phone : @item.ShippingDetail.PhoneNumber
+        </div>
+    </div>
+}

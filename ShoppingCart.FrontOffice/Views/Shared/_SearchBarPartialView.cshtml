@@ -1,10 +1,43 @@
 ﻿
+    @Styles.Render("~/Scripts/modules/lib/css/reset.css")
+    @Styles.Render("~/Scripts/modules/lib/css/icons.css")
+    @Styles.Render("~/Scripts/modules/lib/css/workspace.css")
+    @Styles.Render("~/Scripts/modules/perfect-scrollbar/css/perfect-scrollbar.css")
 
-<p>Create shearch Bar</p>
-<div id="VS" class="container">
-    <div id="search_box_container"></div>
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/Scripts/modules/jQuery/jquery-2.1.4.js")
+    @Scripts.Render("~/Scripts/modules/vendor/jquery.ui.core.js")
+    @Scripts.Render("~/Scripts//modules/vendor/jquery.ui.widget.js")
+    @Scripts.Render("~/Scripts/modules/vendor/jquery.ui.position.js")
+    @Scripts.Render("~/Scripts/modules/vendor/jquery.ui.menu.js")
+    @Scripts.Render("~/Scripts/modules/vendor/jquery.ui.autocomplete.js")
+    @Scripts.Render("~/Scripts/modules/vendor/underscore-1.5.2.js")
+    @Scripts.Render("~/Scripts/modules/vendor/backbone-1.1.0.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/visualsearch.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/views/search_box.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/views/search_facet.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/views/search_input.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/models/search_facets.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/models/search_query.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/utils/backbone_extensions.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/utils/hotkeys.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/utils/jquery_extensions.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/utils/search_parser.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/utils/inflector.js")
+    @Scripts.Render("~/Scripts/modules/lib/js/templates/templates.js")
+
+<div id = "VS" class="container">
+    <div id = "search_box_container" ></div>
     <div id="search_query"></div>
-    <script src="@Url.Content("~/Scripts/searchBar.js")" type="text/javascript" charset="utf-8"></script>
+    <script src = "@Url.Content("~/Scripts/searchBar.js")" type="text/javascript"></script>
+
+    <script src = "@Url.Content("~/Scripts/modules/perfect-scrollbar/js/perfect-scrollbar.js")" type="text/javascript"></script>
+    <script src = "@Url.Content("~/Scripts/modules/perfect-scrollbar/js/perfect-scrollbar.jquery.js")" type="text/javascript"></script>
+</div>
+<div>
+    Breadcrumb Place
+    @*@Html.Partial("PartialView1", Model.partialModel)*@
 </div>
 <div id="search_result_container">
 </div>

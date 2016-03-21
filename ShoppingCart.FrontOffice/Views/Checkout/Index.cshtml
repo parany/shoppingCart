@@ -13,73 +13,92 @@
 
 @using (Html.BeginForm("Order", "Checkout"))
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(x => x.Cart)
-    <div class="form-horizontal">
-        <h4>Checkout Details: Please confirm your order</h4>
-        <hr />
-        <div class="form-group">
-            <div class="control-label col-md-2">Ship to:</div>
-            <div class="col-md-10">
-                @Html.DisplayFor(x => x.UserName)
+    <h4>Checkout Details: Please confirm your order and details to which order will be submitted</h4>
+    <hr />
+    <div class="well">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <h4>Provide details where to ship your order:</h4>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = Model.UserName })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-
-
-        <table id="checkTable" class="table">
-            <thead>
-                <tr>
-                    <th>Quantity</th>
-                    <th>Item</th>
-                    <th class="text-right">Price</th>
-                    <th class="text-right">Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var line in Model.Cart.Lines)
-                {
-                    <tr>
-                        <td class="text-center">@line.Quantity</td>
-                        <td class="text-left">@line.Product.Name</td>
-                        <td class="text-right">@line.Product.Price.ToString("c")</td>
-                        <td class="text-right">
-                            @((line.Quantity * line.Product.Price).ToString("c"))
-                        </td>
-                    </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3" class="text-right">Total:</td>
-                    <td class="text-right">
-
-                        @Model.Cart.ComputeTotalValue().ToString("c")
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-
-        @if(Model.ErrorMessage != ""){
-        <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span>
-            @Model.ErrorMessage
-        </div>
-        }
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10 text-center">
-                @Html.ActionLink("Return to Cart", "Index", "Carts",
-                      new { returnUrl = "/" },
-                      new { @class = "btn btn-primary" }
-                 )
-                <input class="btn btn-primary"
-                       type="submit" value="Complete order" />
-                @*@Html.ActionLink("Complete Order", "Order", "Checkout", Model,
-                      new { @class = "btn btn-primary" }
-                 )*@
+            <div class="form-group">
+                @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = Model.Address })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = Model.PhoneNumber })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>
-}
+    <div class="well">
+        <h4>Verify your order here:</h4>
+            <table id="checkTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Item</th>
+                        <th class="text-right">Price</th>
+                        <th class="text-right">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var line in Model.Cart.Lines)
+                {
+                        <tr>
+                            <td class="text-center">@line.Quantity</td>
+                            <td class="text-left">@line.Product.Name</td>
+                            <td class="text-right">@line.Product.Price.ToString("c")</td>
+                            <td class="text-right">
+                                @((line.Quantity * line.Product.Price).ToString("c"))
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">Total:</td>
+                        <td class="text-right">
+
+                            @Model.Cart.ComputeTotalValue().ToString("c")
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            @if (Model.ErrorMessage != "")
+            {
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    @Model.ErrorMessage
+                </div>
+            }
+        </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 text-center">
+                    @Html.ActionLink("Return to Cart", "Index", "Carts",
+                      new { returnUrl = "/" },
+                      new { @class = "btn btn-primary" }
+                 )
+                    <input class="btn btn-primary"
+                           type="submit" value="Complete order" />
+                </div>
+            </div>
+        }
+
 

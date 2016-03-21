@@ -32,7 +32,7 @@ namespace ShoppingCart.Controllers
         }
         // GET: /Carts/Index
         // Action Showing the content of the cart
-        public ViewResult Index(CartViewModel cart, string returnUrl, string errorMessage= "")
+        public ViewResult Index(CartViewModel cart, string returnUrl, string errorMessage = "")
         {
             // Passing view model containing the cart, the return url and error message
             return View(new CartIndexViewModel
@@ -41,6 +41,21 @@ namespace ShoppingCart.Controllers
                 ReturnUrl = returnUrl ?? "/",
                 ErrorMessage = errorMessage
             });
+        }
+
+        // GET: /Carts/CheckEmpty
+        // Action to Verify if carts is empty
+        public RedirectToRouteResult CheckEmpty(CartViewModel cart)
+        {
+            if (cart.Lines.Count() == 0)
+            {
+                return RedirectToAction("Index", "Carts", 
+                    new { errorMessage = "Empty Cart! Please fill the cart before checking out." });
+            }
+            else
+            {
+                return RedirectToAction("Index","Checkout");
+            }
         }
 
         // POST: /Carts/checkQuantity

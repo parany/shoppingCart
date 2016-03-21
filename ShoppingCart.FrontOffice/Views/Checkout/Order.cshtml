@@ -1,15 +1,17 @@
-﻿
-@{
-    ViewBag.Title = "Order Complete - Shopping Cart";
-}
+﻿@model bool
+    @{
+        ViewBag.Title = "Order Complete - Shopping Cart";
+    }
 
-<h2>Order Complete</h2>
+    <h2>Order Complete</h2>
 
-<div class="text-center">
-    <img style="width:390px;" src="~/Content/Success.jpg" alt="Success">
-    <h4>Thank you for your order. It has been processed!</h4>
-</div>
+    <div class="text-center">
+        <img style="width:390px;" src="~/Content/Success.jpg" alt="Success">
+        <h4>Thank you for your order. It has been processed!</h4>
+        @if(Model){
+            <h4>An Email has been sent to you !</h4>
+        }
+    </div>
 
-
-@Html.ActionLink("Return to Home","Index","Home")
+    @Html.ActionLink("Return to Home", "Index", "Home")
 

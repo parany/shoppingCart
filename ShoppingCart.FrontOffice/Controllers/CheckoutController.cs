@@ -4,12 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Security.Principal;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.Owin;
 
 using ShoppingCart.ViewModels;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Infrastructure.Binders;
 using ShoppingCart.Infrastructure.Abstract;
+using ShoppingCart.Models.Models.User;
 
 namespace ShoppingCart.Controllers
 {
@@ -22,6 +26,9 @@ namespace ShoppingCart.Controllers
         private IGenericRepository<CartLine> _CartLineRepository { get; set; }
         private IGenericRepository<ShippingDetail> _ShippingRepository { get; set; }
 
+        private ApplicationUser CurrentUser{ get{ return UserManager.FindByName(HttpContext.User.Identity.Name);}}
+        private ApplicationUserManager UserManager{get{return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();}}
+
         public CheckoutController(IGenericRepository<Cart> cartRepo,
                                   IGenericRepository<Product> productRepo,
                                   IGenericRepository<CartLine> cartlineRepo,
@@ -33,7 +40,7 @@ namespace ShoppingCart.Controllers
             _CartRepository.AddNavigationProperties(ca => ca.CartLines);
             _CartLineRepository = cartlineRepo;
             _CartLineRepository.AddNavigationProperty(cl => cl.Product);
-            _CartLineRepository.AddNavigationProperty(clr => clr.Cart);
+            _CartLineRepository.AddNavigationProperty(cl => cl.Cart);
             _ShippingRepository = shipRepo;
             _OrderProcessor = proc;
         }
@@ -43,95 +50,106 @@ namespace ShoppingCart.Controllers
         [Authorize]
         public ActionResult Index(CartViewModel cartView, String errorMessage = "")
         {
-
-            // Verifying that cart are not empty before checking out
-            if (cartView.Lines.Count() == 0)
+            ApplicationUser user = CurrentUser;
+            // Creating ViewModel to pass to the view for rendering summary
+            CartDTO cdto = new CartDTO
             {
-                return RedirectToAction("Index", "Carts", new { errorMessage = "Empty Cart! Please fill the cart before checking out." });
-            }
-            else
-            { 
-                // Creating ViewModel to pass to the view for rendering summary
-                CartDTO cdto = new CartDTO
-                {
-                    Cart = cartView,
-                    UserName = User.Identity.GetUserName(),
-                    ErrorMessage = errorMessage
-                };
-                return View(cdto);
-            }
+               Cart = cartView,
+               UserName = user.UserName,
+               Address = user.Address,
+               PhoneNumber = user.PhoneNumber,
+               ErrorMessage = errorMessage
+            };
+            return View(cdto);
         }
 
         // POST: /Checkout/Order
         // Action confirming the order
         [Authorize]
+        [HttpPost]
         public ActionResult Order(CartDTO cartDto)
         {
-            // Creating a new cart in persistence
-            Cart cart = new Cart
+            if (ModelState.IsValid)
             {
-                Id = Guid.NewGuid(),
-                DateCreated = DateTime.Now,
-                CreatedBy = User.Identity.GetUserId()
-            };
-            _CartRepository.Add(cart);
+                ApplicationUser user = CurrentUser;
 
-            // Creating new cartline for each line in the cart and adding to cart in persistence
-            foreach (CartLineViewModel cartl in cartDto.Cart.Lines)
-            {
-                CartLine cartline = new CartLine
+                // Creating Shipping Details for the order
+                ShippingDetail shipD = new ShippingDetail
                 {
                     Id = Guid.NewGuid(),
-                    CartId = cart.Id,
-                    ProductId = cartl.Product.Id,
-                    Quantity = cartl.Quantity,
+                    UserId = user.Id,
                     DateCreated = DateTime.Now,
-                    CreatedBy = User.Identity.GetUserId()
+                    CreatedBy = user.UserName,
+                    Name = cartDto.UserName,
+                    Address = cartDto.Address,
+                    PhoneNumber = cartDto.PhoneNumber
                 };
-                _CartLineRepository.Add(cartline);
+                _ShippingRepository.Add(shipD);
 
-                cart.CartLines.Add(cartline);
-            }
-            cart.DateModified = DateTime.Now;
-            cart.ModifiedBy = User.Identity.GetUserId();
-            _CartRepository.Update(cart);
-
-            // Creating Shipping Details for associating a cart with a user
-            ShippingDetail shipD = new ShippingDetail
-            {
-                Id = Guid.NewGuid(),
-                UserId = User.Identity.GetUserId(),
-                DateCreated = DateTime.Now,
-                CreatedBy = User.Identity.GetUserId()
-            };
-            _ShippingRepository.Add(shipD);
-
-            // Modifying the number of product available in stock after the user confirms the order
-            foreach (CartLineViewModel c in cartDto.Cart.Lines)
-            {
-                Product productToModify = _ProductRepository.GetSingle(x => x.Id == c.Product.Id);
-                if(productToModify.Quantity >= c.Quantity)
+                // Creating a new cart in persistence
+                Cart cart = new Cart
                 {
-                    productToModify.Quantity -= c.Quantity;
-                    _ProductRepository.Update(productToModify);
-                }else
+                    Id = Guid.NewGuid(),
+                    DateCreated = DateTime.Now,
+                    CreatedBy = user.UserName,
+                    UserId = user.Id,
+                    ShippingDetailId = shipD.Id,
+                    State = ShippingState.Created
+                };
+                _CartRepository.Add(cart);
+
+                // Creating new cartline for each line in the cart and adding to cart in persistence
+                foreach (CartLineViewModel cartl in cartDto.Cart.Lines)
                 {
-                    return RedirectToAction("Index", "Checkout", new { errorMessage = "Stock insufficient for {0}", c.Product.Name  });
+                    CartLine cartline = new CartLine
+                    {
+                        Id = Guid.NewGuid(),
+                        CartId = cart.Id,
+                        ProductId = cartl.Product.Id,
+                        Quantity = cartl.Quantity,
+                        DateCreated = DateTime.Now,
+                        CreatedBy = user.Id
+                    };
+                    _CartLineRepository.Add(cartline);
+
+                    cart.CartLines.Add(cartline);
                 }
+                cart.DateModified = DateTime.Now;
+                cart.ModifiedBy = user.Id;
+                _CartRepository.Update(cart);
+
+                // Modifying the number of product available in stock after the user confirms the order
+                foreach (CartLineViewModel c in cartDto.Cart.Lines)
+                {
+                    Product productToModify = _ProductRepository.GetSingle(x => x.Id == c.Product.Id);
+                    if (productToModify.Quantity >= c.Quantity)
+                    {
+                        productToModify.Quantity -= c.Quantity;
+                        _ProductRepository.Update(productToModify);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Checkout", new { errorMessage = "Stock insufficient for {0}, Please see availaible product in Product Details", c.Product.Name });
+                    }
+                }
+                // Modifying cart state to pending
+                cart.State = ShippingState.Pending;
+                cart.DateModified = DateTime.Now;
+                cart.ModifiedBy = user.Id;
+                _CartRepository.Update(cart);
+
+                // Sending Email to Administrator
+                bool result = _OrderProcessor.ProcessOrder(cart, shipD, user, _ProductRepository);
+
+                // Resetting cart content
+                CartModelBinder.ResetBinding(ControllerContext);
+
+                return View(result);
             }
-            // Modifying shipping state to pending
-            ShippingDetail ship = _ShippingRepository.GetSingle(x => x.Id == shipD.Id );
-            ship.DateModified = DateTime.Now;
-            ship.ModifiedBy = User.Identity.GetUserId();
-            _ShippingRepository.Update(ship);
-
-            // Sending Email to Administrator
-            _OrderProcessor.ProcessOrder(cart, shipD);
-
-            // Resetting cart content
-            CartModelBinder.ResetBinding(ControllerContext);
-            
-            return View();
+            else
+            {
+                return RedirectToAction("Index","Checkout", cartDto);
+            }
         }
 
     }

@@ -10,18 +10,20 @@ using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Infrastructure.Abstract;
 using ShoppingCart.ViewModels;
 using ShoppingCart.Models.Repositories.Interface;
+using ShoppingCart.Models.Models.User;
+using System.ComponentModel;
 
 namespace ShoppingCart.Infrastructure.Concrete
 {
     public class EmailSettings
     {
         public string MailToAddress = "shoppingcart@yopmail.com";
-        public string MailFromAddress = "";
+        public string MailFromAddress = "shoppingcarta@gmail.com";
         public bool UseSsl = true;
-        public string Username = "";
-        public string Password = "";
+        public string Username = "shoppingcarta@gmail.com";
+        public string Password = "Secret$1";
         public string ServerName = "smtp.gmail.com";
-        public int ServerPort = 587;
+        public int ServerPort = 465;
         public bool WriteAsFile = false;
         public string FileLocation = @"C:\shoppingcart\emails";
     }
@@ -33,10 +35,10 @@ namespace ShoppingCart.Infrastructure.Concrete
         public EmailOrderProcessor(EmailSettings settings)
         {
             emailSettings = settings;
-            
+
         }
 
-        public void ProcessOrder(Cart cart, ShippingDetail shippingInfo)
+        public bool ProcessOrder(Cart cart, ShippingDetail shippingInfo, ApplicationUser user, IGenericRepository<Product> productRepo)
         {
             using (var smtpClient = new SmtpClient())
             {
@@ -57,26 +59,34 @@ namespace ShoppingCart.Infrastructure.Concrete
                 }
 
                 StringBuilder body = new StringBuilder()
-                    .AppendLine("A new order has been submitted")
-                    .AppendLine("---")
-                    .AppendLine("Items:");
+                    .AppendFormat("Hello {0},\n\n", shippingInfo.Name)
+                    .AppendLine("You have submitted a new order from the shopping store web site.")
+                    .AppendLine("Please see below the details of this order.")
+                    .AppendLine("")
+                    .AppendLine("Items ordered:");
 
                 foreach (var line in cart.CartLines)
                 {
-                    //var subtotal = line.Product.Price * line.Quantity;
-                    //body.AppendFormat("{0} x {1} (subtotal: {2:c}", line.Quantity, line.Product.Name, subtotal);
-                    body.AppendLine("Product Test 1: 1 x 2 = 2");
+                    Product p = productRepo.GetSingle(x=>x.Id == line.ProductId);
+                    var subtotal = p.Price * line.Quantity;
+                    body.AppendFormat("{0} x {1} => subtotal: {2} Euros\n", line.Quantity, p.Name, subtotal);
                 }
 
-                body//.AppendFormat("Total order value: {0:c}", cart.ComputeTotalValue())
-                    .AppendLine("---")
+                body.AppendFormat("\nTotal order value: {0} Euros\n", ComputeTotalValue(cart, productRepo))
+                    .AppendLine("--------------------------")
+                    .AppendLine("")
                     .AppendLine("Ship to:")
-                    .AppendLine(shippingInfo.UserId)
-                    .AppendLine("---");
+                    .AppendLine(shippingInfo.Name)
+                    .AppendLine(shippingInfo.Address)
+                    .AppendLine(shippingInfo.PhoneNumber)
+                    .AppendLine("--------------------------")
+                    .AppendLine("")
+                    .AppendLine("Thank you for your order.");
+
                 MailMessage mailMessage = new MailMessage(
-                    emailSettings.MailFromAddress, 
-                    emailSettings.MailToAddress,
-                    "New order submitted!", 
+                    emailSettings.MailFromAddress,
+                    user.Email ?? emailSettings.MailToAddress,
+                    "New order submitted!",
                     body.ToString()
                 );
 
@@ -84,8 +94,37 @@ namespace ShoppingCart.Infrastructure.Concrete
                 {
                     mailMessage.BodyEncoding = Encoding.ASCII;
                 }
-                smtpClient.Send(mailMessage);
+                bool result= false;
+                try
+                {
+                    smtpClient.SendAsync(mailMessage,null);
+                }
+                catch (Exception e)
+                {
+                    if(e != null)
+                    {
+                        result = false;
+                    }
+                    else
+                    {
+                        result = true;
+                    }
+                }
+                return result;
+                
+            }            
+        }
+
+        public decimal ComputeTotalValue(Cart cart, IGenericRepository<Product> productRepo)
+        {
+            List<CartLine> list = new List<CartLine>();
+            foreach(var l in cart.CartLines)
+            {
+                Product p = productRepo.GetSingle(x => x.Id == l.ProductId);
+                l.Product = p;
+                list.Add(l);
             }
+            return list.Sum(e => e.Product.Price * e.Quantity);
         }
     }
 }

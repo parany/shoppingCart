@@ -15,6 +15,13 @@
         <li class="list-group-item list-group-item-warning"><span class="badge">@Model.Category.Name</span>Category:<br /></li>
         <li class="list-group-item list-group-item-danger"><span class="badge">@Model.Price.ToString("c")</span>Selling Price:</li>
         <li class="list-group-item list-group-item-success"><span class="badge">@Model.Quantity</span>Number available in stock:</li>
+        @using (Html.BeginForm("checkQuantity", "Carts", new { returnUrl = "/" }, FormMethod.Post, new { @style = "display:inline" }))
+        {
+            <div style="margin-top:20px;">
+                @Html.Hidden("productId", Model.Id)
+                <input type="submit" class="btn btn-success" value="Add to cart" />
+            </div>
+        }
     </ul>
 </div>
 

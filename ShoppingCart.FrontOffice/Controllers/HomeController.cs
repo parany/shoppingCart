@@ -25,9 +25,9 @@ namespace ShoppingCart.Controllers
         public ViewResult Index(int page = 1)
         {
             // Retrieving Product created during the last week
-            DateTime lastWeek = DateTime.Today.AddDays(-7);
-            IList<Product> products = _ProductRepository.GetList(p => (p.DateCreated > lastWeek));
-            //IList<Product> products = _ProductRepository.GetAll();
+            //DateTime lastWeek = DateTime.Today.AddDays(-7);
+            //IList<Product> products = _ProductRepository.GetList(p => (p.DateCreated > lastWeek));
+            IList<Product> products = _ProductRepository.GetAll();
 
             // Building viewModel containing products and paging information to pass to the view
             ProductsListViewModel viewModel = new ProductsListViewModel

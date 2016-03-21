@@ -5,6 +5,11 @@ namespace ShoppingCart.ViewModels
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(15, MinimumLength = 3)]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -19,5 +24,13 @@ namespace ShoppingCart.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.MultilineText)]
+        public string Address { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
     }
 }

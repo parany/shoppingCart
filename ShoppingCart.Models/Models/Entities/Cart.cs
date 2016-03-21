@@ -20,7 +20,7 @@ namespace ShoppingCart.Models.Models.Entities
 
         public HashSet<CartLine> CartLines { get; set; }
 
-        public Guid ShoppingDetailId { get; set; }
+        public Guid ShippingDetailId { get; set; }
 
         public ShippingDetail ShippingDetail { get; set; }
 

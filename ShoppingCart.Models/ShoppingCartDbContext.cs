@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using ShoppingCart.Models.Models.User;
+using ShoppingCart.Models.Models.Initializer;
 
 namespace ShoppingCart.Models
 {
@@ -10,6 +11,11 @@ namespace ShoppingCart.Models
         public ShoppingCartDbContext()
             : base("name=ShoppingCartDb")
         {
+        }
+
+        static ShoppingCartDbContext()
+        {
+            Database.SetInitializer<ShoppingCartDbContext>(new ShoppingCartDbInitializer());
         }
 
         public static ShoppingCartDbContext Create()

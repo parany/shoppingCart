@@ -1,17 +1,30 @@
 ﻿@model bool
-    @{
-        ViewBag.Title = "Order Complete - Shopping Cart";
+@{
+    ViewBag.Title = "Order Complete - Shopping Cart";
+}
+
+<h2>Order Complete</h2>
+
+<div class="text-center">
+    <img style="width:390px;" src="~/Content/Success.jpg" alt="Success">
+    <h4>Thank you for your order. It has been processed!</h4>
+    @if (Model)
+    {
+        <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+            <span class="sr-only">Success</span>
+            An Email has been sent to you !
+        </div>
     }
-
-    <h2>Order Complete</h2>
-
-    <div class="text-center">
-        <img style="width:390px;" src="~/Content/Success.jpg" alt="Success">
-        <h4>Thank you for your order. It has been processed!</h4>
-        @if(Model){
-            <h4>An Email has been sent to you !</h4>
-        }
-    </div>
-
-    @Html.ActionLink("Return to Home", "Index", "Home")
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            Failed to send your confirmation email but your order has been considered !
+        </div>
+    }
+</div>
+<br />
+@Html.ActionLink("Return to Home", "Index", "Home")
 

@@ -12,18 +12,21 @@ using ShoppingCart.ViewModels;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Models.Models.User;
 using System.ComponentModel;
+using System.Net.Configuration;
+using System.Configuration;
 
 namespace ShoppingCart.Infrastructure.Concrete
 {
     public class EmailSettings
     {
+        public static SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
         public string MailToAddress = "shoppingcart@yopmail.com";
-        public string MailFromAddress = "shoppingcarta@gmail.com";
-        public bool UseSsl = true;
-        public string Username = "shoppingcarta@gmail.com";
-        public string Password = "Secret$1";
-        public string ServerName = "smtp.gmail.com";
-        public int ServerPort = 465;
+        public string MailFromAddress = section.From;
+        public bool UseSsl = section.Network.EnableSsl;
+        public string Username = section.Network.UserName;
+        public string Password = section.Network.Password;
+        public string ServerName = section.Network.Host;
+        public int ServerPort = section.Network.Port;
         public bool WriteAsFile = false;
         public string FileLocation = @"C:\shoppingcart\emails";
     }
@@ -94,10 +97,10 @@ namespace ShoppingCart.Infrastructure.Concrete
                 {
                     mailMessage.BodyEncoding = Encoding.ASCII;
                 }
-                bool result= false;
+                bool result= true;
                 try
                 {
-                    smtpClient.SendAsync(mailMessage,null);
+                    smtpClient.Send(mailMessage);
                 }
                 catch (Exception e)
                 {
@@ -105,13 +108,8 @@ namespace ShoppingCart.Infrastructure.Concrete
                     {
                         result = false;
                     }
-                    else
-                    {
-                        result = true;
-                    }
                 }
-                return result;
-                
+                return result;  
             }            
         }
 

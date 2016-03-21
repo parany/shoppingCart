@@ -5,6 +5,7 @@ namespace ShoppingCart.ViewModels
     public class LoginViewModel
     {
         [Required]
+        [Display(Name ="Username")]
         public string UserName { get; set; }
 
         [Required]

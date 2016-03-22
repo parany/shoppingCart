@@ -27,6 +27,7 @@ namespace ShoppingCart.Controllers
         {
             ProductRepository = productRepository;
             ProductRepository.AddNavigationProperties(p => p.Category);
+            ProductRepository.AddNavigationProperty(p => p.Image);
         }
 
 

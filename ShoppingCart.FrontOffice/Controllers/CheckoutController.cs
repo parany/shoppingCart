@@ -52,7 +52,7 @@ namespace ShoppingCart.Controllers
         {
             ApplicationUser user = CurrentUser;
             // Creating ViewModel to pass to the view for rendering summary
-            CartDTO cdto = new CartDTO
+            CheckoutDTO cdto = new CheckoutDTO
             {
                Cart = cartView,
                UserName = user.UserName,
@@ -67,7 +67,7 @@ namespace ShoppingCart.Controllers
         // Action confirming the order
         [Authorize]
         [HttpPost]
-        public ActionResult Order(CartDTO cartDto)
+        public ActionResult Order(CheckoutDTO cartDto)
         {
             if (ModelState.IsValid)
             {

@@ -14,7 +14,7 @@ $(document).ready(function () {
                         'filter',
                         'access'
                     ],
-        placeholder: "Search for your documents...",
+        placeholder: "Search for your products...",
         callbacks: {
             search: function (query, searchCollection) {
                 var $query = $('#search_query');

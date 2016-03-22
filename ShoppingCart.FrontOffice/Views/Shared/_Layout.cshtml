@@ -4,7 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Shopping Cart</title>
-    @Styles.Render("~/Content/css")
+    @using ShoppingCart.Helpers
+    @{
+        var theme = Session["CssTheme"] as string ?? Bootstrap.Theme.Default;
+    }
+    @Styles.Render(Bootstrap.Bundle(theme))
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -28,6 +32,7 @@
 
             @Html.Partial("_LoginPartial")
             @Html.Action("Summary", "Carts")
+            @Html.Partial("_SearchBarPartialView")
 
 
         </div>
@@ -35,7 +40,7 @@
 </div>
 <div id="searchLine">
     <div>
-        @Html.Partial("_SearchBarPartialView")
+        
     </div>
 </div>
     <div class="container body-content">

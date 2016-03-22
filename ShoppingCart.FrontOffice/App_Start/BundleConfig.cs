@@ -1,4 +1,5 @@
-﻿using System.Web.Optimization;
+﻿using ShoppingCart.Helpers;
+using System.Web.Optimization;
 
 namespace ShoppingCart
 {
@@ -22,9 +23,17 @@ namespace ShoppingCart
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //          "~/Content/Themes/default/bootstrap.min.css",
+            //          "~/Content/site.css"));
+            foreach (var theme in Bootstrap.Themes)
+            {
+                var stylePath = string.Format("~/Content/Themes/{0}/bootstrap.min.css", theme);
+
+                bundles.Add(new StyleBundle(Bootstrap.Bundle(theme)).Include(
+                            stylePath,
+                            "~/Content/site.css"));
+            }
         }
     }
 }

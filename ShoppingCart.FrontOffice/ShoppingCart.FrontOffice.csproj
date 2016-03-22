@@ -138,10 +138,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HtmlHelpers\PagingHelpers.cs" />
+    <Compile Include="Helpers\Bootstrap.cs" />
+    <Compile Include="Helpers\PagingHelpers.cs" />
     <Compile Include="Infrastructure\Abstract\IOrderProcessor.cs" />
     <Compile Include="Infrastructure\Binders\CartModelBinder.cs" />
     <Compile Include="Infrastructure\Concrete\EmailOrderProcessor.cs" />
@@ -182,12 +184,36 @@
     <Content Include="Content\Oops.jpg" />
     <Content Include="Content\Product.png" />
     <Content Include="Content\Success.jpg" />
+    <Content Include="Content\Themes\bootstrap.min.css" />
+    <Content Include="Content\Themes\cyborg.bootstrap.min.css" />
+    <Content Include="Content\Themes\cyborg\bootstrap.min.css" />
+    <Content Include="Content\Themes\darkly.bootstrap.min.css" />
+    <Content Include="Content\Themes\darkly\bootstrap.min.css" />
+    <Content Include="Content\Themes\default\bootstrap.min.css" />
+    <Content Include="Content\Themes\flatly.bootstrap.min.css" />
+    <Content Include="Content\Themes\flatly\bootstrap.min.css" />
+    <Content Include="Content\Themes\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Themes\lumen.bootstrap.min.css" />
+    <Content Include="Content\Themes\lumen\bootstrap.min.css" />
+    <Content Include="Content\Themes\simplex.bootstrap.min.css" />
+    <Content Include="Content\Themes\simplex\bootstrap.min.css" />
+    <Content Include="Content\Themes\spacelab.bootstrap.min.css" />
+    <Content Include="Content\Themes\spacelab\bootstrap.min.css" />
+    <Content Include="Content\Themes\superhero.bootstrap.min.css" />
+    <Content Include="Content\Themes\superhero\bootstrap.min.css" />
+    <Content Include="Content\Themes\united.bootstrap.min.css" />
+    <Content Include="Content\Themes\united\bootstrap.min.css" />
+    <Content Include="Content\Themes\yeti.bootstrap.min.css" />
+    <Content Include="Content\Themes\yeti\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Themes\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Themes\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Themes\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -197,8 +223,46 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modules\jQuery\jquery-2.1.4.js" />
+    <Content Include="Scripts\modules\jQuery\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\modules\jQuery\jquery-ui.js" />
+    <Content Include="Scripts\modules\jQuery\jquery-ui.min.js" />
+    <Content Include="Scripts\modules\jQuery\jquery.min.js" />
+    <Content Include="Scripts\modules\lib\css\icons.css" />
+    <Content Include="Scripts\modules\lib\css\reset.css" />
+    <Content Include="Scripts\modules\lib\css\workspace.css" />
+    <Content Include="Scripts\modules\lib\images\embed\icons\cancel_search.png" />
+    <Content Include="Scripts\modules\lib\images\embed\icons\search_glyph.png" />
+    <Content Include="Scripts\modules\lib\js\models\search_facets.js" />
+    <Content Include="Scripts\modules\lib\js\models\search_query.js" />
+    <Content Include="Scripts\modules\lib\js\templates\templates.js" />
+    <Content Include="Scripts\modules\lib\js\utils\backbone_extensions.js" />
+    <Content Include="Scripts\modules\lib\js\utils\hotkeys.js" />
+    <Content Include="Scripts\modules\lib\js\utils\inflector.js" />
+    <Content Include="Scripts\modules\lib\js\utils\jquery_extensions.js" />
+    <Content Include="Scripts\modules\lib\js\utils\search_parser.js" />
+    <Content Include="Scripts\modules\lib\js\views\search_box.js" />
+    <Content Include="Scripts\modules\lib\js\views\search_facet.js" />
+    <Content Include="Scripts\modules\lib\js\views\search_input.js" />
+    <Content Include="Scripts\modules\lib\js\visualsearch.js" />
+    <Content Include="Scripts\modules\perfect-scrollbar\css\perfect-scrollbar.css" />
+    <Content Include="Scripts\modules\perfect-scrollbar\css\perfect-scrollbar.min.css" />
+    <Content Include="Scripts\modules\perfect-scrollbar\js\min\perfect-scrollbar.jquery.min.js" />
+    <Content Include="Scripts\modules\perfect-scrollbar\js\min\perfect-scrollbar.min.js" />
+    <Content Include="Scripts\modules\perfect-scrollbar\js\perfect-scrollbar.jquery.js" />
+    <Content Include="Scripts\modules\perfect-scrollbar\js\perfect-scrollbar.js" />
+    <Content Include="Scripts\modules\vendor\backbone-1.1.0.js" />
+    <Content Include="Scripts\modules\vendor\backported\jquery-1.4.4.js" />
+    <Content Include="Scripts\modules\vendor\jquery-1.11.0.js" />
+    <Content Include="Scripts\modules\vendor\jquery.ui.autocomplete.js" />
+    <Content Include="Scripts\modules\vendor\jquery.ui.core.js" />
+    <Content Include="Scripts\modules\vendor\jquery.ui.menu.js" />
+    <Content Include="Scripts\modules\vendor\jquery.ui.position.js" />
+    <Content Include="Scripts\modules\vendor\jquery.ui.widget.js" />
+    <Content Include="Scripts\modules\vendor\underscore-1.5.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\searchBar.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -255,9 +319,14 @@
     <Content Include="Views\Checkout\Order.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Shared\_SearchBarPartialView.cshtml" />
+    <Content Include="Scripts\modules\jQuery\jquery.min.map" />
+    <Content Include="Scripts\modules\lib\js\templates\search_box.jst" />
+    <Content Include="Scripts\modules\lib\js\templates\search_facet.jst" />
+    <Content Include="Scripts\modules\lib\js\templates\search_input.jst" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

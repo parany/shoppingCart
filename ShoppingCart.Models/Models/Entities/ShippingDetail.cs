@@ -5,8 +5,6 @@ namespace ShoppingCart.Models.Models.Entities
 
     public class ShippingDetail : BaseObject
     {
-        public Guid Id { get; set; }
-
         public string UserId { get; set; }
 
         public string Name { get; set; }

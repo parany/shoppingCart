@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using ShoppingCart.Models.Models.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
+using ShoppingCart.Models.Models.User;
 
 namespace ShoppingCart.Models.Models.Initializer
 {
@@ -50,6 +52,36 @@ namespace ShoppingCart.Models.Models.Initializer
             context.Products.Add(p4);
             context.Products.Add(p5);
             context.Products.Add(p6);
+
+            //// Adding a default administrator access
+            //ApplicationUserManager userMgr = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            //ApplicationRoleManager roleMgr = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
+            //string roleAdminName = "Administrators";
+            //string userAdminName = "Admin";
+            //string userAdminPassword = "MySecret";
+            //string userAdminEmail = "admin@example.com";
+            //string userAdminAddress = "Ankorondrano, Madagascar";
+            //string userAdminPhoneNumber = "0202002020";
+            //if (!roleMgr.RoleExists(roleAdminName))
+            //{
+            //    roleMgr.Create(new ApplicationRole(roleAdminName));
+            //}
+            //ApplicationUser user = userMgr.FindByName(userAdminName);
+            //if (user == null)
+            //{
+            //    userMgr.Create(new ApplicationUser {
+            //        UserName = userAdminName,
+            //        Email = userAdminEmail,
+            //        Address = userAdminAddress,
+            //        PhoneNumber = userAdminPhoneNumber
+            //    },
+            //    userAdminPassword);
+            //    user = userMgr.FindByName(userAdminName);
+            //}
+            //if (!userMgr.IsInRole(user.Id, roleAdminName))
+            //{
+            //    userMgr.AddToRole(user.Id, roleAdminName);
+            //}
         }
     }
 }

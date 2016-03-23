@@ -6,8 +6,8 @@
 
     <h2>Product List</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
+    <p style="margin-bottom:10px;">
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
     </p>
     <table class="table productList">
         <tr>
@@ -72,9 +72,9 @@
                     @Html.DisplayFor(modelItem => item.Product.ModifiedBy)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Product.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Product.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Product.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Product.Id }, new { @class = "btn btn-warning btn-xs" })
+                    @Html.ActionLink("Details", "Details", new { id = item.Product.Id }, new { @class = "btn btn-success btn-xs" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Product.Id }, new { @class = "btn btn-danger btn-xs" })
                 </td>
             </tr>
         }

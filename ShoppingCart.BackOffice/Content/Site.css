@@ -26,3 +26,7 @@ textarea {
 .productList tbody > tr > td {
     vertical-align : middle !important;
 }
+
+h2{
+    color: darkcyan;
+}

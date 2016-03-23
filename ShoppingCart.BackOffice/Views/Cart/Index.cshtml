@@ -46,7 +46,14 @@ else
 @foreach (var item in Model)
 {
     <div class="panel panel-default" data-id=@item.Id>
-        <div class="panel-heading">@item.UserName</div>
+        <div class="panel-heading"><span class="badge">#@item.Id.ToString().Substring(0, 8)</span>
+        <span class="glyphicon glyphicon-user"></span> @item.UserName
+        <span class="glyphicon glyphicon-calendar"></span>
+        @if (@item.DateCreated != null)
+        {
+        @item.DateCreated.ToString();
+    }
+        </div>
         <div class="panel-body">
             <h2>Products</h2>
             <ul>

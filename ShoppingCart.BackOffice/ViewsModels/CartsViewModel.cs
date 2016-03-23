@@ -13,5 +13,6 @@ namespace ShoppingCart.BackOffice.ViewsModels
         public List<CartLineViewModel> CartLines { get; set; }
         public ShippingDetailViewModel ShippingDetail { get; set; }
         public ShippingState ShippingState { get; set; }
+        public DateTime? DateCreated { get; set; }
     }
 }

@@ -56,7 +56,8 @@ namespace ShoppingCart.BackOffice.Controllers
                     UserName = cart.User.UserName,
                     CartLines = varLines,
                     ShippingDetail = shippingDetailViewModel,
-                    ShippingState = cart.State
+                    ShippingState = cart.State,
+                    DateCreated = cart.DateCreated
                 });
             }
 

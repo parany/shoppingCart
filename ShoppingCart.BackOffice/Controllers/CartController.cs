@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.BackOffice.ViewsModels;
+using Newtonsoft.Json;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
@@ -25,7 +27,7 @@ namespace ShoppingCart.BackOffice.Controllers
             
         }
         // GET: Cart
-        public ActionResult Index()
+        public ActionResult Index(ShippingState id = ShippingState.Pending)
         {
             var carts = CartRepository.GetAll();
             var cartsViewModels = new List<CartsViewModel>();
@@ -50,13 +52,49 @@ namespace ShoppingCart.BackOffice.Controllers
                 };
                 cartsViewModels.Add(new CartsViewModel
                 {
+                    Id = cart.Id,
                     UserName = cart.User.UserName,
                     CartLines = varLines,
-                    ShippingDetail = shippingDetailViewModel
+                    ShippingDetail = shippingDetailViewModel,
+                    ShippingState = cart.State
                 });
             }
+
+            ViewBag.ShippingStateCounts = new Dictionary<ShippingState, int>();
+
+            ViewBag.ShippingStateCounts.Add(ShippingState.Pending,
+                                            cartsViewModels.Count(x => x.ShippingState == ShippingState.Pending));
+            ViewBag.ShippingStateCounts.Add(ShippingState.Delivered,
+                                            cartsViewModels.Count(x => x.ShippingState == ShippingState.Delivered));
+            ViewBag.ShippingStateCounts.Add(ShippingState.Canceled,
+                                            cartsViewModels.Count(x => x.ShippingState == ShippingState.Canceled));
+
+            IEnumerable<CartsViewModel> cartsViewModelsReturn = cartsViewModels.Where(x => x.ShippingState == ShippingState.Pending);
+
+            if (id == ShippingState.Delivered)
+            {
+                cartsViewModelsReturn = cartsViewModels.Where(x => x.ShippingState == ShippingState.Delivered);
+            }
+            else if (id == ShippingState.Canceled)
+            {
+                cartsViewModelsReturn = cartsViewModels.Where(x => x.ShippingState == ShippingState.Canceled);
+            }
+
+            ViewBag.ActiveTab = id;
             
-            return View(cartsViewModels);
+            return View(cartsViewModelsReturn);
+        }
+
+        [HttpPost]
+        public ActionResult Index(ChangeStateViewModel cartIdandState)
+        {            
+            var cart = CartRepository.GetSingle(x => x.Id == cartIdandState.Id);
+            cart.State = cartIdandState.State;
+            if (cart != null)
+            {
+                CartRepository.Update(cart);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

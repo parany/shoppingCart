@@ -94,7 +94,7 @@ namespace ShoppingCart.Controllers
                     CreatedBy = user.UserName,
                     UserId = user.Id,
                     ShippingDetailId = shipD.Id,
-                    State = ShippingState.Created
+                    State = ShippingState.Pending
                 };
                 _CartRepository.Add(cart);
 

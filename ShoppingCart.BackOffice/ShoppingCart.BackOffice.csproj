@@ -157,6 +157,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewsModels\AddPhoneNumberViewModel.cs" />
+    <Compile Include="ViewsModels\ChangeStateViewModel.cs" />
     <Compile Include="ViewsModels\CartLineViewModel.cs" />
     <Compile Include="ViewsModels\CartsViewModel.cs" />
     <Compile Include="ViewsModels\ChangePasswordViewModel.cs" />

@@ -78,7 +78,8 @@ namespace ShoppingCart.Controllers
             return View();
         }
 
-        public JsonResult GetListUpdate(string name = "", decimal price = 0, string category = "", int page = 1)
+        [HttpPost]
+        public JsonResult ListUpdate(string name = "", decimal price = 0, string category = "", int page = 1)
         {
 
             ProductsListViewModel productsViewModel;
@@ -101,7 +102,7 @@ namespace ShoppingCart.Controllers
                     TotalItems = products.Count()
                 }
             };
-            return Json(productsViewModel.Products, JsonRequestBehavior.AllowGet); 
+            return Json(productsViewModel, JsonRequestBehavior.AllowGet); 
         }
 
     }

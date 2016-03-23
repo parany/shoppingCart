@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="LambdaGenerator\GenericLambda.cs" />
     <Compile Include="LambdaGenerator\ProductExpression.cs" />
+    <Compile Include="ListCreator\ListGetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

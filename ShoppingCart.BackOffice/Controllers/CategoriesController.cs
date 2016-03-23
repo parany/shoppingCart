@@ -12,6 +12,7 @@ using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private IGenericRepository<Category> CategoryRepository { get; }

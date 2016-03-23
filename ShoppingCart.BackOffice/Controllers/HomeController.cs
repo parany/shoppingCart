@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
 

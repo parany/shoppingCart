@@ -69,6 +69,7 @@
     <Compile Include="Models\Entities\Product.cs" />
     <Compile Include="Models\Entities\ShippingDetail.cs" />
     <Compile Include="Models\Initializer\ShoppingCartDbInitializer.cs" />
+    <Compile Include="Models\User\ApplicationRole.cs" />
     <Compile Include="Models\User\ApplicationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Concrete\GenericRepository.cs" />

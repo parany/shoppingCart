@@ -1,15 +1,18 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
+using System.Data.Entity;
+using System.Web.Mvc;
+using Unity.Mvc5;
+using Microsoft.Owin.Security;
+using System.Web;
+
 using ShoppingCart.Controllers;
 using ShoppingCart.Models;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models.Repositories.Concrete;
 using ShoppingCart.Models.Repositories.Interface;
-using System.Data.Entity;
-using System.Web.Mvc;
-using Unity.Mvc5;
 
 namespace ShoppingCart.BackOffice
 {
@@ -32,7 +35,7 @@ namespace ShoppingCart.BackOffice
 			container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
 			container.RegisterType<AccountController>(new InjectionConstructor());
 
-			DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 		}
 	}
 }

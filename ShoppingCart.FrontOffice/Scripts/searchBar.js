@@ -38,7 +38,7 @@ $(document).ready(function () {
                 });
                 // ====================== SHOW RESULT HERE ==================== //
                 
-                 search(arrayStyle);
+                 searchAjax(arrayStyle);
                 
                 window.queryHideDelay2 = setTimeout(function () {
                     $query.animate({
@@ -102,4 +102,51 @@ function search(keyArray) {
         window.location.href = '/Products/List?' + detail;
     }
 
+}
+
+function searchAjax(keyArray){
+    if(onSearchView){
+        if(keyArray.length != 0){
+            var data = "";
+            keyArray.forEach(function (elt, i){
+                if(elt.value != null && elt.value != ""){
+                    data = data + '"' + elt.key + '":"' + elt.value + '"';
+                }
+                if(i != keyArray.length - 1){
+                    data = data + ","
+                }
+            });
+            var s = JSON.parse("{" + data + "}");
+            console.log(s);
+            console.log(keyArray);
+            $.ajax({
+
+                type: 'POST',
+
+                url: '/products/ListUpdate',
+                dataType: 'json',
+                data: s,
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (ex) {
+                    console.log(ex.responseText)
+                }
+            });
+        }else{
+            if (keyArray.length != 0) {
+                var detail = "";
+                keyArray.forEach(function (elt, i){
+                    if(i != 0){
+                        detail = detail + "&&"
+                    }
+                    if(elt.value != null && elt.value != ""){
+                        detail = detail + elt.key + "=" + elt.value;
+                    }
+                });
+
+                window.location.href = '/Products/List?' + detail;
+            }
+        }
+    }
 }

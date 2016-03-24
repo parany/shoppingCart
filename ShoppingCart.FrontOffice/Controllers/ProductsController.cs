@@ -85,6 +85,7 @@ namespace ShoppingCart.Controllers
         {
 
             ProductsListViewModel productsViewModel;
+
             IList<Product> products = ProductRepository.GetList(p =>
                 ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
                 && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
@@ -105,7 +106,21 @@ namespace ShoppingCart.Controllers
                 }
             };
 
-            string output = JsonConvert.SerializeObject(products);
+            try
+            {
+                JsonConvert.SerializeObject(products, Formatting.Indented);
+            }
+            catch (JsonSerializationException ex)
+            {
+                
+            }
+
+
+            string output = JsonConvert.SerializeObject(products, Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                PreserveReferencesHandling = PreserveReferencesHandling.All
+            });
 
             return Json(JObject.Parse(output)); 
         }

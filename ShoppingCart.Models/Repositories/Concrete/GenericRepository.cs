@@ -96,6 +96,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
             using (var context = new ShoppingCartDbContext())
             {
                 IQueryable<T> dbQuery = context.Set<T>();
+                context.Configuration.ProxyCreationEnabled = false;
 
                 // Apply eager loading
                 if (NavigationProperties != null && NavigationProperties.Count > 0)

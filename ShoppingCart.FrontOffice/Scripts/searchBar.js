@@ -24,7 +24,6 @@ $(document).ready(function () {
                     duration: 300,
                     queue: false
                 });
-                $query.html('<span class="raquo">&raquo;</span> You searched for: <b>' + searchCollection.serialize() + '</b>');
                 clearTimeout(window.queryHideDelay2);
                 arrayStyle = [];
                 searchCollection.models.forEach(function (elt) {
@@ -105,7 +104,6 @@ function search(keyArray) {
 }
 
 function searchAjax(keyArray){
-    console.log(onSearchView);
     if(onSearchView == true){
         if(keyArray.length != 0){
             var data = "";
@@ -136,7 +134,6 @@ function searchAjax(keyArray){
             });
         }
         }else{
-            console.log("on false action");
             if (keyArray.length != 0) {
                 var detail = "";
                 keyArray.forEach(function (elt, i){

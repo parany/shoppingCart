@@ -7,6 +7,8 @@ using System.Linq.Expressions;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SharedFunctions.LambdaGenerator;
 using ShoppingCart.Models;
 using ShoppingCart.Models.Models.Entities;
@@ -102,7 +104,10 @@ namespace ShoppingCart.Controllers
                     TotalItems = products.Count()
                 }
             };
-            return Json(productsViewModel, JsonRequestBehavior.AllowGet); 
+
+            string output = JsonConvert.SerializeObject(products);
+
+            return Json(JObject.Parse(output)); 
         }
 
     }

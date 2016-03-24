@@ -7,6 +7,8 @@ using System.Linq.Expressions;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SharedFunctions.LambdaGenerator;
 using ShoppingCart.Models;
 using ShoppingCart.Models.Models.Entities;
@@ -83,6 +85,7 @@ namespace ShoppingCart.Controllers
         {
 
             ProductsListViewModel productsViewModel;
+
             IList<Product> products = ProductRepository.GetList(p =>
                 ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
                 && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
@@ -102,7 +105,24 @@ namespace ShoppingCart.Controllers
                     TotalItems = products.Count()
                 }
             };
-            return Json(productsViewModel, JsonRequestBehavior.AllowGet); 
+
+            try
+            {
+                JsonConvert.SerializeObject(products, Formatting.Indented);
+            }
+            catch (JsonSerializationException ex)
+            {
+                
+            }
+
+
+            string output = JsonConvert.SerializeObject(products, Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                PreserveReferencesHandling = PreserveReferencesHandling.All
+            });
+
+            return Json(JObject.Parse(output)); 
         }
 
     }

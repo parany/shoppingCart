@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LambdaGenerator\Dll\Simpro.Expr.dll" />
+    <Content Include="Newtonsoft.Json.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShoppingCart.Models\ShoppingCart.Models.csproj">

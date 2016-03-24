@@ -24,7 +24,6 @@ $(document).ready(function () {
                     duration: 300,
                     queue: false
                 });
-                $query.html('<span class="raquo">&raquo;</span> You searched for: <b>' + searchCollection.serialize() + '</b>');
                 clearTimeout(window.queryHideDelay2);
                 arrayStyle = [];
                 searchCollection.models.forEach(function (elt) {
@@ -105,7 +104,7 @@ function search(keyArray) {
 }
 
 function searchAjax(keyArray){
-    if(onSearchView){
+    if(onSearchView == true){
         if(keyArray.length != 0){
             var data = "";
             keyArray.forEach(function (elt, i){
@@ -133,6 +132,7 @@ function searchAjax(keyArray){
                     console.log(ex.responseText)
                 }
             });
+        }
         }else{
             if (keyArray.length != 0) {
                 var detail = "";
@@ -147,6 +147,5 @@ function searchAjax(keyArray){
 
                 window.location.href = '/Products/List?' + detail;
             }
-        }
     }
 }

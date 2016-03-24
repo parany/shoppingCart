@@ -10,12 +10,14 @@
     }
     @Styles.Render(Bootstrap.Bundle(theme))
     @Scripts.Render("~/bundles/modernizr")
-    <script>
-        var onSearchView = false;
-    </script>
 
+
+    <meta name="description" content="Shopping Cart, the web site for every shopping" />
 </head>
 <body>
+<script>
+    var onSearchView = false;
+</script>
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -43,19 +45,19 @@
 </div>
 <div id="searchLine">
     <div>
-        
+
     </div>
 </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Shopping Cart / An e-commerce application for selling products - Bolzano S.a.r.l</p>
-        </footer>
-    </div>
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Shopping Cart / An e-commerce application for selling products - Bolzano S.a.r.l</p>
+    </footer>
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </body>
 </html>

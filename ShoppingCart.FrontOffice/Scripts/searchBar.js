@@ -105,7 +105,8 @@ function search(keyArray) {
 }
 
 function searchAjax(keyArray){
-    if(onSearchView){
+    console.log(onSearchView);
+    if(onSearchView == true){
         if(keyArray.length != 0){
             var data = "";
             keyArray.forEach(function (elt, i){
@@ -133,7 +134,9 @@ function searchAjax(keyArray){
                     console.log(ex.responseText)
                 }
             });
+        }
         }else{
+            console.log("on false action");
             if (keyArray.length != 0) {
                 var detail = "";
                 keyArray.forEach(function (elt, i){
@@ -147,6 +150,5 @@ function searchAjax(keyArray){
 
                 window.location.href = '/Products/List?' + detail;
             }
-        }
     }
 }

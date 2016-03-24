@@ -79,6 +79,8 @@ else
     i++;
 }
 
+@Html.AntiForgeryToken()
+
 @section scripts
 {
     <script type="text/javascript">
@@ -91,10 +93,14 @@ else
                 "Canceled": 1,
                 "Delivered": 2
             };
+            var headers = {};
+            headers['__RequestVerificationToken'] = $('input[name="__RequestVerificationToken"]').val();
+            
             $(e.target).parent().parent().hide();
             $.ajax({
                     url: "@Url.Action("Index", "Cart")",
                     type: "POST",
+                    headers: headers,
                     data: JSON.stringify(arr),
                     contentType: "application/json; charset=utf-8",
                     success: function (response) {

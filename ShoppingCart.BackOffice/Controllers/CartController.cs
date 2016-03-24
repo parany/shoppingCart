@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.BackOffice.ViewsModels;
+using ShoppingCart.GeneralLib.CustomAttributs;
 using Newtonsoft.Json;
 
 namespace ShoppingCart.BackOffice.Controllers
@@ -87,6 +88,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         [HttpPost]
+        [ValidateJsonAntiforgeryToken]
         public ActionResult Index(ChangeStateViewModel cartIdandState)
         {            
             var cart = CartRepository.GetSingle(x => x.Id == cartIdandState.Id);

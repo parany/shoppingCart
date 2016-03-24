@@ -269,6 +269,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SharedFunctions\ShoppingCart.GeneralLib.csproj">
+      <Project>{1ee86b32-83c3-4d22-ad5d-3994e7bddf68}</Project>
+      <Name>ShoppingCart.GeneralLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShoppingCart.Models\ShoppingCart.Models.csproj">
       <Project>{19913b66-6b27-4fd9-a9fc-64133aa21aa4}</Project>
       <Name>ShoppingCart.Models</Name>

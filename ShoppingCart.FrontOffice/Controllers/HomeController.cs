@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ShoppingCart.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         private IGenericRepository<Product> _ProductRepository { get; set; } 
@@ -58,6 +59,7 @@ namespace ShoppingCart.Controllers
 
         // GET: /Home/Contact
         // Action populating the contact section of the web site
+        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page";

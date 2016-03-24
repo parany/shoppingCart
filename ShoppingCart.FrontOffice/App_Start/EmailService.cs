@@ -1,16 +1,78 @@
 ﻿using Microsoft.AspNet.Identity;
+using SendGrid;
+using System;
+using System.Configuration;
+using System.Diagnostics;
+using System.Net;
+using System.Net.Configuration;
+using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ShoppingCart
 {
+
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await configSendasync(message);
+            
+        }
+
+        private async Task configSendasync(IdentityMessage message)
+        {
+
+            EmailSettings emailSettings = new EmailSettings {
+                WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+            using (var smtpClient = new SmtpClient())
+            {
+                smtpClient.EnableSsl = emailSettings.UseSsl;
+                smtpClient.Host = emailSettings.ServerName;
+                smtpClient.Port = emailSettings.ServerPort;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.Credentials = new NetworkCredential(
+                    emailSettings.Username,
+                    emailSettings.Password);
+
+                if (emailSettings.WriteAsFile)
+                {
+                    smtpClient.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
+                    smtpClient.PickupDirectoryLocation = emailSettings.FileLocation;
+                    smtpClient.EnableSsl = false;
+                }
+
+                MailMessage mailMessage = new MailMessage(
+                    emailSettings.MailFromAddress,
+                    message.Destination,
+                    message.Subject,
+                    message.Body
+                );
+
+                if (emailSettings.WriteAsFile)
+                {
+                    mailMessage.BodyEncoding = Encoding.ASCII;
+                }
+                try
+                {
+                    smtpClient.Send(mailMessage);
+                    await Task.FromResult(0);
+                }
+                catch (Exception e)
+                {
+                    if (e != null)
+                    {
+                        Trace.TraceError(e.Message);
+                        await Task.FromResult(0);
+                    }
+                }
+            }
         }
     }
+
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 

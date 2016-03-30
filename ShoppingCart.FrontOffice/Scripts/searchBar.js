@@ -126,7 +126,7 @@ function searchAjax(keyArray){
                 dataType: 'json',
                 data: s,
                 success: function (data) {
-                    console.log(data);
+                    deployData(data);
                 },
                 error: function (ex) {
                     console.log(ex.responseText)
@@ -148,4 +148,44 @@ function searchAjax(keyArray){
                 window.location.href = '/Products/List?' + detail;
             }
     }
+}
+
+
+
+var deployData = function(data){
+    console.log(data);
+    var resultPlace = document.getElementById('resultPlace');
+    var resultHTML = "";
+    
+    data.forEach(function (elt, i){
+        
+        resultHTML = resultHTML + '<div class="col-sm-6 col-md-4">'
+        + '<div class="thumbnail" style="margin-bottom: 20px">'
+        + '<img src="http://localhost:12862/Uploads/images/' + elt.Image.ImageName 
+        + '_medium' + elt.Image.ImageType + '">'
+        + '<div class="caption">'
+        + '<h3 style="color: #0094ff">' + elt.Name + '</h3>'
+        + '<p class="lead">' + elt.Description + '</p>'
+        + '<p>'
+        + '<span class="btn btn-primary">' + elt.Price + '</span>'
+        + '<form action="/Home/Details?returnUrl=%2F" method="post" style="display:inline">'
+        + '<span>'
+        + '<input id="productId" name="productId" type="hidden" value="' + elt.ID + '">'
+        + '<input type="submit" class="btn btn-success" value="Details">'
+        + '</span>'
+        + '</form>'
+        + '<form action="/Carts/checkQuantity?returnUrl=%2F" method="post" style="display:inline">'
+        + '<span>'
+        + '<input id="productId" name="productId" type="hidden" value="' + elt.ID + '">'
+        + '<input type="submit" class="btn btn-default" value="Add to cart">'
+        + '</span>'
+        + '</form>'
+        + '</p>'
+        + '</div>'
+        + '</div>'
+        + '</div>';
+
+    });
+
+    resultPlace.innerHTML = resultHTML;
 }

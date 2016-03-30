@@ -1,29 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SharedFunctions.LambdaGenerator;
-using ShoppingCart.Models;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.ViewModels;
-
 
 namespace ShoppingCart.Controllers
 {
     public class ProductsController : Controller
     {
-
-
         private IGenericRepository<Product> ProductRepository { get; }
         public int PageSize = 6;
+
+        private class Meta_product
+        {
+            public Guid ID;
+            public string Name { get; set; }
+
+            public string Description { get; set; }
+
+            public decimal Price { get; set; }
+
+            public int Quantity { get; set; }
+
+            public Image Image { get; set; }
+
+            public string Category { get; set; }
+        }
 
         public ProductsController(IGenericRepository<Product> productRepository)
         {
@@ -33,24 +39,19 @@ namespace ShoppingCart.Controllers
         }
 
 
-
-
-
         // GET: Products
-        public ActionResult List(string name = "", decimal price= 0, string category = "", int page = 1)
+        public ActionResult List(string name = "", decimal price = 0, string category = "", int page = 1)
         {
             ProductsListViewModel productsViewModel;
-            IList<Product> products = ProductRepository.GetList(p =>
-                ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
-                && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
-                && ((price > 0) ? p.Price == price : true)
+            var products = ProductRepository.GetList(p =>
+                (name != null && !name.Equals("") ? p.Name.Equals(name) : true)
+                && (category != null && !category.Equals("") ? p.Category.Name.Equals(category) : true)
+                && (price > 0 ? p.Price == price : true)
                 );
 
 
-
-            productsViewModel = new ProductsListViewModel()
+            productsViewModel = new ProductsListViewModel
             {
-
                 Products = products,
                 PagingInfo = new PagingInfo
                 {
@@ -66,7 +67,7 @@ namespace ShoppingCart.Controllers
         public ActionResult Details(string name)
         {
             ProductDetailViewModel productsViewModel;
-            productsViewModel = new ProductDetailViewModel()
+            productsViewModel = new ProductDetailViewModel
             {
                 Products = ProductRepository.GetList(p => p.Name == name)
             };
@@ -76,54 +77,48 @@ namespace ShoppingCart.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-
             return View();
         }
 
         [HttpPost]
         public JsonResult ListUpdate(string name = "", decimal price = 0, string category = "", int page = 1)
         {
-
             ProductsListViewModel productsViewModel;
 
-            IList<Product> products = ProductRepository.GetList(p =>
-                ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
-                && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
-                && ((price > 0) ? p.Price == price : true)
+            var products = ProductRepository.GetList(p =>
+                (name != null && !name.Equals("") ? p.Name.Equals(name) : true)
+                && (category != null && !category.Equals("") ? p.Category.Name.Equals(category) : true)
+                && (price > 0 ? p.Price == price : true)
                 );
 
+            List<Meta_product> resultList = new List<Meta_product>();
 
-
-        productsViewModel = new ProductsListViewModel()
+            foreach (Product p in products)
             {
+                Meta_product mp = new Meta_product();
+                mp.Name = p.Name;
+                mp.Category = p.Category.Name;
+                mp.Description = p.Description;
+                mp.Image = p.Image;
+                mp.Price = p.Price;
+                mp.Quantity = p.Quantity;
+                mp.ID = p.Id;
+                resultList.Add(mp);
+            }
 
-                Products = products,
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = page,
-                    ItemsPerPage = PageSize,
-                    TotalItems = products.Count()
-                }
-            };
 
             try
             {
-                JsonConvert.SerializeObject(products, Formatting.Indented);
+                JsonConvert.SerializeObject(resultList, Formatting.Indented);
             }
             catch (JsonSerializationException ex)
             {
-                
             }
 
 
-            string output = JsonConvert.SerializeObject(products, Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                PreserveReferencesHandling = PreserveReferencesHandling.All
-            });
+            var output = JsonConvert.SerializeObject(resultList);
 
-            return Json(JObject.Parse(output)); 
+            return Json(resultList);
         }
-
     }
 }

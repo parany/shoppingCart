@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace ShoppingCart.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

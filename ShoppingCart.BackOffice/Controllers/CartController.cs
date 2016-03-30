@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CartController : Controller
     {
         private IGenericRepository<Cart> CartRepository;

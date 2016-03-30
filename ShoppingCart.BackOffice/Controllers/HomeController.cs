@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
 

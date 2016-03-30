@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private IGenericRepository<Product> ProductRepository { get; }

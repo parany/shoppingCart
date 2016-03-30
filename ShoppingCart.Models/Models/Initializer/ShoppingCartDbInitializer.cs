@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,6 +54,8 @@ namespace ShoppingCart.Models.Models.Initializer
             context.Products.Add(p5);
             context.Products.Add(p6);
 
+            InitializeIdentityForEF(context);
+
             //// Adding a default administrator access
             //ApplicationUserManager userMgr = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
             //ApplicationRoleManager roleMgr = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
@@ -82,6 +85,33 @@ namespace ShoppingCart.Models.Models.Initializer
             //{
             //    userMgr.AddToRole(user.Id, roleAdminName);
             //}
+        }
+
+        private void InitializeIdentityForEF(ShoppingCartDbContext context)
+        {
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            
+            string name = "Admin";
+            string password = "123456";
+            
+            //Create Role Admin if it does not exist
+            if (!RoleManager.RoleExists(name))
+            {
+                var roleresult = RoleManager.Create(new IdentityRole(name));
+            }
+
+            //Create User=Admin with password=123456
+            var user = new ApplicationUser();
+            user.UserName = name;
+            
+            var adminresult = UserManager.Create(user, password);
+
+            //Add User Admin to Role Admin
+            if (adminresult.Succeeded)
+            {
+                var result = UserManager.AddToRole(user.Id, name);
+            }
         }
     }
 }

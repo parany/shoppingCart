@@ -104,6 +104,7 @@ function search(keyArray) {
 }
 
 function searchAjax(keyArray){
+    console.log(keyArray);
     if(onSearchView == true){
         if(keyArray.length != 0){
             var data = "";
@@ -116,8 +117,6 @@ function searchAjax(keyArray){
                 }
             });
             var s = JSON.parse("{" + data + "}");
-            console.log(s);
-            console.log(keyArray);
             $.ajax({
 
                 type: 'POST',
@@ -153,7 +152,6 @@ function searchAjax(keyArray){
 
 
 var deployData = function(data){
-    console.log(data);
     var resultPlace = document.getElementById('resultPlace');
     var resultHTML = "";
     

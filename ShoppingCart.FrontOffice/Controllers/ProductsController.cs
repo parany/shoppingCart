@@ -13,6 +13,7 @@ namespace ShoppingCart.Controllers
     public class ProductsController : Controller
     {
         private IGenericRepository<Product> ProductRepository { get; }
+        private IGenericRepository<Category> CategoryRepository { get; }
         public int PageSize = 6;
 
         private class Meta_product
@@ -31,11 +32,13 @@ namespace ShoppingCart.Controllers
             public string Category { get; set; }
         }
 
-        public ProductsController(IGenericRepository<Product> productRepository)
+        public ProductsController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository)
         {
             ProductRepository = productRepository;
             ProductRepository.AddNavigationProperties(p => p.Category);
             ProductRepository.AddNavigationProperty(p => p.Image);
+
+            CategoryRepository = categoryRepository;
         }
 
 
@@ -48,11 +51,13 @@ namespace ShoppingCart.Controllers
                 && (category != null && !category.Equals("") ? p.Category.Name.Equals(category) : true)
                 && (price > 0 ? p.Price == price : true)
                 );
+            var categories = CategoryRepository.GetAll();
 
 
             productsViewModel = new ProductsListViewModel
             {
                 Products = products,
+                Categories = categories,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
@@ -83,7 +88,6 @@ namespace ShoppingCart.Controllers
         [HttpPost]
         public JsonResult ListUpdate(string name = "", decimal price = 0, string category = "", int page = 1)
         {
-            ProductsListViewModel productsViewModel;
 
             var products = ProductRepository.GetList(p =>
                 (name != null && !name.Equals("") ? p.Name.Equals(name) : true)
@@ -105,17 +109,6 @@ namespace ShoppingCart.Controllers
                 mp.ID = p.Id;
                 resultList.Add(mp);
             }
-
-
-            try
-            {
-                JsonConvert.SerializeObject(resultList, Formatting.Indented);
-            }
-            catch (JsonSerializationException ex)
-            {
-            }
-
-
             var output = JsonConvert.SerializeObject(resultList);
 
             return Json(resultList);

@@ -9,6 +9,14 @@
     onSearchView = true;
 </script>
 <h2>Product presentation</h2>
+<h3>Categories: </h3>
+<div class="row">
+    @foreach (var c in Model.Categories)
+    {
+        <button type="button" class="btn btn-primary" onclick="searchAjax([{ key: 'category', value: '@c.Name' }])">@c.Name</button>
+    }
+</div>
+<p></p>
 <div class="row" id="resultPlace">
     @if (Model.Products.Count() != 0)
     {

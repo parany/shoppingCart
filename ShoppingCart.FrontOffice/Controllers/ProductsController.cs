@@ -23,13 +23,20 @@ namespace ShoppingCart.Controllers
 
             public string Description { get; set; }
 
-            public decimal Price { get; set; }
+            public string Price { get; set; }
 
             public int Quantity { get; set; }
 
             public Image Image { get; set; }
 
             public string Category { get; set; }
+        }
+
+        private class Meta_category
+        {
+            public Guid Id;
+
+            public string Name;
         }
 
         public ProductsController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository)
@@ -104,14 +111,51 @@ namespace ShoppingCart.Controllers
                 mp.Category = p.Category.Name;
                 mp.Description = p.Description;
                 mp.Image = p.Image;
-                mp.Price = p.Price;
+                mp.Price = p.Price.ToString("c");
                 mp.Quantity = p.Quantity;
                 mp.ID = p.Id;
                 resultList.Add(mp);
             }
-            var output = JsonConvert.SerializeObject(resultList);
+
 
             return Json(resultList);
+        }
+
+        public JsonResult AllHint()
+        {
+            var products = ProductRepository.GetAll();
+            var categories = CategoryRepository.GetAll();
+
+
+            List<Meta_product> resPr = new List<Meta_product>();
+
+            foreach (Product p in products)
+            {
+                Meta_product mp = new Meta_product();
+                mp.Name = p.Name;
+                mp.Category = p.Category.Name;
+                mp.Description = p.Description;
+                mp.Image = p.Image;
+                mp.Price = p.Price.ToString("c");
+                mp.Quantity = p.Quantity;
+                mp.ID = p.Id;
+                resPr.Add(mp);
+            }
+
+            List<Meta_category> resCat = new List<Meta_category>();
+            foreach (Category c in categories)
+            {
+                Meta_category mc = new Meta_category();
+                mc.Name = c.Name;
+                resCat.Add(mc);
+            }
+
+
+            List<Object> list = new List<Object>();
+            list.Add(resCat);
+            list.Add(resPr);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
     }
 }

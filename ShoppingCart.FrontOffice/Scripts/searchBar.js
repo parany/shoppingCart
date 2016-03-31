@@ -1,86 +1,10 @@
 var arrayStyle = [];
 var dataArray = [];
-var corpArray = [];
+var categoryArray = [];
+var nameArray = [];
 $(document).ready(function () {
-    var visualSearch = VS.init({
-        container: $('#search_box_container'),
-        query: '',
-        minLength: 0,
-        showFacets: true,
-        readOnly: false,
-        unquotable: [
-                        'text',
-                        'account',
-                        'filter',
-                        'access'
-                    ],
-        placeholder: "Search for your products...",
-        callbacks: {
-            search: function (query, searchCollection) {
-                var $query = $('#search_query');
-                $query.stop().animate({
-                    opacity: 1
-                }, {
-                    duration: 300,
-                    queue: false
-                });
-                clearTimeout(window.queryHideDelay2);
-                arrayStyle = [];
-                searchCollection.models.forEach(function (elt) {
-                    if(elt.attributes.category != "text"){
-                            var element = {
-                            key: elt.attributes.category,
-                            value: elt.attributes.value
-                        };
-                        arrayStyle.push(element);
-                    }
-                });
-                // ====================== SHOW RESULT HERE ==================== //
-                
-                 searchAjax(arrayStyle);
-                
-                window.queryHideDelay2 = setTimeout(function () {
-                    $query.animate({
-                        opacity: 0
-                    }, {
-                        duration: 1000,
-                        queue: false
-                    });
-                }, 2000);
-            },
-            valueMatches: function (category, searchTerm, callback) {
-                switch (category) {
-                    case 'name':
-                        callback(nameArray);
-                        break;
-                    case 'category':
-                        callback(categoryArray);
-                        break;
-                    case 'Status':
-                        callback(['single', 'married',"divorced","widowed","unknown"]);
-                        break;
-                    default:
-                        callback();
-                        break;
-                }
-            },
-            facetMatches: function (callback) {
-                callback([{
-                        label: 'Name',
-                        category: 'general'
-                                }, {
-                        label: 'Category',
-                        category: 'general'
-                                },{
-                        label: 'Price',
-                        category: 'general'
-                                },
-                            ], {
-                    preserveOrder: true
-                });
-            }
-        }
-    });
+
+    getHint();
 });
 
 
@@ -104,7 +28,6 @@ function search(keyArray) {
 }
 
 function searchAjax(keyArray){
-    console.log(keyArray);
     if(onSearchView == true){
         if(keyArray.length != 0){
             var data = "";
@@ -172,6 +95,7 @@ var deployData = function(data){
         + '<input type="submit" class="btn btn-success" value="Details">'
         + '</span>'
         + '</form>'
+        + ' '
         + '<form action="/Carts/checkQuantity?returnUrl=%2F" method="post" style="display:inline">'
         + '<span>'
         + '<input id="productId" name="productId" type="hidden" value="' + elt.ID + '">'
@@ -186,4 +110,101 @@ var deployData = function(data){
     });
 
     resultPlace.innerHTML = resultHTML;
+}
+
+
+function getHint(){
+    $.ajax({
+
+                type: 'GET',
+                url: '/products/AllHint',
+                dataType: 'json',
+                success: function (data) {
+                    data[0].forEach(function(elt, i){
+                        categoryArray.push(elt.Name);
+                    });
+                    data[1].forEach(function(elt, i){
+                        nameArray.push(elt.Name);
+                    });
+                },
+                error: function (ex) {
+                    console.log(ex.responseText)
+                }
+            });
+    var visualSearch = VS.init({
+        container: $('#search_box_container'),
+        query: '',
+        minLength: 0,
+        showFacets: true,
+        readOnly: false,
+        unquotable: [
+                        'text',
+                        'account',
+                        'filter',
+                        'access'
+                    ],
+        placeholder: "Search for your products...",
+        callbacks: {
+            search: function (query, searchCollection) {
+                var $query = $('#search_query');
+                $query.stop().animate({
+                    opacity: 1
+                }, {
+                    duration: 300,
+                    queue: false
+                });
+                clearTimeout(window.queryHideDelay2);
+                arrayStyle = [];
+                searchCollection.models.forEach(function (elt) {
+                    if(elt.attributes.category != "text"){
+                            var element = {
+                            key: elt.attributes.category,
+                            value: elt.attributes.value
+                        };
+                        arrayStyle.push(element);
+                    }
+                });
+                // ====================== SHOW RESULT HERE ==================== //
+                
+                 searchAjax(arrayStyle);
+                
+                window.queryHideDelay2 = setTimeout(function () {
+                    $query.animate({
+                        opacity: 0
+                    }, {
+                        duration: 1000,
+                        queue: false
+                    });
+                }, 2000);
+            },
+            valueMatches: function (category, searchTerm, callback) {
+                switch (category) {
+                    case 'Name':
+                        callback(nameArray);
+                        break;
+                    case 'Category':
+                        callback(categoryArray);
+                        break;
+                    default:
+                        callback();
+                        break;
+                }
+            },
+            facetMatches: function (callback) {
+                callback([{
+                        label: 'Name',
+                        category: 'general'
+                                }, {
+                        label: 'Category',
+                        category: 'general'
+                                },{
+                        label: 'Price',
+                        category: 'general'
+                                },
+                            ], {
+                    preserveOrder: true
+                });
+            }
+        }
+    });
 }

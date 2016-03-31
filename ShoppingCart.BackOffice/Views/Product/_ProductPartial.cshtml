@@ -10,6 +10,7 @@
         @if (ViewBag.Title == "Edit")
         {
             @Html.HiddenFor(model => model.Product.Id)
+            @Html.HiddenFor(model => model.Product.ImageId)
         }
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })

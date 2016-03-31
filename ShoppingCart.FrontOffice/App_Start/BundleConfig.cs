@@ -32,7 +32,7 @@ namespace ShoppingCart
 
                 bundles.Add(new StyleBundle(Bootstrap.Bundle(theme)).Include(
                             stylePath,
-                            "~/Content/site.css"));
+                            "~/Content/Site.css"));
             }
         }
     }

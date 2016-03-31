@@ -137,6 +137,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ApplicationRoleManager.cs" />
     <Compile Include="App_Start\ApplicationSignInManager.cs" />
     <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -152,16 +153,21 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\IdentityHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewsModels\AddPhoneNumberViewModel.cs" />
+    <Compile Include="ViewsModels\ChangeStateViewModel.cs" />
     <Compile Include="ViewsModels\CartLineViewModel.cs" />
     <Compile Include="ViewsModels\CartsViewModel.cs" />
     <Compile Include="ViewsModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewsModels\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="ViewsModels\CreateUserViewModel.cs" />
     <Compile Include="ViewsModels\CreateViewModels.cs" />
     <Compile Include="ViewsModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewsModels\ExternalLoginListViewModel.cs" />
@@ -176,6 +182,7 @@
     <Compile Include="ViewsModels\ProductViewModel.cs" />
     <Compile Include="ViewsModels\RegisterViewModel.cs" />
     <Compile Include="ViewsModels\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewsModels\RoleViewModel.cs" />
     <Compile Include="ViewsModels\SendCodeViewModel.cs" />
     <Compile Include="ViewsModels\SetPasswordViewModel.cs" />
     <Compile Include="ViewsModels\ShippingDetailViewModel.cs" />
@@ -241,6 +248,17 @@
     <Content Include="Views\Product\_ProductPartial.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -253,6 +271,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SharedFunctions\ShoppingCart.GeneralLib.csproj">
+      <Project>{1ee86b32-83c3-4d22-ad5d-3994e7bddf68}</Project>
+      <Name>ShoppingCart.GeneralLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShoppingCart.Models\ShoppingCart.Models.csproj">
       <Project>{19913b66-6b27-4fd9-a9fc-64133aa21aa4}</Project>
       <Name>ShoppingCart.Models</Name>

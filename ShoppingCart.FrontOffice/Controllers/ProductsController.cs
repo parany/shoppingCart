@@ -1,55 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using SharedFunctions.LambdaGenerator;
-using ShoppingCart.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.ViewModels;
-
 
 namespace ShoppingCart.Controllers
 {
     public class ProductsController : Controller
     {
-
-
         private IGenericRepository<Product> ProductRepository { get; }
+        private IGenericRepository<Category> CategoryRepository { get; }
         public int PageSize = 6;
 
-        public ProductsController(IGenericRepository<Product> productRepository)
+        private class Meta_product
+        {
+            public Guid ID;
+            public string Name { get; set; }
+
+            public string Description { get; set; }
+
+            public string Price { get; set; }
+
+            public int Quantity { get; set; }
+
+            public Image Image { get; set; }
+
+            public string Category { get; set; }
+        }
+
+        private class Meta_category
+        {
+            public Guid Id;
+
+            public string Name;
+        }
+
+        public ProductsController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository)
         {
             ProductRepository = productRepository;
             ProductRepository.AddNavigationProperties(p => p.Category);
             ProductRepository.AddNavigationProperty(p => p.Image);
+
+            CategoryRepository = categoryRepository;
         }
 
 
-
-
-
         // GET: Products
-        public ActionResult List(string name = "", decimal price= 0, string category = "", int page = 1)
+        public ActionResult List(string name = "", decimal price = 0, string category = "", int page = 1)
         {
             ProductsListViewModel productsViewModel;
-            IList<Product> products = ProductRepository.GetList(p =>
-                ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
-                && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
-                && ((price > 0) ? p.Price == price : true)
+            var products = ProductRepository.GetList(p =>
+                (name != null && !name.Equals("") ? p.Name.Equals(name) : true)
+                && (category != null && !category.Equals("") ? p.Category.Name.Equals(category) : true)
+                && (price > 0 ? p.Price == price : true)
                 );
+            var categories = CategoryRepository.GetAll();
 
 
-
-            productsViewModel = new ProductsListViewModel()
+            productsViewModel = new ProductsListViewModel
             {
-
                 Products = products,
+                Categories = categories,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
@@ -64,7 +79,7 @@ namespace ShoppingCart.Controllers
         public ActionResult Details(string name)
         {
             ProductDetailViewModel productsViewModel;
-            productsViewModel = new ProductDetailViewModel()
+            productsViewModel = new ProductDetailViewModel
             {
                 Products = ProductRepository.GetList(p => p.Name == name)
             };
@@ -74,35 +89,73 @@ namespace ShoppingCart.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-
             return View();
         }
 
-        public JsonResult GetListUpdate(string name = "", decimal price = 0, string category = "", int page = 1)
+        [HttpPost]
+        public JsonResult ListUpdate(string name = "", decimal price = 0, string category = "", int page = 1)
         {
 
-            ProductsListViewModel productsViewModel;
-            IList<Product> products = ProductRepository.GetList(p =>
-                ((name != null && !name.Equals("")) ? p.Name.Equals(name) : true)
-                && ((category != null && !category.Equals("")) ? p.Category.Name.Equals(category) : true)
-                && ((price > 0) ? p.Price == price : true)
+            var products = ProductRepository.GetList(p =>
+                (name != null && !name.Equals("") ? p.Name.Equals(name) : true)
+                && (category != null && !category.Equals("") ? p.Category.Name.Equals(category) : true)
+                && (price > 0 ? p.Price == price : true)
                 );
 
+            List<Meta_product> resultList = new List<Meta_product>();
 
-
-        productsViewModel = new ProductsListViewModel()
+            foreach (Product p in products)
             {
+                Meta_product mp = new Meta_product();
+                mp.Name = p.Name;
+                mp.Category = p.Category.Name;
+                mp.Description = p.Description;
+                mp.Image = p.Image;
+                mp.Price = p.Price.ToString("c");
+                mp.Quantity = p.Quantity;
+                mp.ID = p.Id;
+                resultList.Add(mp);
+            }
 
-                Products = products,
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = page,
-                    ItemsPerPage = PageSize,
-                    TotalItems = products.Count()
-                }
-            };
-            return Json(productsViewModel.Products, JsonRequestBehavior.AllowGet); 
+
+            return Json(resultList);
         }
 
+        public JsonResult AllHint()
+        {
+            var products = ProductRepository.GetAll();
+            var categories = CategoryRepository.GetAll();
+
+
+            List<Meta_product> resPr = new List<Meta_product>();
+
+            foreach (Product p in products)
+            {
+                Meta_product mp = new Meta_product();
+                mp.Name = p.Name;
+                mp.Category = p.Category.Name;
+                mp.Description = p.Description;
+                mp.Image = p.Image;
+                mp.Price = p.Price.ToString("c");
+                mp.Quantity = p.Quantity;
+                mp.ID = p.Id;
+                resPr.Add(mp);
+            }
+
+            List<Meta_category> resCat = new List<Meta_category>();
+            foreach (Category c in categories)
+            {
+                Meta_category mc = new Meta_category();
+                mc.Name = c.Name;
+                resCat.Add(mc);
+            }
+
+
+            List<Object> list = new List<Object>();
+            list.Add(resCat);
+            list.Add(resPr);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
 }

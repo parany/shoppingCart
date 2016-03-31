@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,8 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using ShoppingCart.Models.Models.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
+using ShoppingCart.Models.Models.User;
 
 namespace ShoppingCart.Models.Models.Initializer
 {
@@ -50,6 +53,65 @@ namespace ShoppingCart.Models.Models.Initializer
             context.Products.Add(p4);
             context.Products.Add(p5);
             context.Products.Add(p6);
+
+            InitializeIdentityForEF(context);
+
+            //// Adding a default administrator access
+            //ApplicationUserManager userMgr = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            //ApplicationRoleManager roleMgr = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context));
+            //string roleAdminName = "Administrators";
+            //string userAdminName = "Admin";
+            //string userAdminPassword = "MySecret";
+            //string userAdminEmail = "admin@example.com";
+            //string userAdminAddress = "Ankorondrano, Madagascar";
+            //string userAdminPhoneNumber = "0202002020";
+            //if (!roleMgr.RoleExists(roleAdminName))
+            //{
+            //    roleMgr.Create(new ApplicationRole(roleAdminName));
+            //}
+            //ApplicationUser user = userMgr.FindByName(userAdminName);
+            //if (user == null)
+            //{
+            //    userMgr.Create(new ApplicationUser {
+            //        UserName = userAdminName,
+            //        Email = userAdminEmail,
+            //        Address = userAdminAddress,
+            //        PhoneNumber = userAdminPhoneNumber
+            //    },
+            //    userAdminPassword);
+            //    user = userMgr.FindByName(userAdminName);
+            //}
+            //if (!userMgr.IsInRole(user.Id, roleAdminName))
+            //{
+            //    userMgr.AddToRole(user.Id, roleAdminName);
+            //}
+        }
+
+        private void InitializeIdentityForEF(ShoppingCartDbContext context)
+        {
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            
+            string name = "Admin";
+            string password = "123456";
+            
+            //Create Role Admin if it does not exist
+            if (!RoleManager.RoleExists(name))
+            {
+                var roleresult = RoleManager.Create(new IdentityRole(name));
+            }
+
+            //Create User=Admin with password=123456
+            var user = new ApplicationUser();
+            user.UserName = name;
+            
+            var adminresult = UserManager.Create(user, password);
+
+            //Add User Admin to Role Admin
+            if (adminresult.Succeeded)
+            {
+                var result = UserManager.AddToRole(user.Id, name);
+            }
         }
     }
 }

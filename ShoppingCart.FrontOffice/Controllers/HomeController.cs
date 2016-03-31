@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ShoppingCart.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         private IGenericRepository<Product> _ProductRepository { get; set; } 
@@ -33,9 +34,7 @@ namespace ShoppingCart.Controllers
             ProductsListViewModel viewModel = new ProductsListViewModel
             {
                 Products = products
-                             .OrderByDescending(p => p.DateCreated)
-                             .Skip((page - 1) * PageSize)
-                             .Take(PageSize),
+                             .OrderByDescending(p => p.DateCreated),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
@@ -58,6 +57,7 @@ namespace ShoppingCart.Controllers
 
         // GET: /Home/Contact
         // Action populating the contact section of the web site
+        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page";

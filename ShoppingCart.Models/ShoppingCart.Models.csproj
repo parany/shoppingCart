@@ -82,6 +82,7 @@
     <Compile Include="Models\Payments\Payment.cs" />
     <Compile Include="Models\Payments\PaymentCash.cs" />
     <Compile Include="Models\Payments\Payments.cs" />
+    <Compile Include="Models\User\ApplicationRole.cs" />
     <Compile Include="Models\User\ApplicationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Concrete\GenericRepository.cs" />

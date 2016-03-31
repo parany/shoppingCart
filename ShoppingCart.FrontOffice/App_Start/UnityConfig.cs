@@ -24,12 +24,10 @@ namespace ShoppingCart
         public static void RegisterComponents()
         {
             var container = new UnityContainer();
-            EmailSettings emailSettings = new EmailSettings
-            {
-                WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
-            };
+            EmailSettings emailSettings = new EmailSettings{WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")};
 
             container.RegisterType<IGenericRepository<Product>, GenericRepository<Product>>();
+            container.RegisterType<IGenericRepository<Image>, GenericRepository<Image>>();
             container.RegisterType<IGenericRepository<Cart>, GenericRepository<Cart>>();
             container.RegisterType<IGenericRepository<CartLine>, GenericRepository<CartLine>>();
             container.RegisterType<IGenericRepository<Category>, GenericRepository<Category>>();
@@ -41,8 +39,7 @@ namespace ShoppingCart
             container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
             container.RegisterType<AccountController>(new InjectionConstructor());
-            container.RegisterType<IAuthenticationManager>(
-                    new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
+            container.RegisterType<IAuthenticationManager>(new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

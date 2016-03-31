@@ -1,6 +1,7 @@
-﻿using ShoppingCart.Models.Models.Entities;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+
+using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models.Models.Initializer;
 

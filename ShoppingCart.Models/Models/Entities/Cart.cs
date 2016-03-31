@@ -6,11 +6,9 @@ namespace ShoppingCart.Models.Models.Entities
 {
     public enum ShippingState
     {
-        Created = 0,
-        Pending = 1,
-        Canceled = 2,
-        Delivered = 3,
-        NotCheckedOut = 4
+        Pending = 0,
+        Canceled = 1,
+        Delivered = 2
     };
     public sealed class Cart : BaseObject
     {

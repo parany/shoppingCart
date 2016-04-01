@@ -8,7 +8,7 @@ using ShoppingCart.Models.Models.User;
 
 namespace ShoppingCart.Models.Models.Initializer
 {
-    public class ShoppingCartDbInitializer : DropCreateDatabaseIfModelChanges<ShoppingCartDbContext>
+    public class ShoppingCartDbInitializer : DropCreateDatabaseAlways<ShoppingCartDbContext>
     {
         protected override void Seed(ShoppingCartDbContext context)
         {
@@ -32,22 +32,22 @@ namespace ShoppingCart.Models.Models.Initializer
 
             // Adding 6 products
             Product p1 = new Product() { Id = Guid.NewGuid(), Name ="HP Probook 4540s", CategoryId =cat1.Id, Description ="Hewlet Packard Laptop",
-                ImageId = img_default.Id, Price = 150, Quantity = 10, DateCreated = DateTime.Now };
+                ImageId = img_default.Id, Price = 700, Quantity = 10, DateCreated = DateTime.Now };
             context.Products.Add(p1);
             Product p2 = new Product() { Id = Guid.NewGuid(), Name = "ASUS R510L", CategoryId = cat1.Id, Description = "ASUSTek Laptop",
-                ImageId = img_default.Id, Price = 150, Quantity = 10, DateCreated = DateTime.Now };
+                ImageId = img_default.Id, Price = 850, Quantity = 10, DateCreated = DateTime.Now };
             context.Products.Add(p2);
             Product p3 = new Product(){ Id = Guid.NewGuid(), Name = "iPad Air 2", CategoryId = cat2.Id, Description = "Tablet of Apple",
-                ImageId = img_default.Id, Price = 150, Quantity = 10, DateCreated = DateTime.Now };
+                ImageId = img_default.Id, Price = 925, Quantity = 10, DateCreated = DateTime.Now };
             context.Products.Add(p3);
             Product p4 = new Product() { Id = Guid.NewGuid(), Name = "Surface Pro 4", CategoryId = cat2.Id, Description = "Tablet of Windows",
-                ImageId = img_default.Id, Price = 150, Quantity = 10, DateCreated = DateTime.Now };
+                ImageId = img_default.Id, Price = 950, Quantity = 10, DateCreated = DateTime.Now };
             context.Products.Add(p4);
             Product p5 = new Product() { Id = Guid.NewGuid(), Name = "LG G5", CategoryId = cat3.Id, Description = "LG smart phone",
-                ImageId = img_default.Id, Price = 150, Quantity = 10, DateCreated = DateTime.Now };
+                ImageId = img_default.Id, Price = 1020, Quantity = 10, DateCreated = DateTime.Now };
             context.Products.Add(p5);
             Product p6 = new Product() { Id = Guid.NewGuid(), Name = "Galaxy S7", CategoryId = cat3.Id, Description = "Samsung smart phone",
-                ImageId = img_default.Id, Price = 150, Quantity = 10, DateCreated = DateTime.Now };
+                ImageId = img_default.Id, Price = 1250, Quantity = 10, DateCreated = DateTime.Now };
             context.Products.Add(p6);
 
             InitializeIdentityForEF(context);

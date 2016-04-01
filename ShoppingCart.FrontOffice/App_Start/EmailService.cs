@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
-using SendGrid;
 using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Net;
-using System.Net.Configuration;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;

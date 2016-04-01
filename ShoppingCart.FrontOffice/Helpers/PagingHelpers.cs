@@ -1,7 +1,8 @@
-﻿using ShoppingCart.ViewModels;
-using System;
+﻿using System;
 using System.Text;
 using System.Web.Mvc;
+
+using ShoppingCart.ViewModels;
 
 namespace ShoppingCart.Helpers
 {

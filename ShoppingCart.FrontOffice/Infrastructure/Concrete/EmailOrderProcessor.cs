@@ -4,16 +4,11 @@ using System.Net;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Infrastructure.Abstract;
-using ShoppingCart.ViewModels;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Models.Models.User;
-using System.ComponentModel;
-using System.Net.Configuration;
-using System.Configuration;
 
 namespace ShoppingCart.Infrastructure.Concrete
 {

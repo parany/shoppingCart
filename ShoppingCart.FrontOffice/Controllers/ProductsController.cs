@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.ViewModels;

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using System.Security.Principal;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
 
 using ShoppingCart.ViewModels;
@@ -17,7 +13,7 @@ using ShoppingCart.Models.Models.User;
 
 namespace ShoppingCart.Controllers
 {
-    
+
     public class CheckoutController : Controller
     {
         private IOrderProcessor _OrderProcessor;

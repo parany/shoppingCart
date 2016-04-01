@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using ShoppingCart.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+
+using ShoppingCart.ViewModels;
 
 namespace ShoppingCart.Controllers
 {

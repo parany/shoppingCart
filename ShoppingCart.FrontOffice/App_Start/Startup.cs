@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
+﻿using System;
+using System.Configuration;
+using System.Threading.Tasks;
 using Owin;
-using System;
+using Microsoft.Owin;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
+using Microsoft.Owin.Security.Facebook;
 
 using ShoppingCart.Models;
 using ShoppingCart.Models.Models.User;
@@ -40,32 +44,47 @@ namespace ShoppingCart
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
-            // app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
+            app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
 
             // Enables the application to remember the second login verification factor such as phone or email.
             // Once you check this option, your second step of verification during the login process will be remembered on the device where you logged in from.
             // This is similar to the RememberMe option when you log in.
-            // app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
+            app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
+
+            OAuthSection oauth = (OAuthSection)ConfigurationManager.GetSection("OAuthGroup/OAuth");
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            //    clientId: oauth.Microsoft.ClientId,
+            //    clientSecret: oauth.Microsoft.ClientSecret);
 
             //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            //   consumerKey: oauth.Twitter.ConsumerKey,
+            //   consumerSecret: oauth.Twitter.ConsumerSecret);
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            var fbOptions = new FacebookAuthenticationOptions()
+            {
+                AppId = oauth.Facebook.AppId,
+                AppSecret = oauth.Facebook.AppSecret,
+                Scope = { "email" },
+                Provider = new FacebookAuthenticationProvider
+                {
+                    OnAuthenticated = context =>
+                    {
+                        context.Identity.AddClaim(new System.Security.Claims.Claim("FacebookAccessToken", context.AccessToken));
+                        return Task.FromResult(true);
+                    }
+                }
+            };
+            app.UseFacebookAuthentication(fbOptions);
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //    {
-            //        clientId = "550329395063-akiq2t7qnfscrvdvumt94qbcrv96ro7r.apps.googleusercontent.com",
-            //        clientSecret= " _wiyNPmfAg93z065EQW9bYLO"
-            //    }
-            //);
+            var googleOptions = new GoogleOAuth2AuthenticationOptions
+            {
+                ClientId = oauth.Google.ClientId,
+                ClientSecret = oauth.Google.ClientSecret
+            };
+            googleOptions.Scope.Add("email");
+            app.UseGoogleAuthentication(googleOptions);
         }
     }
 }

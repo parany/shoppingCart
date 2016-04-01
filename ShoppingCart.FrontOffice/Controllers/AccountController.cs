@@ -1,17 +1,15 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using ShoppingCart.Infrastructure.Binders;
-using ShoppingCart.Models.Models.User;
-using ShoppingCart.Models.Models.Entities;
-using ShoppingCart.Models.Repositories.Interface;
-using ShoppingCart.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Security.Claims;
-using ShoppingCart.Models;
+using Facebook;
+
+using ShoppingCart.Infrastructure.Binders;
+using ShoppingCart.Models.Models.User;
+using ShoppingCart.ViewModels;
 
 namespace ShoppingCart.Controllers
 {
@@ -353,9 +351,19 @@ namespace ShoppingCart.Controllers
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+
             if (loginInfo == null)
             {
                 return RedirectToAction("Login");
+            }
+
+            if (loginInfo.Login.LoginProvider == "Facebook")
+            {
+                var identity = AuthenticationManager.GetExternalIdentity(DefaultAuthenticationTypes.ExternalCookie);
+                var access_token = identity.FindFirstValue("FacebookAccessToken");
+                var fb = new FacebookClient(access_token);
+                dynamic myInfo = fb.Get("/me?fields=email");
+                loginInfo.Email = myInfo.email;
             }
 
             // Sign in the user with this external login provider if the user already has a login
@@ -373,7 +381,7 @@ namespace ShoppingCart.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.ExternalIdentity.Name, Email = loginInfo.Email });
             }
         }
 
@@ -397,7 +405,7 @@ namespace ShoppingCart.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, EmailConfirmed=true };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

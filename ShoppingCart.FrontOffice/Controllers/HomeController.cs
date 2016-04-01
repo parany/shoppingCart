@@ -1,10 +1,11 @@
-﻿using ShoppingCart.Models.Models.Entities;
-using ShoppingCart.Models.Repositories.Interface;
-using ShoppingCart.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+
+using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Models.Repositories.Interface;
+using ShoppingCart.ViewModels;
 
 namespace ShoppingCart.Controllers
 {

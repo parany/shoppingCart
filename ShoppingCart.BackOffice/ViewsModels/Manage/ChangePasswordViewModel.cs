@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+
 namespace ShoppingCart.ViewModels
 {
     public class ChangePasswordViewModel

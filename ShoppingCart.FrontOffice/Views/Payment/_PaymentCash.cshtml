@@ -1,0 +1,20 @@
+﻿@model ShoppingCart.ViewModels.CartDTO
+
+<div class="col-md-6">
+    <div class="x_panel">
+        <img src="~/Content/image/cheque.png" alt="" />
+        <div class="x_title">
+            <h2>PaymentCash</h2>
+            <span>@Html.RadioButtonFor(m => m.PaymentsMethod, "Chek")</span>
+        </div>
+        <div class="x_content">
+            <h3>Your check must include:</h3>
+            <ul>
+                <li>Payment amount: <strong>@Model.Cart.ComputeTotalValue().ToString("c")</strong></li>
+                <li>Payable to the order of : <strong>Shopping Cart Identity</strong></li>
+                <li>Mail to : <strong>ShoppinCart Address</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

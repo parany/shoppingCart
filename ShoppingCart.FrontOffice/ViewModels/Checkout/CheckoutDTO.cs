@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using ShoppingCart.Models.Models.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 namespace ShoppingCart.ViewModels
@@ -20,5 +25,9 @@ namespace ShoppingCart.ViewModels
         public string PhoneNumber { get; set; }
 
         public string ErrorMessage { get; set; }
+
+        public string PaymentsMethod { get; set; }
+
+        public Payments Payments { get; set; }
     }
 }

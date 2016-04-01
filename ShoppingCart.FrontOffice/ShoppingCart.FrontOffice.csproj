@@ -182,6 +182,7 @@
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
@@ -221,7 +222,8 @@
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fb.png" />
+  <Content Include="App_Data\payment.xml" />
+  <Content Include="Content\fb.png" />
     <Content Include="Content\google.png" />
     <Content Include="Content\microsoft.png" />
     <Content Include="Content\Oops.jpg" />
@@ -367,9 +369,13 @@
     <Content Include="Scripts\modules\lib\js\templates\search_box.jst" />
     <Content Include="Scripts\modules\lib\js\templates\search_facet.jst" />
     <Content Include="Scripts\modules\lib\js\templates\search_input.jst" />
+    <Content Include="Views\Payment\_Mvola.cshtml" />
+    <Content Include="Views\Payment\_Check.cshtml" />
+    <Content Include="Views\Payment\_PaymentCash.cshtml" />
     <Content Include="Views\Shared\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Profile\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

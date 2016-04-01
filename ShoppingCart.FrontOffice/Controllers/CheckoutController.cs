@@ -10,6 +10,7 @@ using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Infrastructure.Binders;
 using ShoppingCart.Infrastructure.Abstract;
 using ShoppingCart.Models.Models.User;
+using ShoppingCart.Models.Models.Payments;
 
 namespace ShoppingCart.Controllers
 {
@@ -54,8 +55,11 @@ namespace ShoppingCart.Controllers
                UserName = user.UserName,
                Address = user.Address,
                PhoneNumber = user.PhoneNumber,
-               ErrorMessage = errorMessage
+               ErrorMessage = errorMessage,
+               Payments = new Payments()
             };
+            string path = Server.MapPath("~/App_Data/payment.xml");
+            cdto.Payments.InitPaymentsList(path);
             return View(cdto);
         }
 
@@ -90,6 +94,7 @@ namespace ShoppingCart.Controllers
                     CreatedBy = user.UserName,
                     UserId = user.Id,
                     ShippingDetailId = shipD.Id,
+                    PaymentMethod = cartDto.PaymentsMethod,
                     State = ShippingState.Pending
                 };
                 _CartRepository.Add(cart);

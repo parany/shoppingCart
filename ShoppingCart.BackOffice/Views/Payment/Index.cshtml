@@ -1,0 +1,116 @@
+﻿@model IEnumerable <shoppingcart.models.models.entities.payment>
+
+    @{
+        ViewBag.Title = "Payment List";
+    }
+
+    <h2>Payment List</h2>
+
+
+    <div class="panel">
+        <h3>
+            <i class="icon-list-ul"></i>
+            Payment Services available
+        </h3>
+        <div class="modules_list_container_tab row">
+            <div class="col-lg-12">
+                <table class="table">
+
+                    <tbody>
+                        <tr>
+                            <td class="fixed-width-sm center">
+                                <img src="/prestashop/modules/bankwire/logo.png" alt="bankwire" class="img-thumbnail">
+                            </td>
+                            <td>
+                                <div title="Virement bancaire" id="anchorBankwire">
+                                    <div class="module_name">
+                                        <span style="display:none">bankwire</span>
+                                        Virement bancaire
+                                        <small class="text-muted">v1.1.0 - by PrestaShop</small>
+                                        <span class="label label-warning">Nécessite une mise à jour</span>
+                                    </div>
+                                    <p class="module_description">
+                                        Accepter les paiements par virement.
+                                    </p>
+                                </div>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="actions">
+                                <div class="btn-group-action">
+                                    <div class="btn-group">
+                                        <a title="Update it!" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;update=bankwire&amp;tab_module=payments_gateways&amp;module_name=bankwire&amp;anchor=Bankwire" class=" btn btn-default"><i class="icon-refresh"></i> Update it!</a>
+                                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                                            <span class="caret">&nbsp;</span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+
+                                            <li><a title="" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;configure=bankwire&amp;tab_module=payments_gateways&amp;module_name=bankwire" class=""><i class="icon-wrench"></i> Configurer</a></li>
+                                            <li><a title="" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;module_name=bankwire&amp;enable=0&amp;tab_module=payments_gateways" class=""><i class="icon-off"></i> Désactiver</a></li>
+                                            <li><a title="Désactiver sur mobile" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;module_name=bankwire&amp;disable_device=4&amp;tab_module=payments_gateways" class=""><i class="icon-mobile"></i> Désactiver sur mobile</a></li>
+                                            <li><a title="Désactiver sur tablettes" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;module_name=bankwire&amp;disable_device=2&amp;tab_module=payments_gateways" class=""><i class="icon-tablet"></i> Désactiver sur tablettes</a></li>
+                                            <li><a title="Désactiver sur ordinateurs" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;module_name=bankwire&amp;disable_device=1&amp;tab_module=payments_gateways" class=""><i class="icon-desktop"></i> Désactiver sur ordinateurs</a></li>
+                                            <li><a title="" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;module_name=bankwire&amp;reset&amp;tab_module=payments_gateways" class=""><i class="icon-undo"></i> Réinitialiser</a></li>
+                                            <li><a title="Désinstaller" onclick="return confirm('Êtes-vous certain de vouloir effacer vos données ?');" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;uninstall=bankwire&amp;tab_module=payments_gateways&amp;module_name=bankwire&amp;anchor=Bankwire" class=""><i class="icon-minus-sign-alt"></i> Désinstaller</a></li>
+                                            <li><a title="Supprimer des favoris" onclick="" href="#" style="display:none;" data-module="bankwire" data-value="0" class="action_unfavorite toggle_favorite"><i class="icon-star"></i> Supprimer des favoris</a></li>
+                                            <li><a title="Ajouter aux favoris" onclick="" href="#" style="" data-module="bankwire" data-value="1" class="action_favorite toggle_favorite"><i class="icon-star"></i> Ajouter aux favoris</a></li>
+                                            <li class="divider"></li>
+                                            <li><a title="" onclick="return confirm('Cette action supprime définitivement le module sur votre serveur. Êtes-vous vraiment sûr ?');" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;delete=bankwire&amp;tab_module=payments_gateways&amp;module_name=bankwire" class="text-danger"><i class="icon-trash"></i> Supprimer</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="fixed-width-sm center">
+                                <img src="/prestashop/modules/cheque/logo.png" alt="cheque" class="img-thumbnail">
+                            </td>
+                            <td>
+                                <div title="Chèque" id="anchorCheque">
+                                    <div class="module_name">
+                                        <span style="display:none">cheque</span>
+                                        Chèque
+                                        <small class="text-muted">v2.6.0 - by PrestaShop</small>
+                                        <span class="label label-warning">Nécessite une mise à jour</span>
+                                    </div>
+                                    <p class="module_description">
+                                        Ce module vous permet d'accepter des paiements par chèque.
+                                    </p>
+                                </div>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td class="actions">
+                                <div class="btn-group-action">
+                                    <div class="btn-group">
+                                        <a title="Update it!" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;update=cheque&amp;tab_module=payments_gateways&amp;module_name=cheque&amp;anchor=Cheque" class=" btn btn-default"><i class="icon-refresh"></i> Update it!</a>
+                                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                                            <span class="caret">&nbsp;</span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+
+                                            <li><a title="" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;configure=cheque&amp;tab_module=payments_gateways&amp;module_name=cheque" class=""><i class="icon-wrench"></i> Configurer</a></li>
+                                            <li><a title="" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;module_name=cheque&amp;enable=0&amp;tab_module=payments_gateways" class=""><i class="icon-off"></i> Désactiver</a></li>
+                                            <li><a title="Désactiver sur mobile" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;module_name=cheque&amp;disable_device=4&amp;tab_module=payments_gateways" class=""><i class="icon-mobile"></i> Désactiver sur mobile</a></li>
+                                            <li><a title="Désactiver sur tablettes" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;module_name=cheque&amp;disable_device=2&amp;tab_module=payments_gateways" class=""><i class="icon-tablet"></i> Désactiver sur tablettes</a></li>
+                                            <li><a title="Désactiver sur ordinateurs" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;module_name=cheque&amp;disable_device=1&amp;tab_module=payments_gateways" class=""><i class="icon-desktop"></i> Désactiver sur ordinateurs</a></li>
+                                            <li><a title="" onclick="" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;module_name=cheque&amp;reset&amp;tab_module=payments_gateways" class=""><i class="icon-undo"></i> Réinitialiser</a></li>
+                                            <li><a title="Désinstaller" onclick="return confirm('Êtes-vous sûr de vouloir supprimer vos paramètres ?');" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;uninstall=cheque&amp;tab_module=payments_gateways&amp;module_name=cheque&amp;anchor=Cheque" class=""><i class="icon-minus-sign-alt"></i> Désinstaller</a></li>
+                                            <li><a title="Supprimer des favoris" onclick="" href="#" style="display:none;" data-module="cheque" data-value="0" class="action_unfavorite toggle_favorite"><i class="icon-star"></i> Supprimer des favoris</a></li>
+                                            <li><a title="Ajouter aux favoris" onclick="" href="#" style="" data-module="cheque" data-value="1" class="action_favorite toggle_favorite"><i class="icon-star"></i> Ajouter aux favoris</a></li>
+                                            <li class="divider"></li>
+                                            <li><a title="" onclick="return confirm('Cette action supprime définitivement le module sur votre serveur. Êtes-vous vraiment sûr ?');" href="index.php?controller=AdminModules&amp;token=76a38a56dccd6e8f6ca60f1f0fd22505&amp;delete=cheque&amp;tab_module=payments_gateways&amp;module_name=cheque" class="text-danger"><i class="icon-trash"></i> Supprimer</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+

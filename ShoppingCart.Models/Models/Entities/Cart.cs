@@ -24,6 +24,8 @@ namespace ShoppingCart.Models.Models.Entities
 
         public ShippingState State { get; set; }
 
+        public string PaymentMethod { get; set; }
+
         public Cart()
         {
             CartLines = new HashSet<CartLine>();

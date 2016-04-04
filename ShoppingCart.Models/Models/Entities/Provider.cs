@@ -7,7 +7,7 @@ using ShoppingCart.Models.Models.Payments;
 
 namespace ShoppingCart.Models.Models.Entities
 {
-    class Provider : BaseObject
+    public class Provider : BaseObject
     {
         public string Name { get; set; }
         public string Address { get; set; }

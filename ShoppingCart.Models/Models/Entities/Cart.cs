@@ -10,6 +10,11 @@ namespace ShoppingCart.Models.Models.Entities
         Canceled = 1,
         Delivered = 2
     };
+    public enum StansactionType
+    {
+        Buying = 0,
+        Selling = 1
+    }
     public sealed class Cart : BaseObject
     {
         public string UserId { get; set; }
@@ -25,6 +30,8 @@ namespace ShoppingCart.Models.Models.Entities
         public ShippingState State { get; set; }
 
         public string PaymentMethod { get; set; }
+
+        public StansactionType TransactionType { get; set; }
 
         public Cart()
         {

@@ -28,8 +28,9 @@ namespace ShoppingCart.BackOffice
 			container.RegisterType<IGenericRepository<CartLine>, GenericRepository<CartLine>>();
 			container.RegisterType<IGenericRepository<Category>, GenericRepository<Category>>();
 			container.RegisterType<IGenericRepository<ShippingDetail>, GenericRepository<ShippingDetail>>();
+            container.RegisterType<IGenericRepository<Provider>, GenericRepository<Provider>>();
 
-			container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
+            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
 			container.RegisterType<DbContext, ShoppingCartDbContext>(new HierarchicalLifetimeManager());
 			container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
 			container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());

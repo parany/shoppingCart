@@ -70,6 +70,7 @@
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\Image.cs" />
     <Compile Include="Models\Entities\Product.cs" />
+    <Compile Include="Models\Entities\Provider.cs" />
     <Compile Include="Models\Entities\ShippingDetail.cs" />
     <Compile Include="Models\Initializer\ShoppingCartDbInitializer.cs" />
     <Compile Include="Models\Payments\Check.cs" />

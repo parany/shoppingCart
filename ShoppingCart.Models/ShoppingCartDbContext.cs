@@ -35,5 +35,7 @@ namespace ShoppingCart.Models
         public DbSet<CartLine> CartLines { get; set; }
 
         public DbSet<ShippingDetail> ShippingDetails { get; set; }
+
+        public DbSet<Provider> Providers { get; set; }
     }
 }

@@ -75,6 +75,7 @@
     <Compile Include="CustomAttributs\ValidateJsonAntiforgeryTokenAttribute.cs" />
     <Compile Include="LambdaGenerator\GenericLambda.cs" />
     <Compile Include="LambdaGenerator\ProductExpression.cs" />
+    <Compile Include="ListCreator\GenericViewModel.cs" />
     <Compile Include="ListCreator\ListGetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

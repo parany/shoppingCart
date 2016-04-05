@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using ShoppingCart.CommonController.ViewModels.Home;
+using ShoppingCart.CommonController.Meta_Entity;
+using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Models.Repositories.Interface;
+
+namespace ShoppingCart.CommonController.Controllers
+{
+    public class BasicHomeController : Controller
+    {
+        private IGenericRepository<Product> _ProductRepository { get; set; }
+        private IGenericRepository<Category> _CategoryRepository { get; set; }
+
+        public BasicHomeController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository)
+        {
+            _ProductRepository = productRepository;
+            _ProductRepository.AddNavigationProperty(c => c.Category);
+            _ProductRepository.AddNavigationProperty(c => c.Image);
+            _CategoryRepository = categoryRepository;
+        }
+        public virtual ActionResult Index()
+        {
+            IList<Product> products = _ProductRepository.GetAll();
+            IList<Category> categories = _CategoryRepository.GetAll();
+            ProductsListViewModel viewModel = new ProductsListViewModel
+            {
+                Products = products
+                             .OrderByDescending(p => p.DateCreated),
+                Categories = categories
+            };
+
+            return View(viewModel);
+        }
+
+        public virtual ActionResult AllList()
+        {
+            IList<Product> products = _ProductRepository.GetAll();
+            IList<Category> categories = _CategoryRepository.GetAll();
+
+            List<MetaProduct> resPr = new List<MetaProduct>();
+
+            foreach (Product p in products)
+            {
+                MetaProduct mp = new MetaProduct();
+                mp.Name = p.Name;
+                mp.Category = p.Category.Name;
+                mp.Description = p.Description;
+                mp.Image = p.Image;
+                mp.Price = p.Price.ToString("c");
+                mp.Quantity = p.Quantity;
+                mp.ID = p.Id;
+                resPr.Add(mp);
+            }
+
+            List<MetaCategory> resCat = new List<MetaCategory>();
+            foreach (Category c in categories)
+            {
+                MetaCategory mc = new MetaCategory();
+                mc.Name = c.Name;
+                resCat.Add(mc);
+            }
+
+
+            List<Object> list = new List<Object>();
+            list.Add(resCat);
+            list.Add(resPr);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult GetList(string name = "", decimal price = 0, string category = "")
+        {
+            var products = _ProductRepository.GetList(p =>
+                (name != null && !name.Equals("") ? p.Name.Equals(name) : true)
+                && (category != null && !category.Equals("") ? p.Category.Name.Equals(category) : true)
+                && (price > 0 ? p.Price == price : true)
+                );
+
+            List<MetaProduct> resultList = new List<MetaProduct>();
+
+            foreach (Product p in products)
+            {
+                MetaProduct mp = new MetaProduct();
+                mp.Name = p.Name;
+                mp.Category = p.Category.Name;
+                mp.Description = p.Description;
+                mp.Image = p.Image;
+                mp.Price = p.Price.ToString("c");
+                mp.Quantity = p.Quantity;
+                mp.ID = p.Id;
+                resultList.Add(mp);
+            }
+            return Json(resultList);
+        }
+    }
+}

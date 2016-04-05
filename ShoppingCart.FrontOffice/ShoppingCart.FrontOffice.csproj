@@ -390,6 +390,10 @@
       <Project>{1ee86b32-83c3-4d22-ad5d-3994e7bddf68}</Project>
       <Name>ShoppingCart.GeneralLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ShoppingCart.CommonController\ShoppingCart.CommonController.csproj">
+      <Project>{3fb884b2-266e-4d69-9fdc-f6d14540848b}</Project>
+      <Name>ShoppingCart.CommonController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShoppingCart.Models\ShoppingCart.Models.csproj">
       <Project>{19913b66-6b27-4fd9-a9fc-64133aa21aa4}</Project>
       <Name>ShoppingCart.Models</Name>

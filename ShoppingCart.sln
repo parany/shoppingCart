@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.Models", "Shop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.GeneralLib", "SharedFunctions\ShoppingCart.GeneralLib.csproj", "{1EE86B32-83C3-4D22-AD5D-3994E7BDDF68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.CommonController", "ShoppingCart.CommonController\ShoppingCart.CommonController.csproj", "{3FB884B2-266E-4D69-9FDC-F6D14540848B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1EE86B32-83C3-4D22-AD5D-3994E7BDDF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EE86B32-83C3-4D22-AD5D-3994E7BDDF68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EE86B32-83C3-4D22-AD5D-3994E7BDDF68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FB884B2-266E-4D69-9FDC-F6D14540848B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FB884B2-266E-4D69-9FDC-F6D14540848B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FB884B2-266E-4D69-9FDC-F6D14540848B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FB884B2-266E-4D69-9FDC-F6D14540848B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

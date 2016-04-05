@@ -2,8 +2,10 @@ var arrayStyle = [];
 var dataArray = [];
 var categoryArray = [];
 var nameArray = [];
+//Locals
+var localData = [];
 $(document).ready(function () {
-
+    getUpdate();
     getHint();
 });
 
@@ -114,6 +116,7 @@ var deployData = function(data){
 
 
 function getHint(){
+
     $.ajax({
 
                 type: 'GET',
@@ -166,8 +169,8 @@ function getHint(){
                 });
                 // ====================== SHOW RESULT HERE ==================== //
                 
-                 searchAjax(arrayStyle);
-                
+                searchAjax(arrayStyle);
+                statusCheck();
                 window.queryHideDelay2 = setTimeout(function () {
                     $query.animate({
                         opacity: 0
@@ -206,5 +209,62 @@ function getHint(){
                 });
             }
         }
+    });
+}
+
+var statusCheck = function(){
+
+    var currentStatus = true;
+
+    if(navigator.onLine){
+        currentStatus = true;
+    }else{
+        currentStatus = false;        
+    }
+
+    if(!currentStatus && currentStatus != oldStatus){
+        $("#webStatus").fadeIn("slow");
+    }
+    
+    if(oldStatus != currentStatus && currentStatus){
+        $("#webStatus").fadeOut("slow");
+        getUpdate();
+    }
+
+    // confirm new state
+    oldStatus = currentStatus;
+}
+
+
+var searchData =  function(keyArray){
+    if(oldStatus){
+        // send an ajax to server to get the code
+        searchAjax(keyArray) 
+    }else{
+        // search in offline mode
+        localData.forEach(function (elt){
+        });
+    }
+}
+
+
+var getUpdate = function(){
+    $.ajax({
+        type: 'GET',
+        url: '/products/AllHint',
+        dataType: 'json',
+        success: function (data) {
+            localData = data;
+        },
+        error: function (ex) {
+            console.log(ex.responseText)
+        }
+    });
+}
+
+var localSearch = function(keyArray){
+    var resArray = localData;
+    keyArray.forEach(function(elt){
+            
     });
 }

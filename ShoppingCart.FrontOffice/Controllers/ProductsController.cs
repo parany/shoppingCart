@@ -2,52 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-
+using ShoppingCart.CommonController.Controllers;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.ViewModels;
 
 namespace ShoppingCart.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BasicHomeController
     {
-        private IGenericRepository<Product> ProductRepository { get; }
-        private IGenericRepository<Category> CategoryRepository { get; }
         public int PageSize = 6;
 
-        private class Meta_product
+
+        public ProductsController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository) : base(productRepository, categoryRepository)
         {
-            public Guid ID;
-            public string Name { get; set; }
-
-            public string Description { get; set; }
-
-            public string Price { get; set; }
-
-            public int Quantity { get; set; }
-
-            public Image Image { get; set; }
-
-            public string Category { get; set; }
         }
 
-        private class Meta_category
-        {
-            public Guid Id;
-
-            public string Name;
-        }
-
-        public ProductsController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository)
-        {
-            ProductRepository = productRepository;
-            ProductRepository.AddNavigationProperties(p => p.Category);
-            ProductRepository.AddNavigationProperty(p => p.Image);
-
-            CategoryRepository = categoryRepository;
-        }
-
-
+        /*
         // GET: Products
         public ActionResult List(string name = "", decimal price = 0, string category = "", int page = 1)
         {
@@ -75,6 +46,7 @@ namespace ShoppingCart.Controllers
         }
 
         // GET: Products/Details/5
+
         public ActionResult Details(string name)
         {
             ProductDetailViewModel productsViewModel;
@@ -83,12 +55,6 @@ namespace ShoppingCart.Controllers
                 Products = ProductRepository.GetList(p => p.Name == name)
             };
             return View(productsViewModel);
-        }
-
-        // GET: Products/Create
-        public ActionResult Create()
-        {
-            return View();
         }
 
         [HttpPost]
@@ -156,5 +122,6 @@ namespace ShoppingCart.Controllers
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+        */
     }
 }

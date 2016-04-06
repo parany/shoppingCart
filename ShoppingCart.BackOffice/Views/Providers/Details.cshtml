@@ -1,4 +1,5 @@
-﻿@model ShoppingCart.Models.Models.Entities.Provider
+﻿@using ShoppingCart.Models.Models.Payments;
+@model ShoppingCart.BackOffice.ViewsModels.Provider.ProviderViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -27,37 +28,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
+            @Html.DisplayNameFor(model => model.PaymentMethods)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateCreated)
+            <ul>
+                @foreach (var p in Model.PaymentMethods)
+                {
+                    List<Payment> paymentMethods = (List<Payment>)ViewBag.PaymentMethods;
+                    var pm = paymentMethods.Single(x => x.Id == int.Parse(p));
+                    <li>@pm.Name</li>
+                }
+            </ul>
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateModified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateModified)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedBy)
-        </dd>
-
     </dl>
 </div>
 <p>

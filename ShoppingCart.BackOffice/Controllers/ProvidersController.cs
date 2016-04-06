@@ -24,6 +24,14 @@ namespace ShoppingCart.BackOffice.Controllers
             ProviderRepository = providerRepository;
         }
 
+        private List<Payment> GetPaymentMethods()
+        {
+            var payments = new Payments();
+            string path = Server.MapPath("~/App_Data/payment.xml");
+            payments.InitPaymentsList(path);
+            return payments.Modules;
+        }
+
         // GET: Providers
         public ActionResult Index()
         {
@@ -38,20 +46,23 @@ namespace ShoppingCart.BackOffice.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
+            var providerViewModel = new ProviderViewModel();
+            providerViewModel.Id = provider.Id;
+            providerViewModel.Address = provider.Address;
+            providerViewModel.Name = provider.Name;
+            providerViewModel.PaymentMethods = provider.PaymentMethods.Split(',');
+            ViewBag.PaymentMethods = GetPaymentMethods();
             if (provider == null)
             {
                 return HttpNotFound();
             }
-            return View(provider);
+            return View(providerViewModel);
         }
 
         // GET: Providers/Create
         public ActionResult Create()
         {
-            var payments = new Payments();
-            string path = Server.MapPath("~/App_Data/payment.xml");
-            payments.InitPaymentsList(path);
-            ViewBag.PaymentMethods = payments.Modules;
+            ViewBag.PaymentMethods = GetPaymentMethods();
             return View();
         }
 
@@ -84,11 +95,8 @@ namespace ShoppingCart.BackOffice.Controllers
                 ProviderRepository.Add(provider);
                 return RedirectToAction("Index");
             }
-
-            var payments = new Payments();
-            string path = Server.MapPath("~/App_Data/payment.xml");
-            payments.InitPaymentsList(path);
-            ViewBag.PaymentMethods = payments.Modules;
+            
+            ViewBag.PaymentMethods = GetPaymentMethods();
 
             return View(provider);
         }

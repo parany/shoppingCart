@@ -12,8 +12,8 @@ namespace ShoppingCart.CommonController.Controllers
 {
     public class BasicHomeController : Controller
     {
-        private IGenericRepository<Product> _ProductRepository { get; set; }
-        private IGenericRepository<Category> _CategoryRepository { get; set; }
+        private IGenericRepository<Product> _ProductRepository;
+        private IGenericRepository<Category> _CategoryRepository;
 
         public BasicHomeController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository)
         {
@@ -178,6 +178,16 @@ namespace ShoppingCart.CommonController.Controllers
             list.Add(resPr);
 
             return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual IGenericRepository<Product> GetProductRepo()
+        {
+            return _ProductRepository;
+        }
+
+        public virtual IGenericRepository<Category> GetCategoryRepo()
+        {
+            return _CategoryRepository;
         }
     }
 }

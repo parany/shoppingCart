@@ -33,9 +33,9 @@
 
         <dd>
             <ul>
+                @{List<Payment> paymentMethods = (List<Payment>)ViewBag.PaymentMethods; }
                 @foreach (var p in Model.PaymentMethods)
                 {
-                    List<Payment> paymentMethods = (List<Payment>)ViewBag.PaymentMethods;
                     var pm = paymentMethods.Single(x => x.Id == int.Parse(p));
                     <li>@pm.Name</li>
                 }

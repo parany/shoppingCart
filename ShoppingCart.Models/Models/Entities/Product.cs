@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace ShoppingCart.Models.Models.Entities
 {
@@ -21,5 +22,6 @@ namespace ShoppingCart.Models.Models.Entities
 
         public virtual Category Category { get; set; }
 
+        public List<Provider> Providers { get; set; }
     }
 }

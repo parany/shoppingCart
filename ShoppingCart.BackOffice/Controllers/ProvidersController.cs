@@ -50,7 +50,8 @@ namespace ShoppingCart.BackOffice.Controllers
             providerViewModel.Id = provider.Id;
             providerViewModel.Address = provider.Address;
             providerViewModel.Name = provider.Name;
-            providerViewModel.PaymentMethods = provider.PaymentMethods.Split(',');
+            if (provider.PaymentMethods != null)
+                providerViewModel.PaymentMethods = provider.PaymentMethods.Split(',');
             ViewBag.PaymentMethods = GetPaymentMethods();
             if (provider == null)
             {
@@ -109,11 +110,31 @@ namespace ShoppingCart.BackOffice.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
+            ProviderEditViewModel providerViewModel = new ProviderEditViewModel();
+            providerViewModel.Id = provider.Id;
+            providerViewModel.Address = provider.Address;
+            providerViewModel.Name = provider.Name;
+            var paymentMethodsAll = GetPaymentMethods();
+            string[] selectedPaymentMethods = null;
+            if (provider.PaymentMethods != null)
+                selectedPaymentMethods = provider.PaymentMethods.Split(',');
+            var paymentMethods = new List<SelectListItem>();
+            foreach (var pm in paymentMethodsAll)
+            {
+                var item = new SelectListItem
+                {
+                    Value = pm.Id.ToString(),
+                    Text = pm.Name
+                };
+                paymentMethods.Add(item);
+            }
+            paymentMethods.ForEach(p => p.Selected = selectedPaymentMethods != null && selectedPaymentMethods.Contains(p.Value));
+            ViewBag.PaymentMethods = paymentMethods;
             if (provider == null)
             {
                 return HttpNotFound();
             }
-            return View(provider);
+            return View(providerViewModel);
         }
 
         // POST: Providers/Edit/5
@@ -121,14 +142,35 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Address")] Provider provider)
+        public ActionResult Edit([Bind(Include = "Id,Name,Address,PaymentMethods")] ProviderViewModel providerViewModel)
         {
             if (ModelState.IsValid)
             {
+                Provider provider = new Provider();
+                var sbPaymentMethods = new StringBuilder();
+                int i = 1;
+                if (providerViewModel.PaymentMethods != null)
+                {
+                    foreach (var p in providerViewModel.PaymentMethods)
+                    {
+                        sbPaymentMethods.Append(p);
+                        if (i < providerViewModel.PaymentMethods.Count())
+                        {
+                            sbPaymentMethods.Append(',');
+                        }
+                        i++;
+                    }
+                }
+
+                provider.Id = providerViewModel.Id;
+                provider.Address = providerViewModel.Address;
+                provider.Name = providerViewModel.Name;
+                provider.PaymentMethods = sbPaymentMethods.ToString();
+
                 ProviderRepository.Update(provider);
                 return RedirectToAction("Index");
             }
-            return View(provider);
+            return View(providerViewModel);
         }
 
         // GET: Providers/Delete/5

@@ -34,10 +34,18 @@
         <dd>
             <ul>
                 @{List<Payment> paymentMethods = (List<Payment>)ViewBag.PaymentMethods; }
-                @foreach (var p in Model.PaymentMethods)
+                @if (Model.PaymentMethods != null)
                 {
-                    var pm = paymentMethods.Single(x => x.Id == int.Parse(p));
-                    <li>@pm.Name</li>
+                    foreach (var p in Model.PaymentMethods)
+                    {
+                        int pId;
+                        var success = int.TryParse(p, out pId);
+                        if (success)
+                        {
+                            var pm = paymentMethods.Single(x => x.Id == pId);
+                            <li>@pm.Name</li>
+                        }
+                    }
                 }
             </ul>
         </dd>

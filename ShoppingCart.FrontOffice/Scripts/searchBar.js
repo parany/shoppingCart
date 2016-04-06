@@ -263,8 +263,8 @@ var getUpdate = function(){
 }
 
 var localSearch = function(keyArray){
-    var resArray = localData;
-    keyArray.forEach(function(elt){
-            
-    });
+    var resArray = localData[1];
+    for(var i = 0; i < localData[1].length; i++){
+        
+    }
 }

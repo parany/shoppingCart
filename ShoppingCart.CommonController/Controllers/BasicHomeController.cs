@@ -97,7 +97,7 @@ namespace ShoppingCart.CommonController.Controllers
             return Json(resultList);
         }
 
-        public ActionResult List(string name = "", decimal price = 0, string category = "", int page = 1)
+        public virtual ActionResult List(string name = "", decimal price = 0, string category = "", int page = 1)
         {
             ProductsListViewModel productsViewModel;
             var products = _ProductRepository.GetList(p =>
@@ -116,7 +116,7 @@ namespace ShoppingCart.CommonController.Controllers
             return View(productsViewModel);
         }
 
-        public JsonResult ListUpdate(string name = "", decimal price = 0, string category = "", int page = 1)
+        public virtual JsonResult ListUpdate(string name = "", decimal price = 0, string category = "", int page = 1)
         {
 
             var products = _ProductRepository.GetList(p =>
@@ -143,7 +143,7 @@ namespace ShoppingCart.CommonController.Controllers
 
             return Json(resultList);
         }
-        public JsonResult AllHint()
+        public virtual JsonResult AllHint()
         {
             var products = _ProductRepository.GetAll();
             var categories = _CategoryRepository.GetAll();

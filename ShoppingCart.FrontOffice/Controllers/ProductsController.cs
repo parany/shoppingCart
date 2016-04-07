@@ -15,19 +15,6 @@ namespace ShoppingCart.Controllers
         {
         }
 
-        // Action for populating the details of a product
-        [HttpPost]
-        public ViewResult Details(Guid productId, string returnUrl)
-        {
-            // Getting the product to populate details
-            IGenericRepository<Product> repo = GetProductRepo();
-            Product product = repo.GetSingle(p => p.Id == productId);
-
-            // Passing the return Url to view
-            ViewData["ReturnUrl"] = returnUrl;
-
-            //returning view
-            return View(product);
-        }
+        
     }
 }

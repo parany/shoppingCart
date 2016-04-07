@@ -31,7 +31,7 @@
                         <p class="lead"> @p.Description</p>
                         <p>
                             <span class="btn btn-primary">@p.Price.ToString("c")</span>
-                            @using (Html.BeginForm("Details", "Home", new {returnUrl = Request.Url.PathAndQuery},
+                            @using (Html.BeginForm("Details", "Products", new {returnUrl = Request.Url.PathAndQuery},
                                 FormMethod.Post, new {@style = "display:inline"}))
                             {
                                 <span>

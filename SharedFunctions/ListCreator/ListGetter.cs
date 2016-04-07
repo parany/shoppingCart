@@ -63,8 +63,6 @@ namespace ShoppingCart.GeneralLib.ListCreator
                                 o.GetType().GetProperty(p.Name).GetValue(o, null) ==
                                 _model.GetType().GetProperty(p.Name).GetValue(_model, null) : true);
                 }
-
-
             }
             return _result;
         }

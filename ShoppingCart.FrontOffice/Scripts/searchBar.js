@@ -263,8 +263,14 @@ var getUpdate = function(){
 }
 
 var localSearch = function(keyArray){
-    var resArray = localData;
-    keyArray.forEach(function(elt){
-            
+    var resArray = [];
+    resArray[0] = localData[1];
+    keyArray.forEach(function(elt, primary){
+        resArray[primary].forEach(function(obj, i){
+            if(elt.value == obj[elt.key]){
+                resArray[primary + 1].push(obj);
+            }
+        });
     });
+    console.log(resArray);
 }

@@ -13,16 +13,16 @@ using ShoppingCart.CommonController.Models;
 namespace ShoppingCart.CommonController.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class BasicAccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public BasicAccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public BasicAccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -252,12 +252,12 @@ namespace ShoppingCart.CommonController.Controllers
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return RedirectToAction("ResetPasswordConfirmation", "BasicAccount");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return RedirectToAction("ResetPasswordConfirmation", "BasicAccount");
             }
             AddErrors(result);
             return View();
@@ -279,7 +279,7 @@ namespace ShoppingCart.CommonController.Controllers
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "BasicAccount", new { ReturnUrl = returnUrl }));
         }
 
         //
@@ -356,7 +356,7 @@ namespace ShoppingCart.CommonController.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Index", "BasicManage");
             }
 
             if (ModelState.IsValid)

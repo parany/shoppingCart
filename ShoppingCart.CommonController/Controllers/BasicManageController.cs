@@ -11,16 +11,16 @@ using ShoppingCart.CommonController.Models;
 namespace ShoppingCart.CommonController.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class BasicManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
+        public BasicManageController()
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public BasicManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -142,7 +142,7 @@ namespace ShoppingCart.CommonController.Controllers
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", "Manage");
+            return RedirectToAction("Index", "BasicManage");
         }
 
         //
@@ -157,7 +157,7 @@ namespace ShoppingCart.CommonController.Controllers
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", "Manage");
+            return RedirectToAction("Index", "BasicManage");
         }
 
         //
@@ -306,7 +306,7 @@ namespace ShoppingCart.CommonController.Controllers
         public ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
+            return new BasicAccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "BasicManage"), User.Identity.GetUserId());
         }
 
         //

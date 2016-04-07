@@ -11,6 +11,8 @@ using ShoppingCart.Infrastructure.Binders;
 using ShoppingCart.Infrastructure.Abstract;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models.Models.Payments;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace ShoppingCart.Controllers
 {
@@ -26,6 +28,7 @@ namespace ShoppingCart.Controllers
         private ApplicationUser CurrentUser{ get{ return UserManager.FindByName(HttpContext.User.Identity.Name);}}
         private ApplicationUserManager UserManager{get{return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();}}
 
+        private ApplicationRoleManager RoleManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>(); } }
         public CheckoutController(IGenericRepository<Cart> cartRepo,
                                   IGenericRepository<Product> productRepo,
                                   IGenericRepository<CartLine> cartlineRepo,
@@ -47,16 +50,27 @@ namespace ShoppingCart.Controllers
         [Authorize]
         public ActionResult Index(CartViewModel cartView, String errorMessage = "")
         {
+            StansactionType transaction;
+
             ApplicationUser user = CurrentUser;
+            if (RoleManager.RoleExists("Admin") && UserManager.IsInRole(user.Id, "Admin"))
+            {
+                transaction = StansactionType.Buying;
+            }
+            else
+            {
+                transaction = StansactionType.Selling;
+            }
             // Creating ViewModel to pass to the view for rendering summary
             CheckoutDTO cdto = new CheckoutDTO
             {
-               Cart = cartView,
-               UserName = user.UserName,
-               Address = user.Address,
-               PhoneNumber = user.PhoneNumber,
-               ErrorMessage = errorMessage,
-               Payments = new Payments()
+                Cart = cartView,
+                UserName = user.UserName,
+                Address = user.Address,
+                PhoneNumber = user.PhoneNumber,
+                ErrorMessage = errorMessage,
+                Payments = new Payments(),
+                TransactionType = transaction
             };
             string path = Server.MapPath("~/App_Data/payment.xml");
             cdto.Payments.InitPaymentsList(path);
@@ -95,8 +109,9 @@ namespace ShoppingCart.Controllers
                     UserId = user.Id,
                     ShippingDetailId = shipD.Id,
                     PaymentMethod = cartDto.PaymentsMethod,
-                    State = ShippingState.Pending
-                };
+                    State = ShippingState.Pending,
+                    TransactionType = cartDto.TransactionType
+            };
                 _CartRepository.Add(cart);
 
                 // Creating new cartline for each line in the cart and adding to cart in persistence

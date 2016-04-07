@@ -6,6 +6,7 @@ using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Models.Payments;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace ShoppingCart.ViewModels
 {
@@ -30,5 +31,8 @@ namespace ShoppingCart.ViewModels
         public string PaymentsMethod { get; set; }
 
         public Payments Payments { get; set; }
+
+        [DisplayName("Type of Transaction")]
+        public StansactionType TransactionType { get; set; }
     }
 }

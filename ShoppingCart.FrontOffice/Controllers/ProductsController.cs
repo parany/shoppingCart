@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using ShoppingCart.CommonController.Controllers;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.ViewModels;
+using ShoppingCart.CommonController.Controllers;
 
 namespace ShoppingCart.Controllers
 {

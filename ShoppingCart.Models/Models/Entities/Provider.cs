@@ -11,7 +11,7 @@ namespace ShoppingCart.Models.Models.Entities
     {
         public string Name { get; set; }
         public string Address { get; set; }
-        public List<Payment> PaymentMethods {get; set; }
+        public string PaymentMethods { get; set; }
         public List<Product> Products { get; set; }
     }
 }

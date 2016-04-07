@@ -1,4 +1,5 @@
-﻿@model ShoppingCart.Models.Models.Entities.Provider
+﻿@using System.Collections.Generic;
+@model ShoppingCart.BackOffice.ViewsModels.Provider.ProviderEditViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -30,6 +31,20 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Payment Methods", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="PaymentMethods" multiple="multiple" name="PaymentMethods">
+                    @{List<SelectListItem> paymentMethods = ViewBag.PaymentMethods;
+                        foreach (var p in paymentMethods)
+                        {
+                            <option value="@p.Value" selected="@p.Selected">@p.Text</option>
+                        }
+                    }
+                </select>
             </div>
         </div>
 

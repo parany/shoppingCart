@@ -167,6 +167,8 @@
     <Compile Include="ViewsModels\Cart\CartsViewModel.cs" />
     <Compile Include="ViewsModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewsModels\Manage\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="ViewsModels\Provider\ProviderEditViewModel.cs" />
+    <Compile Include="ViewsModels\Provider\ProviderViewModel.cs" />
     <Compile Include="ViewsModels\User\CreateUserViewModel.cs" />
     <Compile Include="ViewsModels\Product\CreateViewModels.cs" />
     <Compile Include="ViewsModels\Account\ExternalLoginConfirmationViewModel.cs" />

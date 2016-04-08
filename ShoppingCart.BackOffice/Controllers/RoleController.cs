@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.BackOffice.ViewsModels;
+using ShoppingCart.CommonController.Infrastructure.Identity;
 
 namespace ShoppingCart.BackOffice.Controllers
 {

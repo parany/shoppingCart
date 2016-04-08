@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShoppingCart.Models.Models.Entities;
-using ShoppingCart.ViewModels;
 using System.Linq;
 using Moq;
 using ShoppingCart.Models.Repositories.Interface;

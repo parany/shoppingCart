@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using ShoppingCart.CommonController.Models;
+
+using ShoppingCart.CommonController.Infrastructure.Identity;
+using ShoppingCart.CommonController.ViewModels;
 
 namespace ShoppingCart.CommonController.Controllers
 {
@@ -32,9 +33,9 @@ namespace ShoppingCart.CommonController.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -142,7 +143,7 @@ namespace ShoppingCart.CommonController.Controllers
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", "BasicManage");
+            return RedirectToAction("Index", "Manage");
         }
 
         //
@@ -157,7 +158,7 @@ namespace ShoppingCart.CommonController.Controllers
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", "BasicManage");
+            return RedirectToAction("Index", "Manage");
         }
 
         //
@@ -195,9 +196,7 @@ namespace ShoppingCart.CommonController.Controllers
         }
 
         //
-        // POST: /Manage/RemovePhoneNumber
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // GET: /Manage/RemovePhoneNumber
         public async Task<ActionResult> RemovePhoneNumber()
         {
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
@@ -306,7 +305,7 @@ namespace ShoppingCart.CommonController.Controllers
         public ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
-            return new BasicAccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "BasicManage"), User.Identity.GetUserId());
+            return new BasicAccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
         }
 
         //
@@ -333,17 +332,11 @@ namespace ShoppingCart.CommonController.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         private void AddErrors(IdentityResult result)
         {
@@ -356,21 +349,13 @@ namespace ShoppingCart.CommonController.Controllers
         private bool HasPassword()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
+            return user != null && user.PasswordHash != null;
         }
 
         private bool HasPhoneNumber()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PhoneNumber != null;
-            }
-            return false;
+            return user != null && user.PhoneNumber != null;
         }
 
         public enum ManageMessageId
@@ -384,6 +369,6 @@ namespace ShoppingCart.CommonController.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

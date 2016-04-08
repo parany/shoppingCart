@@ -4,8 +4,6 @@ using Microsoft.Practices.Unity;
 using System.Data.Entity;
 using System.Web.Mvc;
 using Unity.Mvc5;
-using Microsoft.Owin.Security;
-using System.Web;
 
 using ShoppingCart.Controllers;
 using ShoppingCart.Models;
@@ -16,7 +14,7 @@ using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.BackOffice
 {
-	public static class UnityConfig
+    public static class UnityConfig
 	{
 		public static void RegisterComponents()
 		{

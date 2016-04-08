@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Web;
-using System.Linq;
-using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;

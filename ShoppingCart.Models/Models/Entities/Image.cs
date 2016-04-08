@@ -1,10 +1,6 @@
 ﻿using ImageResizer;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace ShoppingCart.Models.Models.Entities

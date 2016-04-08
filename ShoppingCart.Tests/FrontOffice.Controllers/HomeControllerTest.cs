@@ -1,11 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using ShoppingCart.Controllers;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Concrete;
-using ShoppingCart.Models.Repositories.Interface;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace ShoppingCart.Tests.Controllers

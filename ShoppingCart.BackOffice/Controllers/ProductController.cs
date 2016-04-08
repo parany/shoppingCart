@@ -1,11 +1,9 @@
-﻿using ImageResizer;
-using ShoppingCart.BackOffice.ViewsModels;
+﻿using ShoppingCart.BackOffice.ViewsModels;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;

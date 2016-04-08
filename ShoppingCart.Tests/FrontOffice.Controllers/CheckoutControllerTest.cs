@@ -1,9 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ShoppingCart.Infrastructure.Abstract;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using ShoppingCart.ViewModels;
-using ShoppingCart.Controllers;
 
 namespace ShoppingCart.Tests.FrontOffice.Controllers
 {

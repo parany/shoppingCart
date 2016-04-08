@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
-using ShoppingCart.ViewModels;
 using ShoppingCart.CommonController.Controllers;
 
 namespace ShoppingCart.Controllers
@@ -13,6 +10,7 @@ namespace ShoppingCart.Controllers
     {
         public ProductsController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository) : base(productRepository, categoryRepository)
         {
+            
         }
 
         // Action for populating the details of a product

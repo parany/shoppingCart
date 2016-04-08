@@ -1,8 +1,4 @@
-﻿using System;
-using ShoppingCart.Models.Models.Entities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ShoppingCart.Models.Models.Entities;
 using System.Web.Mvc;
 using System.ComponentModel;
 

@@ -2,9 +2,6 @@
 using Microsoft.AspNet.Identity.Owin;
 using ShoppingCart.BackOffice.ViewsModels;
 using ShoppingCart.Models.Models.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;

@@ -1,13 +1,10 @@
 ﻿using ShoppingCart.Models.Models.User;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace ShoppingCart.BackOffice.ViewsModels
 {
-        public class RoleEditModel
+    public class RoleEditModel
         {
             public ApplicationRole Role { get; set; }
             public IEnumerable<ApplicationUser> Members { get; set; }

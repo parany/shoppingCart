@@ -16,6 +16,7 @@ namespace ShoppingCart.BackOffice
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             UnityConfig.RegisterComponents();
+            CommonController.UnityConfig.RegisterComponents();
         }
     }
 }

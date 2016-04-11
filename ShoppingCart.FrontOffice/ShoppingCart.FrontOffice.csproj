@@ -75,9 +75,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Owin.Security.Providers, Version=1.25.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.Security.Providers.1.27\lib\net45\Owin.Security.Providers.dll</HintPath>
@@ -164,17 +164,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\ApplicationRoleManager.cs" />
-    <Compile Include="App_Start\ApplicationSignInManager.cs" />
-    <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\EmailSettings.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\EmailService.cs" />
-    <Compile Include="App_Start\OAuthSection.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\SmsService.cs" />
-    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
@@ -189,36 +181,12 @@
     </Compile>
     <Compile Include="Helpers\Bootstrap.cs" />
     <Compile Include="Helpers\PagingHelpers.cs" />
-    <Compile Include="Infrastructure\Abstract\IOrderProcessor.cs" />
-    <Compile Include="Infrastructure\Binders\CartModelBinder.cs" />
-    <Compile Include="Infrastructure\Concrete\EmailOrderProcessor.cs" />
-    <Compile Include="ViewModels\Cart\CartCheckQuantityViewModel.cs" />
-    <Compile Include="ViewModels\Checkout\CheckoutDTO.cs" />
-    <Compile Include="ViewModels\Cart\CartIndexViewModel.cs" />
-    <Compile Include="ViewModels\Cart\CartViewModel.cs" />
     <Compile Include="ViewModels\Categories\CategoriesViewModel.cs" />
-    <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
-    <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
-    <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
-    <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
-    <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
-    <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
-    <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Account\ForgotViewModel.cs" />
-    <Compile Include="ViewModels\Account\LoginViewModel.cs" />
-    <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
-    <Compile Include="ViewModels\Manage\IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Home\PagingInfo.cs" />
     <Compile Include="ViewModels\Products\ProductDetailViewModel.cs" />
     <Compile Include="ViewModels\Products\ProductsListViewModel.cs" />
-    <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
-    <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
-    <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
-    <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\payment.xml" />

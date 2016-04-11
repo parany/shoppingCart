@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
+using ShoppingCart.CommonController.Infrastructure.Identity;
 
 namespace ShoppingCart.BackOffice.Infrastructure
 {

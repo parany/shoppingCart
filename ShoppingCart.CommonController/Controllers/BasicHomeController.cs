@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ShoppingCart.CommonController.ViewModels.Home;
 using ShoppingCart.CommonController.Meta_Entity;
@@ -188,6 +187,20 @@ namespace ShoppingCart.CommonController.Controllers
         public virtual IGenericRepository<Category> GetCategoryRepo()
         {
             return _CategoryRepository;
+        }
+        // Action for populating the details of a product
+        [HttpPost]
+        public ViewResult Details(Guid productId, string returnUrl)
+        {
+            // Getting the product to populate details
+            IGenericRepository<Product> repo = GetProductRepo();
+            Product product = repo.GetSingle(p => p.Id == productId);
+
+            // Passing the return Url to view
+            ViewData["ReturnUrl"] = returnUrl;
+
+            //returning view
+            return View(product);
         }
     }
 }

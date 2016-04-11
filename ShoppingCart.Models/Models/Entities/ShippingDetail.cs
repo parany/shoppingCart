@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ShoppingCart.Models.Models.Entities
+﻿namespace ShoppingCart.Models.Models.Entities
 {
 
     public class ShippingDetail : BaseObject

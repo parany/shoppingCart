@@ -2,9 +2,9 @@
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
-using ShoppingCart.Infrastructure.Binders;
-using ShoppingCart.ViewModels;
 using ShoppingCart.Models.Models.Initializer;
+using ShoppingCart.CommonController.ViewModels;
+using ShoppingCart.CommonController.Infrastructure.Binders;
 
 namespace ShoppingCart
 {
@@ -18,6 +18,7 @@ namespace ShoppingCart
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             UnityConfig.RegisterComponents();
+            CommonController.UnityConfig.RegisterComponents();
             ModelBinders.Binders.Add(typeof(CartViewModel), new CartModelBinder());
 
         }

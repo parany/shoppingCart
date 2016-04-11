@@ -1,4 +1,5 @@
-﻿@model ShoppingCart.ViewModels.CheckoutDTO
+﻿@using ShoppingCart.Models.Models.Entities;
+@model ShoppingCart.CommonController.ViewModels.CheckoutDTO
 @{
     ViewBag.Title = "Checkout summary";
 }
@@ -42,6 +43,16 @@
                     @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                 </div>
             </div>
+            @if (Model.TransactionType == StansactionType.Buying)
+            {
+            <div class="form-group">
+                @Html.LabelFor(m => m.TransactionType, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <span style="margin:0 10px">@Html.RadioButtonFor(m => m.TransactionType, StansactionType.Buying) Buying</span>
+                    <span style="margin:0 10px">@Html.RadioButtonFor(m => m.TransactionType, StansactionType.Selling) Selling</span>
+                </div>
+            </div>
+            }
         </div>
     </div>
     <div class="well">

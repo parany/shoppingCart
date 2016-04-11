@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShoppingCart.Models.Models.Payments;
+﻿using System.Collections.Generic;
 
 namespace ShoppingCart.Models.Models.Entities
 {

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,6 +9,7 @@ using System.Web.Mvc;
 
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.BackOffice.ViewsModels;
+using ShoppingCart.CommonController.Infrastructure.Identity;
 
 namespace ShoppingCart.BackOffice.Controllers
 {

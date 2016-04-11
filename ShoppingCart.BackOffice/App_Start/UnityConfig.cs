@@ -4,8 +4,6 @@ using Microsoft.Practices.Unity;
 using System.Data.Entity;
 using System.Web.Mvc;
 using Unity.Mvc5;
-using Microsoft.Owin.Security;
-using System.Web;
 
 using ShoppingCart.Controllers;
 using ShoppingCart.Models;
@@ -16,7 +14,7 @@ using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.BackOffice
 {
-	public static class UnityConfig
+    public static class UnityConfig
 	{
 		public static void RegisterComponents()
 		{
@@ -29,12 +27,6 @@ namespace ShoppingCart.BackOffice
 			container.RegisterType<IGenericRepository<Category>, GenericRepository<Category>>();
 			container.RegisterType<IGenericRepository<ShippingDetail>, GenericRepository<ShippingDetail>>();
             container.RegisterType<IGenericRepository<Provider>, GenericRepository<Provider>>();
-
-            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
-			container.RegisterType<DbContext, ShoppingCartDbContext>(new HierarchicalLifetimeManager());
-			container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
-			container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
-			container.RegisterType<AccountController>(new InjectionConstructor());
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 		}

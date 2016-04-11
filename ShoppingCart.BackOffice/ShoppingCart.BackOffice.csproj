@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="ImageResizer">
       <HintPath>..\packages\ImageResizer.4.0.5\lib\net45\ImageResizer.dll</HintPath>
     </Reference>
@@ -62,9 +66,9 @@
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -137,15 +141,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\ApplicationRoleManager.cs" />
-    <Compile Include="App_Start\ApplicationSignInManager.cs" />
-    <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\EmailService.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\SmsService.cs" />
-    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -161,35 +159,18 @@
     <Compile Include="Helpers\IdentityHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewsModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewsModels\Cart\ChangeStateViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartLineViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartsViewModel.cs" />
-    <Compile Include="ViewsModels\Manage\ChangePasswordViewModel.cs" />
-    <Compile Include="ViewsModels\Manage\ConfigureTwoFactorViewModel.cs" />
     <Compile Include="ViewsModels\Provider\ProviderEditViewModel.cs" />
     <Compile Include="ViewsModels\Provider\ProviderViewModel.cs" />
     <Compile Include="ViewsModels\User\CreateUserViewModel.cs" />
     <Compile Include="ViewsModels\Product\CreateViewModels.cs" />
-    <Compile Include="ViewsModels\Account\ExternalLoginConfirmationViewModel.cs" />
-    <Compile Include="ViewsModels\Account\ExternalLoginListViewModel.cs" />
-    <Compile Include="ViewsModels\Manage\FactorViewModel.cs" />
-    <Compile Include="ViewsModels\Account\ForgotPasswordViewModel.cs" />
-    <Compile Include="ViewsModels\Account\ForgotViewModel.cs" />
-    <Compile Include="ViewsModels\Manage\IndexViewModel.cs" />
-    <Compile Include="ViewsModels\Account\LoginViewModel.cs" />
-    <Compile Include="ViewsModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewsModels\Product\PagingInfo.cs" />
     <Compile Include="ViewsModels\Product\ProductsListViewModel.cs" />
     <Compile Include="ViewsModels\Product\ProductViewModel.cs" />
-    <Compile Include="ViewsModels\Account\RegisterViewModel.cs" />
-    <Compile Include="ViewsModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewsModels\Role\RoleViewModel.cs" />
-    <Compile Include="ViewsModels\Account\SendCodeViewModel.cs" />
-    <Compile Include="ViewsModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewsModels\Cart\ShippingDetailViewModel.cs" />
-    <Compile Include="ViewsModels\Account\VerifyCodeViewModel.cs" />
-    <Compile Include="ViewsModels\Manage\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\payment.xml" />
@@ -282,6 +263,10 @@
     <ProjectReference Include="..\SharedFunctions\ShoppingCart.GeneralLib.csproj">
       <Project>{1ee86b32-83c3-4d22-ad5d-3994e7bddf68}</Project>
       <Name>ShoppingCart.GeneralLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShoppingCart.CommonController\ShoppingCart.CommonController.csproj">
+      <Project>{3FB884B2-266E-4D69-9FDC-F6D14540848B}</Project>
+      <Name>ShoppingCart.CommonController</Name>
     </ProjectReference>
     <ProjectReference Include="..\ShoppingCart.Models\ShoppingCart.Models.csproj">
       <Project>{19913b66-6b27-4fd9-a9fc-64133aa21aa4}</Project>

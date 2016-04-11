@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Collections.Generic;
 
 namespace ShoppingCart.Models.Models.Entities

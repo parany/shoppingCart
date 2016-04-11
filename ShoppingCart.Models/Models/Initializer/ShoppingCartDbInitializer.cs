@@ -8,7 +8,7 @@ using ShoppingCart.Models.Models.User;
 
 namespace ShoppingCart.Models.Models.Initializer
 {
-    public class ShoppingCartDbInitializer : DropCreateDatabaseAlways<ShoppingCartDbContext>
+    public class ShoppingCartDbInitializer : DropCreateDatabaseIfModelChanges<ShoppingCartDbContext>
     {
         protected override void Seed(ShoppingCartDbContext context)
         {

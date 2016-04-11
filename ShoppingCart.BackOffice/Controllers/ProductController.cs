@@ -16,12 +16,17 @@ namespace ShoppingCart.BackOffice.Controllers
         private IGenericRepository<Product> ProductRepository { get; }
         private IGenericRepository<Category> CategoryRepository { get; }
         private IGenericRepository<Image> ImageRepository { get; }
+        private IGenericRepository<Provider> ProviderRepository { get; set; }
 
-        public ProductController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository, IGenericRepository<Image> imageRepository)
+        public ProductController(IGenericRepository<Product> productRepository,
+                                 IGenericRepository<Category> categoryRepository,
+                                 IGenericRepository<Image> imageRepository,
+                                 IGenericRepository<Provider> providerRepository)
         {
             ProductRepository = productRepository;
             CategoryRepository = categoryRepository;
             ImageRepository = imageRepository;
+            ProviderRepository = providerRepository;
             ProductRepository.AddNavigationProperty(p => p.Category);
             ProductRepository.AddNavigationProperty(img => img.Image);
         }
@@ -67,6 +72,21 @@ namespace ShoppingCart.BackOffice.Controllers
         // GET: Product/Create
         public ActionResult Create()
         {
+            var providersList = new List<SelectListItem>();
+
+            var allProviders = ProviderRepository.GetAll();
+
+            foreach (var provider in allProviders)
+            {
+                providersList.Add(new SelectListItem
+                {
+                    Value = provider.Id.ToString(),
+                    Text = provider.Name
+                });
+            }
+
+            ViewBag.ProvidersList = providersList;
+
             CreateViewModels createVM = new CreateViewModels
             {
                 CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
@@ -125,7 +145,19 @@ namespace ShoppingCart.BackOffice.Controllers
                     }
                     createViewModels.Product.ImageId = img_default.Id;
                 }
-                
+
+                var providers = new List<Provider>();
+
+                foreach (var provider in createViewModels.Providers)
+                {
+                    var p = ProviderRepository.GetSingle(x => x.Id.Equals(new Guid(provider)));
+                    if (p.Products == null)
+                        p.Products = new List<Product>();
+                    p.Products.Add(createViewModels.Product);
+                    providers.Add(p);
+                }
+                createViewModels.Product.Providers = providers;
+
                 ProductRepository.Add(createViewModels.Product);
                 return RedirectToAction("Index");
             }
@@ -153,6 +185,21 @@ namespace ShoppingCart.BackOffice.Controllers
                 Product = product,
                 CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
             };
+            var providersList = new List<SelectListItem>();
+
+            var allProviders = ProviderRepository.GetAll();
+
+            foreach (var provider in allProviders)
+            {
+                providersList.Add(new SelectListItem
+                {
+                    Value = provider.Id.ToString(),
+                    Text = provider.Name
+                });
+            }
+
+            ViewBag.ProvidersList = providersList;
+
             return View(createVM);
         }
 

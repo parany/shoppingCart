@@ -12,9 +12,15 @@
     <h4 style="margin-bottom:20px;">There are few sections to manage here:</h4>
     <hr />
     <div class="panel panel-default">
-        <div class="panel-heading">Products</div>
+        <div class="panel-heading">Product Purchase</div>
         <div class="panel-body">
-            For viewing about Products, find our @Html.ActionLink("Product List", "Index", "Product", null, new { @class = "btn btn-default" })
+            For product purchase @Html.ActionLink("Buy product", "Index", "Buy", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Products in Stock</div>
+        <div class="panel-body">
+            For viewing about Products, find our @Html.ActionLink("Product List", "Index", "Product", null, new { @class = "btn btn-primary" })
         </div>
     </div>
     <div class="panel panel-success">

@@ -1,6 +1,7 @@
 ﻿using ShoppingCart.BackOffice.ViewsModels;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
+using ShoppingCart.Models.Repositories.Concrete;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,12 +14,12 @@ namespace ShoppingCart.BackOffice.Controllers
     [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
-        private IGenericRepository<Product> ProductRepository { get; }
+        private ProductRepository ProductRepository { get; }
         private IGenericRepository<Category> CategoryRepository { get; }
         private IGenericRepository<Image> ImageRepository { get; }
         private IGenericRepository<Provider> ProviderRepository { get; set; }
 
-        public ProductController(IGenericRepository<Product> productRepository,
+        public ProductController(ProductRepository productRepository,
                                  IGenericRepository<Category> categoryRepository,
                                  IGenericRepository<Image> imageRepository,
                                  IGenericRepository<Provider> providerRepository)
@@ -146,17 +147,19 @@ namespace ShoppingCart.BackOffice.Controllers
                     createViewModels.Product.ImageId = img_default.Id;
                 }
 
-                var providers = new List<Provider>();
-
-                foreach (var provider in createViewModels.Providers)
+                if (createViewModels.Providers != null)
                 {
-                    var p = ProviderRepository.GetSingle(x => x.Id.Equals(new Guid(provider)));
-                    if (p.Products == null)
-                        p.Products = new List<Product>();
-                    p.Products.Add(createViewModels.Product);
-                    providers.Add(p);
+                    var providers = new List<Provider>();
+                    foreach (var provider in createViewModels.Providers)
+                    {
+                        var p = ProviderRepository.GetSingle(x => x.Id.Equals(new Guid(provider)));
+                        if (p.Products == null)
+                            p.Products = new List<Product>();
+                        p.Products.Add(createViewModels.Product);
+                        providers.Add(p);
+                    }
+                    createViewModels.Product.Providers = providers;
                 }
-                createViewModels.Product.Providers = providers;
 
                 ProductRepository.Add(createViewModels.Product);
                 return RedirectToAction("Index");

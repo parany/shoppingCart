@@ -36,6 +36,7 @@ namespace ShoppingCart.CommonController
             container.RegisterType<IGenericRepository<Category>, GenericRepository<Category>>();
             container.RegisterType<IGenericRepository<ShippingDetail>, GenericRepository<ShippingDetail>>();
             container.RegisterType<IGenericRepository<Provider>, GenericRepository<Provider>>();
+            container.RegisterType<ProductRepository, ProductRepository>();
 
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
             container.RegisterType<DbContext, ShoppingCartDbContext>(new HierarchicalLifetimeManager());

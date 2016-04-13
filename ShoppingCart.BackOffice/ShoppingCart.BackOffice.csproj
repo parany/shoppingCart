@@ -148,7 +148,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuyController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProvidersController.cs" />
@@ -177,6 +179,8 @@
     <Content Include="App_Data\payment.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\image\cheque.png" />
+    <Content Include="Content\image\logo_MVOLA.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -249,6 +253,15 @@
     <Content Include="Views\Providers\Edit.cshtml" />
     <Content Include="Views\Providers\Index.cshtml" />
     <Content Include="Views\Buy\Index.cshtml" />
+    <Content Include="Views\Buy\Details.cshtml" />
+    <Content Include="Views\Carts\AddToCart.cshtml" />
+    <Content Include="Views\Carts\Index.cshtml" />
+    <Content Include="Views\Carts\Summary.cshtml" />
+    <Content Include="Views\Checkout\Index.cshtml" />
+    <Content Include="Views\Checkout\Order.cshtml" />
+    <Content Include="Views\Payment\_Check.cshtml" />
+    <Content Include="Views\Payment\_Mvola.cshtml" />
+    <Content Include="Views\Payment\_PaymentCash.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

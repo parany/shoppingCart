@@ -8,6 +8,7 @@ using System.IO;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
@@ -29,6 +30,7 @@ namespace ShoppingCart.BackOffice.Controllers
             ImageRepository = imageRepository;
             ProviderRepository = providerRepository;
             ProductRepository.AddNavigationProperty(p => p.Category);
+            ProductRepository.AddNavigationProperties(p => p.Providers);
             ProductRepository.AddNavigationProperty(img => img.Image);
         }
 
@@ -146,10 +148,9 @@ namespace ShoppingCart.BackOffice.Controllers
                     }
                     createViewModels.Product.ImageId = img_default.Id;
                 }
-
+                var providers = new List<Provider>();
                 if (createViewModels.Providers != null)
                 {
-                    var providers = new List<Provider>();
                     foreach (var provider in createViewModels.Providers)
                     {
                         var p = ProviderRepository.GetSingle(x => x.Id.Equals(new Guid(provider)));
@@ -158,9 +159,8 @@ namespace ShoppingCart.BackOffice.Controllers
                         p.Products.Add(createViewModels.Product);
                         providers.Add(p);
                     }
-                    createViewModels.Product.Providers = providers;
                 }
-
+                createViewModels.Product.Providers = providers;
                 ProductRepository.Add(createViewModels.Product);
                 return RedirectToAction("Index");
             }
@@ -186,7 +186,8 @@ namespace ShoppingCart.BackOffice.Controllers
             CreateViewModels createVM = new CreateViewModels
             {
                 Product = product,
-                CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
+                CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name"),
+                Providers = product.Providers.Select(x => x.Id.ToString()).ToArray()
             };
             var providersList = new List<SelectListItem>();
 
@@ -197,7 +198,8 @@ namespace ShoppingCart.BackOffice.Controllers
                 providersList.Add(new SelectListItem
                 {
                     Value = provider.Id.ToString(),
-                    Text = provider.Name
+                    Text = provider.Name,
+                    Selected = createVM.Providers.Any(provider.Id.ToString().Contains)
                 });
             }
 
@@ -215,6 +217,19 @@ namespace ShoppingCart.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
+                var providers = new List<Provider>();
+                if (createViewModels.Providers != null)
+                {
+                    foreach (var provider in createViewModels.Providers)
+                    {
+                        var p = ProviderRepository.GetSingle(x => x.Id.Equals(new Guid(provider)));
+                        if (p.Products == null)
+                            p.Products = new List<Product>();
+                        p.Products.Add(createViewModels.Product);
+                        providers.Add(p);
+                    }
+                }
+                createViewModels.Product.Providers = providers;
                 ProductRepository.Update(createViewModels.Product);
                 return RedirectToAction("Index");
             }

@@ -1,28 +1,36 @@
 ﻿using ShoppingCart.BackOffice.ViewsModels;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
+using ShoppingCart.Models.Repositories.Concrete;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
-        private IGenericRepository<Product> ProductRepository { get; }
+        private ProductRepository ProductRepository { get; }
         private IGenericRepository<Category> CategoryRepository { get; }
         private IGenericRepository<Image> ImageRepository { get; }
+        private IGenericRepository<Provider> ProviderRepository { get; set; }
 
-        public ProductController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository, IGenericRepository<Image> imageRepository)
+        public ProductController(ProductRepository productRepository,
+                                 IGenericRepository<Category> categoryRepository,
+                                 IGenericRepository<Image> imageRepository,
+                                 IGenericRepository<Provider> providerRepository)
         {
             ProductRepository = productRepository;
             CategoryRepository = categoryRepository;
             ImageRepository = imageRepository;
+            ProviderRepository = providerRepository;
             ProductRepository.AddNavigationProperty(p => p.Category);
+            ProductRepository.AddNavigationProperties(p => p.Providers);
             ProductRepository.AddNavigationProperty(img => img.Image);
         }
 
@@ -67,6 +75,21 @@ namespace ShoppingCart.BackOffice.Controllers
         // GET: Product/Create
         public ActionResult Create()
         {
+            var providersList = new List<SelectListItem>();
+
+            var allProviders = ProviderRepository.GetAll();
+
+            foreach (var provider in allProviders)
+            {
+                providersList.Add(new SelectListItem
+                {
+                    Value = provider.Id.ToString(),
+                    Text = provider.Name
+                });
+            }
+
+            ViewBag.ProvidersList = providersList;
+
             CreateViewModels createVM = new CreateViewModels
             {
                 CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
@@ -125,7 +148,19 @@ namespace ShoppingCart.BackOffice.Controllers
                     }
                     createViewModels.Product.ImageId = img_default.Id;
                 }
-                
+                var providers = new List<Provider>();
+                if (createViewModels.Providers != null)
+                {
+                    foreach (var provider in createViewModels.Providers)
+                    {
+                        var p = ProviderRepository.GetSingle(x => x.Id.Equals(new Guid(provider)));
+                        if (p.Products == null)
+                            p.Products = new List<Product>();
+                        p.Products.Add(createViewModels.Product);
+                        providers.Add(p);
+                    }
+                }
+                createViewModels.Product.Providers = providers;
                 ProductRepository.Add(createViewModels.Product);
                 return RedirectToAction("Index");
             }
@@ -151,8 +186,25 @@ namespace ShoppingCart.BackOffice.Controllers
             CreateViewModels createVM = new CreateViewModels
             {
                 Product = product,
-                CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
+                CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name"),
+                Providers = product.Providers.Select(x => x.Id.ToString()).ToArray()
             };
+            var providersList = new List<SelectListItem>();
+
+            var allProviders = ProviderRepository.GetAll();
+
+            foreach (var provider in allProviders)
+            {
+                providersList.Add(new SelectListItem
+                {
+                    Value = provider.Id.ToString(),
+                    Text = provider.Name,
+                    Selected = createVM.Providers.Any(provider.Id.ToString().Contains)
+                });
+            }
+
+            ViewBag.ProvidersList = providersList;
+
             return View(createVM);
         }
 
@@ -165,6 +217,19 @@ namespace ShoppingCart.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
+                var providers = new List<Provider>();
+                if (createViewModels.Providers != null)
+                {
+                    foreach (var provider in createViewModels.Providers)
+                    {
+                        var p = ProviderRepository.GetSingle(x => x.Id.Equals(new Guid(provider)));
+                        if (p.Products == null)
+                            p.Products = new List<Product>();
+                        p.Products.Add(createViewModels.Product);
+                        providers.Add(p);
+                    }
+                }
+                createViewModels.Product.Providers = providers;
                 ProductRepository.Update(createViewModels.Product);
                 return RedirectToAction("Index");
             }

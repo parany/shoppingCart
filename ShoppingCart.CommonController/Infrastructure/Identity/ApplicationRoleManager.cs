@@ -9,13 +9,14 @@ using ShoppingCart.Models.Models.User;
 
 namespace ShoppingCart.CommonController.Infrastructure.Identity
 {
-    public class ApplicationRoleManager : RoleManager<ApplicationRole>, IDisposable
+    public class ApplicationRoleManager : RoleManager<ApplicationRole>
     {
-        public ApplicationRoleManager(RoleStore<ApplicationRole> store) : base(store) {
+        public ApplicationRoleManager(IRoleStore<ApplicationRole, string> store) : base(store) {
         }
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
-            return new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<ShoppingCartDbContext>()));
+            var roleStore = new RoleStore<ApplicationRole>(context.Get<ShoppingCartDbContext>());
+            return new ApplicationRoleManager(roleStore);
         }
     }
 }

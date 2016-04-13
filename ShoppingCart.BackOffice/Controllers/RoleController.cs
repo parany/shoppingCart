@@ -10,19 +10,55 @@ using System.Web.Mvc;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.BackOffice.ViewsModels;
 using ShoppingCart.CommonController.Infrastructure.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.ObjectModel;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
-        private ApplicationUserManager UserManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); } }
-        private ApplicationRoleManager RoleManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>(); } }
+
+        private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
+
+        public RoleController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
+        {
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
+
+        public ApplicationUserManager UserManager {
+            get {
+                return this._userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+        }
+        public ApplicationRoleManager RoleManager {
+            get {
+                return this._roleManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+        }
 
         // GET: Role
         public ActionResult Index()
         {
-            return View(RoleManager.Roles);
+            IEnumerable<ApplicationRole> roles = RoleManager.Roles.ToList();
+            var model = new Collection<RoleIndexModel>();
+
+            foreach (var role in roles)
+            {
+                var users = UserManager.Users.Where(x => x.Roles.Select(r => r.RoleId).Contains(role.Id)).ToList();
+                var usersCollection = new Collection<ApplicationUser>();
+
+                foreach (var user in users)
+                {
+                    var userTemp = UserManager.FindById(user.Id);
+                    usersCollection.Add(userTemp);
+                }
+
+                model.Add(new RoleIndexModel { Role = role, Users = usersCollection });
+            }
+            return View(model);
         }
 
         public ActionResult Create()
@@ -35,8 +71,7 @@ namespace ShoppingCart.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result
-                = await RoleManager.CreateAsync(new ApplicationRole(name));
+                IdentityResult result = await RoleManager.CreateAsync(new ApplicationRole(name));
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -84,7 +119,7 @@ namespace ShoppingCart.BackOffice.Controllers
                         return View("Error", result.Errors);
                     }
                 }
-                return RedirectToAction("Index","Role");
+                return RedirectToAction("Index");
             }
             return View("Error", new string[] { "Role Not Found" });
         }

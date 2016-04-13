@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class ProductController : Controller
     {
         private ProductRepository ProductRepository { get; }

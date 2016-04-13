@@ -1,6 +1,4 @@
-﻿@using ShoppingCart.Models.Models.User
-@using ShoppingCart.BackOffice.Infrastructure
-@using ShoppingCart.BackOffice.ViewsModels
+﻿@using ShoppingCart.BackOffice.ViewsModels
 @model ICollection<RoleIndexModel>
 @{ 
     ViewBag.Title = "Roles"; 
@@ -10,33 +8,50 @@
 <p style="margin-bottom:10px;">
     @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
 </p>
-    <table class="table">
-        <tr><th>ID</th><th>Name</th><th>Users</th><th></th></tr>
+    <table class="table table-responsive">
+        <tr><th>Name</th><th>Description</th><th>User Count</th><th>Users in Role</th><th></th></tr>
         @if (Model.Count == 0)
         {
             <tr><td colspan="4" class="text-center">No Roles</td></tr>
         }
-        else {
+        else
+        {
             foreach (RoleIndexModel vm in Model)
             {
                 <tr>
-                    <td>@vm.Role.Id</td>
                     <td>@vm.Role.Name</td>
+                    <td>@vm.Role.Description</td>
+                    <td>
+                        @vm.Users.Count
+                    </td>
                     <td>
                         @if (vm.Users.Count == 0)
                         {
                             @: No Users in Role
 }
-                        else {
+                        else
+                        {
+                            string names = "";
                             <p>
-                                @string.Join(", ", vm.Users.Select(x => Html.GetUserName(x.Id)))
-                        </p>
+                                @for (int i = 0; i < vm.Users.Count; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        names += "" + vm.Users[i].UserName;
+                                    }
+                                    else
+                                    {
+                                        names += ", " + vm.Users[i].UserName;
+                                    }
+                                }
+                                @names
+                            </p>
                         }
                     </td>
                     <td>
                         @using (Html.BeginForm("Delete", "Role", new { id = vm.Role.Id }))
                         {
-                            @Html.ActionLink("Edit", "Edit", "Role", new { id = vm.Role.Id }, new { @class = "btn btn-primary btn-xs" })
+                            @Html.ActionLink("Edit", "Edit", "Role", new { id = vm.Role.Id }, new { @class = "btn btn-success btn-xs" })
                             <button class="btn btn-danger btn-xs"
                                     type="submit">
                                 Delete
@@ -44,7 +59,7 @@
                         }
                     </td>
                 </tr>
-            }
-        }
+    }
+}
     </table>
 

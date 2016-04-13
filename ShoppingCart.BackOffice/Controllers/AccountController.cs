@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace ShoppingCart.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class AccountController : BasicAccountController
     {
     }

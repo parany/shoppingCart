@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class UserController : Controller
     {
 

@@ -15,7 +15,7 @@ using System.Collections.ObjectModel;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class RoleController : Controller
     {
 
@@ -67,11 +67,13 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([Required]string name)
+        public async Task<ActionResult> Create(RoleCreateModel roleCreateModel)
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result = await RoleManager.CreateAsync(new ApplicationRole(name));
+                ApplicationRole role = new ApplicationRole(roleCreateModel.Name);
+                role.Description = roleCreateModel.Description;
+                IdentityResult result = await RoleManager.CreateAsync(role);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -80,7 +82,7 @@ namespace ShoppingCart.BackOffice.Controllers
                     AddErrorsFromResult(result);
                 }
             }
-            return View(name);
+            return View(roleCreateModel);
         }
 
         public async Task<ActionResult> Edit(string id)

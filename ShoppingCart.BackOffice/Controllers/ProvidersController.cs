@@ -11,7 +11,7 @@ using ShoppingCart.BackOffice.ViewsModels.Provider;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class ProvidersController : Controller
     {
         private IGenericRepository<Provider> ProviderRepository { get; set; }

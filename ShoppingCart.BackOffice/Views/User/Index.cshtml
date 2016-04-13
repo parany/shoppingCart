@@ -8,9 +8,8 @@
 <p style="margin-bottom:10px;">
     @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
 </p>
-     <table class="table">
+     <table class="table table-responsive">
          <tr>
-             <th>Id</th>
              <th>Username</th>
              <th>Email</th>
              <th>Address</th>
@@ -25,7 +24,6 @@
             foreach (ApplicationUser user in Model)
             {
                 <tr>
-                    <td>@user.Id</td>
                     <td>@user.UserName</td>
                     <td>@user.Email</td>
                     <td>@user.Address</td>

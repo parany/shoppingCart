@@ -5,7 +5,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShoppingCart.BackOffice.ViewsModels
 {
-    public class RoleEditModel
+        public class RoleCreateModel
+        {
+            [Required]
+            public string Name { get; set; }
+            public string Description { get; set; }
+        }
+        public class RoleEditModel
         {
             public ApplicationRole Role { get; set; }
             public IEnumerable<ApplicationUser> Members { get; set; }

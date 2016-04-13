@@ -5,11 +5,13 @@
 }
 
 <h2>Editing @Model.Role.Name Role</h2>
+<h4>@Model.Role.Description</h4>
 
 @Html.ValidationSummary()
 @using (Html.BeginForm())
 {
     <input type="hidden" name="roleName" value="@Model.Role.Name" />
+
     <div class="panel panel-warning">
         <div class="panel-heading">Add To @Model.Role.Name</div>
         <table class="table">
@@ -18,7 +20,7 @@
                 <tr><td colspan="2">All Users Are Members</td></tr>
             }
             else {
-                <tr><td><strong>User ID</strong></td><td><strong>Add To Role</strong></td></tr>
+                <tr><td><strong>UserName</strong></td><td><strong>Add To Role</strong></td></tr>
                 foreach (ApplicationUser user in Model.NonMembers)
                 {
                     <tr>
@@ -39,7 +41,7 @@
                 <tr><td colspan="2">No Users Are Members</td></tr>
             }
             else {
-                <tr><td><strong>User ID</strong></td><td><strong>Remove From Role</strong></td></tr>
+                <tr><td><strong>UserName</strong></td><td><strong>Remove From Role</strong></td></tr>
                 foreach (ApplicationUser user in Model.Members)
                 {
                     <tr>

@@ -9,7 +9,7 @@ using ShoppingCart.GeneralLib.CustomAttributs;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class CartController : Controller
     {
         private IGenericRepository<Cart> CartRepository;

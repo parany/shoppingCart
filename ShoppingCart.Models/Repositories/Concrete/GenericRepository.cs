@@ -12,7 +12,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
     {
        
         public List<Expression<Func<T, object>>> NavigationProperties;
-        private List<Expression<Func<T, object>>> _ignoreProperties;
+        protected List<Expression<Func<T, object>>> _ignoreProperties;
         public PagingSettings PagingSettings;
         public Func<IQueryable<T>, IOrderedQueryable<T>> OrderBy;
 

@@ -37,35 +37,23 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Product.DateCreated)
+            @Html.DisplayNameFor(model => model.Product.Providers)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Product.DateCreated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.DateModified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product.DateModified)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.CreatedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product.CreatedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.ModifiedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product.ModifiedBy)
+            @if (Model.Product.Providers.Count() != 0)
+            {
+                <ul>
+                    @foreach (var provider in Model.Product.Providers)
+                    {
+                        <li>@provider.Name</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <text>No provider selected.</text>
+            }
         </dd>
 
         <dt>

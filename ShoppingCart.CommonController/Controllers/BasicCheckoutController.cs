@@ -24,8 +24,8 @@ namespace ShoppingCart.Controllers
         private IGenericRepository<CartLine> _CartLineRepository { get; set; }
         private IGenericRepository<ShippingDetail> _ShippingRepository { get; set; }
 
-        private ApplicationUser CurrentUser{ get{ return UserManager.FindByName(HttpContext.User.Identity.Name);}}
-        private ApplicationUserManager UserManager{get{return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();}}
+        private ApplicationUser CurrentUser { get { return UserManager.FindByName(HttpContext.User.Identity.Name); } }
+        private ApplicationUserManager UserManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); } }
 
         private ApplicationRoleManager RoleManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>(); } }
         public BasicCheckoutController(IGenericRepository<Cart> cartRepo,
@@ -110,7 +110,7 @@ namespace ShoppingCart.Controllers
                     PaymentMethod = cartDto.PaymentsMethod,
                     State = ShippingState.Pending,
                     TransactionType = cartDto.TransactionType
-            };
+                };
                 _CartRepository.Add(cart);
 
                 // Creating new cartline for each line in the cart and adding to cart in persistence
@@ -139,7 +139,11 @@ namespace ShoppingCart.Controllers
                     Product productToModify = _ProductRepository.GetSingle(x => x.Id == c.Product.Id);
                     if (productToModify.Quantity >= c.Quantity)
                     {
-                        productToModify.Quantity -= c.Quantity;
+                        if (cartDto.TransactionType == StansactionType.Selling)
+                            productToModify.Quantity -= c.Quantity;
+                        if (cartDto.TransactionType == StansactionType.Buying)
+                            productToModify.Quantity += c.Quantity;
+
                         _ProductRepository.Update(productToModify);
                     }
                     else
@@ -163,7 +167,7 @@ namespace ShoppingCart.Controllers
             }
             else
             {
-                return RedirectToAction("Index","Checkout", cartDto);
+                return RedirectToAction("Index", "Checkout", cartDto);
             }
         }
 

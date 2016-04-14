@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -10,7 +9,6 @@ using System.Web.Mvc;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.BackOffice.ViewsModels;
 using ShoppingCart.CommonController.Infrastructure.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.ObjectModel;
 
 namespace ShoppingCart.BackOffice.Controllers

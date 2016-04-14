@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using ShoppingCart.BackOffice.ViewsModels;
-using ShoppingCart.CommonController.Infrastructure.Identity;
-using ShoppingCart.Models.Models.User;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+
+using ShoppingCart.BackOffice.ViewsModels;
+using ShoppingCart.CommonController.Infrastructure.Identity;
+using ShoppingCart.Models.Models.User;
 
 namespace ShoppingCart.BackOffice.Controllers
 {

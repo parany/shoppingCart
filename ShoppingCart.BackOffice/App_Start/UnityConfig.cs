@@ -1,7 +1,4 @@
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
-using System.Data.Entity;
 using System.Web.Mvc;
 using Unity.Mvc5;
 

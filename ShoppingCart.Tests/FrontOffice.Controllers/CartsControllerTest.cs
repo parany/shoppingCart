@@ -1,11 +1,13 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ShoppingCart.Models.Models.Entities;
+﻿using Moq;
+using System;
 using System.Linq;
-using Moq;
+using System.Web.Mvc;
+using ShoppingCart.Models.Models.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Controllers;
-using System.Web.Mvc;
+using ShoppingCart.CommonController.ViewModels;
 
 namespace ShoppingCart.Tests.FrontOffice.Controllers
 {

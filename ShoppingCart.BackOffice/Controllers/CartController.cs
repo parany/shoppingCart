@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.BackOffice.ViewsModels;
@@ -9,7 +10,7 @@ using ShoppingCart.GeneralLib.CustomAttributs;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class CartController : Controller
     {
         private IGenericRepository<Cart> CartRepository;

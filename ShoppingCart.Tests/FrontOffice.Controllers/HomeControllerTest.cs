@@ -14,7 +14,7 @@ namespace ShoppingCart.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController(new GenericRepository<Product>());
+            HomeController controller = new HomeController();
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -27,7 +27,7 @@ namespace ShoppingCart.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController(new GenericRepository<Product>());
+            HomeController controller = new HomeController();
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

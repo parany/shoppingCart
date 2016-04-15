@@ -3,6 +3,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
 using ShoppingCart.Models.Models.Initializer;
+using ShoppingCart.CommonController.Infrastructure.Binders;
+using ShoppingCart.CommonController.ViewModels;
 
 namespace ShoppingCart.BackOffice
 {
@@ -17,6 +19,7 @@ namespace ShoppingCart.BackOffice
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             UnityConfig.RegisterComponents();
             CommonController.UnityConfig.RegisterComponents();
+            ModelBinders.Binders.Add(typeof(CartViewModel), new CartModelBinder());
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Net;
 using System.Web.Mvc;
+
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
         private IGenericRepository<Category> CategoryRepository { get; }

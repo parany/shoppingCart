@@ -80,6 +80,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ShoppingCart.CommonController\ShoppingCart.CommonController.csproj">
+      <Project>{3FB884B2-266E-4D69-9FDC-F6D14540848B}</Project>
+      <Name>ShoppingCart.CommonController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShoppingCart.Models\ShoppingCart.Models.csproj">
       <Project>{19913b66-6b27-4fd9-a9fc-64133aa21aa4}</Project>
       <Name>ShoppingCart.Models</Name>

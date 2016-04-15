@@ -5,52 +5,63 @@
 }
 
 <h2>Editing @Model.Role.Name Role</h2>
-
+<h4>@Model.Role.Description</h4>
+<hr />
 @Html.ValidationSummary()
 @using (Html.BeginForm())
 {
     <input type="hidden" name="roleName" value="@Model.Role.Name" />
-    <div class="panel panel-warning">
-        <div class="panel-heading">Add To @Model.Role.Name</div>
-        <table class="table">
-            @if (Model.NonMembers.Count() == 0)
-            {
-                <tr><td colspan="2">All Users Are Members</td></tr>
-            }
-            else {
-                <tr><td><strong>User ID</strong></td><td><strong>Add To Role</strong></td></tr>
-                foreach (ApplicationUser user in Model.NonMembers)
+    <div class="row">
+        <div class="panel panel-warning col-md-5 col-lg-5">
+            <div class="panel-heading">Users not in @Model.Role.Name Role</div>
+            <table class="table">
+                @if (Model.NonMembers.Count() == 0)
+                {
+                    <tr><td colspan="2">All Users Are Members</td></tr>
+                }
+                else
                 {
                     <tr>
-                        <td>@user.UserName</td>
-                        <td>
-                            <input type="checkbox" name="IdsToAdd" value="@user.Id">
-                        </td>
+                        <td><strong>Username</strong></td>
+                        <td><strong>Add To Role</strong></td>
                     </tr>
+                    foreach (ApplicationUser user in Model.NonMembers)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>
+                                <input type="checkbox" name="IdsToAdd" value="@user.Id">
+                            </td>
+                        </tr>
+                    }
                 }
-            }
-        </table>
-    </div>
-    <div class="panel panel-warning">
-        <div class="panel-heading">Remove from @Model.Role.Name</div>
-        <table class="table">
-            @if (Model.Members.Count() == 0)
-            {
-                <tr><td colspan="2">No Users Are Members</td></tr>
-            }
-            else {
-                <tr><td><strong>User ID</strong></td><td><strong>Remove From Role</strong></td></tr>
-                foreach (ApplicationUser user in Model.Members)
+            </table>
+        </div>
+        <div class="panel panel-warning col-md-6 col-md-offset-1 col-lg-6 col-lg-offset-1">
+            <div class="panel-heading">Users in @Model.Role.Name Role</div>
+            <table class="table">
+                @if (Model.Members.Count() == 0)
+                {
+                    <tr><td colspan="2">No Users Are Members</td></tr>
+                }
+                else
                 {
                     <tr>
-                        <td>@user.UserName</td>
-                        <td>
-                            <input type="checkbox" name="IdsToDelete" value="@user.Id">
-                        </td>
+                        <td><strong>Username</strong></td>
+                        <td><strong>Remove From Role</strong></td>
                     </tr>
+                    foreach (ApplicationUser user in Model.Members)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>
+                                <input type="checkbox" name="IdsToDelete" value="@user.Id">
+                            </td>
+                        </tr>
+                    }
                 }
-            }
-        </table>
+            </table>
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
     @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })

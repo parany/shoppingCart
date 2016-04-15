@@ -1,0 +1,11 @@
+﻿@model ShoppingCart.CommonController.ViewModels.CartViewModel
+
+    <span class="navbar-right">
+        @Html.ActionLink("View Cart", "Index", "Carts",
+        new { returnUrl = Request.Url.PathAndQuery },
+        new { @class = "btn btn-default navbar-btn" })
+    </span>
+    <span class="navbar-text navbar-right">
+        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" style="padding-right:5px;"></span>
+        <span style="padding-right:5px;">@Model.Lines.Sum(x => x.Quantity) item(s)</span>
+    </span>

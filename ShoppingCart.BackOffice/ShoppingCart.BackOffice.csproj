@@ -161,6 +161,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewsModels\Buy\ProductListAndStateViewModel.cs" />
+    <Compile Include="ViewsModels\Buy\ProductStateViewModel.cs" />
     <Compile Include="ViewsModels\Cart\ChangeStateViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartLineViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartsViewModel.cs" />

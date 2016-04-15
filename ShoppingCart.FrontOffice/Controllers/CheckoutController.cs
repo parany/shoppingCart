@@ -1,5 +1,6 @@
 ﻿using ShoppingCart.CommonController.Infrastructure.Abstract;
 using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Models.Repositories.Concrete;
 using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.Controllers
@@ -7,7 +8,7 @@ namespace ShoppingCart.Controllers
     public class CheckoutController : BasicCheckoutController
     {
         public CheckoutController(IGenericRepository<Cart> cartRepo
-                                , IGenericRepository<Product> productRepo, 
+                                , ProductRepository productRepo, 
                                 IGenericRepository<CartLine> cartlineRepo, 
                                 IGenericRepository<ShippingDetail> shipRepo, 
             

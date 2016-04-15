@@ -11,8 +11,8 @@ namespace ShoppingCart.CommonController.Controllers
 {
     public class BasicHomeController : Controller
     {
-        private IGenericRepository<Product> _ProductRepository;
-        private IGenericRepository<Category> _CategoryRepository;
+        protected IGenericRepository<Product> _ProductRepository;
+        protected IGenericRepository<Category> _CategoryRepository;
 
         public BasicHomeController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository)
         {
@@ -25,7 +25,7 @@ namespace ShoppingCart.CommonController.Controllers
         {
             IList<Product> products = _ProductRepository.GetAll();
             IList<Category> categories = _CategoryRepository.GetAll();
-            ProductsListViewModel viewModel = new ProductsListViewModel
+            ProductsListAndStateViewModel viewModel = new ProductsListAndStateViewModel
             {
                 Products = products
                              .OrderByDescending(p => p.DateCreated),
@@ -98,7 +98,7 @@ namespace ShoppingCart.CommonController.Controllers
 
         public virtual ActionResult List(string name = "", decimal price = 0, string category = "", int page = 1)
         {
-            ProductsListViewModel productsViewModel;
+            ProductsListAndStateViewModel productsViewModel;
             var products = _ProductRepository.GetList(p =>
                 (name != null && !name.Equals("") ? p.Name.Equals(name) : true)
                 && (category != null && !category.Equals("") ? p.Category.Name.Equals(category) : true)
@@ -107,7 +107,7 @@ namespace ShoppingCart.CommonController.Controllers
             var categories = _CategoryRepository.GetAll();
 
 
-            productsViewModel = new ProductsListViewModel
+            productsViewModel = new ProductsListAndStateViewModel
             {
                 Products = products,
                 Categories = categories

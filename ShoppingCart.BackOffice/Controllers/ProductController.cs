@@ -41,7 +41,7 @@ namespace ShoppingCart.BackOffice.Controllers
         {
             IList<ProductViewModel> products = new List<ProductViewModel>();
 
-            foreach (Product product in ProductRepository.GetAll())
+            foreach (Product product in ProductRepository.GetList(p => p.Type == ProductType.ForSale))
             {
                 products.Add(new ProductViewModel
                 {
@@ -108,7 +108,7 @@ namespace ShoppingCart.BackOffice.Controllers
             if (ModelState.IsValid)
             {
                 createViewModels.Product.Id = Guid.NewGuid();
-                
+
                 if (upload != null && upload.ContentLength > 0)
                 {
                     var path = Server.MapPath("~/Uploads/images/");

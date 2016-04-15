@@ -218,6 +218,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\BasicCartsController.cs" />
     <Compile Include="Controllers\BasicCheckoutController.cs" />
+    <Compile Include="Controllers\BasicWorkflowController.cs" />
     <Compile Include="Infrastructure\Abstract\IOrderProcessor.cs" />
     <Compile Include="Infrastructure\Binders\CartModelBinder.cs" />
     <Compile Include="Infrastructure\Email\EmailOrderProcessor.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="Meta_Entity\MetaProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Tools\XmlHandler.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
@@ -252,6 +254,7 @@
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Cart\CartCheckQuantityViewModel.cs" />
     <Compile Include="ViewModels\Cart\CartIndexViewModel.cs" />
+    <Compile Include="ViewModels\Cart\CartMovementViewModel.cs" />
     <Compile Include="ViewModels\Cart\CartViewModel.cs" />
     <Compile Include="ViewModels\Checkout\CheckoutDTO.cs" />
     <Compile Include="ViewModels\Home\ProductsListViewModel.cs" />

@@ -157,15 +157,11 @@ namespace ShoppingCart.Models.Models.Initializer
         private void InitializeIdentityForEF(ShoppingCartDbContext context)
         {
 
-            // Adding a default administrator access
-            var userMgr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var roleMgr = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(context));
-
             // Informations
             string roleAdminName = "Administrator";
             string roleAdminDesc = "These are the administrators who have all access in the system";
             string roleProviderName = "Provider";
-            string roleProviderDesc = "These are the providers who have supply product to the system";
+            string roleProviderDesc = "These are the providers who supply products to the system";
             string userAdminName = "Admin";
             string userAdminPassword = "Secret$1234";
             string userAdminEmail = "admin@example.com";
@@ -182,6 +178,10 @@ namespace ShoppingCart.Models.Models.Initializer
             string userAddress = "Village des jeux, Ankorondrano";
             string userPhoneNumber = "0323203232";
             bool emailConfirmed = true;
+
+            // Adding user and role manager
+            var userMgr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var roleMgr = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(context));
 
             // Create Role Admin if it does not exist
             if (!roleMgr.RoleExists(roleAdminName))

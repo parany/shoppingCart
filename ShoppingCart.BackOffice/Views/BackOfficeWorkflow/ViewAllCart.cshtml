@@ -1,0 +1,20 @@
+﻿@model ShoppingCart.BackOffice.ViewsModels.Workflow.DefaultWorkflowViewModel
+
+@{
+    ViewBag.Title = "ViewAllCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewAllCart</h2>
+
+@foreach (var c in Model.carts)
+{
+    <div>
+        <span>@c.User</span>
+        <span>@c.TransactionType.ToString()</span>
+        <span>@c.WorkflowStatus</span>
+    </div>
+}
+
+
+

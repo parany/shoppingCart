@@ -1,0 +1,75 @@
+@using ShoppingCart.Models.Models.Entities 
+@model ShoppingCart.BackOffice.ViewsModels.Workflow.OneCartViewModel 
+@{ ViewBag.Title = "CartPositionAndPossibilities"; Layout = "~/Views/Shared/_Layout.cshtml"; }
+<script>
+    var object = {
+        cartId: "@Model.Cart.Id",
+        state: "",
+        form: {}
+    }
+    
+    var redirect = "";
+</script>
+
+<div class="row">
+    <h2 style="text-align: center;">Cart Detail</h2>
+</div>
+<div class="row">
+    <a href="/backofficeworkflow/CartPositionAndPossibilities" class="btn btn-info" role="button">Back to list</a>
+</div>
+<div class="row">
+    <div class="md-col-6">
+        <h3>Cart</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="md-col-6">
+        <h3>User : </h3>
+    </div>
+    <div class="md-col-6">
+        <h3>the username </h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="md-col-12">
+        <h3>Items</h3>
+    </div>
+    @foreach (CartLine c in Model.Cart.CartLines) {
+    <div class="md-col-4">
+        <!--<h3>c.Product.Name </h3> -->
+    </div>
+    <div class="md-col-4">
+        @c.Quantity
+    </div>
+    }
+</div>
+
+@if(Model.Forms.Count > 1){
+
+<div> Current status Ongoing on: @Model.status</div>
+<div>
+    <p>Form</p>
+    @foreach (var f in Model.Forms) {
+        if(!f.label.Equals("#text")){
+            <p>@f.label : </p>
+            <input type="@f.type"/>
+        }
+         
+    }
+</div>
+<div>
+    <p>All options</p>
+    @foreach (var o in Model.Options) {
+        <div>
+            <a href="/BackOfficeWorkflow/MoveState?id=@Model.Cart.Id&&newState=@o.type" class="btn btn-info" role="button">@o.type</a>
+        </div>
+    }
+</div>
+}else{
+
+<div> Worflow finished</div>
+<div> Cart status @Model.status</div>
+
+}

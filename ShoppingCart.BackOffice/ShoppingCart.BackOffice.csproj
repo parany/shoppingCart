@@ -208,6 +208,7 @@
     <Content Include="Uploads\images\product_default_large.jpg" />
     <Content Include="Uploads\images\product_default_medium.jpg" />
     <Content Include="Uploads\images\product_default_thumbnail.jpg" />
+    <Content Include="BackOffice.cd" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

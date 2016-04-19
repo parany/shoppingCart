@@ -32,7 +32,7 @@ namespace ShoppingCart.BackOffice.Controllers
             IList<SampleViewModel.BoxContent> list = new List<SampleViewModel.BoxContent>();
             foreach (Cart c in carts)
             {
-                CartProcessTree _Xml = new CartProcessTree("e:/shop/workflow.xml");
+                CartProcessTree _Xml = new CartProcessTree("./workflow.xml");
 
                 list.Add(new SampleViewModel.BoxContent()
                 {

@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ShoppingCart.BackOffice.BundleConfig" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.FilterConfig" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.RouteConfig" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.UnityConfig" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\UnityConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.MvcApplication" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Startup" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Startup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Controllers.AccountController">
+    <Position X="3.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Controllers.BuyController">
+    <Position X="6.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\BuyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Controllers.CartController" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAIAAEAAA=</HashCode>
+      <FileName>Controllers\CartController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Controllers.CartsController">
+    <Position X="9" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\CartsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Controllers.CategoriesController" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAACAAAAAAAAAAAEAAEACAAEAAAAAACA=</HashCode>
+      <FileName>Controllers\CategoriesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Controllers.CheckoutController">
+    <Position X="0.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\CheckoutController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Controllers.HomeController" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Controllers.ProductController" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAQABAAAAAAAAAAgAAAEAAEACAAEAAAAAACA=</HashCode>
+      <FileName>Controllers\ProductController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Controllers.ProvidersController" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAABACCAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ProvidersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Controllers.RoleController" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABACAACAAAAAAAAAAAAAgAAEAAEACAAEAAEAAAAA=</HashCode>
+      <FileName>Controllers\RoleController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.Controllers.UserController" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAEAAEACAAEAAEAAAAA=</HashCode>
+      <FileName>Controllers\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.CartLineViewModel" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>ViewsModels\Cart\CartLineViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.CartsViewModel" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAAAAAAAAAAAAAAAAgAAAAAAAQAAQAEAAAAAAA=</HashCode>
+      <FileName>ViewsModels\Cart\CartsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.ChangeStateViewModel" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>ViewsModels\Cart\ChangeStateViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.ShippingDetailViewModel" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>ViewsModels\Cart\ShippingDetailViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.CreateViewModels" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACCAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewsModels\Product\CreateViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.ProductViewModel">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewsModels\Product\ProductViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.RoleCreateModel" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewsModels\Role\RoleViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.RoleEditModel">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>ViewsModels\Role\RoleViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.RoleModificationModel" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>ViewsModels\Role\RoleViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.RoleIndexModel" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewsModels\Role\RoleViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.CreateUserViewModel" Collapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAQAAAAAAAAAACAQAAAAAAIAA=</HashCode>
+      <FileName>ViewsModels\User\CreateUserViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.ViewModels.PagingInfo" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>ViewsModels\Product\PagingInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.ViewModels.ProductsListViewModel" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>ViewsModels\Product\ProductsListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.Provider.ProviderEditViewModel" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>ViewsModels\Provider\ProviderEditViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.BackOffice.ViewsModels.Provider.ProviderViewModel" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAAAAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>ViewsModels\Provider\ProviderViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.CommonController.FilterConfig" Collapsed="true">
+    <Position X="23.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.RouteConfig" Collapsed="true">
+    <Position X="23.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Startup" Collapsed="true">
+    <Position X="18.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.UnityConfig" Collapsed="true">
+    <Position X="20" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.MvcApplication" Collapsed="true">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Controllers.BasicAccountController">
+    <Position X="3.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Controllers.BasicHomeController">
+    <Position X="6.75" Y="8" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Controllers.BasicManageController" Collapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Controllers.BasicWorkflowController">
+    <Position X="11.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.Controllers.BasicCartsController">
+    <Position X="10.25" Y="8" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.Controllers.BasicCheckoutController">
+    <Position X="0.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Infrastructure.Binders.CartModelBinder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Infrastructure.Email.EmailOrderProcessor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Infrastructure.Email.EmailService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Infrastructure.Email.EmailSettings" Collapsed="true">
+    <Position X="16.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Infrastructure.Identity.ApplicationRoleManager" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Infrastructure.Identity.ApplicationSignInManager" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Infrastructure.Identity.ApplicationUserManager" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Infrastructure.Identity.OAuthSection" Collapsed="true">
+    <Position X="14.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Infrastructure.SMS.SmsService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Meta_Entity.MetaCategory" Collapsed="true">
+    <Position X="21.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Meta_Entity.MetaProduct" Collapsed="true">
+    <Position X="23.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.Tools.XmlHandler" Collapsed="true">
+    <Position X="13" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.ExternalLoginConfirmationViewModel" Collapsed="true">
+    <Position X="18.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.ExternalLoginListViewModel" Collapsed="true">
+    <Position X="20" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.ForgotPasswordViewModel" Collapsed="true">
+    <Position X="13" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.ForgotViewModel" Collapsed="true">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.LoginViewModel" Collapsed="true">
+    <Position X="18.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.RegisterViewModel" Collapsed="true">
+    <Position X="20" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.ResetPasswordViewModel" Collapsed="true">
+    <Position X="21.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.SendCodeViewModel" Collapsed="true">
+    <Position X="13" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.VerifyCodeViewModel" Collapsed="true">
+    <Position X="21.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.CartCheckQuantityViewModel" Collapsed="true">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.CartIndexViewModel" Collapsed="true">
+    <Position X="23.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.CartViewModel" Collapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.CartLineViewModel" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.CheckoutDTO" Collapsed="true">
+    <Position X="21.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.AddPhoneNumberViewModel" Collapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.ChangePasswordViewModel" Collapsed="true">
+    <Position X="20" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.ConfigureTwoFactorViewModel" Collapsed="true">
+    <Position X="23.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.FactorViewModel" Collapsed="true">
+    <Position X="21.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.IndexViewModel" Collapsed="true">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.ManageLoginsViewModel" Collapsed="true">
+    <Position X="20" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.SetPasswordViewModel" Collapsed="true">
+    <Position X="14.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.VerifyPhoneNumberViewModel" Collapsed="true">
+    <Position X="23.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.Cart.CartMovementViewModel" Collapsed="true">
+    <Position X="16.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.CommonController.ViewModels.Home.ProductsListViewModel" Collapsed="true">
+    <Position X="18.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShoppingCart.ViewModels.ProductDetailViewModel" Collapsed="true">
+    <Position X="16.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="ShoppingCart.CommonController.Infrastructure.Abstract.IOrderProcessor" Collapsed="true">
+    <Position X="13" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

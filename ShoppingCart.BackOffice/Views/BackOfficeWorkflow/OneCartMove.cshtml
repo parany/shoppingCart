@@ -50,22 +50,32 @@
 
 <div> Current status Ongoing on: @Model.status</div>
 <div>
-    <p>Form</p>
+    <form role="form">
     @foreach (var f in Model.Forms) {
-        if(!f.label.Equals("#text")){
-            <p>@f.label : </p>
-            <input type="@f.type"/>
-        }
-         
+        if(!f.label.Equals("#text")){    
+            <div class="form-group">
+                <label for="@f.label">@f.label :</label>
+                <input type="@f.type" class="form-control" id="@f.label">
+            </div>
+        } 
     }
+    </form>
 </div>
-<div>
-    <p>All options</p>
-    @foreach (var o in Model.Options) {
-        <div>
-            <a href="/BackOfficeWorkflow/MoveState?id=@Model.Cart.Id&&newState=@o.type" class="btn btn-info" role="button">@o.type</a>
-        </div>
-    }
+<div class="row">
+    <div class="col-md-4">
+        <h3>Next step: </h3>
+            @foreach (var o in Model.Options) {
+                    <a href="/BackOfficeWorkflow/MoveState?id=@Model.Cart.Id&&newState=@o.type" class="btn btn-info" role="button">@o.type</a>
+            }
+    </div>
+    
+    <div class="col-md-4">
+        <h3>Default actions : </h3>
+        <a href="/BackOfficeWorkflow/Reset?id=@Model.Cart.Id" class="btn btn-warning" role="button">Reset</a>
+        <a href="/BackOfficeWorkflow/Drop?id=@Model.Cart.Id" class="btn btn-danger" role="button">Drop</a>
+    </div>
+    
+    
 </div>
 }else{
 

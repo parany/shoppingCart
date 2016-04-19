@@ -11,21 +11,25 @@
 
 @foreach (var c in Model.boxes)
 {
-<div class="panel panel-default col-md-6">
-    <div class="panel-heading">
-        <span class="badge">#@c.Cart.Id.ToString().Substring(0, 8)</span>
+
+
+
+<div class="card">
+  <h3 class="card-header">#@c.Cart.Id.ToString().Substring(0, 8)</h3>
+  <div class="card-block">
+    <h4 class="card-title">
         <span class="glyphicon glyphicon-user"></span> @c.Cart.UserId.ToString().Substring(0, 8)
         <span class="glyphicon glyphicon-calendar"></span>
         @if (@c.Cart.DateCreated != null)
         {
             @c.Cart.DateCreated.ToString();
         }
-    </div>
-    <div class="panel-body">
-        <h2>Products: </h2>
-        <div>
-            <a href="/BackOfficeWorkflow/OneCartMove?id=@c.Cart.Id" class="btn btn-info" role="button">View Detail</a>
-        </div>
-    </div>
+    </h4>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="/BackOfficeWorkflow/OneCartMove?id=@c.Cart.Id" class="btn btn-info" role="button">View Detail</a>
+    <a href="/BackOfficeWorkflow/Reset?id=@c.Cart.Id" class="btn btn-warning" role="button">Reset</a>
+    <a href="/BackOfficeWorkflow/Drop?id=@c.Cart.Id" class="btn btn-danger" role="button">Drop</a>
+  </div>
 </div>
+
 }

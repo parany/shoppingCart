@@ -23,19 +23,7 @@ namespace ShoppingCart.BackOffice.Controllers
         {
             
         }
-
-        public ActionResult ViewAllCart()
-        {
-            IList<Cart> carts = _CartRepository.GetAll();
-
-            DefaultWorkflowViewModel model = new DefaultWorkflowViewModel()
-            {
-                carts = carts
-            };
-
-            return View(model);
-
-        }
+        
 
         public ActionResult CartPositionAndPossibilities()
         {
@@ -89,6 +77,31 @@ namespace ShoppingCart.BackOffice.Controllers
 
             return View(model);
         }
+
+        public ActionResult Reset(string id)
+        {
+            Guid Id = new Guid(id);
+            Cart carts = _CartRepository.GetSingle(c => c.Id == Id);
+            carts.WorkflowStatus = carts.TransactionType.ToString();
+            _CartRepository.Update(carts);
+            return RedirectToAction("OneCartMove", new RouteValueDictionary(
+                new
+                {
+                    controller = "BackOfficeWorkflow", action = "OneCartMove", id = id
+                }));
+        }
+
+        public ActionResult Drop(string id)
+        {
+            Guid Id = new Guid(id);
+            Cart cart = _CartRepository.GetSingle(c => c.Id == Id);
+            _CartRepository.Delete(cart);
+
+            return RedirectToAction("CartPositionAndPossibilities", "BackOfficeWorkflow");
+        }
+
+
+
 
     }
 }

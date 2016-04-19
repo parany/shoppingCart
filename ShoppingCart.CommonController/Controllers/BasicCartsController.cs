@@ -11,7 +11,7 @@ namespace ShoppingCart.Controllers
     public class BasicCartsController : Controller
     {
         private IGenericRepository<Product> _ProductRepository { get; set; }
-        private IGenericRepository<Cart> _CartRepository { get; set; }
+        public IGenericRepository<Cart> _CartRepository { get; set; }
         private IGenericRepository<ShippingDetail> _ShipRepository { get; set; }
         private IGenericRepository<CartLine> _CartLineRepository { get; set; }
 

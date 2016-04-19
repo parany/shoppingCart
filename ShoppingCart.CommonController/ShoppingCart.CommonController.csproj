@@ -242,6 +242,7 @@
     <Compile Include="Meta_Entity\MetaProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Tools\CartProcessTree.cs" />
     <Compile Include="Tools\XmlHandler.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />

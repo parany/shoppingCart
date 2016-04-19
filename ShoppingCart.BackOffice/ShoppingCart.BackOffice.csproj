@@ -103,6 +103,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.XML" />
     <Reference Include="Unity.Mvc5, Version=1.2.3.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Mvc5.1.2.3\lib\net45\Unity.Mvc5.dll</HintPath>
       <Private>True</Private>
@@ -146,6 +147,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BackOfficeWorkflowController.cs" />
     <Compile Include="Controllers\BuyController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
@@ -173,6 +175,9 @@
     <Compile Include="ViewsModels\Product\ProductViewModel.cs" />
     <Compile Include="ViewsModels\Role\RoleViewModel.cs" />
     <Compile Include="ViewsModels\Cart\ShippingDetailViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\DefaultWorkflowViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\OneCartViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\SampleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\payment.xml" />
@@ -186,7 +191,7 @@
     <Content Include="Content\site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="BackOffice.cd" />
+    <Content Include="Scripts\App\ShoppingCart.BackOffice.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -196,6 +201,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\mustache.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -262,6 +268,9 @@
     <Content Include="Views\Payment\_Check.cshtml" />
     <Content Include="Views\Payment\_Mvola.cshtml" />
     <Content Include="Views\Payment\_PaymentCash.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\ViewAllCart.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\CartPositionAndPossibilities.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\OneCartMove.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

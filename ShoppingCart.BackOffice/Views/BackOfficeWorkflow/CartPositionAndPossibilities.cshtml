@@ -1,6 +1,6 @@
 @model ShoppingCart.BackOffice.ViewsModels.Workflow.SampleViewModel
 @{
-    ViewBag.Title = "CartPositionAndPossibilities";
+    ViewBag.Title = "All carts";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
@@ -11,9 +11,6 @@
 
 @foreach (var c in Model.boxes)
 {
-
-
-
 <div class="card">
   <h3 class="card-header">#@c.Cart.Id.ToString().Substring(0, 8)</h3>
   <div class="card-block">
@@ -31,5 +28,4 @@
     <a href="/BackOfficeWorkflow/Drop?id=@c.Cart.Id" class="btn btn-danger" role="button">Drop</a>
   </div>
 </div>
-
 }

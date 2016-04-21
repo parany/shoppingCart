@@ -157,6 +157,8 @@ namespace ShoppingCart.Controllers
                 cart.State = ShippingState.Pending;
                 cart.DateModified = DateTime.Now;
                 cart.ModifiedBy = user.Id;
+                cart.WorkflowStatus = cart.TransactionType.ToString() + "/" + cart.State.ToString();
+                Console.WriteLine(cart.WorkflowStatus);
                 _CartRepository.Update(cart);
 
                 // Sending Email to Administrator

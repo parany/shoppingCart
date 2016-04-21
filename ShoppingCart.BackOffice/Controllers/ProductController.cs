@@ -109,46 +109,7 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 createViewModels.Product.Id = Guid.NewGuid();
 
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    var path = Server.MapPath("~/Uploads/images/");
-                    String imageName = "product_" + createViewModels.Product.Id.ToString();
-
-                    Image uploadImage = new Image
-                    {
-                        Id = Guid.NewGuid(),
-                        ImageName = imageName,
-                        ImageType = ".jpg"
-                    };
-
-                    uploadImage.ImageName = imageName;
-                    uploadImage.ImageType = Path.GetExtension(upload.FileName);
-
-                    //Define the versions to generate
-                    uploadImage.Versions.Add("_thumbnail", "maxwidth=100&maxheight=100&format=jpg");
-                    uploadImage.Versions.Add("_medium", "maxwidth=700&maxheight=700&format=jpg");
-                    uploadImage.Versions.Add("_large", "maxwidth=1200&maxheight=1200&format=jpg");
-
-                    uploadImage.SaveAs(path, upload);
-                    ImageRepository.Add(uploadImage);
-                    createViewModels.Product.ImageId = uploadImage.Id;
-                }
-                else
-                {
-                    Image img_default = ImageRepository.GetSingle(i => i.ImageName == "product_default");
-
-                    if (img_default == null)
-                    {
-                        img_default = new Image
-                        {
-                            Id = Guid.NewGuid(),
-                            ImageName = "product_default",
-                            ImageType = ".jpg"
-                        };
-                        ImageRepository.Add(img_default);
-                    }
-                    createViewModels.Product.ImageId = img_default.Id;
-                }
+                UploadImage(createViewModels, upload);
                 var providers = new List<Provider>();
                 if (createViewModels.Providers != null)
                 {
@@ -214,10 +175,11 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CreateViewModels createViewModels)
+        public ActionResult Edit(CreateViewModels createViewModels, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                UploadImage(createViewModels, upload);
                 var providers = new List<Provider>();
                 if (createViewModels.Providers != null)
                 {
@@ -248,6 +210,50 @@ namespace ShoppingCart.BackOffice.Controllers
             Product product = ProductRepository.GetSingle(p => p.Id == id);
             ProductRepository.Delete(product);
             return RedirectToAction("Index");
+        }
+
+        private void UploadImage(CreateViewModels cvm, HttpPostedFileBase upload)
+        {
+            if (upload != null && upload.ContentLength > 0)
+            {
+                var path = Server.MapPath("~/Uploads/images/");
+                String imageName = "product_" + cvm.Product.Id.ToString();
+
+                Image uploadImage = new Image
+                {
+                    Id = Guid.NewGuid(),
+                    ImageName = imageName,
+                    ImageType = ".jpg"
+                };
+
+                uploadImage.ImageName = imageName;
+                uploadImage.ImageType = Path.GetExtension(upload.FileName);
+
+                //Define the versions to generate
+                uploadImage.Versions.Add("_thumbnail", "maxwidth=100&maxheight=100&format=jpg");
+                uploadImage.Versions.Add("_medium", "maxwidth=700&maxheight=700&format=jpg");
+                uploadImage.Versions.Add("_large", "maxwidth=1200&maxheight=1200&format=jpg");
+
+                uploadImage.SaveAs(path, upload);
+                ImageRepository.Add(uploadImage);
+                cvm.Product.ImageId = uploadImage.Id;
+            }
+            else
+            {
+                Image img_default = ImageRepository.GetSingle(i => i.ImageName == "product_default");
+
+                if (img_default == null)
+                {
+                    img_default = new Image
+                    {
+                        Id = Guid.NewGuid(),
+                        ImageName = "product_default",
+                        ImageType = ".jpg"
+                    };
+                    ImageRepository.Add(img_default);
+                }
+                cvm.Product.ImageId = img_default.Id;
+            }
         }
     }
 }

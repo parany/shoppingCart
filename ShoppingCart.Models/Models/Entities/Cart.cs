@@ -39,6 +39,9 @@ namespace ShoppingCart.Models.Models.Entities
         public StansactionType TransactionType { get; set; }
         public DeliveryMethod DeliveryMethod { get; set; }
 
+        // workflow status
+        public string WorkflowStatus { get; set; }
+
         public Cart()
         {
             CartLines = new HashSet<CartLine>();

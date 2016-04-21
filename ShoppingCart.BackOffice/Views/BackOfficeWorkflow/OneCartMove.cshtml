@@ -1,6 +1,6 @@
 @using ShoppingCart.Models.Models.Entities 
 @model ShoppingCart.BackOffice.ViewsModels.Workflow.OneCartViewModel 
-@{ ViewBag.Title = "CartPositionAndPossibilities"; Layout = "~/Views/Shared/_Layout.cshtml"; }
+@{ ViewBag.Title = "Cart Detail"; Layout = "~/Views/Shared/_Layout.cshtml"; }
 <script>
     var object = {
         cartId: "@Model.Cart.Id",
@@ -12,17 +12,24 @@
 </script>
 
 <div class="row">
-    <h2 style="text-align: center;">Cart Detail</h2>
-</div>
-<div class="row">
-    <a href="/backofficeworkflow/CartPositionAndPossibilities" class="btn btn-info" role="button">Back to list</a>
-</div>
-<div class="row">
-    <div class="md-col-6">
-        <h3>Cart</h3>
+    <div class="row">
+        </br>
+    </div>
+    <div class="col-md-2" style="text-align: center;">
+        <a href="/backofficeworkflow/CartPositionAndPossibilities" class="btn btn-info" role="button">
+            <span class="glyphicon glyphicon-th-list"></span>
+            Back to list
+        </a>
+    </div>
+    <div class="col-md-10">
+        <h2 style="text-align: center;">Cart Detail</h2>
     </div>
 </div>
+<div class="row">
+    
+</div>
 
+<form role="form">
 <div class="row">
     <div class="md-col-6">
         <h3>User : </h3>
@@ -45,7 +52,7 @@
     </div>
     }
 </div>
-
+</form>
 @if(Model.Forms.Count > 1){
 
 <div> Current status Ongoing on: @Model.status</div>
@@ -81,5 +88,13 @@
 
 <div> Worflow finished</div>
 <div> Cart status @Model.status</div>
+<div class="row">
+    <div class="col-md-4">
+        <h3>Default actions : </h3>
+        <a href="/BackOfficeWorkflow/Reset?id=@Model.Cart.Id" class="btn btn-warning" role="button">Reset</a>
+        <a href="/BackOfficeWorkflow/Drop?id=@Model.Cart.Id" class="btn btn-danger" role="button">Drop</a>
+    </div>
+</div>
+
 
 }

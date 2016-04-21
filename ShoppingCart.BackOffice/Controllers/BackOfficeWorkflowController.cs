@@ -13,6 +13,7 @@ using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class BackOfficeWorkflowController : BasicCartsController
     {
         
@@ -32,7 +33,7 @@ namespace ShoppingCart.BackOffice.Controllers
             IList<SampleViewModel.BoxContent> list = new List<SampleViewModel.BoxContent>();
             foreach (Cart c in carts)
             {
-                CartProcessTree _Xml = new CartProcessTree("./workflow.xml");
+                CartProcessTree _Xml = new CartProcessTree("e:/shop/workflow.xml");
 
                 list.Add(new SampleViewModel.BoxContent()
                 {

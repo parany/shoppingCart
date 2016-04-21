@@ -14,5 +14,6 @@ namespace ShoppingCart.BackOffice.ViewsModels.Workflow
         public IList<CartProcessTree.NodeObject> Forms { get; set; }
 
         public string status { get; set; }
+        public IList<string> Evolution { get; set; } 
     }
 }

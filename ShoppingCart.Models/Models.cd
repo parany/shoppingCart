@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ShoppingCart.Models.Migrations.DbConfiguration">
-    <Position X="20.75" Y="1.25" Width="1.5" />
+    <Position X="22.75" Y="1.25" Width="1.5" />
     <NestedTypes>
       <Class Name="ShoppingCart.Models.Migrations.DbConfiguration.InMmemoryCache" Collapsed="true">
         <TypeIdentifier>
@@ -72,7 +72,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ShoppingCart.Models.Models.Initializer.ShoppingCartDbInitializer">
-    <Position X="20.75" Y="3" Width="1.5" />
+    <Position X="22.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAKAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Initializer\ShoppingCartDbInitializer.cs</FileName>
@@ -114,14 +114,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ShoppingCart.Models.Models.User.ApplicationRole">
-    <Position X="20.5" Y="6" Width="1.5" />
+    <Position X="22.75" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\User\ApplicationRole.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ShoppingCart.Models.Models.User.ApplicationUser">
-    <Position X="22.5" Y="6" Width="1.5" />
+    <Position X="20.75" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Models\User\ApplicationUser.cs</FileName>
@@ -150,7 +150,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ShoppingCart.Models.ShoppingCartDbContext">
-    <Position X="19" Y="1.25" Width="1.5" />
+    <Position X="20.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAEAAAAAAAACAgAAAAAEFQAAAAAAAAAAAQ=</HashCode>
       <FileName>ShoppingCartDbContext.cs</FileName>

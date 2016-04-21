@@ -24,16 +24,16 @@ namespace ShoppingCart.BackOffice.Controllers
         {
             
         }
-        
 
         public ActionResult CartPositionAndPossibilities()
         {
-            
+            string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
+
             IList<Cart> carts = _CartRepository.GetAll();
             IList<SampleViewModel.BoxContent> list = new List<SampleViewModel.BoxContent>();
             foreach (Cart c in carts)
             {
-                CartProcessTree _Xml = new CartProcessTree("e:/shop/workflow.xml");
+                CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
 
                 list.Add(new SampleViewModel.BoxContent()
                 {
@@ -59,14 +59,16 @@ namespace ShoppingCart.BackOffice.Controllers
             carts.WorkflowStatus = carts.WorkflowStatus + "/Options/" + newState;
             _CartRepository.Update(carts);
             return RedirectToAction("OneCartMove", new RouteValueDictionary(
-    new { controller = "BackOfficeWorkflow", action = "OneCartMove", id = id }));
+                                    new { controller = "BackOfficeWorkflow", action = "OneCartMove", id = id }));
         }
 
         public ActionResult OneCartMove(string id)
         {
+            string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
+
             Guid Id = new Guid(id);
             Cart cart = _CartRepository.GetSingle(c => c.Id == Id);
-            CartProcessTree _Xml = new CartProcessTree("e:/shop/workflow.xml");
+            CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
 
             OneCartViewModel model = new OneCartViewModel()
             {

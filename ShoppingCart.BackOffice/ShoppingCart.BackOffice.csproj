@@ -191,6 +191,7 @@
     <Compile Include="ViewsModels\Product\ProductViewModel.cs" />
     <Compile Include="ViewsModels\Role\RoleViewModel.cs" />
     <Compile Include="ViewsModels\Cart\ShippingDetailViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\CartsViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\DefaultWorkflowViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\OneCartViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\SampleViewModel.cs" />
@@ -291,7 +292,7 @@
     <Content Include="Views\Payment\_Mvola.cshtml" />
     <Content Include="Views\Payment\_PaymentCash.cshtml" />
     <Content Include="Views\BackOfficeWorkflow\ViewAllCart.cshtml" />
-    <Content Include="Views\BackOfficeWorkflow\CartPositionAndPossibilities.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\ShowAllCart.cshtml" />
     <Content Include="Views\BackOfficeWorkflow\OneCartMove.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />

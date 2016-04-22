@@ -57,7 +57,10 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index")">
+        <span class="glyphicon glyphicon-list"></span>
+        Back to List
+    </a>
 </div>
 
 @section Scripts {

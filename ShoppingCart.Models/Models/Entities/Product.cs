@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingCart.Models.Log;
+using System;
 using System.Collections.Generic;
 
 namespace ShoppingCart.Models.Models.Entities
@@ -15,8 +16,10 @@ namespace ShoppingCart.Models.Models.Entities
 
         public string Description { get; set; }
 
+        [Logging]
         public decimal Price { get; set; }
 
+        [Logging]
         public int Quantity { get; set; }
 
         public Guid ImageId { get; set; }
@@ -32,5 +35,6 @@ namespace ShoppingCart.Models.Models.Entities
         public virtual Category Category { get; set; }
 
         public List<Provider> Providers { get; set; }
+
     }
 }

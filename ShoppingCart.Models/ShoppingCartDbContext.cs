@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models.Models.Initializer;
+using ShoppingCart.Models.Log;
 
 namespace ShoppingCart.Models
 {
@@ -37,5 +38,7 @@ namespace ShoppingCart.Models
         public DbSet<ShippingDetail> ShippingDetails { get; set; }
 
         public DbSet<Provider> Providers { get; set; }
+
+        public DbSet<ChangeTracking> ChangesTracking { get; set; }
     }
 }

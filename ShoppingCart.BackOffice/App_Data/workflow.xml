@@ -11,8 +11,13 @@
                     <Count>number</Count>
                     <Options>
                         <Delivery> delivery
-                            <Closed>closed</Closed>
-                            <Returned>returned</Returned>
+                            <Options>
+                                <Closed>closed</Closed>
+                                <Returned>returned
+                                    <Description> Text </Description>
+                                    <Date>Date</Date>
+                                </Returned>
+                            </Options>
                         </Delivery>
                         <Cancelled>cancel</Cancelled>
                     </Options>

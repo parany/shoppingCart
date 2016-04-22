@@ -13,9 +13,9 @@ namespace ShoppingCart.BackOffice.Controllers
     [Authorize(Roles = "Administrator")]
     public class CartController : Controller
     {
-        private IGenericRepository<Cart> CartRepository;
-        private IGenericRepository<Product> ProductRepository;
-        private IGenericRepository<ShippingDetail> ShippingDetailRepository;
+        public IGenericRepository<Cart> CartRepository;
+        public IGenericRepository<Product> ProductRepository;
+        public IGenericRepository<ShippingDetail> ShippingDetailRepository;
         public CartController(IGenericRepository<Cart> cartRepository,
                               IGenericRepository<Product> productRepository,
                               IGenericRepository<ShippingDetail> shippingDetailRepository)

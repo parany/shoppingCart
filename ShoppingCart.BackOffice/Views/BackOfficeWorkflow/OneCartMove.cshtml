@@ -1,15 +1,7 @@
-@using ShoppingCart.Models.Models.Entities 
+@using ShoppingCart.BackOffice.ViewsModels.Workflow
+@using ShoppingCart.Models.Models.Entities
 @model ShoppingCart.BackOffice.ViewsModels.Workflow.OneCartViewModel 
 @{ ViewBag.Title = "Cart Detail"; Layout = "~/Views/Shared/_Layout.cshtml"; }
-<script>
-    var object = {
-        cartId: "@Model.Cart.Id",
-        state: "",
-        form: {}
-    }
-    
-    var redirect = "";
-</script>
 
 <div class="row">
     <div class="row">
@@ -32,25 +24,33 @@
 <form role="form">
 <div class="row">
     <div class="md-col-6">
-        <h3>User : </h3>
-    </div>
-    <div class="md-col-6">
-        <h3>the username </h3>
+        <h3>User : <span><a href="/User/Edit/@Model.User.Id">@Model.User.UserName</a></span> </h3>
     </div>
 </div>
 
 <div class="row">
-    <div class="md-col-12">
-        <h3>Items</h3>
-    </div>
-    @foreach (CartLine c in Model.Cart.CartLines) {
-    <div class="md-col-4">
-        <!--<h3>c.Product.Name </h3> -->
-    </div>
-    <div class="md-col-4">
-        @c.Quantity
-    </div>
-    }
+        
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-sm-8 col-md-6">Item name</th>
+                    <th class="col-sm-1 col-md-1 text-center">Quantity</th>
+                    <th class="col-sm-1 col-md-1 text-center">total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (OneCartViewModel.CartLineViewModel c in Model.CartLines) {
+                    <tr>
+                        <td class="col-sm-8 col-md-6">
+                            <h4 class="media-heading"><a href="/Product/Details/@c.Product.Id">@c.Product.Name</a></h4>
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>@c.Product.Price</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>@c.Total</strong></td>
+                    </tr>
+                 }
+            </tbody>
+        </table>
+   
 </div>
 </form>
 @if(Model.Forms.Count > 1){

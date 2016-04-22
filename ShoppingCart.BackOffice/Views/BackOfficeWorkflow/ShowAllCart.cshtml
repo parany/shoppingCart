@@ -1,4 +1,5 @@
-@model ShoppingCart.BackOffice.ViewsModels.Workflow.SampleViewModel
+@using ShoppingCart.BackOffice.ViewsModels.Workflow
+@model ShoppingCart.BackOffice.ViewsModels.Workflow.CartsViewModel
 @{
     ViewBag.Title = "All carts";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,20 +10,20 @@
 
 <h2>All carts</h2>
 
-@foreach (var c in Model.boxes)
+@foreach (CartsViewModel.CartWorkViewModel c in Model.Carts)
 {
 <div class="card">
   <h3 class="card-header">#@c.Cart.Id.ToString().Substring(0, 8)</h3>
   <div class="card-block">
     <h4 class="card-title">
-        <span class="glyphicon glyphicon-user"></span> @c.Cart.UserId.ToString().Substring(0, 8)
+        <span class="glyphicon glyphicon-user"></span> @c.User.UserName
         <span class="glyphicon glyphicon-calendar"></span>
         @if (@c.Cart.DateCreated != null)
         {
             @c.Cart.DateCreated.ToString();
         }
     </h4>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <p class="card-text">This cart is actually on @c.Status</p>
     <a href="/BackOfficeWorkflow/OneCartMove?id=@c.Cart.Id" class="btn btn-info" role="button">View Detail</a>
     <a href="/BackOfficeWorkflow/Reset?id=@c.Cart.Id" class="btn btn-warning" role="button">Reset</a>
     <a href="/BackOfficeWorkflow/Drop?id=@c.Cart.Id" class="btn btn-danger" role="button">Drop</a>

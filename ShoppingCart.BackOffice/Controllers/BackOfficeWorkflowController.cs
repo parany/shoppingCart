@@ -25,29 +25,31 @@ namespace ShoppingCart.BackOffice.Controllers
             
         }
 
-        public ActionResult CartPositionAndPossibilities()
+        public ActionResult ShowAllCart()
         {
             string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
 
             IList<Cart> carts = CartRepository.GetAll();
-            IList<SampleViewModel.BoxContent> list = new List<SampleViewModel.BoxContent>();
+            
+            IList<CartsViewModel.CartWorkViewModel> list = new List<CartsViewModel.CartWorkViewModel>();
+
             foreach (Cart c in carts)
             {
                 CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
 
-                list.Add(new SampleViewModel.BoxContent()
+                list.Add(new CartsViewModel.CartWorkViewModel
                 {
                     Cart = c,
-                    Descriptions = _Xml.Descriptions(c.WorkflowStatus),
-                    Options = _Xml.ForwardOptions(c.WorkflowStatus),
+                    User = c.User,
+                    Status = _Xml.CurrentTreeState(c.WorkflowStatus)
                 });
             }
 
-            SampleViewModel model = new SampleViewModel()
+            CartsViewModel model = new CartsViewModel()
             {
-                boxes = list
+                Carts = list
             };
-            
+
             return View(model);
         }
 
@@ -113,7 +115,7 @@ namespace ShoppingCart.BackOffice.Controllers
             Cart cart = CartRepository.GetSingle(c => c.Id == Id);
             CartRepository.Delete(cart);
 
-            return RedirectToAction("CartPositionAndPossibilities", "BackOfficeWorkflow");
+            return RedirectToAction("ShowAllCart", "BackOfficeWorkflow");
         }
 
 

@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ShoppingCart.Models.Migrations.DbConfiguration">
+    <Position X="22.75" Y="1.25" Width="1.5" />
+    <NestedTypes>
+      <Class Name="ShoppingCart.Models.Migrations.DbConfiguration.InMmemoryCache" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Migrations\DbConfiguration.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Migrations\DbConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Entities.BaseObject">
+    <Position X="9" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACCAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAE=</HashCode>
+      <FileName>Models\Entities\BaseObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Entities.Cart">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAQAEAAAAAAAAgAAAAAAAUAAAAgBAAAAAA=</HashCode>
+      <FileName>Models\Entities\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Entities.CartLine">
+    <Position X="6.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAACAA=</HashCode>
+      <FileName>Models\Entities\CartLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Entities.Category">
+    <Position X="11.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Entities\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Entities.Image">
+    <Position X="13.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAABAEAABAAIAAAAAA=</HashCode>
+      <FileName>Models\Entities\Image.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Entities.Product" Collapsed="true">
+    <Position X="15.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAkAgAAAAAAAAQAAAAAABEAAAAAgAAACAA=</HashCode>
+      <FileName>Models\Entities\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Entities.Provider">
+    <Position X="4.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAQAAAAAAAACAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Entities\Provider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Entities.ShippingDetail">
+    <Position X="9" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAwAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\ShippingDetail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Initializer.ShoppingCartDbInitializer">
+    <Position X="22.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAKAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Initializer\ShoppingCartDbInitializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Payments.Check">
+    <Position X="10" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Payments\Check.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Payments.Mvola">
+    <Position X="12.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Payments\Mvola.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Payments.Payment">
+    <Position X="10" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Payments\Payment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Payments.PaymentCash">
+    <Position X="7.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Payments\PaymentCash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.Payments.Payments">
+    <Position X="7.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Payments\Payments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.User.ApplicationRole">
+    <Position X="22.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\User\ApplicationRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Models.User.ApplicationUser">
+    <Position X="20.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\User\ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Repositories.Concrete.GenericRepository&lt;T&gt;">
+    <Position X="17.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIYAAAAAAAAAAAAoAAIAgABAAIEABAAASgAACQEAAgI=</HashCode>
+      <FileName>Repositories\Concrete\GenericRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ShoppingCart.Models.Repositories.Concrete.PagingSettings">
+    <Position X="12.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAAAAgEAAAAAA=</HashCode>
+      <FileName>Repositories\Concrete\PagingSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.Repositories.Concrete.ProductRepository">
+    <Position X="19.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Concrete\ProductRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShoppingCart.Models.ShoppingCartDbContext">
+    <Position X="20.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAACAgAAAAAEFQAAAAAAAAAAAQ=</HashCode>
+      <FileName>ShoppingCartDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ShoppingCart.Models.Repositories.Interface.IGenericRepository&lt;T&gt;">
+    <Position X="15" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAAAAAIAgABAAAEABAAAQgAACAAAAgI=</HashCode>
+      <FileName>Repositories\Interface\IGenericRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ShoppingCart.Models.Models.Entities.ShippingState">
+    <Position X="0.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAIAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\Entities\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ShoppingCart.Models.Models.Entities.StansactionType">
+    <Position X="2.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Models\Entities\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ShoppingCart.Models.Models.Entities.DeliveryMethod">
+    <Position X="4" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Entities\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -8,8 +8,8 @@ namespace ShoppingCart.CommonController.Tools
 {
     public class XmlHandler
     {
-        private XmlDocument _XmlData;
-        private XmlNode _node;
+        private XmlDocument _XmlData { get; set; }
+        private XmlNode _node { get; set; }
 
         // Load the file
         public XmlHandler(string filePath)
@@ -35,6 +35,7 @@ namespace ShoppingCart.CommonController.Tools
 
         public XmlNode DirectPathNode(string s)
         {
+            _node = _XmlData.ChildNodes[1];
             return _node.SelectSingleNode(".//" + s);
         }
     }

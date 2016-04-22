@@ -66,6 +66,14 @@
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="MvcSiteMapProvider, Version=4.6.22.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcSiteMapProvider.MVC5.Core.4.6.22\lib\net45\MvcSiteMapProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvcSiteMapProvider.WebActivator, Version=4.6.22.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcSiteMapProvider.MVC5.4.6.22\lib\net45\MvcSiteMapProvider.WebActivator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -103,8 +111,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.XML" />
     <Reference Include="Unity.Mvc5, Version=1.2.3.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Mvc5.1.2.3\lib\net45\Unity.Mvc5.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.1\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
@@ -145,7 +158,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BackOfficeWorkflowController.cs" />
     <Compile Include="Controllers\BuyController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
@@ -175,9 +190,13 @@
     <Compile Include="ViewsModels\Product\ProductViewModel.cs" />
     <Compile Include="ViewsModels\Role\RoleViewModel.cs" />
     <Compile Include="ViewsModels\Cart\ShippingDetailViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\DefaultWorkflowViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\OneCartViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\SampleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\payment.xml" />
+    <Content Include="App_Data\workflow.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\image\cheque.png" />
@@ -188,6 +207,11 @@
     <Content Include="Content\site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\App\ShoppingCart.BackOffice.js" />
+    <Content Include="Mvc.sitemap" />
+    <None Include="MvcSiteMapSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -197,12 +221,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\mustache.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Uploads\images\product_default_large.jpg" />
     <Content Include="Uploads\images\product_default_medium.jpg" />
     <Content Include="Uploads\images\product_default_thumbnail.jpg" />
+    <Content Include="BackOffice.cd" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -263,6 +289,18 @@
     <Content Include="Views\Payment\_Check.cshtml" />
     <Content Include="Views\Payment\_Mvola.cshtml" />
     <Content Include="Views\Payment\_PaymentCash.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\ViewAllCart.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\CartPositionAndPossibilities.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\OneCartMove.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Access\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

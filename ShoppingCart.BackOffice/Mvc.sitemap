@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+    <mvcSiteMapNode title="BackOffice Home" controller="Home" action="Index">
+        <mvcSiteMapNode title="Product" controller="Product" action="Index">
+            <mvcSiteMapNode title="Create" controller="Product" action="Create"/>
+            <mvcSiteMapNode title="Details" controller="Product" action="Details" preservedRouteParameters="id" />
+            <mvcSiteMapNode title="Edit" controller="Product" action="Edit" preservedRouteParameters="id"/>
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="Categories" controller="Categories" action="Index">
+            <mvcSiteMapNode title="Create" controller="Categories" action="Create"/>
+            <mvcSiteMapNode title="Details" controller="Categories" action="Details" preservedRouteParameters="id"/>
+            <mvcSiteMapNode title="Edit" controller="Categories" action="Edit" preservedRouteParameters="id"/>
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="Carts" controller="Cart" action="Index"/>
+        <mvcSiteMapNode title="Providers" controller="Providers" action="Index">
+            <mvcSiteMapNode title="Create" controller="Providers" action="Create"/>
+            <mvcSiteMapNode title="Details" controller="Providers" action="Details" preservedRouteParameters="id"/>
+            <mvcSiteMapNode title="Edit" controller="Providers" action="Edit" preservedRouteParameters="id"/>
+        </mvcSiteMapNode>
+            <mvcSiteMapNode title="Users" controller="User" action="Index">
+                <mvcSiteMapNode title="Create" controller="User" action="Create"/>
+                <mvcSiteMapNode title="Edit" controller="User" action="Edit" preservedRouteParameters="id"/>
+            </mvcSiteMapNode>
+            <mvcSiteMapNode title="Roles" controller="Role" action="Index">
+                <mvcSiteMapNode title="Create" controller="Role" action="Create"/>
+                <mvcSiteMapNode title="Edit" controller="Role" action="Edit" preservedRouteParameters="id"/>
+            </mvcSiteMapNode>
+        <mvcSiteMapNode title="Access" controller="Access" action="Index"/>
+    </mvcSiteMapNode>
+</mvcSiteMap>

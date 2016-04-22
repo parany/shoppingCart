@@ -25,9 +25,9 @@ namespace ShoppingCart.CommonController.Controllers
             _xmlHandler = new XmlHandler("workflow.xml");
         }
 
-        public ActionResult ALlCarts()
+        public ActionResult AllCarts()
         {
-
+            
             return View();
         }
 

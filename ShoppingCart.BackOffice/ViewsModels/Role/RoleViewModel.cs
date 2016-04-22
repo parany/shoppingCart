@@ -9,6 +9,7 @@ namespace ShoppingCart.BackOffice.ViewsModels
         {
             [Required]
             public string Name { get; set; }
+            [DataType(DataType.MultilineText)]
             public string Description { get; set; }
         }
         public class RoleEditModel

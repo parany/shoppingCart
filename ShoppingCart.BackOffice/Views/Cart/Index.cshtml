@@ -84,49 +84,8 @@ else
 @section scripts
 {
     <script type="text/javascript">
-        $("select[name=ShippingState]").change(function(e) {
-            var id = $(e.target).parent().parent().attr("data-id");
-            var state = $(e.target).val();
-            var arr = { id: id, state: state};
-            var lookup = {
-                "Pending": 0,
-                "Canceled": 1,
-                "Delivered": 2
-            };
-            var headers = {};
-            headers['__RequestVerificationToken'] = $('input[name="__RequestVerificationToken"]').val();
-            
-            $(e.target).parent().parent().hide();
-            $.ajax({
-                    url: "@Url.Action("Index", "Cart")",
-                    type: "POST",
-                    headers: headers,
-                    data: JSON.stringify(arr),
-                    contentType: "application/json; charset=utf-8",
-                    success: function (response) {
-                        if (state == lookup["@ShippingState.Pending"]) {
-                            $("#pending").text(parseInt($("#pending").text()) + 1);
-                        } else if (state == lookup["@ShippingState.Delivered"]) {
-                            $("#delivered").text(parseInt($("#delivered").text()) + 1);
-                        } else if (state == lookup["@ShippingState.Canceled"]) {
-                            $("#canceled").text(parseInt($("#canceled").text()) + 1);
-                        }
-                        if ("@ViewBag.ActiveTab" == "@ShippingState.Pending") {
-                            $("#pending").text(parseInt($("#pending").text()) - 1);
-                        } else if ("@ViewBag.ActiveTab" == "@ShippingState.Delivered") {
-                            $("#delivered").text(parseInt($("#delivered").text()) - 1);
-                        } else if ("@ViewBag.ActiveTab" == "@ShippingState.Canceled") {
-                            $("#canceled").text(parseInt($("#canceled").text()) - 1);
-                        }
-                        $("#n").text(parseInt($("#n").text()) - 1);
-                        if (parseInt($("#n").text()) < 2) {
-                            $("#be").text("is");
-                        }
-                        if (parseInt($("#n").text()) == 0) {
-                            $("#n").text("no");
-                        }
-                    }
-                });
-            });
+        var url = "@Url.Action("Index", "Cart")";
+        var tab = "@ViewBag.ActiveTab";
     </script>
+    <script src="~/Scripts/App/ShoppingCart.BackOffice.js"></script>
 }

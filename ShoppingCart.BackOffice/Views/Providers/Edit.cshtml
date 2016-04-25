@@ -37,7 +37,7 @@
         <div class="form-group">
             @Html.Label("Payment Methods", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="PaymentMethods" multiple="multiple" name="PaymentMethods">
+                <select id="PaymentMethods" multiple="multiple" name="PaymentMethods" class = "form-control">
                     @{List<SelectListItem> paymentMethods = ViewBag.PaymentMethods;
                         foreach (var p in paymentMethods)
                         {

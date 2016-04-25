@@ -11,8 +11,8 @@ namespace ShoppingCart.CommonController.Controllers
 {
     public class BasicHomeController : Controller
     {
-        private IGenericRepository<Product> _ProductRepository;
-        private IGenericRepository<Category> _CategoryRepository;
+        protected IGenericRepository<Product> _ProductRepository;
+        protected IGenericRepository<Category> _CategoryRepository;
 
         public BasicHomeController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository)
         {

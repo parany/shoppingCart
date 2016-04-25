@@ -167,6 +167,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MouvementController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProvidersController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -176,6 +177,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewsModels\Buy\ProductListAndStateViewModel.cs" />
+    <Compile Include="ViewsModels\Buy\ProductStateViewModel.cs" />
     <Compile Include="ViewsModels\Cart\ChangeStateViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartLineViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartsViewModel.cs" />
@@ -298,6 +301,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Access\Index.cshtml" />
+    <Content Include="Views\Mouvement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

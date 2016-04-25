@@ -69,8 +69,7 @@ namespace ShoppingCart.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationRole role = new ApplicationRole(roleCreateModel.Name);
-                role.Description = roleCreateModel.Description;
+                ApplicationRole role = new ApplicationRole(roleCreateModel.Name, roleCreateModel.Description);
                 IdentityResult result = await RoleManager.CreateAsync(role);
                 if (result.Succeeded)
                 {

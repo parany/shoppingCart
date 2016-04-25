@@ -63,8 +63,8 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Log\ChangeTracking.cs" />
-    <Compile Include="Log\ChangeTrackingService.cs" />
+    <Compile Include="Tracking\ChangeTracking.cs" />
+    <Compile Include="Tracking\ChangeTrackingService.cs" />
     <Compile Include="Migrations\DbConfiguration.cs" />
     <Compile Include="Models\Entities\Cart.cs" />
     <Compile Include="Models\Entities\CartLine.cs" />

@@ -7,8 +7,9 @@ using System.Web.Mvc;
 
 using ShoppingCart.Models.Models.Payments;
 using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Models.ViewModels;
 using ShoppingCart.Models.Repositories.Interface;
-using ShoppingCart.BackOffice.ViewsModels.Provider;
+using ShoppingCart.Services.Interface;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
@@ -16,10 +17,13 @@ namespace ShoppingCart.BackOffice.Controllers
     public class ProvidersController : Controller
     {
         private IGenericRepository<Provider> ProviderRepository { get; set; }
+        private IProvidersService ProvidersService { get; set; }
 
-        public ProvidersController(IGenericRepository<Provider> providerRepository)
+        public ProvidersController(IGenericRepository<Provider> providerRepository,
+                                   IProvidersService providersService)
         {
             ProviderRepository = providerRepository;
+            ProvidersService = providersService;
         }
 
         private List<Payment> GetPaymentMethods()
@@ -75,23 +79,7 @@ namespace ShoppingCart.BackOffice.Controllers
             Provider provider = new Provider();
             if (ModelState.IsValid)
             {
-                var sbPaymentMethods = new StringBuilder();
-                int i = 1;
-                foreach (var p in providerViewModel.PaymentMethods)
-                {
-                    sbPaymentMethods.Append(p);
-                    if (i < providerViewModel.PaymentMethods.Count())
-                    {
-                        sbPaymentMethods.Append(',');
-                    }
-                    i++;
-                }
-
-                provider.Address = providerViewModel.Address;
-                provider.Name = providerViewModel.Name;
-                provider.PaymentMethods = sbPaymentMethods.ToString();
-
-                ProviderRepository.Add(provider);
+                ProvidersService.AddProvider(providerViewModel);
                 return RedirectToAction("Index");
             }
             

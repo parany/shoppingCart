@@ -1,5 +1,5 @@
 ﻿@using System.Collections.Generic;
-@model ShoppingCart.BackOffice.ViewsModels.Provider.ProviderEditViewModel
+@model ShoppingCart.Models.ViewModels.ProviderEditViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -37,7 +37,7 @@
         <div class="form-group">
             @Html.Label("Payment Methods", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="PaymentMethods" multiple="multiple" name="PaymentMethods">
+                <select id="PaymentMethods" multiple="multiple" name="PaymentMethods" class = "form-control">
                     @{List<SelectListItem> paymentMethods = ViewBag.PaymentMethods;
                         foreach (var p in paymentMethods)
                         {
@@ -57,7 +57,10 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index")">
+        <span class="glyphicon glyphicon-list"></span>
+        Back to List
+    </a>
 </div>
 
 @section Scripts {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ShoppingCart.Models.Models.Entities;
 using System.Data.Entity;
+using ShoppingCart.Models.Log;
 
 namespace ShoppingCart.Models.Repositories.Concrete
 {
@@ -24,6 +25,17 @@ namespace ShoppingCart.Models.Repositories.Concrete
                     item.DateCreated = DateTime.Now;
                     item.DateModified = DateTime.Now;
 
+                    ChangeTracking logs = new ChangeTracking()
+                    {
+                        Id = Guid.NewGuid(),
+                        DateChanged = DateTime.Now,
+                        ClassName = item.GetType().Name,
+                        PrimaryKey = item.Id,
+                        Description = "Adding New Product"
+                    };
+
+                    context.ChangesTracking.Add(logs);
+
                     context.Products.Attach(item);
                     context.Products.Add(item);
                 }
@@ -41,6 +53,17 @@ namespace ShoppingCart.Models.Repositories.Concrete
                     Product attachedEntity = context.Set<Product>()
                         .Include(e => e.Providers)
                         .SingleOrDefault(e => e.Id == item.Id);
+
+                    ChangeTrackingService<Product> service = new ChangeTrackingService<Product>();
+                    List<ChangeTracking> logs = service.GetChanges(attachedEntity, item, "Update Product");
+
+                    if (logs != null)
+                    {
+                        foreach (ChangeTracking log in logs)
+                        {
+                            context.ChangesTracking.Add(log);
+                        }
+                    }
 
                     var providers = new List<Provider>(item.Providers).ToList();
 

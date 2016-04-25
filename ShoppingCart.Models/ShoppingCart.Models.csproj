@@ -63,6 +63,8 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tracking\ChangeTracking.cs" />
+    <Compile Include="Tracking\ChangeTrackingService.cs" />
     <Compile Include="Migrations\DbConfiguration.cs" />
     <Compile Include="Models\Entities\Cart.cs" />
     <Compile Include="Models\Entities\CartLine.cs" />
@@ -90,6 +92,8 @@
     <Compile Include="Repositories\Concrete\ProductRepository.cs" />
     <Compile Include="Repositories\Interface\IGenericRepository.cs" />
     <Compile Include="ShoppingCartDbContext.cs" />
+    <Compile Include="ViewModels\ProviderEditViewModel.cs" />
+    <Compile Include="ViewModels\ProviderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -98,6 +102,7 @@
     <None Include="Models.cd" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -12,29 +12,31 @@ using ShoppingCart.CommonController.Infrastructure.Abstract;
 using ShoppingCart.CommonController.Infrastructure.Identity;
 using ShoppingCart.CommonController.ViewModels;
 using ShoppingCart.CommonController.Infrastructure.Binders;
+using ShoppingCart.Models.Repositories.Concrete;
 
 namespace ShoppingCart.Controllers
 {
 
     public class BasicCheckoutController : Controller
     {
-        private IOrderProcessor _OrderProcessor;
-        private IGenericRepository<Cart> _CartRepository { get; set; }
-        private IGenericRepository<Product> _ProductRepository { get; set; }
-        private IGenericRepository<CartLine> _CartLineRepository { get; set; }
-        private IGenericRepository<ShippingDetail> _ShippingRepository { get; set; }
+        protected IOrderProcessor _OrderProcessor;
+        protected IGenericRepository<Cart> _CartRepository { get; set; }
+        protected ProductRepository _ProductRepository { get; set; }
+        protected IGenericRepository<CartLine> _CartLineRepository { get; set; }
+        protected IGenericRepository<ShippingDetail> _ShippingRepository { get; set; }
 
-        private ApplicationUser CurrentUser { get { return UserManager.FindByName(HttpContext.User.Identity.Name); } }
-        private ApplicationUserManager UserManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); } }
+        protected ApplicationUser CurrentUser { get { return UserManager.FindByName(HttpContext.User.Identity.Name); } }
+        protected ApplicationUserManager UserManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); } }
 
         private ApplicationRoleManager RoleManager { get { return HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>(); } }
         public BasicCheckoutController(IGenericRepository<Cart> cartRepo,
-                                  IGenericRepository<Product> productRepo,
+                                  ProductRepository productRepo,
                                   IGenericRepository<CartLine> cartlineRepo,
                                   IGenericRepository<ShippingDetail> shipRepo,
                                   IOrderProcessor proc)
         {
             _ProductRepository = productRepo;
+            _ProductRepository.AddNavigationProperties(p => p.Providers);
             _CartRepository = cartRepo;
             _CartRepository.AddNavigationProperties(ca => ca.CartLines);
             _CartLineRepository = cartlineRepo;
@@ -80,7 +82,7 @@ namespace ShoppingCart.Controllers
         // Action confirming the order
         [Authorize]
         [HttpPost]
-        public ActionResult Order(CheckoutDTO cartDto)
+        public virtual ActionResult Order(CheckoutDTO cartDto)
         {
             if (ModelState.IsValid)
             {

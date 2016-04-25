@@ -8,6 +8,8 @@ using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models.Repositories.Concrete;
 using ShoppingCart.Models.Repositories.Interface;
+using ShoppingCart.Services.Interface;
+using ShoppingCart.Services.Implementation;
 
 namespace ShoppingCart.BackOffice
 {
@@ -24,6 +26,7 @@ namespace ShoppingCart.BackOffice
 			container.RegisterType<IGenericRepository<Category>, GenericRepository<Category>>();
 			container.RegisterType<IGenericRepository<ShippingDetail>, GenericRepository<ShippingDetail>>();
             container.RegisterType<IGenericRepository<Provider>, GenericRepository<Provider>>();
+            container.RegisterType<IProvidersService, ProvidersService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 		}

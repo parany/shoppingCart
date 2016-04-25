@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShoppingCart.BackOffice.ViewsModels.Provider
+namespace ShoppingCart.Models.ViewModels
 {
     public class ProviderEditViewModel
     {

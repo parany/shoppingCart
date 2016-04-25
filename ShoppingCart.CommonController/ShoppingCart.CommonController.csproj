@@ -323,6 +323,10 @@
       <Project>{19913b66-6b27-4fd9-a9fc-64133aa21aa4}</Project>
       <Name>ShoppingCart.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ShoppingCart.Services\ShoppingCart.Services.csproj">
+      <Project>{34065edb-a9b3-47c4-ac2d-ec8478429961}</Project>
+      <Name>ShoppingCart.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

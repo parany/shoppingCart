@@ -86,6 +86,8 @@
     <Compile Include="Repositories\Concrete\ProductRepository.cs" />
     <Compile Include="Repositories\Interface\IGenericRepository.cs" />
     <Compile Include="ShoppingCartDbContext.cs" />
+    <Compile Include="ViewModels\ProviderEditViewModel.cs" />
+    <Compile Include="ViewModels\ProviderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

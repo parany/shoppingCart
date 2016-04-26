@@ -15,6 +15,11 @@ namespace ShoppingCart.CommonController.Tools
 
         }
 
+        /*
+         * ACTIONS WITH NODES / VIEW NODES
+         *
+         *
+         */
         public class NodeObject
         {
             public string label { get; set; }
@@ -28,7 +33,7 @@ namespace ShoppingCart.CommonController.Tools
             IList<NodeObject> des = new List<NodeObject>();
             foreach (XmlNode node in nodes)
             {
-                if (!node.Name.Equals("Options"))
+                if (!node.Name.Equals("Options") && !node.Name.Equals("Action"))
                 {
                     des.Add(new NodeObject()
                     {
@@ -64,6 +69,10 @@ namespace ShoppingCart.CommonController.Tools
 
         public bool TreeState(string path)
         {
+            /* RESULT
+             * true => state on going
+             * false => final state
+             */
             return DirectPathNode(path).SelectSingleNode("Options").HasChildNodes;
         }
 
@@ -83,10 +92,17 @@ namespace ShoppingCart.CommonController.Tools
             return des;
         }
 
-        public string CurrentTreeState(string path)
+        public string CurrentPotitionOnTree(string path)
         {
             return DirectPathNode(path).Name;
         }
+
         
+        /*
+         * CREATE NODES
+         *
+         *
+         */
+
     }
 }

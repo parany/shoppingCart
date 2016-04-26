@@ -38,5 +38,15 @@ namespace ShoppingCart.CommonController.Tools
             _node = _XmlData.ChildNodes[1];
             return _node.SelectSingleNode(".//" + s);
         }
+
+        public XmlNodeList Heads()
+        {
+            return _node.ChildNodes;
+        }
+
+        public XmlNode StartNode()
+        {
+            return _node;
+        }
     }
 }

@@ -32,6 +32,7 @@
                 <tr>
                     <th class="col-sm-8 col-md-6">Item name</th>
                     <th class="col-sm-1 col-md-1 text-center">Quantity</th>
+                    <th class="col-sm-1 col-md-1 text-center">Unit Price</th>
                     <th class="col-sm-1 col-md-1 text-center">total</th>
                 </tr>
             </thead>
@@ -41,6 +42,7 @@
                         <td class="col-sm-8 col-md-6">
                             @Html.ActionLink(c.Product.Name, "Details", "Product", c.Product.Id)</h4>
                         </td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>@c.Quantity</strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>@c.Product.Price</strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>@c.Total</strong></td>
                     </tr>

@@ -182,7 +182,6 @@
     <Compile Include="ViewsModels\Cart\ChangeStateViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartLineViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartsViewModel.cs" />
-    <Compile Include="ViewsModels\Product\StockHistoryViewModel.cs" />
     <Compile Include="ViewsModels\User\CreateUserViewModel.cs" />
     <Compile Include="ViewsModels\Product\CreateViewModels.cs" />
     <Compile Include="ViewsModels\Product\PagingInfo.cs" />
@@ -192,6 +191,7 @@
     <Compile Include="ViewsModels\Cart\ShippingDetailViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\CartsViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\DefaultWorkflowViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\NodesViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\OneCartViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\SampleViewModel.cs" />
   </ItemGroup>
@@ -303,7 +303,7 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Access\Index.cshtml" />
     <Content Include="Views\Mouvement\Index.cshtml" />
-    <Content Include="Views\Mouvement\Stock.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\TreeState.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

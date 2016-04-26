@@ -8,9 +8,9 @@ using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models.Repositories.Concrete;
 using ShoppingCart.Models.Repositories.Interface;
+using ShoppingCart.Models.Log;
 using ShoppingCart.Services.Interface;
 using ShoppingCart.Services.Implementation;
-using ShoppingCart.Models.Log;
 
 namespace ShoppingCart.BackOffice
 {

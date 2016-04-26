@@ -17,11 +17,24 @@ namespace ShoppingCart.BackOffice.Controllers
     {
         private IGenericRepository<ChangeTracking> _ChangeTrackingRepository { get; }
         private ProductRepository _ProductRepository { get; }
+        private IGenericRepository<Category> _CategoryRepository { get; }
+        private IGenericRepository<Image> _ImageRepository { get; }
+        private IGenericRepository<Provider> _ProviderRepository { get; set; }
 
-        public MouvementController(IGenericRepository<ChangeTracking> changeTrackingRepository, ProductRepository productRepository)
+        public MouvementController(IGenericRepository<ChangeTracking> changeTrackingRepository,
+                                   ProductRepository productRepository,
+                                   IGenericRepository<Category> categoryRepository,
+                                   IGenericRepository<Image> imageRepository,
+                                   IGenericRepository<Provider> providerRepository)
         {
             _ChangeTrackingRepository = changeTrackingRepository;
             _ProductRepository = productRepository;
+            _CategoryRepository = categoryRepository;
+            _ImageRepository = imageRepository;
+            _ProviderRepository = providerRepository;
+            _ProductRepository.AddNavigationProperty(p => p.Category);
+            _ProductRepository.AddNavigationProperty(img => img.Image);
+            _ProductRepository.AddNavigationProperties(p => p.Providers);
         }
 
         // GET: Mouvement
@@ -45,7 +58,7 @@ namespace ShoppingCart.BackOffice.Controllers
 
             foreach (Product pro in products)
             {
-                stockHistoryList.Add(new StockHistoryViewModel { Product = pro });
+                stockHistoryList.Add(new StockHistoryViewModel { Product = pro, ImagePath = pro.Image.getImageVersion("_thumbnail"), ChangedType = null });
             }
 
             StockHistoryViewModel productStockChanged = stockHistoryList.FirstOrDefault(p => p.Product.Id == change.PrimaryKey);
@@ -54,10 +67,14 @@ namespace ShoppingCart.BackOffice.Controllers
             {
 
                 var property = productStockChanged.Product.GetType().GetProperty(change.PropertyName);
-                property.SetValue(productStockChanged.Product, change.OldValue,null,Binder.);
+                var targetType = property.PropertyType;
+                var convertedValue = Convert.ChangeType(change.OldValue, targetType);
+
+                property.SetValue(productStockChanged.Product, convertedValue);
+                productStockChanged.ChangedType = change.Type.ToString();
             }
 
-            return View(productStockChanged);
+            return View(stockHistoryList);
         }
     }
 }

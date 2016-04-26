@@ -37,7 +37,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class=" @if(item.ChangedType == "Edit") { ".info"}  ">
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Name)
             </td>
@@ -75,6 +75,7 @@
                 @Html.DisplayFor(modelItem => item.Product.CreatedBy)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.ChangedType)
                 @Html.ActionLink("Edit", "Edit", new { id = item.Product.Id }, new { @class = "btn btn-warning btn-xs" })
                 @Html.ActionLink("Details", "Details", new { id = item.Product.Id }, new { @class = "btn btn-success btn-xs" })
                 @Html.ActionLink("Delete", "Delete", new { id = item.Product.Id }, new { @class = "btn btn-danger btn-xs" })

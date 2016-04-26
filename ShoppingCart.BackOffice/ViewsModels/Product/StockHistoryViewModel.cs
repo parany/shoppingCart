@@ -9,6 +9,7 @@ namespace ShoppingCart.BackOffice.ViewsModels
     public class StockHistoryViewModel
     {
         public Product Product { get; set; }
-        public bool isChanged { get; set; }
+        public string ImagePath { get; set; }
+        public String ChangedType { get; set; }
     }
 }

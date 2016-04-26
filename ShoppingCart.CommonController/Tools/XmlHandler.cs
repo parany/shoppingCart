@@ -11,11 +11,14 @@ namespace ShoppingCart.CommonController.Tools
         private XmlDocument _XmlData { get; set; }
         private XmlNode _node { get; set; }
 
+        private string _FilePath { get; set; }
+
         // Load the file
         public XmlHandler(string filePath)
         {
             _XmlData = new XmlDocument();
             _XmlData.Load(filePath);
+            _FilePath = filePath;
             _node = _XmlData.ChildNodes[1]; // this will get the head of the tree "//workflows"
         }
 
@@ -47,6 +50,16 @@ namespace ShoppingCart.CommonController.Tools
         public XmlNode StartNode()
         {
             return _node;
+        }
+
+        public XmlNode Create(string name)
+        {
+            return _XmlData.CreateElement(name);
+        }
+
+        public void Save()
+        {
+            _XmlData.Save(_FilePath);
         }
     }
 }

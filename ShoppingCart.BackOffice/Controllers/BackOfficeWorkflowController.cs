@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Xml;
 using ShoppingCart.BackOffice.ViewsModels.Workflow;
 using ShoppingCart.CommonController.Tools;
 using ShoppingCart.Controllers;
@@ -141,9 +142,26 @@ namespace ShoppingCart.BackOffice.Controllers
             };
             return View("TreeState",model);
         }
-        public ActionResult ChangeNodeName()
+        public ActionResult ChangeNodeName(string path, string name)
         {
-            return Json("");
+            string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
+            CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
+            XmlNode current = _Xml.DirectPathNode(path);
+            XmlNode newNode = _Xml.Create(name);
+            string newPath = path.Replace(current.Name, newNode.Name);
+            current.ParentNode.ReplaceChild(newNode, current);
+            foreach (XmlNode node in current.ChildNodes)
+            {
+                newNode.AppendChild(node);
+            }
+            foreach (XmlAttribute att in current.Attributes)
+            {
+                newNode.Attributes.Append(att);
+            }
+
+            _Xml.Save();
+            return RedirectToAction("TreeState", new RouteValueDictionary(
+                                    new { controller = "BackOfficeWorkflow", action = "TreeState", path = newPath }));
         }
         public ActionResult DeleteBranch()
         {
@@ -158,7 +176,7 @@ namespace ShoppingCart.BackOffice.Controllers
         {
             string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
             CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
-            if (!_Xml.DirectPathNode(path).Name.Equals(_Xml.StartNode().Name))
+            if (!_Xml.DirectPathNode(path).Name.Equals(_Xml.StartNode().Name) && path!=null)
             {
                 NodesViewModel model = new NodesViewModel
                 {

@@ -1,14 +1,11 @@
-﻿@model IEnumerable<ShoppingCart.BackOffice.ViewsModels.ProductViewModel>
+﻿@model IEnumerable<ShoppingCart.BackOffice.ViewsModels.StockHistoryViewModel>
 
 @{
-    ViewBag.Title = "Product List";
+    ViewBag.Title = "Stock History";
 }
 
-<h2>Product List</h2>
+<h2>Stock History</h2>
 
-<p style="margin-bottom:10px;">
-    @Html.ActionLink("Buy Product", "Index", "Buy", null, new { @class = "btn btn-primary" })
-</p>
 <table class="table productList">
     <tr>
         <th>

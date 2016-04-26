@@ -25,16 +25,11 @@ namespace ShoppingCart.Models.Repositories.Concrete
                     item.DateCreated = DateTime.Now;
                     item.DateModified = DateTime.Now;
 
-                    ChangeTracking logs = new ChangeTracking()
-                    {
-                        Id = Guid.NewGuid(),
-                        DateChanged = DateTime.Now,
-                        ClassName = item.GetType().Name,
-                        PrimaryKey = item.Id,
-                        Description = "Adding New Product"
-                    };
+                    ChangeTrackingService<Product> service = new ChangeTrackingService<Product>();
+                    ChangeTracking log = service.AddingChange(item);
 
-                    context.ChangesTracking.Add(logs);
+                    if (log != null)
+                        context.ChangesTracking.Add(log);
 
                     context.Products.Attach(item);
                     context.Products.Add(item);
@@ -55,7 +50,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
                         .SingleOrDefault(e => e.Id == item.Id);
 
                     ChangeTrackingService<Product> service = new ChangeTrackingService<Product>();
-                    List<ChangeTracking> logs = service.GetChanges(attachedEntity, item, "Update Product");
+                    List<ChangeTracking> logs = service.GetChanges(attachedEntity, item);
 
                     if (logs != null)
                     {

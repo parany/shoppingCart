@@ -10,6 +10,7 @@ using ShoppingCart.BackOffice.ViewsModels;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Models.Repositories.Concrete;
+using System.Globalization;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
@@ -192,6 +193,9 @@ namespace ShoppingCart.BackOffice.Controllers
                         providers.Add(p);
                     }
                 }
+                String priceFormat = createViewModels.Product.Price.ToString("F");
+                decimal price = Convert.ToDecimal(priceFormat, new CultureInfo("fr-FR"));
+                createViewModels.Product.Price = price;
                 createViewModels.Product.Providers = providers;
                 ProductRepository.Update(createViewModels.Product);
                 return RedirectToAction("Index");

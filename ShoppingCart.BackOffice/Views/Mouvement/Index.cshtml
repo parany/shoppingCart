@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ShoppingCart.Models.Log.ChangeTracking>
 
 @{
-    ViewBag.Title = "Product List";
+    ViewBag.Title = "Mouvement List";
 }
 
 <h2>Mouvement List</h2>
@@ -23,6 +23,7 @@
         <th>
             @Html.DisplayNameFor(model => model.OldValue)
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -42,6 +43,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OldValue)
+            </td>
+            <td>
+                @Html.ActionLink("Last Stock", "Stock", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })
             </td>
         </tr>
     }

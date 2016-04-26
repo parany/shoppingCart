@@ -2,6 +2,7 @@
 using ShoppingCart.Models.Repositories.Interface;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,14 @@ namespace ShoppingCart.Models.Log
 
     }
 
+    public class LoggingClassAttribute : Attribute
+    {
+
+    }
+
     public class ChangeTrackingService<T> where T : BaseObject
     {
-        public List<ChangeTracking> GetChanges(T oldEntry, T newEntry, string description)
+        public List<ChangeTracking> GetChanges(T oldEntry, T newEntry)
         {
             List<ChangeTracking> logs = new List<ChangeTracking>();
 
@@ -43,8 +49,11 @@ namespace ShoppingCart.Models.Log
                 {
                     continue;
                 }
-                var oldValue = oldProperty.GetValue(oldEntry);
-                var newValue = matchingProperty.GetValue(newEntry);
+                var oldValue = oldProperty.GetValue(oldEntry).ToString();
+                Type t = Type.GetType(matchingProperty.PropertyType.FullName);
+                var newValue = matchingProperty.GetValue(newEntry).ToString();
+
+
                 if (matchingProperty != null && oldValue != newValue)
                 {
                     logs.Add(new ChangeTracking()
@@ -55,8 +64,9 @@ namespace ShoppingCart.Models.Log
                         ClassName = className,
                         PropertyName = matchingProperty.Name,
                         OldValue = oldProperty.GetValue(oldEntry).ToString(),
-                        Description = description,
+                        Description = "Update " + className + " " + matchingProperty.Name,
                         NewValue = matchingProperty.GetValue(newEntry).ToString(),
+                        Type = ChangeType.Edit
                     });
                 }
             }
@@ -64,5 +74,54 @@ namespace ShoppingCart.Models.Log
             return logs;
         }
 
+        public ChangeTracking AddingChange(T newEntry)
+        {
+            var newType = newEntry.GetType();
+
+            var attributes = newType.GetCustomAttributes(typeof(LoggingClassAttribute), false);
+
+            if (attributes.Length > 0)
+            {
+                ChangeTracking log = new ChangeTracking()
+                {
+                    Id = Guid.NewGuid(),
+                    DateChanged = DateTime.Now,
+                    ClassName = newEntry.GetType().Name,
+                    PrimaryKey = newEntry.Id,
+                    Description = "Adding New " + newEntry.GetType().Name,
+                    Type = ChangeType.Add
+                };
+
+                return log;
+            }
+
+            return null;
+        }
+
+        public ChangeTracking DeleteChange(T newEntry)
+        {
+            var newType = newEntry.GetType();
+            if (newType.BaseType.Name != "BaseObject")
+                newType = Type.GetType(newType.BaseType.FullName);
+
+            var attributes = newType.GetCustomAttributes(typeof(LoggingClassAttribute), false);
+
+            if (attributes.Length > 0)
+            {
+                ChangeTracking log = new ChangeTracking()
+                {
+                    Id = Guid.NewGuid(),
+                    DateChanged = DateTime.Now,
+                    ClassName = newType.Name,
+                    PrimaryKey = newEntry.Id,
+                    Description = "Delete " + newEntry.GetType().Name,
+                    Type = ChangeType.Delete
+                };
+
+                return log;
+            }
+
+            return null;
+        }
     }
 }

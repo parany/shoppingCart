@@ -1,4 +1,5 @@
-﻿using ShoppingCart.Models.Models.Entities;
+﻿using ShoppingCart.Models.Log;
+using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 using System;
 using System.Collections.Generic;
@@ -230,6 +231,11 @@ namespace ShoppingCart.Models.Repositories.Concrete
                     item.DateCreated = DateTime.Now;
                     item.DateModified = DateTime.Now;
 
+                    ChangeTrackingService<T> service = new ChangeTrackingService<T>();
+                    ChangeTracking log = service.AddingChange(item);
+
+                    if (log != null)
+                        context.ChangesTracking.Add(log);
 
                     context.Entry(item).State = EntityState.Added;
                 }
@@ -264,6 +270,17 @@ namespace ShoppingCart.Models.Repositories.Concrete
 
                         entry.Property(i => i.DateCreated).IsModified = false;
                         entry.Property(i => i.CreatedBy).IsModified = false;
+
+                        ChangeTrackingService<T> service = new ChangeTrackingService<T>();
+                        List<ChangeTracking> logs = service.GetChanges(attachedEntity, item);
+
+                        if (logs != null)
+                        {
+                            foreach (ChangeTracking log in logs)
+                            {
+                                context.ChangesTracking.Add(log);
+                            }
+                        }
                     }
                 }
 
@@ -283,6 +300,12 @@ namespace ShoppingCart.Models.Repositories.Concrete
             {
                 foreach (T item in items)
                 {
+                    ChangeTrackingService<T> service = new ChangeTrackingService<T>();
+                    ChangeTracking log = service.DeleteChange(item);
+
+                    if (log != null)
+                        context.ChangesTracking.Add(log);
+
                     context.Entry(item).State = EntityState.Deleted;
                 }
                 context.SaveChanges();

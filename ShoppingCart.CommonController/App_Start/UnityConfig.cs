@@ -16,9 +16,9 @@ using System.Web;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Models.Repositories.Concrete;
 using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Models.Log;
 using ShoppingCart.Services.Interface;
 using ShoppingCart.Services.Implementation;
-using ShoppingCart.Models.Log;
 
 namespace ShoppingCart.CommonController
 {

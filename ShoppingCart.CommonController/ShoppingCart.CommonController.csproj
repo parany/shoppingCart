@@ -218,6 +218,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\BasicCartsController.cs" />
     <Compile Include="Controllers\BasicCheckoutController.cs" />
+    <Compile Include="Controllers\BasicPrintController.cs" />
     <Compile Include="Controllers\BasicWorkflowController.cs" />
     <Compile Include="Infrastructure\Abstract\IOrderProcessor.cs" />
     <Compile Include="Infrastructure\Binders\CartModelBinder.cs" />

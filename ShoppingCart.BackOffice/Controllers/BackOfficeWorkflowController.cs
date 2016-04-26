@@ -25,6 +25,12 @@ namespace ShoppingCart.BackOffice.Controllers
             
         }
 
+        /*
+         * USE TREE
+         *
+         *
+         */
+
         public ActionResult ShowAllCart()
         {
             string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
@@ -41,7 +47,7 @@ namespace ShoppingCart.BackOffice.Controllers
                 {
                     Cart = c,
                     User = c.User,
-                    Status = _Xml.CurrentTreeState(c.WorkflowStatus)
+                    Status = _Xml.CurrentPotitionOnTree(c.WorkflowStatus)
                 });
             }
 
@@ -52,8 +58,7 @@ namespace ShoppingCart.BackOffice.Controllers
 
             return View(model);
         }
-
-
+        
         public ActionResult MoveState(string newState, string id)
         {
             Guid Id = new Guid(id);
@@ -88,7 +93,7 @@ namespace ShoppingCart.BackOffice.Controllers
                 Cart = cart,
                 Forms = _Xml.Descriptions(cart.WorkflowStatus),
                 Options = _Xml.ForwardOptions(cart.WorkflowStatus),
-                status = _Xml.CurrentTreeState(cart.WorkflowStatus),
+                status = _Xml.CurrentPotitionOnTree(cart.WorkflowStatus),
                 User = cart.User,
                 CartLines = varLines
             };
@@ -118,8 +123,57 @@ namespace ShoppingCart.BackOffice.Controllers
             return RedirectToAction("ShowAllCart", "BackOfficeWorkflow");
         }
 
+        /*
+         * Create Nodes TREE
+         *
+         *
+         */
 
+        public ActionResult ShowTreeBase()
+        {
+            string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
+            CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
+            NodesViewModel model = new NodesViewModel
+            {
+                List = _Xml.Heads(),
+                CurrentNode = _Xml.StartNode(),
+                Start = true
+            };
+            return View("TreeState",model);
+        }
+        public ActionResult ChangeNodeName()
+        {
+            return Json("");
+        }
+        public ActionResult DeleteBranch()
+        {
+            return Json("");
+        }
+        public ActionResult ChangeNodeValue()
+        {
+            return Json("");
+        }
 
+        public ActionResult TreeState(string path)
+        {
+            string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
+            CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
+            if (!_Xml.DirectPathNode(path).Name.Equals(_Xml.StartNode().Name))
+            {
+                NodesViewModel model = new NodesViewModel
+                {
+                    List = _Xml.DirectPathNode(path).ChildNodes,
+                    CurrentNode = _Xml.DirectPathNode(path),
+                    Start = false
+                };
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("ShowTreeBase", new RouteValueDictionary(
+                                    new { controller = "BackOfficeWorkflow", action = "ShowTreeBase" }));
+            }
+        }
 
     }
 }

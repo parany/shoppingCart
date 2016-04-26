@@ -182,8 +182,6 @@
     <Compile Include="ViewsModels\Cart\ChangeStateViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartLineViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartsViewModel.cs" />
-    <Compile Include="ViewsModels\Provider\ProviderEditViewModel.cs" />
-    <Compile Include="ViewsModels\Provider\ProviderViewModel.cs" />
     <Compile Include="ViewsModels\User\CreateUserViewModel.cs" />
     <Compile Include="ViewsModels\Product\CreateViewModels.cs" />
     <Compile Include="ViewsModels\Product\PagingInfo.cs" />
@@ -329,6 +327,10 @@
     <ProjectReference Include="..\ShoppingCart.Models\ShoppingCart.Models.csproj">
       <Project>{19913b66-6b27-4fd9-a9fc-64133aa21aa4}</Project>
       <Name>ShoppingCart.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShoppingCart.Services\ShoppingCart.Services.csproj">
+      <Project>{34065edb-a9b3-47c4-ac2d-ec8478429961}</Project>
+      <Name>ShoppingCart.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

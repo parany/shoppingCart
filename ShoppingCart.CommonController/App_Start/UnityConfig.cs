@@ -16,6 +16,8 @@ using System.Web;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Models.Repositories.Concrete;
 using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Services.Interface;
+using ShoppingCart.Services.Implementation;
 using ShoppingCart.Models.Log;
 
 namespace ShoppingCart.CommonController
@@ -37,6 +39,7 @@ namespace ShoppingCart.CommonController
             container.RegisterType<IGenericRepository<Category>, GenericRepository<Category>>();
             container.RegisterType<IGenericRepository<ShippingDetail>, GenericRepository<ShippingDetail>>();
             container.RegisterType<IGenericRepository<Provider>, GenericRepository<Provider>>();
+            container.RegisterType<IProvidersService, ProvidersService>();
             container.RegisterType<IGenericRepository<ChangeTracking>, GenericRepository<ChangeTracking>>();
             container.RegisterType<ProductRepository, ProductRepository>();
 

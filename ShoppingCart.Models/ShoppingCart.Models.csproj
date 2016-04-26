@@ -63,8 +63,8 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Log\ChangeTracking.cs" />
-    <Compile Include="Log\ChangeTrackingService.cs" />
+    <Compile Include="Tracking\ChangeTracking.cs" />
+    <Compile Include="Tracking\ChangeTrackingService.cs" />
     <Compile Include="Migrations\DbConfiguration.cs" />
     <Compile Include="Models\Entities\Cart.cs" />
     <Compile Include="Models\Entities\CartLine.cs" />
@@ -88,6 +88,8 @@
     <Compile Include="Repositories\Concrete\ProductRepository.cs" />
     <Compile Include="Repositories\Interface\IGenericRepository.cs" />
     <Compile Include="ShoppingCartDbContext.cs" />
+    <Compile Include="ViewModels\ProviderEditViewModel.cs" />
+    <Compile Include="ViewModels\ProviderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

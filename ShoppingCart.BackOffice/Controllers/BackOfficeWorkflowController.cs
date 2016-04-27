@@ -142,41 +142,35 @@ namespace ShoppingCart.BackOffice.Controllers
             };
             return View("TreeState",model);
         }
-        public ActionResult ChangeNodeName(string path, string name)
+        [HttpPost]
+        public ActionResult ChangeNodeName(string path, string name, string oldName)
         {
             string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
             CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
-            XmlNode current = _Xml.DirectPathNode(path);
-            XmlNode newNode = _Xml.Create(name);
-            string newPath = path.Replace(current.Name, newNode.Name);
-            current.ParentNode.ReplaceChild(newNode, current);
-            foreach (XmlNode node in current.ChildNodes)
-            {
-                newNode.AppendChild(node);
-            }
-            foreach (XmlAttribute att in current.Attributes)
-            {
-                newNode.Attributes.Append(att);
-            }
-
-            _Xml.Save();
+            string newPath = path.Replace(oldName, "");
+            _Xml.ChangeNodeName(path, name);
             return RedirectToAction("TreeState", new RouteValueDictionary(
                                     new { controller = "BackOfficeWorkflow", action = "TreeState", path = newPath }));
         }
-        public ActionResult DeleteBranch()
+        public ActionResult DeleteBranch(string path, string branchName)
         {
-            return Json("");
+            string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
+            CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
+            string newPath = path.Replace(branchName, "");
+            _Xml.DeleteBranch(path);
+            return RedirectToAction("TreeState", new RouteValueDictionary(
+                                    new { controller = "BackOfficeWorkflow", action = "TreeState", path = newPath }));
         }
         public ActionResult ChangeNodeValue()
         {
             return Json("");
         }
 
-        public ActionResult TreeState(string path)
+        public ActionResult TreeState(string path = null)
         {
             string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
             CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
-            if (!_Xml.DirectPathNode(path).Name.Equals(_Xml.StartNode().Name) && path!=null)
+            if (!_Xml.DirectPathNode(path).Name.Equals(_Xml.StartNode().Name) && path != null)
             {
                 NodesViewModel model = new NodesViewModel
                 {

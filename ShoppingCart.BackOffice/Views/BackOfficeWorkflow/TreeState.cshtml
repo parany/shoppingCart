@@ -6,7 +6,6 @@
     ViewBag.Title = "TreeState";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="row">
     <div class="col-md-6">
         <h3>Tree Status : </h3>
@@ -30,13 +29,13 @@
                 @Html.ActionLink("Change Name", "ChangeNodeName", "BackOfficeWorkflow", new {path = @o.Name, name = "Selling"}, new { @style = "color:white" , @class= "btn btn-warning" })
             </div>
         </div>
-    }
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Add new Branch</h3>
-            @Html.ActionLink("Add Branch", "TreeState", "BackOfficeWorkflow", null, new { @style = "color:white" , @class= "btn btn-info" })
-        </div>
-    </div>
+        }
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Add new Branch</h3>
+                    @Html.ActionLink("Add Branch", "TreeState", "BackOfficeWorkflow", null, new { @style = "color:white" , @class= "btn btn-info" })
+                </div>
+            </div>
 }else{
 
     foreach (XmlNode o in Model.List)

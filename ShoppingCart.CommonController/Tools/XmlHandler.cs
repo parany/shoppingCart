@@ -9,7 +9,7 @@ namespace ShoppingCart.CommonController.Tools
     public class XmlHandler
     {
         private XmlDocument _XmlData { get; set; }
-        private XmlNode _node { get; set; }
+        public XmlNode _node { get; set; }
 
         private string _FilePath { get; set; }
 
@@ -55,6 +55,31 @@ namespace ShoppingCart.CommonController.Tools
         public XmlNode Create(string name)
         {
             return _XmlData.CreateElement(name);
+        }
+
+        public void ChangeNodeName(string path, string newName)
+        {
+            XmlNode currentNode = DirectPathNode(path);
+            XmlNode newNode = Create(newName);
+            currentNode.ParentNode.ReplaceChild(newNode, currentNode);
+            foreach (XmlNode node in currentNode.ChildNodes)
+            {
+                newNode.AppendChild(node);
+            }
+            foreach (XmlAttribute att in currentNode.Attributes)
+            {
+                newNode.Attributes.Append(att);
+            }
+
+            Save();
+        }
+
+        public void DeleteBranch(string path)
+        {
+            XmlNode currentNode = DirectPathNode(path);
+            currentNode.ParentNode.RemoveChild(currentNode);
+
+            Save();
         }
 
         public void Save()

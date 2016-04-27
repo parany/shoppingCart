@@ -10,6 +10,7 @@ using ShoppingCart.Controllers;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
+    [Authorize(Roles = "AllPermissions")]
     public class CartsController : BasicCartsController
     {
         public CartsController(IGenericRepository<Product> productRepository,

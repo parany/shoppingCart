@@ -40,7 +40,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Membership <span class="caret"></span></a>
                         <ul class="dropdown-menu navbar-inverse">
                             <li>@Html.ActionLink("Users", "Index", "User", null, new { @style = "color:white" })</li>
-                            <li>@Html.ActionLink("Roles", "Index", "Role", null, new { @style = "color:white" })</li>
+                            <li>@Html.ActionLink("Groups", "Index", "Groups", null, new { @style = "color:white" })</li>
+                            <li>@Html.ActionLink("Permissions", "Index", "Role", null, new { @style = "color:white" })</li>
                         </ul>
                     </li>
                     @*@Html.MvcSiteMap().Menu()*@

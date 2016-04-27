@@ -13,7 +13,6 @@ using ShoppingCart.Services.Interface;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     public class ProvidersController : Controller
     {
         private IGenericRepository<Provider> ProviderRepository { get; set; }
@@ -35,12 +34,14 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Providers
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public ActionResult Index()
         {
             return View(ProviderRepository.GetAll());
         }
 
         // GET: Providers/Details/5
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public ActionResult Details(Guid? id)
         {
             if (id == null)
@@ -63,6 +64,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Providers/Create
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Create()
         {
             ViewBag.PaymentMethods = GetPaymentMethods();
@@ -74,6 +76,7 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Create([Bind(Include = "Name,Address,PaymentMethods")] ProviderViewModel providerViewModel)
         {
             Provider provider = new Provider();
@@ -89,6 +92,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Providers/Edit/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -128,6 +132,7 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Edit([Bind(Include = "Id,Name,Address,PaymentMethods")] ProviderViewModel providerViewModel)
         {
             if (ModelState.IsValid)
@@ -160,6 +165,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Providers/Delete/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -177,6 +183,7 @@ namespace ShoppingCart.BackOffice.Controllers
         // POST: Providers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult DeleteConfirmed(Guid id)
         {
             Provider provider = ProviderRepository.GetSingle(x => x.Id == id);

@@ -10,7 +10,6 @@ using ShoppingCart.GeneralLib.CustomAttributs;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     public class CartController : Controller
     {
         public IGenericRepository<Cart> CartRepository;
@@ -27,6 +26,7 @@ namespace ShoppingCart.BackOffice.Controllers
             
         }
         // GET: Cart
+        [Authorize(Roles = "AllPermissions")]
         public ActionResult Index(ShippingState id = ShippingState.Pending)
         {
             var carts = CartRepository.GetAll();
@@ -88,6 +88,7 @@ namespace ShoppingCart.BackOffice.Controllers
 
         [HttpPost]
         [ValidateJsonAntiforgeryToken]
+        [Authorize(Roles = "AllPermissions")]
         public ActionResult Index(ChangeStateViewModel cartIdandState)
         {            
             var cart = CartRepository.GetSingle(x => x.Id == cartIdandState.Id);

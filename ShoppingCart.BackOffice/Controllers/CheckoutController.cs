@@ -28,6 +28,7 @@ namespace ShoppingCart.BackOffice.Controllers
 
         [Authorize]
         [HttpPost]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public override ActionResult Order(CheckoutDTO cartDto)
         {
             if (ModelState.IsValid)

@@ -2,10 +2,9 @@
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     public class HomeController : Controller
     {
-
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         // GET: Home
         public ActionResult Index()
         {

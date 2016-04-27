@@ -63,6 +63,7 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\User\IdentityManager.cs" />
     <Compile Include="Tracking\ChangeTracking.cs" />
     <Compile Include="Tracking\ChangeTrackingService.cs" />
     <Compile Include="Migrations\DbConfiguration.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="Models\User\ApplicationUser.cs" />
     <Compile Include="Models\User\ApplicationUserGroup.cs" />
     <Compile Include="Models\User\Group.cs" />
-    <Compile Include="Models\User\GroupManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Concrete\GenericRepository.cs" />
     <Compile Include="Repositories\Concrete\PagingSettings.cs" />

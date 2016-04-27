@@ -4,7 +4,7 @@ using ShoppingCart.CommonController.Controllers;
 
 namespace ShoppingCart.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "AllPermissions")]
     public class AccountController : BasicAccountController
     {
     }

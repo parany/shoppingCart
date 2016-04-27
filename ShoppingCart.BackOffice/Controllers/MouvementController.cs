@@ -19,6 +19,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Mouvement
+        [Authorize(Roles = "AllPermissions")]
         public ActionResult Index()
         {
             return View(_ChangeTrackingRepository.GetAll());

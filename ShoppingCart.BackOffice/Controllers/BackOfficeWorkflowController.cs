@@ -13,7 +13,7 @@ using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    
     public class BackOfficeWorkflowController : CartController
     {
 
@@ -25,6 +25,7 @@ namespace ShoppingCart.BackOffice.Controllers
             
         }
 
+        [Authorize(Roles = "AllPermissions")]
         public ActionResult ShowAllCart()
         {
             string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
@@ -54,6 +55,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
 
+        [Authorize(Roles = "AllPermissions")]
         public ActionResult MoveState(string newState, string id)
         {
             Guid Id = new Guid(id);
@@ -64,6 +66,7 @@ namespace ShoppingCart.BackOffice.Controllers
                                     new { controller = "BackOfficeWorkflow", action = "OneCartMove", id = id }));
         }
 
+        [Authorize(Roles = "AllPermissions")]
         public ActionResult OneCartMove(string id)
         {
             string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
@@ -96,6 +99,7 @@ namespace ShoppingCart.BackOffice.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "AllPermissions")]
         public ActionResult Reset(string id)
         {
             Guid Id = new Guid(id);
@@ -109,6 +113,7 @@ namespace ShoppingCart.BackOffice.Controllers
                 }));
         }
 
+        [Authorize(Roles = "AllPermissions")]
         public ActionResult Drop(string id)
         {
             Guid Id = new Guid(id);

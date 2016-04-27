@@ -1,29 +1,27 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using ShoppingCart.Models;
-using ShoppingCart.Models.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ShoppingCart.Models.Models.User
 {
-    public class GroupManager
+    public class IdentityManager
     {
-        ShoppingCartDbContext _db;
         RoleManager<ApplicationRole> _roleManager;
+
         UserManager<ApplicationUser> _userManager;
 
-        public GroupManager(ShoppingCartDbContext context)
+        ShoppingCartDbContext _db;
+
+        public IdentityManager(ShoppingCartDbContext context)
         {
             _db = context;
-            _roleManager = new RoleManager<ApplicationRole>(
-                new RoleStore<ApplicationRole>(new ShoppingCartDbContext()));
-            _userManager = new UserManager<ApplicationUser>(
-                new UserStore<ApplicationUser>(new ShoppingCartDbContext()));
+            _roleManager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(_db));
+            _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_db));
         }
-
 
         public bool RoleExists(string name)
         {
@@ -33,7 +31,6 @@ namespace ShoppingCart.Models.Models.User
 
         public bool CreateRole(string name, string description = "")
         {
-            // Swap ApplicationRole for IdentityRole:
             var idResult = _roleManager.Create(new ApplicationRole(name, description));
             return idResult.Succeeded;
         }
@@ -56,14 +53,31 @@ namespace ShoppingCart.Models.Models.User
         public void ClearUserRoles(string userId)
         {
             var user = _userManager.FindById(userId);
-            var currentRoles = new List<IdentityUserRole>();
+            var currentRoles = _userManager.GetRoles(user.Id);
 
-            currentRoles.AddRange(user.Roles);
             foreach (var role in currentRoles)
             {
-                var currentrole = _roleManager.FindById(role.RoleId);
-                _userManager.RemoveFromRole(userId, currentrole.Name);
+                _userManager.RemoveFromRole(userId, role);
             }
+        }
+
+        public void RemoveFromRole(string userId, string roleName)
+        {
+            _userManager.RemoveFromRole(userId, roleName);
+        }
+
+
+        public void DeleteRole(string roleId)
+        {
+            var roleUsers = _db.Users.Where(u => u.Roles.Any(r => r.RoleId == roleId));
+            var role = _db.Roles.Find(roleId);
+
+            foreach (var user in roleUsers)
+            {
+                this.RemoveFromRole(user.Id, role.Name);
+            }
+            _db.Roles.Remove(role);
+            _db.SaveChanges();
         }
 
         public void CreateGroup(string groupName)
@@ -138,7 +152,7 @@ namespace ShoppingCart.Models.Models.User
                     // This will be 1 if the current group is the only one:
                     if (groupsWithRole == 1)
                     {
-                        _userManager.RemoveFromRole(user.Id, role.Role.Name);
+                        this.RemoveFromRole(user.Id, role.Role.Name);
                     }
                 }
             }

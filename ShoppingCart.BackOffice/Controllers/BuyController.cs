@@ -17,6 +17,7 @@ namespace ShoppingCart.BackOffice.Controllers
 
         }
 
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public override ActionResult Index()
         {
             IList<Product> productsToBuy = _ProductRepository.GetList(p => p.Type == ProductType.ToBuy);

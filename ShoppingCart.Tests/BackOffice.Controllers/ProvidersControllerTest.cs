@@ -16,9 +16,8 @@ namespace ShoppingCart.Tests.BackOffice.Controllers
         [TestMethod]
         public void Edit_ReturnsHttpStatusBadRequest_WhenIdIsNull()
         {
-            var mockProviderRepository = new Mock<IGenericRepository<Provider>>();
             var mockServiceProvider = new Mock<IProvidersService>();
-            var providerController = new ProvidersController(mockProviderRepository.Object, mockServiceProvider.Object);
+            var providerController = new ProvidersController(mockServiceProvider.Object);
             Guid? nullId = null;
             var result = providerController.Edit(nullId);
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));

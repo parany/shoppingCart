@@ -11,5 +11,6 @@ namespace ShoppingCart.Services.Interface
     {
         void AddProvider(ProviderViewModel providerViewModel);
         ProviderEditViewModel EditProvider(Guid? id);
+        ProviderViewModel GetDetails(Guid? id);
     }
 }

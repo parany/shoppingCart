@@ -72,5 +72,18 @@ namespace ShoppingCart.Services.Implementation
             providerViewModel.PaymentMethods = paymentMethods;
             return providerViewModel;
         }
+        public ProviderViewModel GetDetails(Guid? id)
+        {
+            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
+            if (provider == null)
+                return null;
+            var providerViewModel = new ProviderViewModel();
+            providerViewModel.Id = provider.Id;
+            providerViewModel.Address = provider.Address;
+            providerViewModel.Name = provider.Name;
+            if (provider.PaymentMethods != null)
+                providerViewModel.PaymentMethods = provider.PaymentMethods.Split(',');
+            return providerViewModel;
+        }
     }
 }

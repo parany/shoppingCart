@@ -10,6 +10,7 @@ using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.ViewModels;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Services.Interface;
+using ShoppingCart.GeneralLib.Util;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
@@ -28,8 +29,7 @@ namespace ShoppingCart.BackOffice.Controllers
         private List<Payment> GetPaymentMethods()
         {
             var payments = new Payments();
-            string path = Server.MapPath("~/App_Data/payment.xml");
-            payments.InitPaymentsList(path);
+            payments.InitPaymentsListFromResourceString(ResourcesHelper.payment);
             return payments.Modules;
         }
 
@@ -48,15 +48,9 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
-            var providerViewModel = new ProviderViewModel();
-            providerViewModel.Id = provider.Id;
-            providerViewModel.Address = provider.Address;
-            providerViewModel.Name = provider.Name;
-            if (provider.PaymentMethods != null)
-                providerViewModel.PaymentMethods = provider.PaymentMethods.Split(',');
+            var providerViewModel = ProvidersService.GetDetails(id);
             ViewBag.PaymentMethods = GetPaymentMethods();
-            if (provider == null)
+            if (providerViewModel == null)
             {
                 return HttpNotFound();
             }

@@ -85,5 +85,30 @@ namespace ShoppingCart.Services.Implementation
                 providerViewModel.PaymentMethods = provider.PaymentMethods.Split(',');
             return providerViewModel;
         }
+        public void UpdateProvider(ProviderViewModel providerViewModel)
+        {
+            Provider provider = new Provider();
+            var sbPaymentMethods = new StringBuilder();
+            int i = 1;
+            if (providerViewModel.PaymentMethods != null)
+            {
+                foreach (var p in providerViewModel.PaymentMethods)
+                {
+                    sbPaymentMethods.Append(p);
+                    if (i < providerViewModel.PaymentMethods.Count())
+                    {
+                        sbPaymentMethods.Append(',');
+                    }
+                    i++;
+                }
+            }
+
+            provider.Id = providerViewModel.Id;
+            provider.Address = providerViewModel.Address;
+            provider.Name = providerViewModel.Name;
+            provider.PaymentMethods = sbPaymentMethods.ToString();
+
+            ProviderRepository.Update(provider);
+        }
     }
 }

@@ -22,8 +22,7 @@ namespace ShoppingCart.BackOffice.Controllers
         public BackOfficeWorkflowController(IGenericRepository<Cart> cartRepository,
                               IGenericRepository<Product> productRepository,
                               IGenericRepository<ShippingDetail> shippingDetailRepository) : base(cartRepository, productRepository, shippingDetailRepository)
-        {
-            
+        {    
         }
 
         /*

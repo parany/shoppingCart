@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<ShoppingCart.Models.Models.User.Group>
-@{ ViewBag.Title = "Index"; }
+@{ ViewBag.Title = "Groups List"; }
 
-<h2>Groups</h2>
+<h2>List of Groups</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -20,9 +20,9 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Permissions", "GroupRoles", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Permissions", "GroupRoles", new { id = item.Id }, new { @class = "btn btn-success btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-xs" })
             </td>
         </tr>
     }

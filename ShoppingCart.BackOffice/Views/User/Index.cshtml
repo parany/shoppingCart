@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ShoppingCart.BackOffice.ViewsModels.EditUserViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Users List";
 }
 
-<h2>Index</h2>
+<h2>List of Users in the system</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -42,10 +42,10 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.UserName }) |
-                @Html.ActionLink("Groups", "UserGroups", new { id = item.UserName }) |
-                @Html.ActionLink("Effective Permissions", "UserPermissions", new { id = item.UserName }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserName })
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserName }, new { @class = "btn btn-warning btn-xs" }) 
+                @Html.ActionLink("Groups", "UserGroups", new { id = item.UserName }, new { @class = "btn btn-success btn-xs" }) 
+                @Html.ActionLink("Effective Permissions", "UserPermissions", new { id = item.UserName }, new { @class = "btn btn-info btn-xs" }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserName }, new { @class = "btn btn-danger btn-xs" })
             </td>
         </tr>
     }

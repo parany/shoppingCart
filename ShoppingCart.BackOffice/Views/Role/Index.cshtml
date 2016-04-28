@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ShoppingCart.BackOffice.ViewsModels.RoleViewModel>
 
 @{
-    ViewBag.Title = "Application Roles";
+    ViewBag.Title = "Permissions List";
 }
 
-<h2>Application Roles</h2>
+<h2>List of permissions</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -30,8 +30,8 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.RoleName }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.RoleName })
+                @Html.ActionLink("Edit", "Edit", new { id = item.RoleName }, new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.RoleName }, new { @class = "btn btn-danger btn-xs" })
             </td>
         </tr>
     }

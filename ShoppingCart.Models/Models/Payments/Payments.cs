@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace ShoppingCart.Models.Models.Payments
@@ -28,6 +29,18 @@ namespace ShoppingCart.Models.Models.Payments
                     this.Modules.Add(pay);
                 }
             }
+        }
+
+        public void InitPaymentsListFromResourceString(string payment)
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(Payments));
+            MemoryStream memStream = new MemoryStream(Encoding.UTF8.GetBytes(payment));
+            Payments p = xs.Deserialize(memStream) as Payments;
+
+            foreach (Payment pay in p.Modules)
+            {
+                this.Modules.Add(pay);
+            }            
         }
     }
 }

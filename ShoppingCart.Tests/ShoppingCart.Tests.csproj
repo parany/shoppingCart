@@ -60,6 +60,7 @@
     <Compile Include="BackOffice.Controllers\HomeControllerTest.cs" />
     <Compile Include="BackOffice.Controllers\ProductControllerTest.cs" />
     <Compile Include="BackOffice.Controllers\RoleControllerTest.cs" />
+    <Compile Include="BackOffice.Controllers\ProvidersControllerTest.cs" />
     <Compile Include="BackOffice.Controllers\UserControllerTest.cs" />
     <Compile Include="FrontOffice.Controllers\CartsControllerTest.cs" />
     <Compile Include="FrontOffice.Controllers\CheckoutControllerTest.cs" />
@@ -80,6 +81,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ShoppingCart.BackOffice\ShoppingCart.BackOffice.csproj">
+      <Project>{a2c4cdc6-10b3-4a66-b728-15abf462253f}</Project>
+      <Name>ShoppingCart.BackOffice</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShoppingCart.CommonController\ShoppingCart.CommonController.csproj">
       <Project>{3FB884B2-266E-4D69-9FDC-F6D14540848B}</Project>
       <Name>ShoppingCart.CommonController</Name>
@@ -91,6 +96,10 @@
     <ProjectReference Include="..\ShoppingCart.FrontOffice\ShoppingCart.FrontOffice.csproj">
       <Project>{8721026B-92D6-4CF5-AEE5-70C7D6381CA1}</Project>
       <Name>ShoppingCart.FrontOffice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShoppingCart.Services\ShoppingCart.Services.csproj">
+      <Project>{34065edb-a9b3-47c4-ac2d-ec8478429961}</Project>
+      <Name>ShoppingCart.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

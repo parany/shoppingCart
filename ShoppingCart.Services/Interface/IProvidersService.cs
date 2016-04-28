@@ -10,5 +10,6 @@ namespace ShoppingCart.Services.Interface
     public interface IProvidersService
     {
         void AddProvider(ProviderViewModel providerViewModel);
+        ProviderEditViewModel EditProvider(Guid? id);
     }
 }

@@ -95,32 +95,13 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
-            ProviderEditViewModel providerViewModel = new ProviderEditViewModel();
-            providerViewModel.Id = provider.Id;
-            providerViewModel.Address = provider.Address;
-            providerViewModel.Name = provider.Name;
-            var paymentMethodsAll = GetPaymentMethods();
-            string[] selectedPaymentMethods = null;
-            if (provider.PaymentMethods != null)
-                selectedPaymentMethods = provider.PaymentMethods.Split(',');
-            var paymentMethods = new List<SelectListItem>();
-            foreach (var pm in paymentMethodsAll)
-            {
-                var item = new SelectListItem
-                {
-                    Value = pm.Id.ToString(),
-                    Text = pm.Name
-                };
-                paymentMethods.Add(item);
-            }
-            paymentMethods.ForEach(p => p.Selected = selectedPaymentMethods != null && selectedPaymentMethods.Contains(p.Value));
-            ViewBag.PaymentMethods = paymentMethods;
+            ProviderEditViewModel provider = ProvidersService.EditProvider(id);
+            ViewBag.PaymentMethods = provider.PaymentMethods;
             if (provider == null)
             {
                 return HttpNotFound();
             }
-            return View(providerViewModel);
+            return View(provider);
         }
 
         // POST: Providers/Edit/5

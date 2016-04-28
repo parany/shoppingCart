@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using ShoppingCart.Models.ViewModels;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Models.Models.Payments;
 using ShoppingCart.Services.Interface;
+using ShoppingCart.GeneralLib.Util;
 
 namespace ShoppingCart.Services.Implementation
 {
@@ -16,6 +19,12 @@ namespace ShoppingCart.Services.Implementation
         public ProvidersService(IGenericRepository<Provider> providerRepository)
         {
             ProviderRepository = providerRepository;
+        }
+        private List<Payment> GetPaymentMethods()
+        {
+            var payments = new Payments();
+            payments.InitPaymentsListFromResourceString(ResourcesHelper.payment);
+            return payments.Modules;
         }
         public void AddProvider(ProviderViewModel providerViewModel)
         {
@@ -37,6 +46,31 @@ namespace ShoppingCart.Services.Implementation
             provider.PaymentMethods = sbPaymentMethods.ToString();
 
             ProviderRepository.Add(provider);
+        }
+        public ProviderEditViewModel EditProvider(Guid? id)
+        {
+            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
+            ProviderEditViewModel providerViewModel = new ProviderEditViewModel();
+            providerViewModel.Id = provider.Id;
+            providerViewModel.Address = provider.Address;
+            providerViewModel.Name = provider.Name;
+            var paymentMethodsAll = GetPaymentMethods();
+            string[] selectedPaymentMethods = null;
+            if (provider.PaymentMethods != null)
+                selectedPaymentMethods = provider.PaymentMethods.Split(',');
+            var paymentMethods = new List<SelectListItem>();
+            foreach (var pm in paymentMethodsAll)
+            {
+                var item = new SelectListItem
+                {
+                    Value = pm.Id.ToString(),
+                    Text = pm.Name
+                };
+                paymentMethods.Add(item);
+            }
+            paymentMethods.ForEach(p => p.Selected = selectedPaymentMethods != null && selectedPaymentMethods.Contains(p.Value));
+            providerViewModel.PaymentMethods = paymentMethods;
+            return providerViewModel;
         }
     }
 }

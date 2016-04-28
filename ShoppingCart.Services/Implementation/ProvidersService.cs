@@ -121,5 +121,9 @@ namespace ShoppingCart.Services.Implementation
             if (provider != null)
                 ProviderRepository.Delete(provider);
         }
+        public IEnumerable<Provider> GetAllProviders()
+        {
+            return ProviderRepository.GetAll();
+        }
     }
 }

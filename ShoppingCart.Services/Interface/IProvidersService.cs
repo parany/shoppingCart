@@ -16,5 +16,6 @@ namespace ShoppingCart.Services.Interface
         void UpdateProvider(ProviderViewModel providerViewModel);
         Provider GetProvider(Guid? id);
         void DeleteProvider(Guid id);
+        IEnumerable<Provider> GetAllProviders();
     }
 }

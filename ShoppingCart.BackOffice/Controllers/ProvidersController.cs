@@ -16,13 +16,10 @@ namespace ShoppingCart.BackOffice.Controllers
 {
     public class ProvidersController : Controller
     {
-        private IGenericRepository<Provider> ProviderRepository { get; set; }
         private IProvidersService ProvidersService { get; set; }
 
-        public ProvidersController(IGenericRepository<Provider> providerRepository,
-                                   IProvidersService providersService)
+        public ProvidersController(IProvidersService providersService)
         {
-            ProviderRepository = providerRepository;
             ProvidersService = providersService;
         }
 
@@ -37,7 +34,7 @@ namespace ShoppingCart.BackOffice.Controllers
         [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public ActionResult Index()
         {
-            return View(ProviderRepository.GetAll());
+            return View(ProvidersService.GetAllProviders());
         }
 
         // GET: Providers/Details/5

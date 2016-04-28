@@ -10,6 +10,7 @@ namespace ShoppingCart.Models.Models.Entities
         ToBuy = 1
     };
 
+    [LoggingClass]
     public class Product : BaseObject
     {
         public string Name { get; set; }

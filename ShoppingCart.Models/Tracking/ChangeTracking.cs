@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.Models.Log
 {
+    public enum ChangeType
+    {
+        Add = 0,
+        Edit = 1,
+        Delete = 2,
+    }
+
     public class ChangeTracking : BaseObject
     {
         public string ClassName { get; set; }
@@ -15,6 +22,7 @@ namespace ShoppingCart.Models.Log
         public string OldValue { get; set; }
         public string NewValue { get; set; }
         public string Description { get; set; }
+        public ChangeType Type { get; set; }
         public DateTime DateChanged { get; set; }
     }
 }

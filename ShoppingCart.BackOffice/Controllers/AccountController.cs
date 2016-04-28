@@ -1,6 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using ShoppingCart.CommonController.Controllers;
+using System.Web.Mvc;
 
-using ShoppingCart.CommonController.Controllers;
 
 namespace ShoppingCart.Controllers
 {

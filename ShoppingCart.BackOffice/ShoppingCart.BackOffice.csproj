@@ -158,6 +158,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BackOfficeWorkflowController.cs" />
     <Compile Include="Controllers\BuyController.cs" />
@@ -165,7 +166,6 @@
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
-    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MouvementController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -182,12 +182,7 @@
     <Compile Include="ViewsModels\Cart\ChangeStateViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartLineViewModel.cs" />
     <Compile Include="ViewsModels\Cart\CartsViewModel.cs" />
-    <Compile Include="ViewsModels\Group\SelectGroupEditorViewModel.cs" />
-    <Compile Include="ViewsModels\Group\SelectGroupRolesViewModel.cs" />
-    <Compile Include="ViewsModels\Group\SelectUserGroupsViewModel.cs" />
-    <Compile Include="ViewsModels\Role\EditRoleViewModel.cs" />
-    <Compile Include="ViewsModels\Role\SelectRoleEditorViewModel.cs" />
-    <Compile Include="ViewsModels\Role\UserPermissionsViewModel.cs" />
+    <Compile Include="ViewsModels\Product\StockHistoryViewModel.cs" />
     <Compile Include="ViewsModels\User\CreateUserViewModel.cs" />
     <Compile Include="ViewsModels\Product\CreateViewModels.cs" />
     <Compile Include="ViewsModels\Product\PagingInfo.cs" />
@@ -195,10 +190,9 @@
     <Compile Include="ViewsModels\Product\ProductViewModel.cs" />
     <Compile Include="ViewsModels\Role\RoleViewModel.cs" />
     <Compile Include="ViewsModels\Cart\ShippingDetailViewModel.cs" />
-    <Compile Include="ViewsModels\User\EditUserViewModel.cs" />
-    <Compile Include="ViewsModels\User\ManageUserViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\CartsViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\DefaultWorkflowViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\NodesViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\OneCartViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\SampleViewModel.cs" />
   </ItemGroup>
@@ -216,10 +210,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\App\ShoppingCart.BackOffice.js" />
-    <Content Include="Mvc.sitemap">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="BackOffice.cd" />
+    <Content Include="Mvc.sitemap" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -239,6 +230,7 @@
     <Content Include="Uploads\images\product_default_large.jpg" />
     <Content Include="Uploads\images\product_default_medium.jpg" />
     <Content Include="Uploads\images\product_default_thumbnail.jpg" />
+    <Content Include="BackOffice.cd" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -278,6 +270,7 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
@@ -311,19 +304,8 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Access\Index.cshtml" />
     <Content Include="Views\Mouvement\Index.cshtml" />
-    <Content Include="Views\User\Edit.cshtml" />
-    <Content Include="Views\Groups\GroupRoles.cshtml" />
-    <Content Include="Views\Role\Delete.cshtml" />
-    <Content Include="Views\Groups\Index.cshtml" />
-    <Content Include="Views\Groups\Create.cshtml" />
-    <Content Include="Views\Groups\Edit.cshtml" />
-    <Content Include="Views\Groups\Delete.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\SelectGroupEditorViewModel.cshtml" />
-    <Content Include="Views\User\UserGroups.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\SelectRoleEditorViewModel.cshtml" />
-    <Content Include="Views\User\UserPermissions.cshtml" />
-    <Content Include="Views\User\Delete.cshtml" />
-    <Content Include="Views\Groups\Details.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\TreeState.cshtml" />
+    <Content Include="Views\Mouvement\Stock.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

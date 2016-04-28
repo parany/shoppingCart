@@ -126,7 +126,7 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
+            Provider provider = ProvidersService.GetProvider(id);
             if (provider == null)
             {
                 return HttpNotFound();

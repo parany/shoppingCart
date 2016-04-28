@@ -110,5 +110,10 @@ namespace ShoppingCart.Services.Implementation
 
             ProviderRepository.Update(provider);
         }
+        public Provider GetProvider(Guid? id)
+        {
+            var provider = ProviderRepository.GetSingle(x => x.Id == id);
+            return provider;
+        }
     }
 }

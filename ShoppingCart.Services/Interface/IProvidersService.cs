@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.ViewModels;
 
 namespace ShoppingCart.Services.Interface
@@ -13,5 +14,6 @@ namespace ShoppingCart.Services.Interface
         ProviderEditViewModel EditProvider(Guid? id);
         ProviderViewModel GetDetails(Guid? id);
         void UpdateProvider(ProviderViewModel providerViewModel);
+        Provider GetProvider(Guid? id);
     }
 }

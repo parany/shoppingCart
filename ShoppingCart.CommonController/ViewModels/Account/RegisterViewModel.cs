@@ -1,3 +1,4 @@
+using ShoppingCart.Models.Models.User;
 using System.ComponentModel.DataAnnotations;
 
 namespace ShoppingCart.CommonController.ViewModels
@@ -32,5 +33,17 @@ namespace ShoppingCart.CommonController.ViewModels
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+
+        public ApplicationUser GetUser()
+        {
+            var user = new ApplicationUser()
+            {
+                UserName = this.UserName,
+                Address = this.Address,
+                PhoneNumber = this.PhoneNumber,
+                Email = this.Email,
+            };
+            return user;
+        }
     }
 }

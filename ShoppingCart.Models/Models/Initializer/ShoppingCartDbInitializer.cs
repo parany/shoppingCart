@@ -6,11 +6,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Models.User;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ShoppingCart.Models.Models.Initializer
 {
     public class ShoppingCartDbInitializer : DropCreateDatabaseIfModelChanges<ShoppingCartDbContext>
     {
+
         protected override void Seed(ShoppingCartDbContext context)
         {
             PerformInitialSetup(context);
@@ -19,6 +21,9 @@ namespace ShoppingCart.Models.Models.Initializer
 
         public void PerformInitialSetup(ShoppingCartDbContext context)
         {
+            // Products Informations
+            string[] categories = { "Ordinateurs", "Tablettes", "Phones" };
+
             // Adding 3 categories
             Category cat1 = new Category() { Id = Guid.NewGuid(), Name = "Ordinateurs", DateCreated = DateTime.Now };
             context.Categories.Add(cat1);
@@ -154,109 +159,103 @@ namespace ShoppingCart.Models.Models.Initializer
 
         }
 
+
+
         private void InitializeIdentityForEF(ShoppingCartDbContext context)
         {
 
-            // Informations
-            string roleAdminName = "Administrator";
-            string roleAdminDesc = "These are the administrators who have all access in the system";
-            string roleProviderName = "Provider";
-            string roleProviderDesc = "These are the providers who supply products to the system";
-            string userAdminName = "Admin";
-            string userAdminPassword = "Secret$1234";
-            string userAdminEmail = "admin@example.com";
-            string userAdminAddress = "Ankorondrano, Madagascar";
-            string userAdminPhoneNumber = "0202002020";
-            string userProviderName = "Provider";
-            string userProviderPassword = "Secret$1234";
-            string userProviderEmail = "provider@example.com";
-            string userProviderAddress = "Ny Havana, Ankorondrano";
-            string userProviderPhoneNumber = "0343403434";
-            string userName = "User";
-            string userPassword = "Secret$1234";
-            string userEmail = "user@example.com";
-            string userAddress = "Village des jeux, Ankorondrano";
-            string userPhoneNumber = "0323203232";
-            bool emailConfirmed = true;
+            // Informations about Identity
+            string[] _initialGroupNames = { "Administrator", "Provider", "PrivilegedUser" };
 
-            // Adding user and role manager
-            var userMgr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var roleMgr = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(context));
+            string[] _rolesNames = { "AllPermissions", "ReadWrite", "Read" };
+            string[] _rolesDescriptions = { "These are the administrators who have all access in the system", "These are the providers who supply products to the system", "These are users with privileged access" };
 
-            // Create Role Admin if it does not exist
-            if (!roleMgr.RoleExists(roleAdminName))
+            string[] _usersNames = { "Admin", "Provider", "User" };
+            string[] _usersEmails = { "admin@example.com", "provider@example.com", "user@example.com" };
+            string[] _usersAddresses = { "Ankorondrano, Madagascar", "Ny Havana, Ankorondrano", "Village des jeux, Ankorondrano" };
+            string[] _usersPhoneNumbers = { "0202002020", "0343403434", "0323203232" };
+            bool _emailConfirmed = true;
+            string _usersPassword = "Secret$1234";
+
+            string[] _administratorRoleNames =  { "AllPermissions" };
+            string[] _providerRoleNames = { "ReadWrite" };
+            string[] _privilegedUserRoleNames = { "Read" };
+
+
+            // Adding identity manager
+            IdentityManager _idManager = new IdentityManager(context);
+            ShoppingCartDbContext _db = context;
+
+            // Adding Groups
+            foreach (var groupName in _initialGroupNames)
             {
-                ApplicationRole admin = new ApplicationRole(roleAdminName);
-                admin.Description = roleAdminDesc;
-                roleMgr.Create(admin);
+                _idManager.CreateGroup(groupName);
             }
 
-            // Create Role Provider if it does not exist
-            if (!roleMgr.RoleExists(roleProviderName))
+            // Adding Roles
+            for (int j=0; j< _rolesNames.Count(); j++)
             {
-                ApplicationRole provider = new ApplicationRole(roleProviderName);
-                provider.Description = roleProviderDesc;
-                roleMgr.Create(provider);
+                _idManager.CreateRole(_rolesNames[j],_rolesDescriptions[j]);
             }
+            
 
-            // Create Admin user
-            ApplicationUser user = userMgr.FindByName(userAdminName);
-            if (user == null)
+            //Creating Users
+            for (int i = 0; i < _usersNames.Count(); i++)
             {
-                userMgr.Create(new ApplicationUser
+                var user = new ApplicationUser()
                 {
-                    UserName = userAdminName,
-                    Email = userAdminEmail,
-                    EmailConfirmed = emailConfirmed,
-                    Address = userAdminAddress,
-                    PhoneNumber = userAdminPhoneNumber
-                },
-                userAdminPassword);
-                user = userMgr.FindByName(userAdminName);
-            }
+                    UserName = _usersNames[i],
+                    Email = _usersEmails[i],
+                    Address = _usersAddresses[i],
+                    EmailConfirmed = _emailConfirmed,
+                    PhoneNumber = _usersPhoneNumbers[i]
+                };
+                _idManager.CreateUser(user, _usersPassword);
 
-            // Add User Admin to Role Admin
-            if (!userMgr.IsInRole(user.Id, roleAdminName))
-            {
-                userMgr.AddToRole(user.Id, roleAdminName);
-            }
-
-            // Create Provider user
-            ApplicationUser user2 = userMgr.FindByName(userProviderName);
-            if (user2 == null)
-            {
-                userMgr.Create(new ApplicationUser
+                if (i == 0)
                 {
-                    UserName = userProviderName,
-                    Email = userProviderEmail,
-                    EmailConfirmed = emailConfirmed,
-                    Address = userProviderAddress,
-                    PhoneNumber = userProviderPhoneNumber
-                },
-                userProviderPassword);
-                user2 = userMgr.FindByName(userProviderName);
-            }
-
-            // Add User Provider to Role Provider
-            if (!userMgr.IsInRole(user2.Id, roleProviderName))
-            {
-                userMgr.AddToRole(user2.Id, roleProviderName);
-            }
-
-            //Create Simple User
-            ApplicationUser user3 = userMgr.FindByName(userName);
-            if (user3 == null)
-            {
-                userMgr.Create(new ApplicationUser
+                    _idManager.AddUserToRole(user.Id, _rolesNames[0]);
+                }
+                else if (i == 1)
                 {
-                    UserName = userName,
-                    Email = userEmail,
-                    EmailConfirmed = emailConfirmed,
-                    Address = userAddress,
-                    PhoneNumber = userPhoneNumber
-                },
-                userPassword);
-                user3 = userMgr.FindByName(userName);
+                    _idManager.AddUserToRole(user.Id, _rolesNames[1]);
+                }
+            }
+
+            // Adding Roles to Groups
+            var allGroups = _db.Groups;
+            for(int k=0; k < _initialGroupNames.Count(); k++)
+            {
+                string[] table = null;
+                if (k == 0)
+                {
+                    table = _administratorRoleNames;
+                }
+                else if (k == 1)
+                {
+                    table = _providerRoleNames;
+                }
+                else if (k == 2)
+                {
+                    table = _privilegedUserRoleNames;
+                }
+                string temp = _initialGroupNames[k];
+                var roles = allGroups.First(g => g.Name == temp);
+                foreach (string name in table)
+                {
+                    _idManager.AddRoleToGroup(roles.Id, name);
+                }
+            }
+
+            // Adding Users to Groups
+            for(int l = 0; l < _usersNames.Count(); l++)
+            {
+                string temp = _usersNames[l];
+                string temp2 = _initialGroupNames[l];
+                var usr = _db.Users.First(u => u.UserName == temp);
+                var allGroup = _db.Groups;
+                var grp = allGroups.First(g => g.Name == temp2);
+                _idManager.AddUserToGroup(usr.Id, grp.Id);
             }
         }
     }

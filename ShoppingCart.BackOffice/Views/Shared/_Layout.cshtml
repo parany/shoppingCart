@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - BO ShoppingCart</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -41,7 +41,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Membership <span class="caret"></span></a>
                         <ul class="dropdown-menu navbar-inverse">
                             <li>@Html.ActionLink("Users", "Index", "User", null, new { @style = "color:white" })</li>
-                            <li>@Html.ActionLink("Roles", "Index", "Role", null, new { @style = "color:white" })</li>
+                            <li>@Html.ActionLink("Groups", "Index", "Groups", null, new { @style = "color:white" })</li>
+                            <li>@Html.ActionLink("Permissions", "Index", "Role", null, new { @style = "color:white" })</li>
                         </ul>
                     </li>
                     @*@Html.MvcSiteMap().Menu()*@

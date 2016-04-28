@@ -225,9 +225,6 @@
     <Compile Include="Infrastructure\Email\EmailOrderProcessor.cs" />
     <Compile Include="Infrastructure\Email\EmailService.cs" />
     <Compile Include="Infrastructure\Email\EmailSettings.cs" />
-    <Compile Include="Infrastructure\Identity\ApplicationRoleManager.cs" />
-    <Compile Include="Infrastructure\Identity\ApplicationSignInManager.cs" />
-    <Compile Include="Infrastructure\Identity\ApplicationUserManager.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
@@ -237,6 +234,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Identity\ApplicationRoleManager.cs" />
+    <Compile Include="Infrastructure\Identity\ApplicationSignInManager.cs" />
+    <Compile Include="Infrastructure\Identity\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\Identity\OAuthSection.cs" />
     <Compile Include="Infrastructure\SMS\SmsService.cs" />
     <Compile Include="Meta_Entity\MetaCategory.cs" />
@@ -311,7 +311,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>

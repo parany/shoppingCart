@@ -14,7 +14,7 @@ using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "AllPermissions")]
     public class BackOfficeWorkflowController : CartController
     {
 

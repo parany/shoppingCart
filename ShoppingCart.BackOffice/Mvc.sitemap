@@ -22,6 +22,12 @@
             <mvcSiteMapNode title="Reset" controller="BackOfficeWorkflow" action="Reset" preservedRouteParameters="id"/>
             <mvcSiteMapNode title="Drop" controller="BackOfficeWorkflow" action="Drop" preservedRouteParameters="id"/>
         </mvcSiteMapNode>
+      <mvcSiteMapNode title="Workflow" controller="BackOfficeWorkflow" action="ShowTreeBase">
+        <mvcSiteMapNode title="Change Node Name" controller="BackOfficeWorkflow" action="ChangeNodeName" preservedRouteParameters="path,name,oldName"/>
+        <mvcSiteMapNode title="Delete Branch" controller="BackOfficeWorkflow" action="DeleteBranch" preservedRouteParameters="path,branchName"/>
+        <mvcSiteMapNode title="Change Node Value" controller="BackOfficeWorkflow" action="ChangeNodeValue"/>
+        <mvcSiteMapNode title="Tree State" controller="BackOfficeWorkflow" action="TreeState" preservedRouteParameters="path"/>
+      </mvcSiteMapNode>
         <mvcSiteMapNode title="Providers" controller="Providers" action="Index">
             <mvcSiteMapNode title="Create" controller="Providers" action="Create"/>
             <mvcSiteMapNode title="Details" controller="Providers" action="Details" preservedRouteParameters="id"/>

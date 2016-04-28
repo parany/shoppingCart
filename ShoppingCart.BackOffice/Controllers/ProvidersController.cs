@@ -140,9 +140,7 @@ namespace ShoppingCart.BackOffice.Controllers
         [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
-            if (provider != null)
-                ProviderRepository.Delete(provider);
+            ProvidersService.DeleteProvider(id);
             return RedirectToAction("Index");
         }
 

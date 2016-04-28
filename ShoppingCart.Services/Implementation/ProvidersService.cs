@@ -115,5 +115,11 @@ namespace ShoppingCart.Services.Implementation
             var provider = ProviderRepository.GetSingle(x => x.Id == id);
             return provider;
         }
+        public void DeleteProvider(Guid id)
+        {
+            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
+            if (provider != null)
+                ProviderRepository.Delete(provider);
+        }
     }
 }

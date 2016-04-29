@@ -11,7 +11,7 @@ namespace ShoppingCart.Models.Repositories.Concrete
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseObject
     {
-       
+
         public List<Expression<Func<T, object>>> NavigationProperties;
         protected List<Expression<Func<T, object>>> _ignoreProperties;
         public PagingSettings PagingSettings;
@@ -305,6 +305,16 @@ namespace ShoppingCart.Models.Repositories.Concrete
 
                     if (log != null)
                         context.ChangesTracking.Add(log);
+
+                    IQueryable<ChangeTracking> dbQuery = context.ChangesTracking.Where(chg => chg.PrimaryKey == item.Id);
+                    List<ChangeTracking> listChanges = dbQuery.ToList();
+                    if (listChanges != null)
+                    {
+                        foreach (ChangeTracking chg in listChanges)
+                        {
+                            chg.Type = ChangeType.Delete;
+                        }
+                    }
 
                     context.Entry(item).State = EntityState.Deleted;
                 }

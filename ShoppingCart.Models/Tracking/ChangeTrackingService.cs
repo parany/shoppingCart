@@ -114,7 +114,7 @@ namespace ShoppingCart.Models.Log
                     DateChanged = DateTime.Now,
                     ClassName = newType.Name,
                     PrimaryKey = newEntry.Id,
-                    Description = "Delete " + newEntry.GetType().Name,
+                    Description = "Delete " + newType.Name,
                     Type = ChangeType.Delete
                 };
 

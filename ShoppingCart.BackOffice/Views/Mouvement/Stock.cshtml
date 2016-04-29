@@ -37,50 +37,59 @@
 
     @foreach (var item in Model)
     {
-        <tr class=" @if(item.ChangedType == "Edit") { ".info"}  ">
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
-            </td>
-            <td>
-                <img src="~/Uploads/images/@item.ImagePath" alt="@item.Product.Image.ImageName" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Category.Name)
-            </td>
-            <td>
-                @{
-                    var last = item.Product.Providers.Last();
-                }
+        if (item.ChangedType == "Delete")
+        {
+            <tr class="danger text-center">
+                <td colspan="8">Product was deleted</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    <img src="~/Uploads/images/@item.ImagePath" alt="@item.Product.Image.ImageName" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Category.Name)
+                </td>
+                <td>
+                    @{
+                        var last = item.Product.Providers.Last();
+                    }
 
-                @foreach (var provider in item.Product.Providers)
-                {
-                    @Html.DisplayFor(modelItem => provider.Name)
-
-                    if (provider != last)
+                    @foreach (var provider in item.Product.Providers)
                     {
-                        <span> / </span>
+                        @Html.DisplayFor(modelItem => provider.Name)
+
+                        if (provider != last)
+                        {
+                            <span> / </span>
+                        }
                     }
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChangedType)
-                @Html.ActionLink("Edit", "Edit", new { id = item.Product.Id }, new { @class = "btn btn-warning btn-xs" })
-                @Html.ActionLink("Details", "Details", new { id = item.Product.Id }, new { @class = "btn btn-success btn-xs" })
-                @Html.ActionLink("Delete", "Delete", new { id = item.Product.Id }, new { @class = "btn btn-danger btn-xs" })
-            </td>
-        </tr>
-                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.DateCreated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.CreatedBy)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Product.Id }, new { @class = "btn btn-warning btn-xs" })
+                    @Html.ActionLink("Details", "Details", new { id = item.Product.Id }, new { @class = "btn btn-success btn-xs" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Product.Id }, new { @class = "btn btn-danger btn-xs" })
+                </td>
+            </tr>
+                        }
+
+                        }
 
 </table>

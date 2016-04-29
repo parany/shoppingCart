@@ -43,6 +43,56 @@ namespace ShoppingCart.BackOffice.Controllers
             return View(_ChangeTrackingRepository.GetAll().OrderByDescending(mvt => mvt.DateChanged));
         }
 
+        // GET: Mouvement
+        public ActionResult Avant(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ChangeTracking change = _ChangeTrackingRepository.GetSingle(mvt => mvt.Id == id.Value
+                                                                               && mvt.ClassName == "Product");
+            IList<Product> products = _ProductRepository.GetList(p => p.Type == ProductType.ForSale
+                                                                      && p.DateCreated <= change.DateChanged);
+
+            IList<ChangeTracking> list = _ChangeTrackingRepository.GetList(mvt => mvt.DateChanged > change.DateChanged 
+                                                                                  && mvt.Type != ChangeType.Delete);
+
+            IList<StockHistoryViewModel> stockHistoryList = new List<StockHistoryViewModel>();
+
+            foreach (Product pro in products)
+            {
+                stockHistoryList.Add(new StockHistoryViewModel { Product = pro, ImagePath = pro.Image.getImageVersion("_thumbnail"), ChangedType = null });
+            }
+
+            foreach (ChangeTracking chg in list)
+            {
+                switch (chg.Type)
+                {
+                    case ChangeType.Add:
+                        break;
+                    case ChangeType.Edit:
+                        StockHistoryViewModel productStockChanged = stockHistoryList.FirstOrDefault(p => p.Product.Id == chg.PrimaryKey);
+                        if (productStockChanged != null)
+                        {
+                            var property = productStockChanged.Product.GetType().GetProperty(chg.PropertyName);
+                            var targetType = property.PropertyType;
+                            var convertedValue = Convert.ChangeType(chg.OldValue, targetType);
+
+                            property.SetValue(productStockChanged.Product, convertedValue);
+                            productStockChanged.ChangedType = chg.Type.ToString();
+                        }
+                        break;
+
+                    case ChangeType.Delete:
+                        break;
+                }
+            }
+
+            return View("Stock", stockHistoryList);
+        }
+
         // GET: Mouvement/Stock
         public ActionResult Stock(Guid? id)
         {
@@ -74,6 +124,10 @@ namespace ShoppingCart.BackOffice.Controllers
                 productStockChanged.ChangedType = change.Type.ToString();
             }
 
+            if (change.Type == ChangeType.Delete)
+            {
+                stockHistoryList.Add(new StockHistoryViewModel() { ChangedType = change.Type.ToString() });
+            }
             return View(stockHistoryList);
         }
     }

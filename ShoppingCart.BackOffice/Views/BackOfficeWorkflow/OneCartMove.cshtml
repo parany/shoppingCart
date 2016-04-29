@@ -8,7 +8,7 @@
         </br>
     </div>
     <div class="col-md-2" style="text-align: center;">
-        @Html.ActionLink("Back to List", "ShowAllCart", "BackOfficeWorkflow", nnull, new { @style = "color:white" , @class= "btn btn-info" })
+        @Html.ActionLink("Back to List", "ShowAllCart", "BackOfficeWorkflow", null, new { @style = "color:white" , @class= "btn btn-info" })
     </div>
     <div class="col-md-10">
         <h2 style="text-align: center;">Cart Detail</h2>
@@ -40,7 +40,7 @@
                 @foreach (OneCartViewModel.CartLineViewModel c in Model.CartLines) {
                     <tr>
                         <td class="col-sm-8 col-md-6">
-                            @Html.ActionLink(c.Product.Name, "Details", "Product", c.Product.Id)</h4>
+                            @Html.ActionLink(c.Product.Name, "Details", "Product", c.Product.Id)
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>@c.Quantity</strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>@c.Product.Price</strong></td>

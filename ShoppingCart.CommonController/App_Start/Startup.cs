@@ -54,9 +54,9 @@ namespace ShoppingCart.CommonController
             OAuthSection oauth = (OAuthSection)ConfigurationManager.GetSection("OAuthGroup/OAuth");
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: oauth.Microsoft.ClientId,
-            //    clientSecret: oauth.Microsoft.ClientSecret);
+            app.UseMicrosoftAccountAuthentication(
+                clientId: oauth.Microsoft.ClientId,
+                clientSecret: oauth.Microsoft.ClientSecret);
 
             //app.UseTwitterAuthentication(
             //   consumerKey: oauth.Twitter.ConsumerKey,

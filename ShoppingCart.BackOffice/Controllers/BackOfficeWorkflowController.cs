@@ -43,11 +43,20 @@ namespace ShoppingCart.BackOffice.Controllers
             {
                 CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
 
+                // Check if the Worflow is initialised
+                string status = c.WorkflowStatus;
+                if (status == null)
+                {
+                    status = c.TransactionType.ToString();
+                    c.WorkflowStatus = status;
+                    CartRepository.Update(c);
+                }
+
                 list.Add(new CartsViewModel.CartWorkViewModel
                 {
                     Cart = c,
                     User = c.User,
-                    Status = _Xml.CurrentPotitionOnTree(c.WorkflowStatus)
+                    Status = _Xml.CurrentPotitionOnTree(status)
                 });
             }
 

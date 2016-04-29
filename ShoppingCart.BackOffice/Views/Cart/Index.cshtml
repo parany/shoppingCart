@@ -2,7 +2,7 @@
 @model IEnumerable<ShoppingCart.BackOffice.ViewsModels.CartsViewModel>
 
 @{
-    ViewBag.Title = "Carts";
+    ViewBag.Title = "Carts List";
 }
 
 @{
@@ -11,7 +11,7 @@
     int canceledCartsCount = ViewBag.ShippingStateCounts[ShippingState.Canceled];
 }
 
-<h2>Carts</h2>
+<h2>List of Carts</h2>
 <ul class="nav nav-pills" role="tablist">
     <li role="presentation" @if (ViewBag.ActiveTab == ShippingState.Pending) {<text>class="active"</text>}>
         <a href=@Url.Action("Index", new { id = ShippingState.Pending })>

@@ -1,64 +1,39 @@
-﻿@using ShoppingCart.BackOffice.ViewsModels
-@model ICollection<RoleIndexModel>
-@{ 
-    ViewBag.Title = "Roles"; 
+﻿@model IEnumerable<ShoppingCart.BackOffice.ViewsModels.RoleViewModel>
+
+@{
+    ViewBag.Title = "Permissions List";
 }
 
-<h2>Roles</h2>
-<p style="margin-bottom:10px;">
-    @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
+<h2>List of permissions</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table table-responsive">
-        <tr><th>Name</th><th>Description</th><th>User Count</th><th>Users in Role</th><th></th></tr>
-        @if (Model.Count == 0)
-        {
-            <tr><td colspan="4" class="text-center">No Roles</td></tr>
-        }
-        else
-        {
-            foreach (RoleIndexModel vm in Model)
-            {
-                <tr>
-                    <td>@vm.Role.Name</td>
-                    <td>@vm.Role.Description</td>
-                    <td>
-                        @vm.Users.Count
-                    </td>
-                    <td>
-                        @if (vm.Users.Count == 0)
-                        {
-                            @: No Users in Role
-}
-                        else
-                        {
-                            string names = "";
-                            <p>
-                                @for (int i = 0; i < vm.Users.Count; i++)
-                                {
-                                    if (i == 0)
-                                    {
-                                        names += "" + vm.Users[i].UserName;
-                                    }
-                                    else
-                                    {
-                                        names += ", " + vm.Users[i].UserName;
-                                    }
-                                }
-                                @names
-                            </p>
-                        }
-                    </td>
-                    <td>
-                        @using (Html.BeginForm("Delete", "Role", new { id = vm.Role.Id }))
-                        {
-                            @Html.ActionLink("Edit", "Edit", "Role", new { id = vm.Role.Id }, new { @class = "btn btn-success btn-xs" })
-                            <button class="btn btn-danger btn-xs" type="submit">
-                                Delete
-                            </button>
-                        }
-                    </td>
-                </tr>
-            }
-        }
-</table>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
 
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RoleName }, new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.RoleName }, new { @class = "btn btn-danger btn-xs" })
+            </td>
+        </tr>
+    }
+
+</table>

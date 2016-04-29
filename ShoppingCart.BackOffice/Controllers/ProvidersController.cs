@@ -10,52 +10,44 @@ using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.ViewModels;
 using ShoppingCart.Models.Repositories.Interface;
 using ShoppingCart.Services.Interface;
+using ShoppingCart.GeneralLib.Util;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     public class ProvidersController : Controller
     {
-        private IGenericRepository<Provider> ProviderRepository { get; set; }
         private IProvidersService ProvidersService { get; set; }
 
-        public ProvidersController(IGenericRepository<Provider> providerRepository,
-                                   IProvidersService providersService)
+        public ProvidersController(IProvidersService providersService)
         {
-            ProviderRepository = providerRepository;
             ProvidersService = providersService;
         }
 
         private List<Payment> GetPaymentMethods()
         {
             var payments = new Payments();
-            string path = Server.MapPath("~/App_Data/payment.xml");
-            payments.InitPaymentsList(path);
+            payments.InitPaymentsListFromResourceString(ResourcesHelper.payment);
             return payments.Modules;
         }
 
         // GET: Providers
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public ActionResult Index()
         {
-            return View(ProviderRepository.GetAll());
+            return View(ProvidersService.GetAllProviders());
         }
 
         // GET: Providers/Details/5
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
-            var providerViewModel = new ProviderViewModel();
-            providerViewModel.Id = provider.Id;
-            providerViewModel.Address = provider.Address;
-            providerViewModel.Name = provider.Name;
-            if (provider.PaymentMethods != null)
-                providerViewModel.PaymentMethods = provider.PaymentMethods.Split(',');
+            var providerViewModel = ProvidersService.GetDetails(id);
             ViewBag.PaymentMethods = GetPaymentMethods();
-            if (provider == null)
+            if (providerViewModel == null)
             {
                 return HttpNotFound();
             }
@@ -63,6 +55,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Providers/Create
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Create()
         {
             ViewBag.PaymentMethods = GetPaymentMethods();
@@ -74,6 +67,7 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Create([Bind(Include = "Name,Address,PaymentMethods")] ProviderViewModel providerViewModel)
         {
             Provider provider = new Provider();
@@ -89,38 +83,20 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Providers/Edit/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
-            ProviderEditViewModel providerViewModel = new ProviderEditViewModel();
-            providerViewModel.Id = provider.Id;
-            providerViewModel.Address = provider.Address;
-            providerViewModel.Name = provider.Name;
-            var paymentMethodsAll = GetPaymentMethods();
-            string[] selectedPaymentMethods = null;
-            if (provider.PaymentMethods != null)
-                selectedPaymentMethods = provider.PaymentMethods.Split(',');
-            var paymentMethods = new List<SelectListItem>();
-            foreach (var pm in paymentMethodsAll)
-            {
-                var item = new SelectListItem
-                {
-                    Value = pm.Id.ToString(),
-                    Text = pm.Name
-                };
-                paymentMethods.Add(item);
-            }
-            paymentMethods.ForEach(p => p.Selected = selectedPaymentMethods != null && selectedPaymentMethods.Contains(p.Value));
-            ViewBag.PaymentMethods = paymentMethods;
+            ProviderEditViewModel provider = ProvidersService.EditProvider(id);
+            ViewBag.PaymentMethods = provider.PaymentMethods;
             if (provider == null)
             {
                 return HttpNotFound();
             }
-            return View(providerViewModel);
+            return View(provider);
         }
 
         // POST: Providers/Edit/5
@@ -128,45 +104,26 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Edit([Bind(Include = "Id,Name,Address,PaymentMethods")] ProviderViewModel providerViewModel)
         {
             if (ModelState.IsValid)
             {
-                Provider provider = new Provider();
-                var sbPaymentMethods = new StringBuilder();
-                int i = 1;
-                if (providerViewModel.PaymentMethods != null)
-                {
-                    foreach (var p in providerViewModel.PaymentMethods)
-                    {
-                        sbPaymentMethods.Append(p);
-                        if (i < providerViewModel.PaymentMethods.Count())
-                        {
-                            sbPaymentMethods.Append(',');
-                        }
-                        i++;
-                    }
-                }
-
-                provider.Id = providerViewModel.Id;
-                provider.Address = providerViewModel.Address;
-                provider.Name = providerViewModel.Name;
-                provider.PaymentMethods = sbPaymentMethods.ToString();
-
-                ProviderRepository.Update(provider);
+                ProvidersService.UpdateProvider(providerViewModel);
                 return RedirectToAction("Index");
             }
             return View(providerViewModel);
         }
 
         // GET: Providers/Delete/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
+            Provider provider = ProvidersService.GetProvider(id);
             if (provider == null)
             {
                 return HttpNotFound();
@@ -177,11 +134,10 @@ namespace ShoppingCart.BackOffice.Controllers
         // POST: Providers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Provider provider = ProviderRepository.GetSingle(x => x.Id == id);
-            if (provider != null)
-                ProviderRepository.Delete(provider);
+            ProvidersService.DeleteProvider(id);
             return RedirectToAction("Index");
         }
 

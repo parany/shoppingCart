@@ -5,8 +5,11 @@ namespace ShoppingCart.Models.Models.User
     public class ApplicationRole : IdentityRole
     {
         public ApplicationRole() : base() { }
-        public ApplicationRole(string name) : base(name) { }
+        public ApplicationRole(string name, string description) : base(name)
+        {
+            this.Description = description;
+        }
 
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
     }
 }

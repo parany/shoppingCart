@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<ShoppingCart.Models.Models.Entities.Provider>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Providers List";
 }
 
-<h2>Index</h2>
+<h2>List of Providers</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
@@ -17,7 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
-        <th></th>
+        <th>
+
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -29,9 +31,9 @@
             @Html.DisplayFor(modelItem => item.Address)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, new { @class = "btn btn-warning" })
-            @Html.ActionLink("Details", "Details", new { id=item.Id }, new { @class = "btn btn-info"})
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new { @class = "btn btn-danger"})
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, new { @class = "btn btn-warning btn-xs" })
+            @Html.ActionLink("Details", "Details", new { id=item.Id }, new { @class = "btn btn-info btn-xs"})
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new { @class = "btn btn-danger btn-xs"})
         </td>
     </tr>
 }

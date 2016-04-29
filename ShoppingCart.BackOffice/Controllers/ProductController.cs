@@ -14,7 +14,6 @@ using System.Globalization;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     public class ProductController : Controller
     {
         private ProductRepository ProductRepository { get; }
@@ -38,6 +37,7 @@ namespace ShoppingCart.BackOffice.Controllers
 
         //
         // GET: /Product/
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public ActionResult Index()
         {
             IList<ProductViewModel> products = new List<ProductViewModel>();
@@ -55,6 +55,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Product/Details/5
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public ActionResult Details(Guid? id)
         {
             if (id == null)
@@ -75,6 +76,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Product/Create
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Create()
         {
             var providersList = new List<SelectListItem>();
@@ -104,6 +106,7 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Create(CreateViewModels createViewModels, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
@@ -134,6 +137,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Product/Edit/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -176,6 +180,7 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Edit(CreateViewModels createViewModels, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
@@ -205,6 +210,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Product/Delete/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -216,6 +222,7 @@ namespace ShoppingCart.BackOffice.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         private void UploadImage(CreateViewModels cvm, HttpPostedFileBase upload)
         {
             if (upload != null && upload.ContentLength > 0)

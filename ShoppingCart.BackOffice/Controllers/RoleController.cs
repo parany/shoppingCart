@@ -10,146 +10,112 @@ using ShoppingCart.Models.Models.User;
 using ShoppingCart.BackOffice.ViewsModels;
 using ShoppingCart.CommonController.Infrastructure.Identity;
 using System.Collections.ObjectModel;
+using ShoppingCart.Models;
+using System.Net;
+using System.Data.Entity;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     public class RoleController : Controller
     {
-
-        private ApplicationUserManager _userManager;
-        private ApplicationRoleManager _roleManager;
-
-        public RoleController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
-        {
-            _userManager = userManager;
-            _roleManager = roleManager;
-        }
-
-        public ApplicationUserManager UserManager {
-            get {
-                return this._userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-        }
-        public ApplicationRoleManager RoleManager {
-            get {
-                return this._roleManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
-            }
-        }
+        private ShoppingCartDbContext _db = new ShoppingCartDbContext();
 
         // GET: Role
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public ActionResult Index()
         {
-            IEnumerable<ApplicationRole> roles = RoleManager.Roles.ToList();
-            var model = new Collection<RoleIndexModel>();
-
-            foreach (var role in roles)
+            var rolesList = new List<RoleViewModel>();
+            foreach (var role in _db.Roles)
             {
-                var users = UserManager.Users.Where(x => x.Roles.Select(r => r.RoleId).Contains(role.Id)).ToList();
-                var usersCollection = new Collection<ApplicationUser>();
-
-                foreach (var user in users)
-                {
-                    var userTemp = UserManager.FindById(user.Id);
-                    usersCollection.Add(userTemp);
-                }
-
-                model.Add(new RoleIndexModel { Role = role, Users = usersCollection });
+                var roleModel = new RoleViewModel(role);
+                rolesList.Add(roleModel);
             }
-            return View(model);
+            return View(rolesList);
         }
 
-        public ActionResult Create()
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
+        public ActionResult Create(string message = "")
         {
+            ViewBag.Message = message;
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(RoleCreateModel roleCreateModel)
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
+        public ActionResult Create([Bind(Include =
+            "RoleName,Description")]RoleViewModel model)
         {
+            string message = "That role name has already been used";
             if (ModelState.IsValid)
             {
-                ApplicationRole role = new ApplicationRole(roleCreateModel.Name);
-                role.Description = roleCreateModel.Description;
-                IdentityResult result = await RoleManager.CreateAsync(role);
-                if (result.Succeeded)
+                var role = new ApplicationRole(model.RoleName, model.Description);
+                var idManager = new IdentityManager(_db);
+
+                if (idManager.RoleExists(model.RoleName))
                 {
+                    return View(message);
+                }
+                else
+                {
+                    idManager.CreateRole(model.RoleName, model.Description);
                     return RedirectToAction("Index");
                 }
-                else {
-                    AddErrorsFromResult(result);
-                }
             }
-            return View(roleCreateModel);
+            return View();
         }
 
-        public async Task<ActionResult> Edit(string id)
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
+        public ActionResult Edit(string id)
         {
-            ApplicationRole role = await RoleManager.FindByIdAsync(id);
-            string[] memberIDs = role.Users.Select(x => x.UserId).ToArray();
-            IEnumerable<ApplicationUser> members = UserManager.Users.Where(x => memberIDs.Any(y => y == x.Id));
-            IEnumerable<ApplicationUser> nonMembers = UserManager.Users.Except(members);
-            return View(new RoleEditModel
-            {
-                Role = role,
-                Members = members,
-                NonMembers = nonMembers
-            });
+            // It's actually the Role.Name tucked into the id param:
+            var role = _db.Roles.First(r => r.Name == id);
+            var roleModel = new EditRoleViewModel(role);
+            return View(roleModel);
         }
+
 
         [HttpPost]
-        public async Task<ActionResult> Edit(RoleModificationModel model)
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
+        public ActionResult Edit([Bind(Include =
+            "RoleName,OriginalRoleName,Description")] EditRoleViewModel model)
         {
-            IdentityResult result;
             if (ModelState.IsValid)
             {
-                foreach (string userId in model.IdsToAdd ?? new string[] { })
-                {
-                    result = await UserManager.AddToRoleAsync(userId, model.RoleName);
-                    if (!result.Succeeded)
-                    {
-                        return View("Error", result.Errors);
-                    }
-                }
-                foreach (string userId in model.IdsToDelete ?? new string[] { })
-                {
-                    result = await UserManager.RemoveFromRoleAsync(userId, model.RoleName);
-                    if (!result.Succeeded)
-                    {
-                        return View("Error", result.Errors);
-                    }
-                }
+                var role = (ApplicationRole)_db.Roles.First(r => r.Name == model.OriginalRoleName);
+                role.Name = model.RoleName;
+                role.Description = model.Description;
+                _db.Entry(role).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View("Error", new string[] { "Role Not Found" });
+            return View(model);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Delete(string id)
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
+        public ActionResult Delete(string id)
         {
-            ApplicationRole role = await RoleManager.FindByIdAsync(id);
-            if (role != null)
+            if (id == null)
             {
-                IdentityResult result = await RoleManager.DeleteAsync(role);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
-                else {
-                    return View("Error", result.Errors);
-                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else {
-                return View("Error", new string[] { "Role Not Found" });
+            var role = _db.Roles.First(r => r.Name == id);
+            var model = new RoleViewModel(role);
+            if (role == null)
+            {
+                return HttpNotFound();
             }
+            return View(model);
         }
 
-        private void AddErrorsFromResult(IdentityResult result)
+
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
+        public ActionResult DeleteConfirmed(string id)
         {
-            foreach (string error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
+            var role = _db.Roles.First(r => r.Name == id);
+            var idManager = new IdentityManager(_db);
+            idManager.DeleteRole(role.Id);
+            return RedirectToAction("Index");
         }
     }
 }

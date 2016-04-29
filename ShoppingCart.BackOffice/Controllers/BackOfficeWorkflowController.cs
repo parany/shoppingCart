@@ -14,7 +14,7 @@ using ShoppingCart.Models.Repositories.Interface;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "AllPermissions")]
     public class BackOfficeWorkflowController : CartController
     {
 
@@ -22,8 +22,7 @@ namespace ShoppingCart.BackOffice.Controllers
         public BackOfficeWorkflowController(IGenericRepository<Cart> cartRepository,
                               IGenericRepository<Product> productRepository,
                               IGenericRepository<ShippingDetail> shippingDetailRepository) : base(cartRepository, productRepository, shippingDetailRepository)
-        {
-            
+        {    
         }
 
         /*

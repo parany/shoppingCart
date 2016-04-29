@@ -23,7 +23,7 @@ namespace ShoppingCart.CommonController.Controllers
         }
         public virtual ActionResult Index()
         {
-            IList<Product> products = _ProductRepository.GetAll();
+            IList<Product> products = _ProductRepository.GetList(p => p.Type == ProductType.ForSale);
             IList<Category> categories = _CategoryRepository.GetAll();
             ProductsListViewModel viewModel = new ProductsListViewModel
             {

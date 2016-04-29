@@ -127,8 +127,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -191,31 +191,22 @@
   <ItemGroup>
     <Content Include="App_Data\payment.xml" />
     <Content Include="Content\fb.png" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\google.png" />
     <Content Include="Content\microsoft.png" />
     <Content Include="Content\Oops.jpg" />
     <Content Include="Content\Product.png" />
     <Content Include="Content\Success.jpg" />
-    <Content Include="Content\Themes\bootstrap.min.css" />
-    <Content Include="Content\Themes\cyborg.bootstrap.min.css" />
     <Content Include="Content\Themes\cyborg\bootstrap.min.css" />
-    <Content Include="Content\Themes\darkly.bootstrap.min.css" />
     <Content Include="Content\Themes\darkly\bootstrap.min.css" />
     <Content Include="Content\Themes\default\bootstrap.min.css" />
-    <Content Include="Content\Themes\flatly.bootstrap.min.css" />
     <Content Include="Content\Themes\flatly\bootstrap.min.css" />
     <Content Include="Content\Themes\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\Themes\lumen.bootstrap.min.css" />
     <Content Include="Content\Themes\lumen\bootstrap.min.css" />
-    <Content Include="Content\Themes\simplex.bootstrap.min.css" />
     <Content Include="Content\Themes\simplex\bootstrap.min.css" />
-    <Content Include="Content\Themes\spacelab.bootstrap.min.css" />
     <Content Include="Content\Themes\spacelab\bootstrap.min.css" />
-    <Content Include="Content\Themes\superhero.bootstrap.min.css" />
     <Content Include="Content\Themes\superhero\bootstrap.min.css" />
-    <Content Include="Content\Themes\united.bootstrap.min.css" />
     <Content Include="Content\Themes\united\bootstrap.min.css" />
-    <Content Include="Content\Themes\yeti.bootstrap.min.css" />
     <Content Include="Content\Themes\yeti\bootstrap.min.css" />
     <Content Include="Content\twitter.png" />
     <Content Include="favicon.ico" />
@@ -228,6 +219,11 @@
     <Content Include="Content\Themes\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Themes\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="FrontOffice.cd" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Properties\PublishProfiles\shopping-cart - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\shopping-cart - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -321,7 +317,6 @@
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
-    <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Carts\Index.cshtml" />
     <Content Include="Views\Carts\AddToCart.cshtml" />

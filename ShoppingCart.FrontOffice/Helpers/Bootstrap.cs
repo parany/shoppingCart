@@ -4,7 +4,7 @@ namespace ShoppingCart.Helpers
 {
     public class Bootstrap
     {
-        public const string BundleBase = "~/Content/css/";
+        public const string BundleBase = "~/Content/Themes";
 
         public class Theme
         {

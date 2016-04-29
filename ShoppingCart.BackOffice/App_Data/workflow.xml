@@ -6,20 +6,22 @@
                             <Options><Closed>closed</Closed><Returned>returned
                                     <Description> Text </Description><Date>Date</Date></Returned></Options></Delivery><Cancelled>cancel</Cancelled></Options></Pending><Cancelled>cancel
                     <Notes>text</Notes></Cancelled></Options></Buying>
-  <sells>
-    <confirm>
-      <pending>
-        <Delivery>
-          <Closed>
-          </Closed>
-          <Returned>
-          </Returned>
-        </Delivery>
-        <Cancelled>
-        </Cancelled>
-      </pending>
-      <Cancelled>
-      </Cancelled>
-    </confirm>
-  </sells>
+  <Selling> Buy
+            <CartId>text</CartId><Notes>text</Notes><Options><Pending> pending
+                    <Payment>text</Payment><Notes>text</Notes><Delivery>text</Delivery><Count>number</Count><Options><Delivery> delivery
+                          <Options>
+                              <Closed>closed</Closed>
+                              <Returned>returned
+                                    <Description> Text </Description><Date>Date</Date>
+                              </Returned>
+                          </Options>
+                          </Delivery>
+                              <Cancelled>cancel</Cancelled>
+                              </Options>
+                                </Pending>
+                                  <Cancelled>cancel
+                                        <Notes>text</Notes>
+                                  </Cancelled>
+                            </Options>
+   </Selling>
 </workflows>

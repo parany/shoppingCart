@@ -1,6 +1,22 @@
-﻿@model ShoppingCart.ViewModels.ExternalLoginListViewModel
+﻿@model ShoppingCart.CommonController.ViewModels.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
-
+<style>
+    .socialnetwork-container-space{
+        margin: 20px 0;
+    }
+</style>
+<script>
+    window.onload = function () {
+        var button1 = document.getElementById("Google");
+        button1.classList.add("btn-danger");
+        var button2 = document.getElementById("Facebook");
+        button2.classList.add("btn-primary");
+        var button3 = document.getElementById("Microsoft");
+        button3.classList.add("btn-default");
+        var button4 = document.getElementById("Twitter");
+        button4.classList.add("btn-info");
+    }
+</script>
 <h4>Use another service to log in.</h4>
 <hr />
 @{
@@ -19,7 +35,26 @@
             <div id="socialLoginList">
                 <p>
                     @foreach (AuthenticationDescription p in loginProviders) {
-                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                        <div class="socialnetwork-container-space">
+                            <button type="submit" class="btn" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                                @switch (p.AuthenticationType)
+                                {
+                                    case "Facebook":
+                                        <img src="~/Content/fb.png" />
+                                        break;
+                                    case "Google":
+                                        <img src="~/Content/google.png" />
+                                        break;
+                                    case "Microsoft":
+                                        <img src="~/Content/microsoft.png" />
+                                        break;
+                                    case "Twitter":
+                                        <img src="~/Content/twitter.png" />
+                                        break;
+                                }
+                                Login using @p.AuthenticationType
+                            </button>
+                       </div>
                     }
                 </p>
             </div>

@@ -1,5 +1,5 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
+using Microsoft.Owin;
 
 [assembly: OwinStartupAttribute(typeof(ShoppingCart.Startup))]
 namespace ShoppingCart
@@ -8,7 +8,7 @@ namespace ShoppingCart
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            CommonController.Startup.ConfigureAuth(app);
         }
     }
 }

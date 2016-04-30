@@ -1,0 +1,91 @@
+﻿@using ShoppingCart.Models.Models.Entities;
+@model IEnumerable<ShoppingCart.BackOffice.ViewsModels.CartsViewModel>
+
+@{
+    ViewBag.Title = "Carts List";
+}
+
+@{
+    int pendingCartsCount = ViewBag.ShippingStateCounts[ShippingState.Pending];
+    int deliveredCartsCount = ViewBag.ShippingStateCounts[ShippingState.Delivered];
+    int canceledCartsCount = ViewBag.ShippingStateCounts[ShippingState.Canceled];
+}
+
+<h2>List of Carts</h2>
+<ul class="nav nav-pills" role="tablist">
+    <li role="presentation" @if (ViewBag.ActiveTab == ShippingState.Pending) {<text>class="active"</text>}>
+        <a href=@Url.Action("Index", new { id = ShippingState.Pending })>
+            Pending
+            <span class="badge" id="pending">@pendingCartsCount</span>
+        </a>
+    </li>
+    <li role="presentation" @if (ViewBag.ActiveTab == ShippingState.Delivered) {<text>class="active"</text>}>
+        <a href=@Url.Action("Index", new { id = ShippingState.Delivered })>
+            Delivered
+            <span class="badge" id="delivered">@deliveredCartsCount</span>
+        </a>
+    </li>
+    <li role="presentation" @if (ViewBag.ActiveTab == ShippingState.Canceled) {<text>class="active"</text>}>
+        <a href=@Url.Action("Index", new { id = ShippingState.Canceled })>
+            Canceled
+            <span class="badge" id="canceled">@canceledCartsCount</span>
+        </a>
+    </li>
+</ul>
+@if (ViewBag.ShippingStateCounts[ViewBag.ActiveTab] == 0)
+{
+    <p>There is no @ViewBag.ActiveTab cart.</p>
+}
+else
+{
+    var n = @ViewBag.ShippingStateCounts[ViewBag.ActiveTab];
+    <p>There @if (n > 1) {<span id="be">are</span>} else {<span>is</span>} <span id="n">@n</span> @ViewBag.ActiveTab cart@{
+        if (n > 1) {<span id="plural">s</span>} }.</p>
+}
+@{ var i = 0; }
+@foreach (var item in Model)
+{
+    <div class="panel panel-default" data-id=@item.Id>
+        <div class="panel-heading"><span class="badge">#@item.Id.ToString().Substring(0, 8)</span>
+        <span class="glyphicon glyphicon-user"></span> @item.UserName
+        <span class="glyphicon glyphicon-calendar"></span>
+        @if (@item.DateCreated != null)
+        {
+        @item.DateCreated.ToString();
+    }
+        </div>
+        <div class="panel-body">
+            <h2>Products</h2>
+            <ul>
+                @foreach (var cartLine in item.CartLines)
+                {
+                    <li>
+                        <span class="badge">@cartLine.Quantity</span>
+                        @cartLine.Product.Name
+                    </li>
+
+                }
+            </ul>
+            <h2>Ship to :</h2>
+                @item.ShippingDetail.Name<br />
+                At : @item.ShippingDetail.Address<br />
+                Phone : @item.ShippingDetail.PhoneNumber
+            @Html.DropDownList("ShippingState",
+                  EnumHelper.GetSelectList(typeof(ShippingState),
+                                           item.ShippingState),
+                  new { @class = "form-control", id = "ShippingState" + @i })
+        </div>
+    </div>
+    i++;
+}
+
+@Html.AntiForgeryToken()
+
+@section scripts
+{
+    <script type="text/javascript">
+        var url = "@Url.Action("Index", "Cart")";
+        var tab = "@ViewBag.ActiveTab";
+    </script>
+    <script src="~/Scripts/App/ShoppingCart.BackOffice.js"></script>
+}

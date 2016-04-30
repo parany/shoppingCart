@@ -1,0 +1,31 @@
+﻿@model ShoppingCart.Models.Models.Entities.Product
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 >Details of @Model.Name</h2>
+
+<div class="row">
+    <div class="text-center col-md-6 col-lg-6">
+        <img style="width:390px;margin-bottom:50px;" src="http://localhost:12862/Uploads/images/@Model.Image.getImageVersion("_large")" alt="@Model.Image.ImageName">
+    </div>
+
+    <ul class="list-group col-md-6 col-lg-6" style="margin-top: 50px;">
+        <li class="list-group-item list-group-item"><strong>Description:</strong><br />@Model.Description</li>
+        <li class="list-group-item list-group-item"><span class="badge">@Model.Category.Name</span>Category:<br /></li>
+        <li class="list-group-item list-group-item"><span class="badge">@Model.Price.ToString("c")</span>Selling Price:</li>
+        <li class="list-group-item list-group-item"><span class="badge">@Model.Quantity</span>Number available in stock:</li>
+        @using (Html.BeginForm("checkQuantity", "Carts", new { returnUrl = "/" }, FormMethod.Post, new { @style = "display:inline" }))
+        {
+            <div style="margin-top:20px;">
+                @Html.Hidden("productId", Model.Id)
+                <input type="submit" class="btn btn-success" value="Add to cart" />
+            </div>
+        }
+    </ul>
+</div>
+
+<div>
+    <a href="@ViewData["ReturnUrl"]"> < Back to List</a>
+</div>
+

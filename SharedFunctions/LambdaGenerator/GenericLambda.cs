@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using Simpro.Expr;
 
 namespace SharedFunctions.LambdaGenerator
@@ -17,7 +13,7 @@ namespace SharedFunctions.LambdaGenerator
             _Expression = new ExprParser();
         }
 
-        public void genLambda(string s)
+        public void GenLambda(string s)
         {
 
             _lambda = _Expression.Parse(s);
@@ -26,6 +22,11 @@ namespace SharedFunctions.LambdaGenerator
         public Object RunExpression(Object obj, string name, string category, decimal price)
         {
             return _Expression.Run(_lambda, obj, name, category, price);
+        }
+
+        public LambdaExpression GetExpression()
+        {
+            return _lambda;
         }
     }
 }

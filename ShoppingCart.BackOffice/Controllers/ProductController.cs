@@ -1,39 +1,48 @@
-﻿using ImageResizer;
-using ShoppingCart.BackOffice.ViewsModels;
-using ShoppingCart.Models.Models.Entities;
-using ShoppingCart.Models.Repositories.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
+
+using ShoppingCart.BackOffice.ViewsModels;
+using ShoppingCart.Models.Models.Entities;
+using ShoppingCart.Models.Repositories.Interface;
+using ShoppingCart.Models.Repositories.Concrete;
+using System.Globalization;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
     public class ProductController : Controller
     {
-        private IGenericRepository<Product> ProductRepository { get; }
+        private ProductRepository ProductRepository { get; }
         private IGenericRepository<Category> CategoryRepository { get; }
         private IGenericRepository<Image> ImageRepository { get; }
+        private IGenericRepository<Provider> ProviderRepository { get; set; }
 
-        public ProductController(IGenericRepository<Product> productRepository, IGenericRepository<Category> categoryRepository, IGenericRepository<Image> imageRepository)
+        public ProductController(ProductRepository productRepository,
+                                 IGenericRepository<Category> categoryRepository,
+                                 IGenericRepository<Image> imageRepository,
+                                 IGenericRepository<Provider> providerRepository)
         {
             ProductRepository = productRepository;
             CategoryRepository = categoryRepository;
             ImageRepository = imageRepository;
+            ProviderRepository = providerRepository;
             ProductRepository.AddNavigationProperty(p => p.Category);
+            ProductRepository.AddNavigationProperties(p => p.Providers);
             ProductRepository.AddNavigationProperty(img => img.Image);
         }
 
         //
         // GET: /Product/
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public ActionResult Index()
         {
             IList<ProductViewModel> products = new List<ProductViewModel>();
 
-            foreach (Product product in ProductRepository.GetAll())
+            foreach (Product product in ProductRepository.GetList(p => p.Type == ProductType.ForSale))
             {
                 products.Add(new ProductViewModel
                 {
@@ -46,6 +55,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Product/Details/5
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         public ActionResult Details(Guid? id)
         {
             if (id == null)
@@ -66,8 +76,24 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Product/Create
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Create()
         {
+            var providersList = new List<SelectListItem>();
+
+            var allProviders = ProviderRepository.GetAll();
+
+            foreach (var provider in allProviders)
+            {
+                providersList.Add(new SelectListItem
+                {
+                    Value = provider.Id.ToString(),
+                    Text = provider.Name
+                });
+            }
+
+            ViewBag.ProvidersList = providersList;
+
             CreateViewModels createVM = new CreateViewModels
             {
                 CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
@@ -80,53 +106,27 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Create(CreateViewModels createViewModels, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
                 createViewModels.Product.Id = Guid.NewGuid();
-                
-                if (upload != null && upload.ContentLength > 0)
+
+                UploadImage(createViewModels, upload);
+                var providers = new List<Provider>();
+                if (createViewModels.Providers != null)
                 {
-                    var path = Server.MapPath("~/Uploads/images/");
-                    String imageName = "product_" + createViewModels.Product.Id.ToString();
-
-                    Image uploadImage = new Image
+                    foreach (var provider in createViewModels.Providers)
                     {
-                        Id = Guid.NewGuid(),
-                        ImageName = imageName,
-                        ImageType = ".jpg"
-                    };
-
-                    uploadImage.ImageName = imageName;
-                    uploadImage.ImageType = Path.GetExtension(upload.FileName);
-
-                    //Define the versions to generate
-                    uploadImage.Versions.Add("_thumbnail", "maxwidth=100&maxheight=100&format=jpg");
-                    uploadImage.Versions.Add("_medium", "maxwidth=700&maxheight=700&format=jpg");
-                    uploadImage.Versions.Add("_large", "maxwidth=1200&maxheight=1200&format=jpg");
-
-                    uploadImage.SaveAs(path, upload);
-                    ImageRepository.Add(uploadImage);
-                    createViewModels.Product.ImageId = uploadImage.Id;
-                }
-                else
-                {
-                    Image img_default = ImageRepository.GetSingle(i => i.ImageName == "product_default");
-
-                    if (img_default == null)
-                    {
-                        img_default = new Image
-                        {
-                            Id = Guid.NewGuid(),
-                            ImageName = "product_default",
-                            ImageType = ".jpg"
-                        };
-                        ImageRepository.Add(img_default);
+                        var p = ProviderRepository.GetSingle(x => x.Id.Equals(new Guid(provider)));
+                        if (p.Products == null)
+                            p.Products = new List<Product>();
+                        p.Products.Add(createViewModels.Product);
+                        providers.Add(p);
                     }
-                    createViewModels.Product.ImageId = img_default.Id;
                 }
-                
+                createViewModels.Product.Providers = providers;
                 ProductRepository.Add(createViewModels.Product);
                 return RedirectToAction("Index");
             }
@@ -137,6 +137,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Product/Edit/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -152,8 +153,25 @@ namespace ShoppingCart.BackOffice.Controllers
             CreateViewModels createVM = new CreateViewModels
             {
                 Product = product,
-                CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name")
+                CategoryList = new SelectList(CategoryRepository.GetAll(), "Id", "Name"),
+                Providers = product.Providers.Select(x => x.Id.ToString()).ToArray()
             };
+            var providersList = new List<SelectListItem>();
+
+            var allProviders = ProviderRepository.GetAll();
+
+            foreach (var provider in allProviders)
+            {
+                providersList.Add(new SelectListItem
+                {
+                    Value = provider.Id.ToString(),
+                    Text = provider.Name,
+                    Selected = createVM.Providers.Any(provider.Id.ToString().Contains)
+                });
+            }
+
+            ViewBag.ProvidersList = providersList;
+
             return View(createVM);
         }
 
@@ -162,10 +180,28 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CreateViewModels createViewModels)
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
+        public ActionResult Edit(CreateViewModels createViewModels, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                UploadImage(createViewModels, upload);
+                var providers = new List<Provider>();
+                if (createViewModels.Providers != null)
+                {
+                    foreach (var provider in createViewModels.Providers)
+                    {
+                        var p = ProviderRepository.GetSingle(x => x.Id.Equals(new Guid(provider)));
+                        if (p.Products == null)
+                            p.Products = new List<Product>();
+                        p.Products.Add(createViewModels.Product);
+                        providers.Add(p);
+                    }
+                }
+                String priceFormat = createViewModels.Product.Price.ToString("F");
+                decimal price = Convert.ToDecimal(priceFormat, new CultureInfo("fr-FR"));
+                createViewModels.Product.Price = price;
+                createViewModels.Product.Providers = providers;
                 ProductRepository.Update(createViewModels.Product);
                 return RedirectToAction("Index");
             }
@@ -174,6 +210,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Product/Delete/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -183,6 +220,51 @@ namespace ShoppingCart.BackOffice.Controllers
             Product product = ProductRepository.GetSingle(p => p.Id == id);
             ProductRepository.Delete(product);
             return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
+        private void UploadImage(CreateViewModels cvm, HttpPostedFileBase upload)
+        {
+            if (upload != null && upload.ContentLength > 0)
+            {
+                var path = Server.MapPath("~/Uploads/images/");
+                String imageName = "product_" + cvm.Product.Id.ToString();
+
+                Image uploadImage = new Image
+                {
+                    Id = Guid.NewGuid(),
+                    ImageName = imageName,
+                    ImageType = ".jpg"
+                };
+
+                uploadImage.ImageName = imageName;
+                uploadImage.ImageType = Path.GetExtension(upload.FileName);
+
+                //Define the versions to generate
+                uploadImage.Versions.Add("_thumbnail", "maxwidth=100&maxheight=100&format=jpg");
+                uploadImage.Versions.Add("_medium", "maxwidth=700&maxheight=700&format=jpg");
+                uploadImage.Versions.Add("_large", "maxwidth=1200&maxheight=1200&format=jpg");
+
+                uploadImage.SaveAs(path, upload);
+                ImageRepository.Add(uploadImage);
+                cvm.Product.ImageId = uploadImage.Id;
+            }
+            else
+            {
+                Image img_default = ImageRepository.GetSingle(i => i.ImageName == "product_default");
+
+                if (img_default == null)
+                {
+                    img_default = new Image
+                    {
+                        Id = Guid.NewGuid(),
+                        ImageName = "product_default",
+                        ImageType = ".jpg"
+                    };
+                    ImageRepository.Add(img_default);
+                }
+                cvm.Product.ImageId = img_default.Id;
+            }
         }
     }
 }

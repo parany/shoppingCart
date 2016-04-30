@@ -1,0 +1,60 @@
+﻿@using ShoppingCart.Models.Models.Payments;
+@model ShoppingCart.Models.ViewModels.ProviderViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Provider</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentMethods)
+        </dt>
+
+        <dd>
+            <ul>
+                @{List<Payment> paymentMethods = (List<Payment>)ViewBag.PaymentMethods; }
+                @if (Model.PaymentMethods != null)
+                {
+                    foreach (var p in Model.PaymentMethods)
+                    {
+                        int pId;
+                        var success = int.TryParse(p, out pId);
+                        if (success)
+                        {
+                            var pm = paymentMethods.Single(x => x.Id == pId);
+                            <li>@pm.Name</li>
+                        }
+                    }
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" }) |
+    <a href="@Url.Action("Index")">
+        <span class="glyphicon glyphicon-list"></span>
+        Back to List
+    </a>
+</p>

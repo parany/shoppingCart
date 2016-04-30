@@ -8,7 +8,7 @@ namespace ShoppingCart.BackOffice
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            CommonController.Startup.ConfigureAuth(app);
         }
     }
 }

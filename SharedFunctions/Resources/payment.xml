@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Payments xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Modules>
+    <Mvola>
+      <Id>0</Id>
+      <Name>Mvola</Name>
+      <Number>034 00 000 00</Number>
+    </Mvola>
+    <Check>
+      <Id>1</Id>
+      <Name>Check</Name>
+      <Order>Order Name</Order>
+      <Address>Adress Name</Address>
+    </Check>
+    <PaymentCash>
+      <Id>2</Id>
+      <Name>PaymentCash</Name>
+    </PaymentCash>
+  </Modules>
+</Payments>

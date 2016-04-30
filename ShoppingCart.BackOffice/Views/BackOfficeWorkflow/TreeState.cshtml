@@ -1,0 +1,85 @@
+@using System.Xml
+@using ShoppingCart.BackOffice.ViewsModels.Workflow
+@model ShoppingCart.BackOffice.ViewsModels.Workflow.NodesViewModel
+
+@{
+    ViewBag.Title = "TreeState";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h3>Tree Status : </h3>
+        <span>Position: @Model.CurrentNode.Name</span>
+        @if (Model.Start)
+        {
+            <h4>You are at the starting state</h4>
+        }else{
+            <br>
+            @Html.ActionLink("Change Name", "ChangeNodeName", "BackOfficeWorkflow", null, new { @style = "color:white" , @class= "btn btn-warning" })
+        }
+    </div>
+</div>
+
+@if(Model.Start){
+    foreach(XmlNode o in Model.List){
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Branch : @o.Name</h3>
+                @Html.ActionLink("Go to", "TreeState", "BackOfficeWorkflow", new { path=@o.Name }, new { @style = "color:white" , @class= "btn btn-info" })
+                @Html.ActionLink("Change Name", "ChangeNodeName", "BackOfficeWorkflow", new {path = @o.Name, name = "Selling"}, new { @style = "color:white" , @class= "btn btn-warning" })
+            </div>
+        </div>
+        }
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Add new Branch</h3>
+                    @Html.ActionLink("Add Branch", "TreeState", "BackOfficeWorkflow", null, new { @style = "color:white" , @class= "btn btn-info" })
+                </div>
+            </div>
+}else{
+
+    foreach (XmlNode o in Model.List)
+    {
+        if (o.Name.Equals("Options"))
+        {
+            XmlNodeList nodes = o.ChildNodes;
+            <div>
+            Further Options:
+            @foreach (XmlNode node in nodes)
+            {
+                <div>
+                    Option Name: @node.Name
+                        @Html.ActionLink("Change Name", "ChangeNodeName", "BackOfficeWorkflow", null, new { @style = "color:white" , @class= "btn btn-warning" })
+                        @Html.ActionLink("Delete Node", "DeleteBranch", "BackOfficeWorkflow", null, new { @style = "color:white" , @class= "btn btn-warning" })
+                </div>
+            }
+            </div>
+        }else{
+            <div>
+                Descriptions name: @o.Name <br>
+                @Html.ActionLink("Change Name", "ChangeNodeName", "BackOfficeWorkflow", null, new { @style = "color:white" , @class= "btn btn-warning" })
+            </div>
+            <div>
+                Descriptions type: 
+                @if (o.Value != null)
+                {
+                    <span>@o.Value</span>
+                }
+                else
+                {
+                    <span>Not set yet</span>
+                }
+                <br>
+                @Html.ActionLink("Change Type", "ChangeNodeValue", "BackOfficeWorkflow", null, new { @style = "color:white" , @class= "btn btn-warning" })
+            </div>
+        }
+    }
+
+}
+
+
+
+
+
+
+

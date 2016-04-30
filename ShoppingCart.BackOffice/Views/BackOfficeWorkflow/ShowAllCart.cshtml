@@ -1,0 +1,33 @@
+@using ShoppingCart.BackOffice.ViewsModels.Workflow
+@model ShoppingCart.BackOffice.ViewsModels.Workflow.CartsViewModel
+@{
+    ViewBag.Title = "All carts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var state_choice = "";
+</script>
+
+<h2>All carts</h2>
+
+@foreach (CartsViewModel.CartWorkViewModel c in Model.Carts)
+{
+<div class="card">
+  <h3 class="card-header">#@c.Cart.Id.ToString().Substring(0, 8)</h3>
+  <div class="card-block">
+    <h4 class="card-title">
+        <span class="glyphicon glyphicon-user"></span> @c.User.UserName 
+        <span class="glyphicon glyphicon-calendar"></span>
+        @if (@c.Cart.DateCreated != null)
+        {
+            @c.Cart.DateCreated.ToString();
+        }
+    </h4>
+      <p>Branch: @c.Cart.TransactionType.ToString()</p>
+    <p class="card-text">This cart is actually on @c.Status</p>
+    @Html.ActionLink("View Detail", "OneCartMove", "BackOfficeWorkflow", new {id = c.Cart.Id}, new { @style = "color:white" , @class="btn btn-info"})
+    @Html.ActionLink("Reset", "Reset", "BackOfficeWorkflow", new {id = c.Cart.Id}, new { @style = "color:white" , @class= "btn btn-warning" })
+    @Html.ActionLink("Drop", "Drop", "BackOfficeWorkflow", new {id = c.Cart.Id}, new { @style = "color:white" , @class= "btn btn-danger" })
+  </div>
+</div>
+}

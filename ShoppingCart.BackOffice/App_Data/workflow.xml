@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+    <workflows>
+        <Buying> Buy
+            <CartId>text</CartId>
+            <Notes>text</Notes>
+            <Redirection>route de redirection</Redirection>
+            <Options>
+                <Pending> pending
+                    <Redirection>route de redirection</Redirection>
+                    <Payment>text</Payment>
+                    <Notes>text</Notes>
+                    <Delivery>text</Delivery>
+                    <Count>number</Count>
+                    <Options>
+                        <Delivery> delivery
+                            <Redirection>route de redirection</Redirection>
+                            <Options>
+                                <Closed>
+                                    <Redirection>route de redirection</Redirection>
+                                </Closed>
+                                <Returned>
+                                    <Redirection>route de redirection</Redirection>
+                                    <Description> Text </Description>
+                                    <Date>Date</Date>
+                                </Returned>
+                            </Options>
+                        </Delivery>
+                        <Cancelled>
+                            <Redirection>route de redirection</Redirection>
+                        </Cancelled>
+                    </Options>
+                </Pending>
+                <Cancelled>cancel
+                    <Notes>text</Notes>
+                </Cancelled>
+            </Options>
+        </Buying>
+        <Selling>
+            <CartId>text</CartId>
+            <Notes>text</Notes>
+            <Redirection>route de redirection</Redirection>
+            <Options>
+                <Pending> pending
+                    <Redirection>route de redirection</Redirection>
+                    <Payment>text</Payment>
+                    <Notes>text</Notes>
+                    <Delivery>text</Delivery>
+                    <Count>number</Count>
+                    <Options>
+                        <Delivery> delivery
+                            <Redirection>route de redirection</Redirection>
+                            <Options>
+                                <Closed>
+                                    <Redirection>route de redirection</Redirection>
+                                </Closed>
+                                <Returned>
+                                    <Redirection>route de redirection</Redirection>
+                                    <Description> Text </Description>
+                                    <Date>Date</Date>
+                                </Returned>
+                            </Options>
+                        </Delivery>
+                        <Cancelled>
+                            <Redirection>route de redirection</Redirection>
+                        </Cancelled>
+                    </Options>
+                </Pending>
+                <Cancelled>cancel
+                    <Notes>text</Notes>
+                </Cancelled>
+            </Options>
+        </Selling>
+    </workflows>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+    <mvcSiteMapNode title="BackOffice Home" controller="Home" action="Index">
+        <mvcSiteMapNode title="Product" controller="Product" action="Index">
+            <mvcSiteMapNode title="Create" controller="Product" action="Create"/>
+            <mvcSiteMapNode title="Details" controller="Product" action="Details" preservedRouteParameters="id" />
+            <mvcSiteMapNode title="Edit" controller="Product" action="Edit" preservedRouteParameters="id"/>
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="Mouvements" controller="Mouvement" action="Index"/>
+        <mvcSiteMapNode title="Categories" controller="Categories" action="Index">
+            <mvcSiteMapNode title="Create" controller="Categories" action="Create"/>
+            <mvcSiteMapNode title="Details" controller="Categories" action="Details" preservedRouteParameters="id"/>
+            <mvcSiteMapNode title="Edit" controller="Categories" action="Edit" preservedRouteParameters="id"/>
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="Carts" controller="Cart" action="Index"/>
+        <mvcSiteMapNode title="Workflow" controller="BackOfficeWorkflow" action="ShowAllCart">
+            <mvcSiteMapNode title="Move State" controller="BackOfficeWorkflow" action="MoveState" preservedRouteParameters="id,newState"/>
+            <mvcSiteMapNode title="Move One Cart" controller="BackOfficeWorkflow" action="OneCartMove" preservedRouteParameters="id"/>
+            <mvcSiteMapNode title="Reset" controller="BackOfficeWorkflow" action="Reset" preservedRouteParameters="id"/>
+            <mvcSiteMapNode title="Drop" controller="BackOfficeWorkflow" action="Drop" preservedRouteParameters="id"/>
+        </mvcSiteMapNode>
+      <mvcSiteMapNode title="Workflow" controller="BackOfficeWorkflow" action="ShowTreeBase">
+        <mvcSiteMapNode title="Change Node Name" controller="BackOfficeWorkflow" action="ChangeNodeName" preservedRouteParameters="path,name,oldName"/>
+        <mvcSiteMapNode title="Delete Branch" controller="BackOfficeWorkflow" action="DeleteBranch" preservedRouteParameters="path,branchName"/>
+        <mvcSiteMapNode title="Change Node Value" controller="BackOfficeWorkflow" action="ChangeNodeValue"/>
+        <mvcSiteMapNode title="Tree State" controller="BackOfficeWorkflow" action="TreeState" preservedRouteParameters="path"/>
+      </mvcSiteMapNode>
+        <mvcSiteMapNode title="Providers" controller="Providers" action="Index">
+            <mvcSiteMapNode title="Create" controller="Providers" action="Create"/>
+            <mvcSiteMapNode title="Details" controller="Providers" action="Details" preservedRouteParameters="id"/>
+            <mvcSiteMapNode title="Edit" controller="Providers" action="Edit" preservedRouteParameters="id"/>
+          <mvcSiteMapNode title="Delete" controller="Providers" action="Delete" preservedRouteParameters="id"/>
+        </mvcSiteMapNode>
+            <mvcSiteMapNode title="Users" controller="User" action="Index">
+                <mvcSiteMapNode title="Create" controller="User" action="Create"/>
+                <mvcSiteMapNode title="Edit" controller="User" action="Edit" preservedRouteParameters="id,Message"/>
+                <mvcSiteMapNode title="Delete" controller="User" action="Delete" preservedRouteParameters="id"/>
+              <mvcSiteMapNode title="User Groups" controller="User" action="UserGroups" preservedRouteParameters="id"/>
+              <mvcSiteMapNode title="User Permissions" controller="User" action="UserPermissions" preservedRouteParameters="id"/>
+            </mvcSiteMapNode>
+            <mvcSiteMapNode title="Permissions" controller="Role" action="Index">
+                <mvcSiteMapNode title="Create" controller="Role" action="Create"/>
+                <mvcSiteMapNode title="Edit" controller="Role" action="Edit" preservedRouteParameters="id"/>
+                <mvcSiteMapNode title="Delete" controller="Role" action="Delete" preservedRouteParameters="id"/>
+            </mvcSiteMapNode>
+            <mvcSiteMapNode title="Groups" controller="Groups" action="Index">
+              <mvcSiteMapNode title="Create" controller="Groups" action="Create"/>
+              <mvcSiteMapNode title="Details" controller="Groups" action="Details" preservedRouteParameters="id"/>
+              <mvcSiteMapNode title="Edit" controller="Groups" action="Edit" preservedRouteParameters="id"/>
+              <mvcSiteMapNode title="Delete" controller="Groups" action="Delete" preservedRouteParameters="id"/>
+              <mvcSiteMapNode title="Group Permissions" controller="Groups" action="GroupRoles" preservedRouteParameters="id"/>
+            </mvcSiteMapNode>
+    </mvcSiteMapNode>
+</mvcSiteMap>

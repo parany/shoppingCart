@@ -4,46 +4,57 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Shopping Cart</title>
-    @Styles.Render("~/Content/css")
+    @using ShoppingCart.Helpers
+    @{
+        var theme = Session["CssTheme"] as string ?? Bootstrap.Theme.Default;
+    }
+    @Styles.Render(Bootstrap.Bundle(theme))
     @Scripts.Render("~/bundles/modernizr")
 
+
+    <meta name="description" content="Shopping Cart, the web site for every shopping" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Shopping Cart", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                
-                    @Html.Partial("_LoginPartial")  
-                    @Html.Action("Summary", "Carts")
-                    
-                
-            </div>
+<script>
+    var onSearchView = false;
+</script>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Shopping Cart", "Index", "Products", new {area = ""}, new {@class = "navbar-brand"})
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "List", "Products")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+
+            @Html.Partial("_LoginPartial")
+            @Html.Action("Summary", "Carts")
+            @Html.Partial("_SearchBarPartialView")
+
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Shopping Cart / An e-commerce application for selling products - Bolzano S.a.r.l</p>
-        </footer>
-    </div>
+</div>
+<div id="webStatus" style="width:100%;height:100%;display:none;background-color:red; text-align: center">OFFLINE MODE</div>
+<div id="searchLine">
+</div>
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Shopping Cart / An e-commerce application for selling products - Bolzano S.a.r.l</p>
+    </footer>
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </body>
 </html>

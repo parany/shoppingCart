@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - BO ShoppingCart</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,18 +16,44 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("ShoppingCart", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("ShoppingCart", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "color: #ffffff;background-color:transparent;" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Product", "Index", "Product")</li>
-                    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
-                    <li>@Html.ActionLink("Cart", "Index", "Cart")</li>
-                    <li>@Html.ActionLink("User", "Index", "User")</li>
-                </ul>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stock <span class="caret"></span></a>
+                        <ul class="dropdown-menu navbar-inverse">
+                            <li>@Html.ActionLink("Products", "Index", "Product", null, new { @style = "color:white" })</li>
+                            <li>@Html.ActionLink("Mouvements", "Index", "Mouvement", null, new { @style = "color:white" })</li>
+                            <li>@Html.ActionLink("Categories", "Index", "Categories", null, new { @style = "color:white" })</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actions <span class="caret"></span></a>
+                        <ul class="dropdown-menu navbar-inverse">
+                            <li>@Html.ActionLink("Carts", "Index", "Cart", null, new { @style = "color:white" })</li>
+                            <li>@Html.ActionLink("Workflow", "ShowAllCart", "backofficeworkflow", null, new { @style = "color:white" })</li>
+                            <li>@Html.ActionLink("Workflow tree", "ShowTreeBase", "backofficeworkflow", null, new { @style = "color:white" })</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Providers", "Index", "Providers")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Membership <span class="caret"></span></a>
+                        <ul class="dropdown-menu navbar-inverse">
+                            <li>@Html.ActionLink("Users", "Index", "User", null, new { @style = "color:white" })</li>
+                            <li>@Html.ActionLink("Groups", "Index", "Groups", null, new { @style = "color:white" })</li>
+                            <li>@Html.ActionLink("Permissions", "Index", "Role", null, new { @style = "color:white" })</li>
+                        </ul>
+                    </li>
+                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
+    </div>
+    <div class="container">
+        <ol class="breadcrumb">
+            @Html.MvcSiteMap().SiteMapPath()
+        </ol>
     </div>
     <div class="container body-content">
         @RenderBody()
@@ -37,7 +62,6 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

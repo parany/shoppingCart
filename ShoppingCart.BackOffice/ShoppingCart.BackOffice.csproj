@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="ImageResizer">
       <HintPath>..\packages\ImageResizer.4.0.5\lib\net45\ImageResizer.dll</HintPath>
     </Reference>
@@ -59,6 +63,21 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcSiteMapProvider, Version=4.6.22.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcSiteMapProvider.MVC5.Core.4.6.22\lib\net45\MvcSiteMapProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvcSiteMapProvider.WebActivator, Version=4.6.22.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcSiteMapProvider.MVC5.4.6.22\lib\net45\MvcSiteMapProvider.WebActivator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -66,10 +85,6 @@
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Providers">
       <HintPath>..\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -96,8 +111,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.XML" />
     <Reference Include="Unity.Mvc5, Version=1.2.3.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Mvc5.1.2.3\lib\net45\Unity.Mvc5.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.1\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
@@ -134,55 +154,91 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\ApplicationSignInManager.cs" />
-    <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\EmailService.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\SmsService.cs" />
-    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BackOfficeWorkflowController.cs" />
+    <Compile Include="Controllers\BuyController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MouvementController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProvidersController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewsModels\AddPhoneNumberViewModel.cs" />
-    <Compile Include="ViewsModels\ChangePasswordViewModel.cs" />
-    <Compile Include="ViewsModels\ConfigureTwoFactorViewModel.cs" />
-    <Compile Include="ViewsModels\CreateViewModels.cs" />
-    <Compile Include="ViewsModels\ExternalLoginConfirmationViewModel.cs" />
-    <Compile Include="ViewsModels\ExternalLoginListViewModel.cs" />
-    <Compile Include="ViewsModels\FactorViewModel.cs" />
-    <Compile Include="ViewsModels\ForgotPasswordViewModel.cs" />
-    <Compile Include="ViewsModels\ForgotViewModel.cs" />
-    <Compile Include="ViewsModels\IndexViewModel.cs" />
-    <Compile Include="ViewsModels\LoginViewModel.cs" />
-    <Compile Include="ViewsModels\ManageLoginsViewModel.cs" />
-    <Compile Include="ViewsModels\PagingInfo.cs" />
-    <Compile Include="ViewsModels\ProductsListViewModel.cs" />
-    <Compile Include="ViewsModels\ProductViewModel.cs" />
-    <Compile Include="ViewsModels\RegisterViewModel.cs" />
-    <Compile Include="ViewsModels\ResetPasswordViewModel.cs" />
-    <Compile Include="ViewsModels\SendCodeViewModel.cs" />
-    <Compile Include="ViewsModels\SetPasswordViewModel.cs" />
-    <Compile Include="ViewsModels\VerifyCodeViewModel.cs" />
-    <Compile Include="ViewsModels\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewsModels\Buy\ProductListAndStateViewModel.cs" />
+    <Compile Include="ViewsModels\Buy\ProductStateViewModel.cs" />
+    <Compile Include="ViewsModels\Cart\ChangeStateViewModel.cs" />
+    <Compile Include="ViewsModels\Cart\CartLineViewModel.cs" />
+    <Compile Include="ViewsModels\Cart\CartsViewModel.cs" />
+    <Compile Include="ViewsModels\Group\SelectGroupEditorViewModel.cs" />
+    <Compile Include="ViewsModels\Group\SelectGroupRolesViewModel.cs" />
+    <Compile Include="ViewsModels\Group\SelectUserGroupsViewModel.cs" />
+    <Compile Include="ViewsModels\Role\EditRoleViewModel.cs" />
+    <Compile Include="ViewsModels\Role\SelectRoleEditorViewModel.cs" />
+    <Compile Include="ViewsModels\Role\UserPermissionsViewModel.cs" />
+    <Compile Include="ViewsModels\Product\StockHistoryViewModel.cs" />
+    <Compile Include="ViewsModels\User\CreateUserViewModel.cs" />
+    <Compile Include="ViewsModels\User\EditUserViewModel.cs" />
+    <Compile Include="ViewsModels\User\ManageUserViewModel.cs" />
+    <Compile Include="ViewsModels\Product\CreateViewModels.cs" />
+    <Compile Include="ViewsModels\Product\PagingInfo.cs" />
+    <Compile Include="ViewsModels\Product\ProductsListViewModel.cs" />
+    <Compile Include="ViewsModels\Product\ProductViewModel.cs" />
+    <Compile Include="ViewsModels\Role\RoleViewModel.cs" />
+    <Compile Include="ViewsModels\Cart\ShippingDetailViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\CartsViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\DefaultWorkflowViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\NodesViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\OneCartViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\SampleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\payment.xml" />
+    <Content Include="App_Data\workflow.xml" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-treeview.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fb.png" />
+    <Content Include="Content\google.png" />
+    <Content Include="Content\image\cheque.png" />
+    <Content Include="Content\image\logo_MVOLA.jpg" />
+    <Content Include="Content\microsoft.png" />
+    <Content Include="Content\Oops.jpg" />
+    <Content Include="Content\Success.jpg" />
+    <Content Include="Content\twitter.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\App\ShoppingCart.BackOffice.js" />
+    <Content Include="Mvc.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="MvcSiteMapSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\shoppingcart-bo - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\shoppingcart-bo - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -192,9 +248,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\mustache.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Uploads\images\product_default_large.jpg" />
+    <Content Include="Uploads\images\product_default_medium.jpg" />
+    <Content Include="Uploads\images\product_default_thumbnail.jpg" />
+    <Content Include="BackOffice.cd" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -228,22 +289,86 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Product\_ProductPartial.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Providers\Create.cshtml" />
+    <Content Include="Views\Providers\Delete.cshtml" />
+    <Content Include="Views\Providers\Details.cshtml" />
+    <Content Include="Views\Providers\Edit.cshtml" />
+    <Content Include="Views\Providers\Index.cshtml" />
+    <Content Include="Views\Buy\Index.cshtml" />
+    <Content Include="Views\Buy\Details.cshtml" />
+    <Content Include="Views\Carts\AddToCart.cshtml" />
+    <Content Include="Views\Carts\Index.cshtml" />
+    <Content Include="Views\Carts\Summary.cshtml" />
+    <Content Include="Views\Checkout\Index.cshtml" />
+    <Content Include="Views\Checkout\Order.cshtml" />
+    <Content Include="Views\Payment\_Check.cshtml" />
+    <Content Include="Views\Payment\_Mvola.cshtml" />
+    <Content Include="Views\Payment\_PaymentCash.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\ViewAllCart.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\ShowAllCart.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\OneCartMove.cshtml" />
+    <Content Include="Views\BackOfficeWorkflow\TreeState.cshtml" />
+    <Content Include="Views\Mouvement\Index.cshtml" />
+    <Content Include="Views\Mouvement\Stock.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\UserGroups.cshtml" />
+    <Content Include="Views\User\UserPermissions.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
+    <Content Include="Views\Groups\Details.cshtml" />
+    <Content Include="Views\Groups\Create.cshtml" />
+    <Content Include="Views\Groups\Edit.cshtml" />
+    <Content Include="Views\Groups\Delete.cshtml" />
+    <Content Include="Views\Groups\GroupRoles.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SelectGroupEditorViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SelectRoleEditorViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Uploads\images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SharedFunctions\ShoppingCart.GeneralLib.csproj">
+      <Project>{1ee86b32-83c3-4d22-ad5d-3994e7bddf68}</Project>
+      <Name>ShoppingCart.GeneralLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShoppingCart.CommonController\ShoppingCart.CommonController.csproj">
+      <Project>{3FB884B2-266E-4D69-9FDC-F6D14540848B}</Project>
+      <Name>ShoppingCart.CommonController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShoppingCart.Models\ShoppingCart.Models.csproj">
       <Project>{19913b66-6b27-4fd9-a9fc-64133aa21aa4}</Project>
       <Name>ShoppingCart.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShoppingCart.Services\ShoppingCart.Services.csproj">
+      <Project>{34065edb-a9b3-47c4-ac2d-ec8478429961}</Project>
+      <Name>ShoppingCart.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

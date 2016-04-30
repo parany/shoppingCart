@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ShoppingCart.Models;
+
 using ShoppingCart.Models.Models.Entities;
 using ShoppingCart.Models.Repositories.Interface;
 
@@ -22,12 +17,14 @@ namespace ShoppingCart.BackOffice.Controllers
             CategoryRepository.AddNavigationProperty(c => c.Products);
         }
 
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         // GET: Categories
         public ActionResult Index()
         {
             return View(CategoryRepository.GetAll());
         }
 
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         // GET: Categories/Details/5
         public ActionResult Details(Guid? id)
         {
@@ -44,6 +41,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Create()
         {
             return View();
@@ -54,6 +52,7 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Create([Bind(Include = "Name")] Category category)
         {
             if (ModelState.IsValid)
@@ -66,6 +65,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -85,6 +85,7 @@ namespace ShoppingCart.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Edit([Bind(Include = "Id,Name")] Category category)
         {
             if (ModelState.IsValid)
@@ -96,6 +97,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -111,6 +113,7 @@ namespace ShoppingCart.BackOffice.Controllers
         }
 
         // POST: Categories/Delete/5
+        [Authorize(Roles = "AllPermissions, ReadWrite")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ShoppingCart.Models.Log.ChangeTracking>
+
+@{
+    ViewBag.Title = "Mouvement List";
+}
+
+<h2>Mouvement List</h2>
+
+<table class="table productList">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateChanged)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OldValue)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateChanged)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NewValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OldValue)
+            </td>
+            <td>
+                @Html.ActionLink("Last Stock", "Avant", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })
+            </td>
+        </tr>
+    }
+
+</table>

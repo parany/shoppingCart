@@ -1,12 +1,10 @@
-﻿using System;
-using System.Net;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace ShoppingCart.BackOffice.Controllers
 {
     public class HomeController : Controller
     {
-
+        [Authorize(Roles = "AllPermissions, Read, ReadWrite")]
         // GET: Home
         public ActionResult Index()
         {

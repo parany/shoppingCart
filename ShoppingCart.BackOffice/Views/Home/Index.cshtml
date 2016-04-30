@@ -1,12 +1,51 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
-<h2>Welcome</h2>
+<div class="jumbotron">
+    <h2>Welcome to the shoppingCart BackOffice</h2>
+    <p class="lead">
+        This is to manage the ShoppingCart web site
+    </p>
+</div>
 
 <p>
-    <ul>
-        <li>@Html.ActionLink("Product List", "Index", "Product")</li>
-    </ul>
+    <h4 style="margin-bottom:20px;">There are few sections to manage here:</h4>
+    <hr />
+    <div class="panel panel-default">
+        <div class="panel-heading">Product Purchase</div>
+        <div class="panel-body">
+            For product purchase @Html.ActionLink("Buy product", "Index", "Buy", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Products in Stock</div>
+        <div class="panel-body">
+            For viewing about Products, find our @Html.ActionLink("Stock", "Index", "Product", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">Product Categories</div>
+        <div class="panel-body">
+            For managing Product Categories, find our @Html.ActionLink("Category List", "Index", "Categories", null, new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <div class="panel panel-warning">
+        <div class="panel-heading">Orders</div>
+        <div class="panel-body">
+            For managing Orders, find our @Html.ActionLink("Order List", "Index", "Cart", null, new { @class = "btn btn-warning" })
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">Users</div>
+        <div class="panel-body">
+            For managing Users, find our @Html.ActionLink("User List", "Index", "User", null, new { @class = "btn btn-info" })
+        </div>
+    </div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">User Roles</div>
+        <div class="panel-body">
+            For managing User Roles, find our @Html.ActionLink("Role List", "Index", "Role", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
 </p>
 

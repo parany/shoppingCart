@@ -11,6 +11,7 @@ using System.Configuration;
 using ShoppingCart.Models.Models.User;
 using ShoppingCart.Models;
 using ShoppingCart.CommonController.Infrastructure.Identity;
+using Microsoft.Owin.Security.MicrosoftAccount;
 
 namespace ShoppingCart.CommonController
 {
@@ -54,9 +55,16 @@ namespace ShoppingCart.CommonController
             OAuthSection oauth = (OAuthSection)ConfigurationManager.GetSection("OAuthGroup/OAuth");
 
             // Uncomment the following lines to enable logging in with third party login providers
-            app.UseMicrosoftAccountAuthentication(
-                clientId: oauth.Microsoft.ClientId,
-                clientSecret: oauth.Microsoft.ClientSecret);
+            var microsoftOptions = new MicrosoftAccountAuthenticationOptions
+            {
+                Caption = "Live",
+                ClientId = oauth.Microsoft.ClientId,
+                ClientSecret = oauth.Microsoft.ClientSecret,
+            };
+            microsoftOptions.Scope.Add("wl.basic");
+            microsoftOptions.Scope.Add("wl.emails");
+            app.UseMicrosoftAccountAuthentication(microsoftOptions);
+
 
             //app.UseTwitterAuthentication(
             //   consumerKey: oauth.Twitter.ConsumerKey,

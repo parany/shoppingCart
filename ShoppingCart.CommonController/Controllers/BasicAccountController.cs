@@ -11,6 +11,7 @@ using ShoppingCart.Models.Models.User;
 using ShoppingCart.CommonController.Infrastructure.Identity;
 using ShoppingCart.CommonController.ViewModels;
 using ShoppingCart.CommonController.Infrastructure.Binders;
+using System.Security.Claims;
 
 namespace ShoppingCart.CommonController.Controllers
 {
@@ -367,6 +368,11 @@ namespace ShoppingCart.CommonController.Controllers
                 var fb = new FacebookClient(access_token);
                 dynamic myInfo = fb.Get("/me?fields=email");
                 loginInfo.Email = myInfo.email;
+            }else if(loginInfo.Login.LoginProvider == "Microsoft")
+            {
+                var identity = HttpContext.GetOwinContext().Authentication.GetExternalLoginInfoAsync();
+                var email = identity.Result.Email;
+                loginInfo.Email = email;
             }
 
             // Sign in the user with this external login provider if the user already has a login

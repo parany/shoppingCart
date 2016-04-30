@@ -368,7 +368,8 @@ namespace ShoppingCart.CommonController.Controllers
                 var fb = new FacebookClient(access_token);
                 dynamic myInfo = fb.Get("/me?fields=email");
                 loginInfo.Email = myInfo.email;
-            }else if(loginInfo.Login.LoginProvider == "Microsoft")
+            }
+            else if(loginInfo.Login.LoginProvider == "Microsoft")
             {
                 var identity = HttpContext.GetOwinContext().Authentication.GetExternalLoginInfoAsync();
                 var email = identity.Result.Email;

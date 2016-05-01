@@ -203,6 +203,7 @@
     <Compile Include="ViewsModels\Workflow\NodesViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\OneCartViewModel.cs" />
     <Compile Include="ViewsModels\Workflow\SampleViewModel.cs" />
+    <Compile Include="ViewsModels\Workflow\WorkFlowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\payment.xml" />
@@ -342,6 +343,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Shared\_Workflow.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

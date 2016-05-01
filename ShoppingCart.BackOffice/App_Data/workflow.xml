@@ -3,35 +3,66 @@
         <Buying> Buy
             <CartId>text</CartId>
             <Notes>text</Notes>
-            <Redirection>route de redirection</Redirection>
+            <Redirection>route de redirection
+                <Control> Control
+                </Control>
+                <Action> Action
+                </Action>
+            </Redirection>
             <Options>
                 <Pending> pending
-                    <Redirection>route de redirection</Redirection>
-                    <Payment>text</Payment>
-                    <Notes>text</Notes>
-                    <Delivery>text</Delivery>
-                    <Count>number</Count>
+                    <Redirection>route de redirection
+                        <Control> Control
+                        </Control>
+                        <Action> Action
+                        </Action>
+                    </Redirection>
                     <Options>
                         <Delivery> delivery
-                            <Redirection>route de redirection</Redirection>
+                            <Redirection>route de redirection
+                                <Control> Control
+                                </Control>
+                                <Action> Action
+                                </Action>
+                            </Redirection>
                             <Options>
                                 <Closed>
-                                    <Redirection>route de redirection</Redirection>
+                                    <Redirection>route de redirection
+                                        <Control> Control
+                                        </Control>
+                                        <Action> Action
+                                        </Action>
+                                    </Redirection>
                                 </Closed>
                                 <Returned>
-                                    <Redirection>route de redirection</Redirection>
+                                    <Redirection>route de redirection
+                                        <Control> Control
+                                        </Control>
+                                        <Action> Action
+                                        </Action>
+                                    </Redirection>
                                     <Description> Text </Description>
                                     <Date>Date</Date>
                                 </Returned>
                             </Options>
                         </Delivery>
                         <Cancelled>
-                            <Redirection>route de redirection</Redirection>
+                            <Redirection>route de redirection
+                                <Control> Control
+                                </Control>
+                                <Action> Action
+                                </Action>
+                            </Redirection>
                         </Cancelled>
                     </Options>
                 </Pending>
                 <Cancelled>cancel
-                    <Notes>text</Notes>
+                    <Redirection>route de redirection
+                        <Control> Control
+                        </Control>
+                        <Action> Action
+                        </Action>
+                    </Redirection>
                 </Cancelled>
             </Options>
         </Buying>

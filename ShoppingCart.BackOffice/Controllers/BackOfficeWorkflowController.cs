@@ -132,6 +132,50 @@ namespace ShoppingCart.BackOffice.Controllers
             return RedirectToAction("ShowAllCart", "BackOfficeWorkflow");
         }
 
+        // ================================== PARTIALS ===================== //
+
+        public ActionResult SelectCart(string id)
+        {
+            string workflowXmlPath = Server.MapPath("~/App_Data/workflow.xml");
+
+            Guid Id = new Guid(id);
+            Cart cart = CartRepository.GetSingle(c => c.Id == Id);
+            CartProcessTree _Xml = new CartProcessTree(workflowXmlPath);
+            XmlNode currentPosition = _Xml.DirectPathNode(cart.WorkflowStatus);
+            string currentControl = currentPosition.SelectSingleNode("./Redirection/Control").Value;
+            string currentAction = currentPosition.SelectSingleNode("./Redirection/Action").Value;
+            return RedirectToAction(currentAction, new RouteValueDictionary(
+                                    new { controller = currentControl, action = currentAction, id = cart.Id }));
+        }
+
+
+        // ================================= END PARTIALS ================ //
+
+        
+        // ================================ TESTING PARTIALS ============ //
+        public ActionResult ChangeShippingState(string id, string state)
+        {
+            Guid Id = new Guid(id);
+            Cart cart = CartRepository.GetSingle(c => c.Id == Id);
+            switch (state)
+            {
+                case "Pending":
+                    cart.State = ShippingState.Pending;
+                    break;
+                case "Cancelled":
+                    cart.State = ShippingState.Canceled;
+                    break;
+                case "Delivered":
+                    cart.State = ShippingState.Delivered;
+                    break;
+            }
+            CartRepository.Update(cart);
+            return MoveState(state, id);
+        }
+
+
+        // =============================== END TEST =================== //
+
         /*
          * Create Nodes TREE
          *
@@ -194,6 +238,5 @@ namespace ShoppingCart.BackOffice.Controllers
                                     new { controller = "BackOfficeWorkflow", action = "ShowTreeBase" }));
             }
         }
-
     }
 }

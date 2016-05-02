@@ -10,7 +10,7 @@ namespace ShoppingCart.Models.Models.Entities
         Canceled = 1,
         Delivered = 2
     };
-    public enum StansactionType
+    public enum TransactionType
     {
         Buying = 0,
         Selling = 1
@@ -36,7 +36,7 @@ namespace ShoppingCart.Models.Models.Entities
 
         public string PaymentMethod { get; set; }
 
-        public StansactionType TransactionType { get; set; }
+        public TransactionType TransactionType { get; set; }
         public DeliveryMethod DeliveryMethod { get; set; }
 
         // workflow status

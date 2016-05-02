@@ -28,6 +28,6 @@ namespace ShoppingCart.CommonController.ViewModels
         public Payments Payments { get; set; }
 
         [DisplayName("Type of Transaction")]
-        public StansactionType TransactionType { get; set; }
+        public TransactionType TransactionType { get; set; }
     }
 }

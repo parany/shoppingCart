@@ -51,16 +51,16 @@ namespace ShoppingCart.Controllers
         [Authorize]
         public ActionResult Index(CartViewModel cartView, String errorMessage = "")
         {
-            StansactionType transaction;
+            TransactionType transaction;
 
             ApplicationUser user = CurrentUser;
             if (RoleManager.RoleExists("Admin") && UserManager.IsInRole(user.Id, "Admin"))
             {
-                transaction = StansactionType.Buying;
+                transaction = TransactionType.Buying;
             }
             else
             {
-                transaction = StansactionType.Selling;
+                transaction = TransactionType.Selling;
             }
             // Creating ViewModel to pass to the view for rendering summary
             CheckoutDTO cdto = new CheckoutDTO
@@ -141,9 +141,9 @@ namespace ShoppingCart.Controllers
                     Product productToModify = _ProductRepository.GetSingle(x => x.Id == c.Product.Id);
                     if (productToModify.Quantity >= c.Quantity)
                     {
-                        if (cartDto.TransactionType == StansactionType.Selling)
+                        if (cartDto.TransactionType == TransactionType.Selling)
                             productToModify.Quantity -= c.Quantity;
-                        if (cartDto.TransactionType == StansactionType.Buying)
+                        if (cartDto.TransactionType == TransactionType.Buying)
                             productToModify.Quantity += c.Quantity;
 
                         _ProductRepository.Update(productToModify);

@@ -153,7 +153,7 @@ namespace ShoppingCart.BackOffice.Controllers
 
         
         // ================================ TESTING PARTIALS ============ //
-        public ActionResult ChangeShippingState(string id, string state)
+        public void ChangeShippingState(string id, string state)
         {
             Guid Id = new Guid(id);
             Cart cart = CartRepository.GetSingle(c => c.Id == Id);
@@ -170,7 +170,6 @@ namespace ShoppingCart.BackOffice.Controllers
                     break;
             }
             CartRepository.Update(cart);
-            return MoveState(state, id);
         }
 
 

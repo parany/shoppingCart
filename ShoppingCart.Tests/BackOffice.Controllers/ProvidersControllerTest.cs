@@ -1,5 +1,6 @@
 ﻿using Moq;
 using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShoppingCart.BackOffice.Controllers;
 using ShoppingCart.Models.Repositories.Interface;
@@ -23,6 +24,17 @@ namespace ShoppingCart.Tests.BackOffice.Controllers
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
             Assert.AreEqual(new HttpStatusCodeResult(HttpStatusCode.BadRequest).StatusCode,
                             ((HttpStatusCodeResult)result).StatusCode);
+        }
+        [TestMethod]
+        public void Index_ReturnsViewResult_WhenCalled()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            var providerList = new List<Provider>();
+            mockServiceProvider.Setup(serviceProvider => serviceProvider.GetAllProviders()).Returns(providerList);
+            var providerController = new ProvidersController(mockServiceProvider.Object);
+            var result = providerController.Index();
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.AreEqual(((ViewResult)result).Model, providerList);
         }
     }
 }

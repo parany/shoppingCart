@@ -1,6 +1,7 @@
 ﻿using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShoppingCart.BackOffice.Controllers;
 using ShoppingCart.Models.Repositories.Interface;
@@ -35,6 +36,16 @@ namespace ShoppingCart.Tests.BackOffice.Controllers
             var result = providerController.Index();
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             Assert.AreEqual(((ViewResult)result).Model, providerList);
+        }
+        [TestMethod]
+        public void Index_HasAuthorizeAttribute()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            var providerController = new ProvidersController(mockServiceProvider.Object);
+            var type = providerController.GetType();
+            var methodInfo = type.GetMethod("Index");
+            var attributes = methodInfo.GetCustomAttributes(typeof(AuthorizeAttribute), true);
+            Assert.IsTrue(attributes.Any());
         }
     }
 }

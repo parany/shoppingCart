@@ -89,5 +89,23 @@ namespace ShoppingCart.Tests.BackOffice.Controllers
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             Assert.AreEqual(((ViewResult)result).Model, providerViewModel);
         }
+        [TestMethod]
+        public void Create_ReturnsViewResult_WhenCalledWithoutParameters()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            ProviderViewModel providerViewModel = new ProviderViewModel();
+            var providersController = new ProvidersController(mockServiceProvider.Object);
+            var result = providersController.Create();
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+        }
+        [TestMethod]
+        public void Create_RedirectToIndex_WhenCalledWithValidViewModel()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            var providerController = new ProvidersController(mockServiceProvider.Object);
+            var result = providerController.Create(new ProviderViewModel());
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.AreEqual(((RedirectToRouteResult)result).RouteValues["action"], "Index");
+        }
     }
 }

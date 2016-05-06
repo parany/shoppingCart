@@ -48,6 +48,15 @@ namespace ShoppingCart.Tests.BackOffice.Controllers
             Assert.IsTrue(attributes.Any());
         }
         [TestMethod]
+        public void Index_CallsGetAllProviders_WhenCalled()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            mockServiceProvider.Setup(mock => mock.GetAllProviders());
+            var providerController = new ProvidersController(mockServiceProvider.Object);
+            providerController.Index();
+            mockServiceProvider.Verify(mock => mock.GetAllProviders());
+        }
+        [TestMethod]
         public void Details_ReturnsHttpStatusBadRequest_WhenIdIsNull()
         {
             var mockServiceProvider = new Mock<IProvidersService>();

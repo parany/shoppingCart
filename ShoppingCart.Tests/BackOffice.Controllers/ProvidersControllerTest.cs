@@ -120,6 +120,16 @@ namespace ShoppingCart.Tests.BackOffice.Controllers
             Assert.AreEqual(((ViewResult)result).Model, providerViewModel);
         }
         [TestMethod]
+        public void Details_CallsProviderServiceGetDetails_WhenCalledWithId()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            ProviderViewModel providerViewModel = new ProviderViewModel();
+            mockServiceProvider.Setup(serviceProvider => serviceProvider.GetDetails(It.IsAny<Guid?>())).Returns(providerViewModel);
+            var providersController = new ProvidersController(mockServiceProvider.Object);
+            providersController.Details(Guid.NewGuid());
+            mockServiceProvider.Verify(mock => mock.GetDetails(It.IsAny<Guid?>()));
+        }
+        [TestMethod]
         public void Create_ReturnsViewResult_WhenCalledWithoutParameters()
         {
             var mockServiceProvider = new Mock<IProvidersService>();

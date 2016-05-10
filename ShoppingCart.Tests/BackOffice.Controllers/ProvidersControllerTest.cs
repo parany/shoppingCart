@@ -27,6 +27,17 @@ namespace ShoppingCart.Tests.BackOffice.Controllers
                             ((HttpStatusCodeResult)result).StatusCode);
         }
         [TestMethod]
+        public void Edit_CallsEditProvider_WhenCalledWithNonNullId()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            Guid? id = Guid.NewGuid();
+            var providerEditViewModel = new ProviderEditViewModel();
+            mockServiceProvider.Setup(mock => mock.EditProvider(It.IsAny<Guid?>())).Returns(providerEditViewModel);
+            var providerController = new ProvidersController(mockServiceProvider.Object);
+            providerController.Edit(id);
+            mockServiceProvider.Verify(mock => mock.EditProvider(It.IsAny<Guid?>()));
+        }
+        [TestMethod]
         public void Index_ReturnsViewResult_WhenCalledWithoutParameters()
         {
             var mockServiceProvider = new Mock<IProvidersService>();

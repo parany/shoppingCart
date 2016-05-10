@@ -38,6 +38,16 @@ namespace ShoppingCart.Tests.BackOffice.Controllers
             mockServiceProvider.Verify(mock => mock.EditProvider(It.IsAny<Guid?>()));
         }
         [TestMethod]
+        public void Edit_CallsUpdateProvider_WhenCalledWithProviderViewModel()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            ProviderViewModel providerViewModel = new ProviderViewModel();
+            mockServiceProvider.Setup(mock => mock.UpdateProvider(providerViewModel));
+            var providerController = new ProvidersController(mockServiceProvider.Object);
+            providerController.Edit(providerViewModel);
+            mockServiceProvider.Verify(mock => mock.UpdateProvider(providerViewModel));
+        }
+        [TestMethod]
         public void Index_ReturnsViewResult_WhenCalledWithoutParameters()
         {
             var mockServiceProvider = new Mock<IProvidersService>();

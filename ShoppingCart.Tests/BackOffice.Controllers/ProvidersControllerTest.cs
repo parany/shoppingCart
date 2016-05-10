@@ -176,5 +176,23 @@ namespace ShoppingCart.Tests.BackOffice.Controllers
             var result = providersController.Delete(It.IsAny<Guid>());
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+        [TestMethod]
+        public void DeleteConfirmed_CallsProviderServiceDeleteProvider_WhenCalledWithId()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            mockServiceProvider.Setup(serviceProvider => serviceProvider.DeleteProvider(It.IsAny<Guid>()));
+            var providersController = new ProvidersController(mockServiceProvider.Object);
+            providersController.DeleteConfirmed(It.IsAny<Guid>());
+            mockServiceProvider.Verify(mock => mock.DeleteProvider(It.IsAny<Guid>()));
+        }
+        [TestMethod]
+        public void DeleteConfirmed_RedirectToIndex_WhenCalledWithId()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            var providerController = new ProvidersController(mockServiceProvider.Object);
+            var result = providerController.DeleteConfirmed(It.IsAny<Guid>());
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.AreEqual(((RedirectToRouteResult)result).RouteValues["action"], "Index");
+        }
     }
 }

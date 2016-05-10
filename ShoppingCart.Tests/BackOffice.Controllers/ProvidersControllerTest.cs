@@ -147,5 +147,34 @@ namespace ShoppingCart.Tests.BackOffice.Controllers
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
             Assert.AreEqual(((RedirectToRouteResult)result).RouteValues["action"], "Index");
         }
+        [TestMethod]
+        public void Delete_ReturnsHttpStatusBadRequest_WhenCalledWithNullId()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            var providerController = new ProvidersController(mockServiceProvider.Object);
+            Guid? id = null;
+            var result = providerController.Delete(id);
+            Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
+            Assert.AreEqual(new HttpStatusCodeResult(HttpStatusCode.BadRequest).StatusCode,
+                            ((HttpStatusCodeResult)result).StatusCode);
+        }
+        [TestMethod]
+        public void Delete_ReturnsHttpNotFound_WhenIdNotFound()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            mockServiceProvider.Setup(serviceProvider => serviceProvider.GetProvider(It.IsAny<Guid>())).Returns((Provider)null);
+            var providersController = new ProvidersController(mockServiceProvider.Object);
+            var result = providersController.Delete(It.IsAny<Guid>());
+            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+        }
+        [TestMethod]
+        public void Delete_ReturnsViewResult_WhenIdFound()
+        {
+            var mockServiceProvider = new Mock<IProvidersService>();
+            mockServiceProvider.Setup(serviceProvider => serviceProvider.GetProvider(It.IsAny<Guid>())).Returns(new Provider());
+            var providersController = new ProvidersController(mockServiceProvider.Object);
+            var result = providersController.Delete(It.IsAny<Guid>());
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+        }
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="FrontOffice.Controllers\CategoriesControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FrontOffice.Controllers\HomeControllerTest.cs" />
+    <Compile Include="Services\ProviderServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config">

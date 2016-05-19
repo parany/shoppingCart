@@ -27,5 +27,18 @@ namespace ShoppingCart.Tests.Services
             providerService.AddProvider(providerViewModel);
             providerRepository.Verify(mock => mock.Add(It.IsAny<Provider>()));
         }
+        [TestMethod]
+        public void AddProvider_CreateStringPaymentMethods_WhenCalledWithProviderViewModel()
+        {
+            var providerRepository = new Mock<IGenericRepository<Provider>>();
+            var providerViewModel = new ProviderViewModel();
+            providerViewModel.PaymentMethods = new String[] { "0", "1", "2" };
+            var providerService = new ProvidersService(providerRepository.Object);
+            string paymentMethods = String.Empty;
+            providerRepository.Setup(mock => mock.Add(It.IsAny<Provider>()))
+                .Callback((Provider[] p) => paymentMethods = p[0].PaymentMethods);
+            providerService.AddProvider(providerViewModel);
+            Assert.AreEqual("0,1,2", paymentMethods);
+        }
     }
 }
